@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
+import CKEditor from "react-ckeditor-component";
 
 export default () => {
+    const [content, setContent] = useState("");
+    console.log("content", content);
     return (
 
         <div className="container-fluid Table-for-administrator-main-div">
@@ -26,10 +29,10 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label className="Campaign-lable">Campaign Name*</label>
+                                        <label className="Campaign-lable">Campaign Name*</label>
                                     </div>
                                     <div>
-                                    <input type="name" className="form-control"placeholder="Enter Name"></input>
+                                        <input type="name" className="form-control" placeholder="Enter Name"></input>
                                     </div>
                                 </div>
                             </div>
@@ -37,38 +40,38 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Slug*</label>
+                                        <label >Slug*</label>
                                     </div>
 
                                     <div>
-                                    <input type="slug" className="form-control"placeholder="Enter Slug"></input>
+                                        <input type="slug" className="form-control" placeholder="Enter Slug"></input>
                                     </div>
                                 </div>
                             </div>
                             {/* Category */}
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
-                                   <div>
-                                    <label >Category*</label>
+                                    <div>
+                                        <label >Category*</label>
                                     </div>
                                     <div>
-                                    <select className="form-control">
-                                        <option>Sports</option>
-                                        <option>Entertainment</option>
-                                        <option>Cause</option>
-                                        <option>Others</option>
-                                        <option>Event</option>
-                                        <option>Peace Campaign</option>
-                                        <option>International Days</option>
-                                        <option>Awareness</option>
-                                        <option>Support</option>
-                                        <option>Charity</option>
-                                        <option>Human Rights</option>
-                                        <option>Animal Rights</option>
-                                        <option>National Days</option>
-                                        <option>Culture</option>
-                                        <option>Political</option>
-                                    </select>
+                                        <select className="form-control">
+                                            <option>Sports</option>
+                                            <option>Entertainment</option>
+                                            <option>Cause</option>
+                                            <option>Others</option>
+                                            <option>Event</option>
+                                            <option>Peace Campaign</option>
+                                            <option>International Days</option>
+                                            <option>Awareness</option>
+                                            <option>Support</option>
+                                            <option>Charity</option>
+                                            <option>Human Rights</option>
+                                            <option>Animal Rights</option>
+                                            <option>National Days</option>
+                                            <option>Culture</option>
+                                            <option>Political</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -76,11 +79,11 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Short Description</label>
+                                        <label >Short Description</label>
                                     </div>
 
                                     <div>
-                                    <input className="form-control"placeholder="Enter Short Description"></input>
+                                        <input className="form-control" placeholder="Enter Short Description"></input>
                                     </div>
                                 </div>
                             </div>
@@ -88,11 +91,12 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Facebook URL(optional)</label>
+                                        <label >Facebook URL(optional)</label>
                                     </div>
 
                                     <div>
-                                    <input type="url" className="form-control"placeholder="Enter facebook url"></input>
+                                        <input type="url" className="form-control"
+                                               placeholder="Enter facebook url"></input>
                                     </div>
                                 </div>
                             </div>
@@ -100,11 +104,16 @@ export default () => {
                             <div className="Table-text-area-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Description</label>
+                                        <label >Description</label>
                                     </div>
 
                                     <div>
-                                    <textarea className="form-control"placeholder="Enter Description" rows="5"/>
+                                        <CKEditor
+                                            content={content ? content : ""}
+                                            events={{
+                                                "change":(event)=> setContent(event.editor.getData())
+                                            }}
+                                            className="form-control" placeholder="Enter Description" rows="5"/>
                                     </div>
                                 </div>
                             </div>
@@ -112,11 +121,12 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Hash-tag</label>
+                                        <label >Hash-tag</label>
                                     </div>
 
                                     <div>
-                                    <input type="Hash-Tag" className="form-control"placeholder="Enter Hash Tag"></input>
+                                        <input type="Hash-Tag" className="form-control"
+                                               placeholder="Enter Hash Tag"></input>
                                     </div>
                                 </div>
                             </div>
@@ -124,11 +134,12 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Keyword</label>
+                                        <label >Keyword</label>
                                     </div>
 
                                     <div>
-                                    <input type="keyword" className="form-control"placeholder="Enter Keyword"></input>
+                                        <input type="keyword" className="form-control"
+                                               placeholder="Enter Keyword"></input>
                                     </div>
                                 </div>
                             </div>
@@ -136,11 +147,12 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Transparency*Minimum 0 - No transparancyMaximum 90 - 90% transparent overlay*</label>
+                                        <label >Transparency*Minimum 0 - No transparancyMaximum 90 - 90% transparent
+                                            overlay*</label>
                                     </div>
 
                                     <div>
-                                    <input type="number" className="form-control"></input>
+                                        <input type="number" className="form-control"></input>
                                     </div>
                                 </div>
                             </div>
@@ -148,20 +160,20 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Hash-Tag Font:</label>
+                                        <label >Hash-Tag Font:</label>
                                     </div>
 
                                     <div>
-                                    <select className="form-control">
-                                        <option>16</option>
-                                        <option>18</option>
-                                        <option>20</option>
-                                        <option>22</option>
-                                        <option>24</option>
-                                        <option>26</option>
-                                        <option>28</option>
-                                        <option>30</option>
-                                    </select>
+                                        <select className="form-control">
+                                            <option>16</option>
+                                            <option>18</option>
+                                            <option>20</option>
+                                            <option>22</option>
+                                            <option>24</option>
+                                            <option>26</option>
+                                            <option>28</option>
+                                            <option>30</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -170,11 +182,11 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >Start Date</label>
+                                        <label >Start Date</label>
                                     </div>
 
                                     <div>
-                                    <input type="date" className="form-control"></input>
+                                        <input type="date" className="form-control"></input>
                                     </div>
                                 </div>
                             </div>
@@ -182,11 +194,11 @@ export default () => {
                             <div className="Table-Inputs-Fields">
                                 <div className="form-group">
                                     <div>
-                                    <label >End Date</label>
+                                        <label >End Date</label>
                                     </div>
 
                                     <div>
-                                    <input type="date" className="form-control"></input>
+                                        <input type="date" className="form-control"></input>
                                     </div>
                                 </div>
                             </div>
