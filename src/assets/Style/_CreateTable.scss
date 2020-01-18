@@ -1,0 +1,47 @@
+// table Styling start here 
+.blanck-dev{
+ height:3vh;
+}
+.Table-section-starts{
+    background:#fff;
+    min-height:90vh;  
+}
+/* Table Input field Styling Here */
+.Table-Inputs-Fields{
+    margin-left:5%;
+}
+.Table-Inputs-Fields .Campaign-lable{
+    margin-top: 5%;
+}
+.Table-Inputs-Fields input{
+    width:50%;
+    height: 40px;
+    border: 1px solid #d1cece;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-left: 10px;
+    color: #495057;
+}
+/* Table Select Field Here */
+.Table-Inputs-Fields select{
+    width:50%;
+    height: 40px;
+    border: 1px solid #d1cece;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-left: 10px;
+    color: #495057;
+}
+/* Table textarea fields Styling here*/
+.Table-text-area-Fields{
+    margin-left: 5%;
+}
+.Table-text-area-Fields textarea{
+    width:50%;
+    border: 1px solid #d1cece;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-left: 10px;
+    color: #495057;
+}
+/* Table Styling end Here */

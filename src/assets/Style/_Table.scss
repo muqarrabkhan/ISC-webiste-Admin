@@ -1,0 +1,139 @@
+
+// Administrator Table css
+.Table-for-administrator-main-div {
+    width: 100%;
+}
+
+.header-of-viewAdministrator{ 
+    display: flex;
+    box-shadow: 2px -9px 6px 8px;
+    justify-content: space-between;
+}
+.heading6-of-header{
+    margin-left: 4%;
+    padding-top: 1%;
+    font-size: 20px;
+    color: $Heading-of-Header;
+}
+.header-btn-of-table{
+    padding: 7px;
+    margin: 12px;
+    width: 122px;
+    height: 37px;
+    background: $Table-Button-color;
+    border: 1px solid $Table-Button-color!important;
+    border-radius: 6px;
+    color: $White-color;
+    font-size: 17px;
+}
+.background-of-table {
+    background: $Table-Background;
+    padding-bottom: 29px;
+}
+.Table-of-administrator {
+    background: $Table-Background;
+    min-height: 140vh;
+}
+.Table-Header {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    margin-left: 1.5%;
+    background-color: $Table-navbar;
+    padding: 0px 20px 0px 22px;
+    color: $White-color;
+}
+.select-option-of-adminstrator {
+    background: #323b52;
+    color: white;
+    min-height: 32px;
+    font-size:14px;
+    border: 1px solid $White-color;
+}
+.input-for-search {
+    background: $Table-navbar;
+    color: $White-color;
+    border: 1px solid $White-color;
+    height: 34px;
+    width: 300px;
+    padding: 10px;
+    font-size: 14px;
+    padding-top: 13px;
+}
+
+    // Table designing starts from here
+
+.main-table-heading{
+    margin: auto;
+    border-left:1px solid white;
+    width: 97%;
+ }
+ .background-color-head{
+      background-color:  $Table-title;
+ }
+ .table-of-data{
+  background-color:  $White-color;
+
+ }
+ .table-row-of-head{
+    height: 41px;
+    border: 1px solid $Table-title;
+    th{
+        color: $White-color;
+        padding: 12px;
+        border: 1px solid;
+    }
+}
+.table-row-data-of-body{
+    height: 52px;
+    color: $Table-text-color;
+    
+    td{
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-top: 10px;
+    }
+}
+.table-footer{
+    height: 52px;
+    color: $Table-text-color;
+    border: 1px solid #dddddd;
+    
+    td{
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-top: 10px;
+    }
+}
+
+.edit-image-table {
+    border: 1px solid $Tabel-action-border-color;
+    padding: 5px;
+    border-radius: 3px;
+    width: 34px;
+}
+
+.delete-image-table {
+    border: 1px solid $Tabel-action-border-color;
+    padding: 3px;
+    margin-left: 4px;
+    width: 34px;
+    border-radius: 3px;
+}
+.view-btn-of-table {
+    margin-left: 3px;
+    color: $Table-text-color;
+    border: 1px solid $Tabel-action-border-color;
+    padding: 5px 9px 6px 9px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input::-webkit-input-placeholder{
+    color: white;
+  }
+  input:-moz-placeholder{
+    color:  white;
+}
