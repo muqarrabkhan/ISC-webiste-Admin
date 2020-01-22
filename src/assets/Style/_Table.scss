@@ -6,7 +6,7 @@
 
 .header-of-viewAdministrator{ 
     display: flex;
-    box-shadow: 2px -9px 6px 8px;
+    box-shadow: 2px -9px 6px -7px;
     justify-content: space-between;
 }
 .heading6-of-header{
@@ -67,7 +67,7 @@
 
 .main-table-heading{
     margin: auto;
-    border-left:1px solid white;
+    border-left:1px solid $White-color;
     width: 97%;
  }
  .background-color-head{
@@ -123,6 +123,7 @@
     border-radius: 3px;
 }
 .view-btn-of-table {
+    background: #fff;
     margin-left: 3px;
     color: $Table-text-color;
     border: 1px solid $Tabel-action-border-color;

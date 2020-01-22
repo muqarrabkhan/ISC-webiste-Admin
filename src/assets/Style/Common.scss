@@ -1,9 +1,18 @@
 @import './Color.scss';
 @import './CreateTable';
 @import './Table.scss';
-
+@import './CheckBox.scss';
+@import './Radiobutton.scss';
+@import './SwitchButton.scss';
 // font-family
 .fnt-poppins{
         font-family: 'Poppins', sans-serif;
+}
+
+.white-color{
+        color: $White-color;
+}
+.background-white{
+        background: $White-color;
 }
 

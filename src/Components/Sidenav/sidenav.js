@@ -19,8 +19,6 @@ import File from '../../assets/Images/file.png'
 import Logout from '../../assets/Images/logout.png'
 
 
-import { Link } from 'react-router-dom'
-
 export default () => {
     return (
         <>
@@ -29,7 +27,7 @@ export default () => {
 
                     {/* logo  */}
                     <div className="logo-dashboard">
-                        <img src={Logo} />
+                        <img src={Logo} alt="Logo"/>
                     </div>
 
                     {/* Sidenav Links*/}
@@ -38,14 +36,14 @@ export default () => {
                         {/* dashboard  */}
 
                         <div className="dashboard-name-logo">
-                            <img className="dashboard_icon" src={DashBoard} />
+                            <img className="dashboard_icon" src={DashBoard} alt="dashboard"/>
                             <a className="dashboard-link fnt-poppins">DashBoard </a>
                         </div>
 
                         {/* Administrator */}
 
                         <div className="sidenav-name-logo">
-                            <img className="administrator_icon" src={Administrator} />
+                            <img className="administrator_icon" src={Administrator} alt="Administrator"/>
                             <a className="sidenav-link fnt-poppins">Administrator</a>
                         </div>
 

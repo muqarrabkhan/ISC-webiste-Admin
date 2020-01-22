@@ -64,7 +64,7 @@ export default () => {
                                         <div style={{display:"flex"}}>
                                             <img className="edit-image-table" src={Editlogo}/>
                                             <img className="delete-image-table" src={Deletelogo}/>
-                                            <span className="view-btn-of-table">View Submissions</span>   
+                                            <span className="view-btn-of-table">View Details</span>   
                                         </div>
                                     </td>
                                 </tr>

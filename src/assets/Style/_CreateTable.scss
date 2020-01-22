@@ -1,47 +1,89 @@
 // table Styling start here 
+@import './Color.scss';
+
 .blanck-dev{
  height:3vh;
 }
-.Table-section-starts{
-    background:#fff;
-    min-height:90vh;  
+.Form-section-startup{
+    background:$White-color;
+    min-height:146vh;  
+
+    .extra-div{
+        background:$White-color;
+        padding-top: 10px;
+    }
+    .inputs-of-admistrator{
+        width: 900px;
+        height: 40px;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 15px;
+        border: 1px solid $Tabel-action-border-color;
+    }
+    .textarea-of-admistrator{
+        width: 900px;
+        height: 100px;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 15px;
+        border: 1px solid $Tabel-action-border-color;
+    }
+    .cancel-btn-of-form{
+        width: 114px;
+        height: 39px;
+        border-radius: 4px;
+        border: 1px solid $Tabel-action-border-color;    
+    }
+    .Save-btn-of-form{
+        width: 114px;
+        height: 39px;
+        border-radius: 4px;
+        border: 1px solid $Table-navbar;
+        background: $Table-navbar;
+        color: $White-color;    
+    }
+    .ck-Editor{
+        width: 900px;
+    }
+
 }
-/* Table Input field Styling Here */
-.Table-Inputs-Fields{
-    margin-left:5%;
+
+// create Compaign form and also using Template Page
+   
+.Form-Inputs-Fields{
+    input{
+       width:600px;
+       height:45px;
+       padding: 10px;
+       border-radius:5px;
+       border:1px solid $Tabel-action-border-color;
+   }
+   select{
+    width:600px;
+    height:45px;
+    border-radius:5px;
+    border:1px solid $Tabel-action-border-color;
+
+   }
+ 
 }
-.Table-Inputs-Fields .Campaign-lable{
-    margin-top: 5%;
+.ck-editor-of-compaign{
+    width: 1250px;
+
+    .ck-editor-of-compaign-border{
+    border-right: 1px solid $radio-color;
+    }
 }
-.Table-Inputs-Fields input{
-    width:50%;
+
+.border-of-variable{
+    border:1px solid $Tabel-action-border-color;
+}
+.redonly-input{
+    width: 1100px;
     height: 40px;
-    border: 1px solid #d1cece;
-    border-radius: 5px;
-    font-size: 16px;
-    padding-left: 10px;
-    color: #495057;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    border: 1px solid $Tabel-action-border-color;
 }
-/* Table Select Field Here */
-.Table-Inputs-Fields select{
-    width:50%;
-    height: 40px;
-    border: 1px solid #d1cece;
-    border-radius: 5px;
-    font-size: 16px;
-    padding-left: 10px;
-    color: #495057;
-}
-/* Table textarea fields Styling here*/
-.Table-text-area-Fields{
-    margin-left: 5%;
-}
-.Table-text-area-Fields textarea{
-    width:50%;
-    border: 1px solid #d1cece;
-    border-radius: 5px;
-    font-size: 16px;
-    padding-left: 10px;
-    color: #495057;
-}
-/* Table Styling end Here */
+
