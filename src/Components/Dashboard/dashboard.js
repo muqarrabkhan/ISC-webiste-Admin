@@ -154,33 +154,37 @@ export default () => {
                   <div className="is-flex Last-week-cards-main-dev">
                     <div className="Last-week-card-section  has-margin-top-50">
                       <img src={Image1} alt="" />
-                      <div className="has-margin-top-10 has-margin-left-10" >
+                      <div className="has-margin-top-10  text-center" >
                         <h4 className="fnt-size-15 fnt-poppins">Update Profile Picture</h4>
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
+                        <button className="Save-btn-of-form has-margin-top-20 fnt-poppins">Support</button>
                       </div>
                     </div>
                  {/* 2nd Card of Last Week Views and of Compaigns */}
                     <div className="Last-week-card-section  has-margin-top-50">
                       <img src={Image1} alt="" />
-                      <div className="has-margin-top-10 has-margin-left-10" >
+                      <div className="has-margin-top-10  text-center" >
                         <h4 className="fnt-size-15 fnt-poppins">Update Profile Picture</h4>
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
+                        <button className="Save-btn-of-form has-margin-top-20 fnt-poppins">Support</button>
                       </div>
                     </div>
                  {/* 3rd Card of Last Week Views and of Compaigns */}                    
                     <div className="Last-week-card-section has-margin-top-50">
                       <img src={Image1} alt="" />
-                      <div className="has-margin-top-10 has-margin-left-10" >
+                      <div className="has-margin-top-10  text-center" >
                         <h4 className="fnt-size-15 fnt-poppins">Update Profile Picture</h4>
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
+                        <button className="Save-btn-of-form has-margin-top-20 fnt-poppins">Support</button>
                       </div>
                     </div>
                  {/* 4th Card of Last Week Views and of Compaigns */}                    
                     <div className="Last-week-card-section  has-margin-top-50">
                       <img src={Image1} alt="" />
-                      <div className="has-margin-top-10 has-margin-left-10" >
+                      <div className="has-margin-top-10 text-center" >
                         <h4 className="fnt-size-15 fnt-poppins">Update Profile Picture</h4>
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
+                        <button className="Save-btn-of-form  has-margin-top-20  fnt-poppins">Support</button>
                       </div>
                     </div>
                   </div>
