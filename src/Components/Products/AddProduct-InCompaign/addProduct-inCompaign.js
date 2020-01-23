@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Image from '../../../assets/Images/admin.png'
+import React from 'react'
 
 export default () => {
   

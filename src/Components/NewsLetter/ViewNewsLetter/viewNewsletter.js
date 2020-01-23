@@ -52,8 +52,8 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="applying-flex">
-                                            <img className="edit-image-table" src={Editlogo}/>
-                                            <img className="delete-image-table" src={Deletelogo}/>
+                                            <img className="edit-image-table" alt="edit-button" src={Editlogo}/>
+                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo}/>
                                             <span className="view-btn-of-table">View Submissions</span>   
                                         </div>
                                     </td>

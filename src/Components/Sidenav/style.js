@@ -12,7 +12,7 @@ export default()=>{
             }
             .dashboard-main-dev .logo-dashboard{
                 padding-top: 3%;
-                padding-left: 20%;
+                padding-left: 23%;
             }   
             .dashboard-name-logo {
                 width: 189px;
@@ -31,6 +31,9 @@ export default()=>{
             }
             .administrator_icon{
                 width: 23px
+            }
+            .icon-width-admin{
+                width: 19px
             }
 
             .sidenav-name-logo {

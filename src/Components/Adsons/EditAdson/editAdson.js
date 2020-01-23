@@ -2,14 +2,13 @@ import React, {useState} from 'react'
 import InputColor from 'react-input-color';
 
 export default () => {
-    const [initial, setInitial] = useState('#5e72e4');
+    const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
     return (
 
         <div className="container-fluid Table-for-administrator-main-div">
 
             {/* header */}
-
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update Adson</h6>
                 <button className="header-btn-of-table fnt-poppins">Back</button>

@@ -35,38 +35,30 @@ export default () => {
                                         <th className="white-color">Action</th>
                                     </tr>
                                 </thead>
+                                <tbody>
                                 <tr className="fnt-poppins background-white">
                                     <td>Alfreds Futterkiste</td>
                                     <td>
                                         <div className="switch-btn-of-tables">
-                                            <label class="switch">
+                                            <label className="switch">
                                                 <input type="checkbox" />
-                                                <span class="slider"></span>
+                                                <span className="slider"></span>
                                             </label>
                                         </div>
                                     </td>
                                     <td>
                                         <div className="appling-flex-btns">
-                                            <img className="edit-image-table" src={Editlogo} />
-                                            <img className="delete-image-table" src={Deletelogo} />
+                                            <img className="edit-image-table" alt="edit-button" src={Editlogo} />
+                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
                                             <span className="view-btn-of-table ">View Details</span>
                                         </div>
                                     </td>
                                 </tr>
-
-
-
+                                </tbody>
                             </table>
-
                         </div>
-
-
-
                     </div>
-
-
                 </div>
-
                 <Style />
             </div>
         </>

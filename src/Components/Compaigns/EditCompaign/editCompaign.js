@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import InputColor from 'react-input-color';
 
 export default () => {
-    const [initial, setInitial] = useState('#5e72e4');
+    const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -22,19 +22,19 @@ export default () => {
                             {/* Display Social Share Image */}
                             <div className="has-padding-top-20">
                                 <label className="has-margin-left-50 fnt-poppins">Dispaly/Social Share Image</label>
-                                <div class="field has-margin-top-20 has-margin-left-50">
-                                    <div class="file is-small has-name ">
-                                        <label class="file-label ">
-                                            <input class="file-input  " type="file" name="resume" />
-                                            <span class="file-cta">
-                                                <span class="file-icon">
-                                                    <i class="fas fa-upload"></i>
+                                <div className="field has-margin-top-20 has-margin-left-50">
+                                    <div className="file is-small has-name ">
+                                        <label className="file-label ">
+                                            <input className="file-input  " type="file" name="resume" />
+                                            <span className="file-cta">
+                                                <span className="file-icon">
+                                                    <i className="fas fa-upload"></i>
                                                 </span>
-                                                <span class="file-label fnt-poppins">
+                                                <span className="file-label fnt-poppins">
                                                     Choose file...
                                                 </span>
                                             </span>
-                                            <span class="file-name fnt-poppins">
+                                            <span className="file-name fnt-poppins">
                                                 No file choosen...
                                             </span>
                                         </label>
@@ -46,95 +46,95 @@ export default () => {
                                 <label className="has-margin-left-50 fnt-poppins" >Overlays (max 5 images)</label>
                             </div>
                             {/* First choose file button */}
-                            <div class="field has-margin-top-20 has-margin-left-50">
-                                <div class="file is-small has-name ">
-                                    <label class="file-label ">
-                                        <input class="file-input  " type="file" name="resume" />
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
+                            <div className="field has-margin-top-20 has-margin-left-50">
+                                <div className="file is-small has-name ">
+                                    <label className="file-label ">
+                                        <input className="file-input  " type="file" name="resume" />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <i className="fas fa-upload"></i>
                                             </span>
-                                            <span class="file-label fnt-poppins">
+                                            <span className="file-label fnt-poppins">
                                                 Choose file...
                                             </span>
                                         </span>
-                                        <span class="file-name fnt-poppins">
+                                        <span className="file-name fnt-poppins">
                                             No file choosen...
                                         </span>
                                     </label>
                                 </div>
                             </div>
                             {/* Second choose file button */}
-                            <div class="field has-margin-top-20 has-margin-left-50">
-                                <div class="file is-small has-name ">
-                                    <label class="file-label ">
-                                        <input class="file-input  " type="file" name="resume" />
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
+                            <div className="field has-margin-top-20 has-margin-left-50">
+                                <div className="file is-small has-name ">
+                                    <label className="file-label ">
+                                        <input className="file-input  " type="file" name="resume" />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <i className="fas fa-upload"></i>
                                             </span>
-                                            <span class="file-label fnt-poppins">
+                                            <span className="file-label fnt-poppins">
                                                 Choose file...
                                             </span>
                                         </span>
-                                        <span class="file-name fnt-poppins">
+                                        <span className="file-name fnt-poppins">
                                             No file choosen...
                                          </span>
                                     </label>
                                 </div>
                             </div>
                             {/* Thirt choose file button  */}
-                            <div class="field has-margin-top-20 has-margin-left-50">
-                                <div class="file is-small has-name ">
-                                    <label class="file-label ">
-                                        <input class="file-input  " type="file" name="resume" />
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
+                            <div className="field has-margin-top-20 has-margin-left-50">
+                                <div className="file is-small has-name ">
+                                    <label className="file-label ">
+                                        <input className="file-input  " type="file" name="resume" />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <i className="fas fa-upload"></i>
                                             </span>
-                                            <span class="file-label fnt-poppins">
+                                            <span className="file-label fnt-poppins">
                                                 Choose file...
                                             </span>
                                         </span>
-                                        <span class="file-name fnt-poppins">
+                                        <span className="file-name fnt-poppins">
                                             No file choosen...
                                         </span>
                                     </label>
                                 </div>
                             </div>
                             {/* Fourth choose file button */}
-                            <div class="field has-margin-top-20 has-margin-left-50">
-                                <div class="file is-small has-name ">
-                                    <label class="file-label ">
-                                        <input class="file-input  " type="file" name="resume" />
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
+                            <div className="field has-margin-top-20 has-margin-left-50">
+                                <div className="file is-small has-name ">
+                                    <label className="file-label ">
+                                        <input className="file-input  " type="file" name="resume" />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <i className="fas fa-upload"></i>
                                             </span>
-                                            <span class="file-label fnt-poppins">
+                                            <span className="file-label fnt-poppins">
                                                 Choose file...
                                            </span>
                                         </span>
-                                        <span class="file-name fnt-poppins">
+                                        <span className="file-name fnt-poppins">
                                             No file choosen...
                                         </span>
                                     </label>
                                 </div>
                             </div>
                             {/* Fifth choose file button */}
-                            <div class="field has-margin-top-20 has-margin-left-50">
-                                <div class="file is-small has-name ">
-                                    <label class="file-label ">
-                                        <input class="file-input  " type="file" name="resume" />
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
+                            <div className="field has-margin-top-20 has-margin-left-50">
+                                <div className="file is-small has-name ">
+                                    <label className="file-label ">
+                                        <input className="file-input  " type="file" name="resume" />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <i className="fas fa-upload"></i>
                                             </span>
-                                            <span class="file-label fnt-poppins">
+                                            <span className="file-label fnt-poppins">
                                                 Choose file...
                                         </span>
                                         </span>
-                                        <span class="file-name fnt-poppins">
+                                        <span className="file-name fnt-poppins">
                                             No file choosen...
                                      </span>
                                     </label>

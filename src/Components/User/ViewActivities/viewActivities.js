@@ -1,6 +1,4 @@
 import React from 'react'
-import Editlogo from '../../../assets/Images/edit.svg'
-import Deletelogo from '../../../assets/Images/delete.svg'
 
 export default () => {
     return (

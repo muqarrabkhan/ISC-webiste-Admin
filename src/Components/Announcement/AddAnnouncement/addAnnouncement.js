@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export default () => {
-
     return (
-
         <div className="container-fluid Table-for-administrator-main-div">
-
             {/* header */}
 
             <div className="header-of-viewAdministrator">

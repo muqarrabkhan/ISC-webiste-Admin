@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
-import CKEditor from "react-ckeditor-component";
+import React from 'react'
 
 export default () => {
-    const [content, setContent] = useState("");
-    console.log("content", content);
+
 
     return (
 

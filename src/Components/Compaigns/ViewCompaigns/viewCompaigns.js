@@ -130,32 +130,32 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="switch-btn-of-tables">
-                                            <label class="switch">
+                                            <label className="switch">
                                                 <input type="checkbox" />
-                                                <span class="slider"></span>
+                                                <span className="slider"></span>
                                             </label>
                                         </div>
                                     </td>
                                     <td>
                                         <div className="switch-btn-of-tables">
-                                            <label class="switch">
+                                            <label className="switch">
                                                 <input type="checkbox" />
-                                                <span class="slider"></span>
+                                                <span className="slider"></span>
                                             </label>
                                         </div>
                                     </td>
                                     <td>
                                         <div className="switch-btn-of-tables">
-                                            <label class="switch">
+                                            <label className="switch">
                                                 <input type="checkbox" />
-                                                <span class="slider"></span>
+                                                <span className="slider"></span>
                                             </label>
                                         </div>
                                     </td>
                                     <td className="btns-of-viewcompaign">
                                         <div className="is-flex">
-                                            <img className="edit-image-table customization-of-image-btn" src={Editlogo} />
-                                            <img className="edit-image-table customization-of-image-btn" src={Deletelogo} />
+                                            <img className="edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
+                                            <img className="edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
                                             <span className="view-btn-of-table ">Verify</span>
                                         </div>
                                         <div className="has-margin-top-10">
