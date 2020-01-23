@@ -1,0 +1,48 @@
+@import './Color.scss';
+.dash-board-cards{
+       width: 403px;
+    height: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius:10px;
+    .dashboard-card-headr{
+     h1{
+            color:#6b97df;
+    }
+    }
+.dashboard-card-hr-line { 
+      width: 361px;
+    height: 3px;
+    background:#e0e0e0;
+}
+.card-left-text {
+           width: 192px;
+        color:#bdbdbd;
+    }
+.dashboard-card-vl{
+        border-left: 3px solid #e0e0e0;
+       height: 106px;
+}
+.card-right-text {
+        color:#bdbdbd;
+    }
+}
+// Last Week campaign styling start
+.last-week-main-dev{
+    .Last-week-cards-main-dev{
+        justify-content: space-evenly;
+        
+    }
+.dashboard-Lastweek-Campaign-hdr{
+width: 1311px;
+    height: 69px;
+    background-color:$Table-navbar;
+
+}
+.Last-week-card-section{
+       width: 265px;
+    height: 360px;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+     border-radius:10px;
+
+}
+}

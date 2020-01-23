@@ -4,6 +4,7 @@
 @import './CheckBox.scss';
 @import './Radiobutton.scss';
 @import './SwitchButton.scss';
+@import './dashboard.scss';
 // font-family
 .fnt-poppins{
         font-family: 'Poppins', sans-serif;
@@ -14,5 +15,23 @@
 }
 .background-white{
         background: $White-color;
+}
+.fnt-size-20{
+        font-size:20px;
+}
+.fnt-size-25{
+        font-size:25px;
+}
+.fnt-size-15{
+        font-size:15px;
+}
+.fnt-size-13{
+        font-size:13px;
+}
+.fnt-weight-600{
+        font-weight:600;
+}
+.text-center{
+        text-align:center;
 }
 
