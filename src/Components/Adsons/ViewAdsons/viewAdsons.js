@@ -26,9 +26,7 @@ export default () => {
                             </select>
                         </div>
                     </div>
-
                     {/* Table-Title */}
-
                     <div className="container-fluid Table-title">
                         <table className="main-table-heading">
                             <thead className="heading-of-table background-color-head">
@@ -56,8 +54,6 @@ export default () => {
                                         </div>
                                     </td>
                                 </tr>
-
-
                                 <tr className="table-footer">
                                     <td>Total</td>
                                     <td></td>
@@ -66,20 +62,11 @@ export default () => {
                                     <td></td>
                                     <td>Number</td>
                                 </tr>
-
                             </tbody>
-
-
                         </table>
-
-
-
                     </div>
-
-
                 </div>
-
-                <Style/>
+                <Style />
             </div>
         </>
     );

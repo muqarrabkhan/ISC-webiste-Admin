@@ -44,16 +44,14 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="applying-flex-products-btn">
-                                            <img className="edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo}/>
+                                            <img className="edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
                                             <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <span className="view-btn-of-table view-subscription-btn-products">Assign</span>   
-                                            <span className="view-btn-of-table view-subscription-btn-products">View</span>   
- 
+                                            <span className="view-btn-of-table view-subscription-btn-products">Assign</span>
+                                            <span className="view-btn-of-table view-subscription-btn-products">View</span>
+
                                         </div>
                                     </td>
                                 </tr>
-                             
-
                                 <tr className="table-footer">
                                     <td>Total</td>
                                     <td></td>
@@ -63,20 +61,11 @@ export default () => {
                                     <td></td>
                                     <td>Number</td>
                                 </tr>
-
                             </tbody>
-
-
                         </table>
-
-
-
                     </div>
-
-
                 </div>
-
-                <Style/>
+                <Style />
             </div>
         </>
     );

@@ -33,7 +33,6 @@ export default () => {
                                             <div>
                                                 <input className="has-margin-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
                                             </div>
-
                                         </div>
                                     </div>
                                     {/*Product Sale Price($)**/}
@@ -47,9 +46,7 @@ export default () => {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Product Short Description**/}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
@@ -63,7 +60,6 @@ export default () => {
                                         </div>
                                     </div>
                                     {/*Product Url* */}
-
                                     <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
@@ -74,10 +70,9 @@ export default () => {
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
+                            {/* buttons */}
                             <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>

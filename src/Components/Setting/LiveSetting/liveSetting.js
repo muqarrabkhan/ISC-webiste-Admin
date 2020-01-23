@@ -49,8 +49,8 @@ export default () => {
                                     <input className="has-margin-top-40" type="radio" id="radio3" name="radio-of-groups" checked />
                                     <label className="label-of-radio" for="radio3">
                                         <div className="checker"></div>
-                                         <div>Enable</div>
-                                </label>
+                                        <div>Enable</div>
+                                    </label>
                                 </div>
                             </div>
                             <div className="radios-of-group has-margin-left-50">

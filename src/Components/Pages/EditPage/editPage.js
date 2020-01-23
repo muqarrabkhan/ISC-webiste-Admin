@@ -19,7 +19,6 @@ export default () => {
             {/* Table of Administrator  */}
             <form>
                 <div className="Table-of-administrator">
-
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
@@ -85,6 +84,7 @@ export default () => {
                                         className="form-control" placeholder="Enter Description" rows="5" />
                                 </div>
                             </div>
+                            {/* buttons */}
                             <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>

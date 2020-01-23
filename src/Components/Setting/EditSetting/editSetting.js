@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ()=>{
+export default () => {
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -51,11 +51,11 @@ export default ()=>{
                                 </div>
                                 <div className="has-margin-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins">
-                                            <option>General</option>
-                                        	<option>Payment</option>
-                                        	<option>Social</option>
-                                        	<option>Email</option>
-                                        	<option>Apps</option>
+                                        <option>General</option>
+                                        <option>Payment</option>
+                                        <option>Social</option>
+                                        <option>Email</option>
+                                        <option>Apps</option>
                                     </select>
                                 </div>
                             </div>

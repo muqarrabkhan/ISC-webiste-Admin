@@ -3,7 +3,6 @@ import React from 'react'
 export default () => {
   
     return (
-
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
@@ -32,6 +31,7 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
+                             {/* buttons */}
                             <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Add</button>

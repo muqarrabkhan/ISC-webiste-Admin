@@ -94,10 +94,7 @@ export default () => {
                             </select>
                         </div>
                     </div>
-
-
                     {/* Table-Title */}
-
                     <div className="container-fluid Table-title">
                         <table className="main-table-heading">
                             <thead className="heading-of-table background-color-head">
@@ -159,7 +156,7 @@ export default () => {
                                             <span className="view-btn-of-table ">Verify</span>
                                         </div>
                                         <div className="has-margin-top-10">
-                                        <span className="view-btn-of-table has-width-40">View Details</span>
+                                            <span className="view-btn-of-table has-width-40">View Details</span>
                                         </div>
                                         <div className="has-margin-top-10">
                                             <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>
@@ -168,14 +165,8 @@ export default () => {
                                 </tr>
                             </tbody>
                         </table>
-
-
-
                     </div>
-
-
                 </div>
-
                 <Style />
             </div>
         </>

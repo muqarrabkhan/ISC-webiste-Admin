@@ -1,8 +1,7 @@
 import React from 'react'
-import {Route , Switch} from 'react-router-dom'
+import {Route, Switch } from 'react-router-dom'
 import Sidenav from './Components/Sidenav/sidenav'
 import Administrator from './Components/Administrator/ViewAdministrators/viewAdministrator'
-import User from './Components/User/ViewUser/viewUser'
 
 export default () => {
     return (
@@ -11,12 +10,11 @@ export default () => {
                 <div className="main-routes">
                     <div className="right-section">
                         <Switch>
-                            <Route path={"/"} exact component={Administrator} />
-                            <Route path={"/user"} component={User} />
+                            <Route path={"/administrator"} component={Administrator} />
                         </Switch>
                     </div>
                 </div>
-            </Sidenav>    
+            </Sidenav>
         </div>
     );
 }

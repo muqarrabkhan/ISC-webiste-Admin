@@ -66,14 +66,8 @@ export default () => {
                                 </tr>
                             </tbody>
                         </table>
-
-
-
                     </div>
-
-
                 </div>
-
                 <Style />
             </div>
         </>

@@ -4,9 +4,7 @@ export default () => {
 
 
     return (
-
         <div className="container-fluid Table-for-administrator-main-div">
-
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update Coupan</h6>

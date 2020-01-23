@@ -29,15 +29,15 @@ export default () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr className="fnt-poppins background-white">
-                                    <td>Alfreds Futterkiste</td>
-                                    <td>Alfreds</td>
-                                    <td>
-                                        <div className="appling-flex-btns">
-                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr className="fnt-poppins background-white">
+                                        <td>Alfreds Futterkiste</td>
+                                        <td>Alfreds</td>
+                                        <td>
+                                            <div className="appling-flex-btns">
+                                                <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

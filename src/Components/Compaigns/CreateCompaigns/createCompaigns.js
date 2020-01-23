@@ -330,7 +330,6 @@ export default () => {
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
                             </div>
-
                         </div>
                     </div>
                 </div>

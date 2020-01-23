@@ -7,18 +7,14 @@ export default () => {
     return (
 
         <div className="container-fluid Table-for-administrator-main-div">
-
             {/* header */}
-
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Details</h6>
                 <button className="header-btn-of-table fnt-poppins">Back</button>
             </div>
-
             {/* Table of Administrator  */}
             <form>
                 <div className="Table-of-administrator">
-
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
@@ -37,11 +33,9 @@ export default () => {
                                                     <option>Disable</option>
                                                 </select>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Place On**/}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
@@ -60,8 +54,6 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-
-
                             {/* radioButtons */}
                             <div className="radios has-margin-top-20 has-margin-left-50">
                                 <div className="radio">
@@ -94,7 +86,6 @@ export default () => {
                                     }}>
                                     {color.hex}
                                 </div>
-
                                 <InputColor initialHexColor={initial} onChange={setColor} />
                             </div>
                             <div className="Form-main-div-of-sectons flex-row">
@@ -108,11 +99,9 @@ export default () => {
                                             <div>
                                                 <input className="has-margin-top-10 fnt-poppins" />
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Compaign Url*/}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
@@ -131,8 +120,6 @@ export default () => {
                             <div className="has-margin-top-30 has-margin-left-50">
                                 <label>Ad Link*</label>
                             </div>
-
-
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Ad Text***/}
@@ -144,11 +131,9 @@ export default () => {
                                             <div>
                                                 <input className="has-margin-top-10 fnt-poppins" />
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Ad Button Text*/}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
@@ -163,7 +148,6 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Ad Image Url*/}
@@ -178,7 +162,6 @@ export default () => {
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Start Date*/}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">

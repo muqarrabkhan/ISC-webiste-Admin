@@ -153,7 +153,6 @@ export default () => {
                                     }}>
                                     {color.hex}
                                 </div>
-
                                 <InputColor initialHexColor={initial} onChange={setColor} />
                             </div>
                             <div className="Form-main-div-of-sectons flex-row">
@@ -322,14 +321,12 @@ export default () => {
                                 </div>
                             </div>
                             {/* Form section2 div end here */}
-
                             {/* file chosen button end here */}
                             {/* Cancel and Save button */}
                             <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
                             </div>
-
                         </div>
                     </div>
                 </div>

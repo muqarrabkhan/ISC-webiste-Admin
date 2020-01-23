@@ -2,24 +2,17 @@ import React from 'react'
 import Image1 from '../../assets/Images/larki.jpg'
 
 export default () => {
-
-
   return (
 
     <div className="container-fluid Table-for-administrator-main-div">
-
       {/* header */}
-
       <div className="header-of-viewAdministrator">
         <h6 className="heading6-of-header fnt-poppins">Dashboard</h6>
-
       </div>
-
       {/* Table of Administrator  */}
       <div className="container-fluid">
         <form>
           <div className="Table-of-administrator">
-
             <div className="background-of-table">
               <div className="blanck-dev"></div>
               {/* Table Section */}
@@ -45,7 +38,6 @@ export default () => {
                           <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
                           <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">1105</p>
                         </div>
-
                       </div>
                     </div>
                     {/* second card */}
@@ -158,6 +150,7 @@ export default () => {
                       </select>
                     </div>
                   </div>
+                {/* 1st Card of Last Week Views and of Compaigns */}
                   <div className="is-flex Last-week-cards-main-dev">
                     <div className="Last-week-card-section  has-margin-top-50">
                       <img src={Image1} alt="" />
@@ -166,6 +159,7 @@ export default () => {
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
                       </div>
                     </div>
+                 {/* 2nd Card of Last Week Views and of Compaigns */}
                     <div className="Last-week-card-section  has-margin-top-50">
                       <img src={Image1} alt="" />
                       <div className="has-margin-top-10 has-margin-left-10" >
@@ -173,6 +167,7 @@ export default () => {
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
                       </div>
                     </div>
+                 {/* 3rd Card of Last Week Views and of Compaigns */}                    
                     <div className="Last-week-card-section has-margin-top-50">
                       <img src={Image1} alt="" />
                       <div className="has-margin-top-10 has-margin-left-10" >
@@ -180,6 +175,7 @@ export default () => {
                         <p className="has-margin-top-5 fnt-size-13  fnt-poppins">Category:Human-Rights</p>
                       </div>
                     </div>
+                 {/* 4th Card of Last Week Views and of Compaigns */}                    
                     <div className="Last-week-card-section  has-margin-top-50">
                       <img src={Image1} alt="" />
                       <div className="has-margin-top-10 has-margin-left-10" >

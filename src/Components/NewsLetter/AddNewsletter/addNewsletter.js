@@ -2,8 +2,6 @@ import React from 'react'
 import Image from '../../../assets/Images/admin.png'
 
 export default () => {
-
-
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -35,11 +33,9 @@ export default () => {
                                             <div>
                                                 <input className="has-margin-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Select Tempelate* */}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
@@ -61,8 +57,6 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-
-
                             {/* radioButtons */}
                             <div className="radios has-margin-top-20 has-margin-left-50">
                                 <div className="radio">
@@ -94,7 +88,6 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-
                             {/* radioButtons second for Select Group**/}
                             <div className="radios-of-group has-margin-top-20 has-margin-left-50">
                                 <div className="radio-of-group">
@@ -124,10 +117,8 @@ export default () => {
                                     <div>
                                         <input className="has-margin-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
                                     </div>
-
                                 </div>
                             </div>
-
                             {/* Campaign URL**/}
                             <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
                                 <div className="form-group">
@@ -137,11 +128,9 @@ export default () => {
                                     <div>
                                         <input className="has-margin-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
                                     </div>
-
                                 </div>
                             </div>
-
-
+                            {/* buttons */}
                             <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>

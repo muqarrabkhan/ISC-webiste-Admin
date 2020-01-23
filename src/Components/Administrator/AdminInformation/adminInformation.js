@@ -9,7 +9,6 @@ export default () => {
                 <div className="has-margin">
                     <h6 className="heading6-of-header fnt-poppins">Administrator</h6>
                 </div>
-
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
@@ -38,7 +37,7 @@ export default () => {
                                     <div className="has-margin-top-20 fnt-poppins">
                                         <div>
                                             <label>Role*</label>
-                                            <input className="fnt-poppins inputs-of-admistrator"/>
+                                            <input className="fnt-poppins inputs-of-admistrator" />
                                         </div>
                                     </div>
                                     <div className="has-margin-top-20 has-margin-bottom-30 fnt-poppins">
@@ -54,7 +53,6 @@ export default () => {
                     <div className="Table-Header">
                         <h6 className="fnt-poppins">All Admins Record</h6>
                     </div>
-
                     {/* Table-Title */}
                     <div className="container-fluid Table-title">
                         <table className="main-table-heading">
