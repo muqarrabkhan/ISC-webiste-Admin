@@ -6,24 +6,24 @@
     border-radius:10px;
     .dashboard-card-headr{
      h1{
-            color:#6b97df;
+            color:$dashboard-card-hadr;
     }
     }
 .dashboard-card-hr-line { 
       width: 361px;
     height: 3px;
-    background:#e0e0e0;
+    background:$dashboard-card-hr-vl-line;
 }
 .card-left-text {
            width: 192px;
-        color:#bdbdbd;
+        color:$dashboard-card-left-right-text;
     }
 .dashboard-card-vl{
-        border-left: 3px solid #e0e0e0;
+        border-left: 3px solid $dashboard-card-hr-vl-line;
        height: 106px;
 }
 .card-right-text {
-        color:#bdbdbd;
+        color:$dashboard-card-left-right-text;
     }
 }
 // Last Week campaign styling start
