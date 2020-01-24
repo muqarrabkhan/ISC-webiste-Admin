@@ -20,7 +20,7 @@ export default () => {
                         {/* Table Section */}
                         <div className="container  Form-section-startup">
                             <div className="Form-section2-uploading-image">
-                                <img className="has-margin-left-55 has-margin-top-30" src={Image} />
+                                <img className="has-margin-left-55 has-margin-top-30" alt="" src={Image} />
                             </div>
                             <div className="Form-section2-uploading-btn">
                                 <button className="Save-btn-of-form has-margin-left-55 has-margin-top-20 fnt-poppins">Upload Image</button>

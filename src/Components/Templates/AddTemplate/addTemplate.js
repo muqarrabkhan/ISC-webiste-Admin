@@ -20,14 +20,12 @@ export default () => {
             {/* Table of Administrator  */}
             <form>
                 <div className="Table-of-administrator">
-
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
                         <div className="container  Form-section-startup">
-
                             <div className="Form-section2-uploading-image">
-                                <img className="has-margin-left-55 has-margin-top-30" src={Image} />
+                                <img className="has-margin-left-55 has-margin-top-30" alt="" src={Image} />
                             </div>
                             <div className="Form-section2-uploading-btn">
                                 <button className="Save-btn-of-form has-margin-left-55 has-margin-top-20 fnt-poppins">Upload Image</button>
@@ -43,7 +41,6 @@ export default () => {
                                             <div>
                                                 <input className="has-margin-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
                                             </div>
-
                                         </div>
                                     </div>
                                     {/* Email**/}
@@ -58,7 +55,6 @@ export default () => {
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="Form-section2-main-div-of-inputs has-margin-top-10">
                                     {/*Subject* */}
                                     <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">

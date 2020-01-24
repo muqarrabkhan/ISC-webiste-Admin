@@ -1,14 +1,18 @@
 import React from 'react'
-import {BrowserRouter} from 'react-router-dom'
 import 'bulma/css/bulma.css'
 import './assets/Style/Common.scss'
+import './assets/Style/Style.scss'
 import 'bulma-helpers/css/bulma-helpers.min.css'
-import Route from './Routes'
-
+import Routes from './Routes'
+import { BrowserRouter, Switch } from 'react-router-dom'
 
 export default () => {
     return (
-        <Route/>
+        <BrowserRouter>
+            <Switch>
+                <Routes />
+            </Switch>
+        </BrowserRouter>
     );
 }
 

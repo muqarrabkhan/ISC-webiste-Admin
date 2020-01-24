@@ -92,8 +92,8 @@ export default () => {
                                     <td>
                                         <div className="appling-width-btns is-flex ">
                                             <div className=" is-flex image-btn-edit-delete-user-compaign">
-                                                <img className="edit-image-table" src={Editlogo} />
-                                                <img className="delete-image-table" src={Deletelogo} />
+                                                <img className="edit-image-table" alt="" src={Editlogo} />
+                                                <img className="delete-image-table" alt="" src={Deletelogo} />
                                             </div>
                                             <div className=" is-flex btn-of-view-user-compaign ">
                                                 <span className="view-btn-of-table">View Details</span>
