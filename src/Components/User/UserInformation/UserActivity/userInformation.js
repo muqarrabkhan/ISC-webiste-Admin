@@ -1,5 +1,6 @@
 import React from 'react'
 import Style from './style'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
@@ -52,8 +53,8 @@ export default () => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                            <h6 className="fnt-poppins  has-margin-left-20 border-bottom-inside-header-of-table">User Activity</h6>
-                            <h6 className="fnt-poppins has-padding-left-20">Compaign</h6>
+                        <Link to={"/user-information-activities"}><h6 className="fnt-poppins  has-margin-left-20 border-bottom-inside-header-of-table">User Activity</h6></Link>
+                        <Link to={"/user-information-campaings"}><h6 className="fnt-poppins has-padding-left-20">Compaign</h6></Link>
                         </div>
                     </div>
                     {/* Table-Title */}

@@ -2,6 +2,7 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
@@ -10,7 +11,7 @@ export default () => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Adson</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                    <Link to={""}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">

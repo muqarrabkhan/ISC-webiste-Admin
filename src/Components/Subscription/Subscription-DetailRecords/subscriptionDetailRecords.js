@@ -2,23 +2,19 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
-
                 {/* header */}
-
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Subscription Detail Records</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                    <Link to={"/add-subscription-record"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
-
                 {/* Table of Administrator  */}
-
                 <div className="Table-of-administrator">
-
                     <div className="background-of-table">
                     </div>
                     <div className="Table-Header">
@@ -38,7 +34,7 @@ export default () => {
                                     <td>Excellence in Learning & Development Form</td>
                                      <td>
                                         <div className="is-flex">
-                                            <img className="edit-image-table" alt="edit-button" src={Editlogo}/>
+                                           <Link to={"/edit-subscription-detail"}><img className="edit-image-table" alt="edit-button" src={Editlogo}/></Link>
                                             <img className="delete-image-table" alt="Delete-button" src={Deletelogo}/>
                                         </div>
                                     </td>
