@@ -1,15 +1,15 @@
 import React from 'react'
 import '../../../assets/Style/Common.scss'
+import {Link} from 'react-router-dom'
 
 export default () => {
-
     return (
 
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Edit Administrator</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/administrator"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>

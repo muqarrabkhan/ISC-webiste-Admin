@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import CKEditor from "react-ckeditor-component";
+import {Link} from 'react-router-dom'
 
 export default () => {
     const [content, setContent] = useState("");
@@ -10,7 +11,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Edit File</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/file"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>

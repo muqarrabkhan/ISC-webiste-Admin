@@ -2,6 +2,7 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
@@ -10,7 +11,7 @@ export default () => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Campaigns</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                    <Link to={"/create-camapaign"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -151,12 +152,12 @@ export default () => {
                                     </td>
                                     <td className="btns-of-viewcompaign">
                                         <div className="is-flex">
-                                            <img className="edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
+                                            <Link to={"/edit-campaign"}><img className="edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} /></Link>
                                             <img className="edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
-                                            <span className="view-btn-of-table ">Verify</span>
+                                            <Link><span className="view-btn-of-table ">Verify</span></Link>
                                         </div>
                                         <div className="has-margin-top-10">
-                                            <span className="view-btn-of-table has-width-40">View Details</span>
+                                        <Link to={"/Camapaign-details"}><span className="view-btn-of-table has-width-40">View Details</span></Link>
                                         </div>
                                         <div className="has-margin-top-10">
                                             <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>

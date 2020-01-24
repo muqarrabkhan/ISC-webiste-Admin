@@ -1,13 +1,13 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default () => {
-  
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Product in Compaign</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/view-all-campaign"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>

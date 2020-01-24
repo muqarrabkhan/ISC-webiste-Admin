@@ -102,9 +102,9 @@ const allRouters = () => {
                             <Route path={"/subscription-detail-record"} component={SubscriptionDetailRecord} />
                             <Route path={"/subscription"} component={ViewSubscription} />
                             {/* Announcemnent */}
-                            <Route path={"/add-category"} component={AddAnnouncement} />
-                            <Route path={"/category-details"} component={AnnouncementDetail} />
-                            <Route path={"/edit-category"} component={EditAnnouncemnent} />
+                            <Route path={"/add-announcement"} component={AddAnnouncement} />
+                            <Route path={"/announcement-details"} component={AnnouncementDetail} />
+                            <Route path={"/edit-announcement"} component={EditAnnouncemnent} />
                             <Route path={"/announcement"} component={ViewAnnouncement} />
                             {/* Cateories */}
                             <Route path={"/add-category"} component={AddCategory} />
