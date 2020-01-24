@@ -11,7 +11,7 @@ export default () => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Adson</h6>
-                    <Link to={""}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                    <Link to={"/add-adson"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -49,9 +49,9 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="appling-flex-btns">
-                                            <img className="edit-image-table" alt="edit-button" src={Editlogo} />
+                                            <Link to={"edit-adson"}><img className="edit-image-table" alt="edit-button" src={Editlogo} /></Link>
                                             <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <span className="view-btn-of-table">View Details</span>
+                                            <Link to={"view-details"}><span className="view-btn-of-table">View Details</span></Link>
                                         </div>
                                     </td>
                                 </tr>

@@ -1,22 +1,18 @@
 import React, { useState } from 'react'
 import CKEditor from "react-ckeditor-component";
 import Image from '../../../assets/Images/admin.png'
+import {Link} from 'react-router-dom'
 
 export default () => {
     const [content, setContent] = useState("");
     console.log("content", content);
-
     return (
-
         <div className="container-fluid Table-for-administrator-main-div">
-
             {/* header */}
-
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Templates</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/tamplates"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
-
             {/* Table of Administrator  */}
             <form>
                 <div className="Table-of-administrator">

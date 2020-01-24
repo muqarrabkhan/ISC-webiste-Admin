@@ -1,6 +1,7 @@
 import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Style from './style'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
@@ -9,7 +10,7 @@ export default () => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Coupans</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                    <Link to={"/add-coupans"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -52,7 +53,7 @@ export default () => {
                                     <td>sub view</td>
                                     <td>sub view</td>
                                     <td>
-                                        <img className="edit-image-table" alt="edit-button" src={Editlogo} />
+                                    <Link to={"/edit-coupans"}><img className="edit-image-table" alt="edit-button" src={Editlogo} /></Link>
                                     </td>
                                 </tr>
                                 <tr className="table-footer">

@@ -1,13 +1,14 @@
 import React from 'react'
 import Image from '../../../assets/Images/admin.png'
-
+import {Link} from 'react-router-dom'
+ 
 export default () => {
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update Product</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/product"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>

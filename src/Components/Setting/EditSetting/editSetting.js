@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
@@ -6,7 +7,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update General Setting</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/setting"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>
