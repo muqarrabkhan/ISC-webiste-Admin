@@ -9,9 +9,7 @@ import { BrowserRouter, Switch } from 'react-router-dom'
 export default () => {
     return (
         <BrowserRouter>
-            <Switch>
                 <Routes />
-            </Switch>
         </BrowserRouter>
     );
 }

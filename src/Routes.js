@@ -80,7 +80,6 @@ const allRouters = () => {
             <Sidenav />
             <div className="main-routes main-dev-of-routes">
                 <div className="right-section">
-                    <BrowserRouter>
                         <Switch>
                             {/* Dashboard */}
                             <Route path={"/dashboard"} component={Dashboard} />
@@ -153,7 +152,6 @@ const allRouters = () => {
                             <Route path={"/edit-file"} component={EditFiles} />
                             <Route path={"/file"} component={Viewfiles} />
                         </Switch>
-                    </BrowserRouter>
                 </div>
             </div>
         </div>
