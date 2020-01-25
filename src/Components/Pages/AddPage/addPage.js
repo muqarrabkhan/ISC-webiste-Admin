@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import CKEditor from "react-ckeditor-component";
 import {withRouter} from 'react-router-dom'
+
 const AddPage= (props) => {
     let {history}=props;
+    
     const [content, setContent] = useState("");
     console.log("content", content);
 

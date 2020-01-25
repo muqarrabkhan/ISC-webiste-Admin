@@ -1,7 +1,10 @@
 import React, {useState} from 'react'
 import InputColor from 'react-input-color';
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const EditAdson=(props) => {
+    let {history}=props;
+    
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
     return (
@@ -9,7 +12,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update Adson</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={()=>history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form>
@@ -197,3 +200,4 @@ export default () => {
         </div>
     );
 }
+export default withRouter(EditAdson);

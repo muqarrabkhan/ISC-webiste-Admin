@@ -2,16 +2,17 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const viewProduct=(props) => {
+    let {history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Products</h6>
-                    <Link to={"/add-product"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                   <button onClick={()=> history.push("/add-product")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -45,10 +46,10 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="applying-flex-products-btn">
-                                            <Link to={"/edit-product"}><img className="edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} /></Link>
+                                           <img onClick={()=>history.push("/edit-product")} className=" cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
                                             <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <Link><span className="view-btn-of-table view-subscription-btn-products">Assign</span></Link>
-                                            <Link to={"/view-all-campaign"}><span className="view-btn-of-table view-subscription-btn-products">View</span></Link>
+                                            <span className="cursor-pointer view-btn-of-table view-subscription-btn-products">Assign</span>
+                                            <span onClick={()=>history.push("/view-all-campaign")} className="cursor-pointer view-btn-of-table view-subscription-btn-products">View</span>
 
                                         </div>
                                     </td>
@@ -71,3 +72,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(viewProduct)

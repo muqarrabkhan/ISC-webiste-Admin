@@ -10,7 +10,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Campaign Details</h6>
-                <Link to={"/campaign"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
+                <Link to={"/campaign"}><button className="cursor-pointer header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>

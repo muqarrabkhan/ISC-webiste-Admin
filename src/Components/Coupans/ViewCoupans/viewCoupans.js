@@ -1,16 +1,17 @@
 import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Style from './style'
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const viewCoupan=(props) => {
+    let {history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Coupans</h6>
-                    <Link to={"/add-coupans"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                   <button onClick={()=> history.push=("/add-coupans")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -53,7 +54,7 @@ export default () => {
                                     <td>sub view</td>
                                     <td>sub view</td>
                                     <td>
-                                    <Link to={"/edit-coupans"}><img className="edit-image-table" alt="edit-button" src={Editlogo} /></Link>
+                                   <img onClick={()=>history.push("/edit-coupans")}  className=" cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                     </td>
                                 </tr>
                                 <tr className="table-footer">
@@ -74,3 +75,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(viewCoupan)

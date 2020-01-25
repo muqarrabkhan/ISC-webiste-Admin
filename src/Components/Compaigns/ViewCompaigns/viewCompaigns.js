@@ -11,7 +11,7 @@ export default () => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Campaigns</h6>
-                    <Link to={"/create-camapaign"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                    <Link to={"/create-camapaign"}><button className="cursor-pointer header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -152,12 +152,12 @@ export default () => {
                                     </td>
                                     <td className="btns-of-viewcompaign">
                                         <div className="is-flex">
-                                            <Link to={"/edit-campaign"}><img className="edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} /></Link>
+                                            <Link to={"/edit-campaign"}><img className="cursor-pointeredit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} /></Link>
                                             <img className="edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
-                                            <Link><span className="view-btn-of-table ">Verify</span></Link>
+                                            <span className="cursor-pointer view-btn-of-table ">Verify</span>
                                         </div>
                                         <div className="has-margin-top-10">
-                                        <Link to={"/Camapaign-details"}><span className="view-btn-of-table has-width-40">View Details</span></Link>
+                                        <Link to={"/Camapaign-details"}><span className="cursor-pointer view-btn-of-table has-width-40">View Details</span></Link>
                                         </div>
                                         <div className="has-margin-top-10">
                                             <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>

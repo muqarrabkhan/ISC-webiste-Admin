@@ -2,7 +2,7 @@ import React from 'react'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
 
-export default () => {
+const viewAllcompaign=() => {
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -48,3 +48,4 @@ export default () => {
         </>
     );
 }
+export default viewAllcompaign
