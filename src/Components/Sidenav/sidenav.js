@@ -2,25 +2,19 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import Logo from '../../assets/Images/scteisbe.png'
 import Style from './style'
-import DashBoard from '../../assets/Images/dashboard.png'
-import Administrator from '../../assets/Images/admin.png'
-import User from '../../assets/Images/user.png'
-import Subscription from '../../assets/Images/subscription.png'
-import Announcement from '../../assets/Images/announcement.png'
-import Catogries from '../../assets/Images/category.png'
-import Newsletter from '../../assets/Images/newsletter.png'
-import Pages from '../../assets/Images/pages.png'
-import Setting from '../../assets/Images/Setting.png'
-import Compaigns from '../../assets/Images/compaign.png'
-import Products from '../../assets/Images/product.png'
-import Adsons from '../../assets/Images/adson.png'
-import Coupan from '../../assets/Images/coupan.png'
-import Template from '../../assets/Images/template.png'
-import File from '../../assets/Images/file.png'
 import Logout from '../../assets/Images/logout.png'
 
-const Sidenav = (props) => { 
-
+const Sidenav = (props) => {
+    let { location: routerLocation } = props;
+    let location = routerLocation.pathname;
+    const currentActive = (value) => {
+        if (location === "/") {
+            return "active"
+        }
+        else {
+            return location.indexOf(value) === 1 ? "active" : ""
+        }
+    }
     return (
         <>
             <div className="container-fluid dashboard-main-dev">
@@ -32,110 +26,110 @@ const Sidenav = (props) => {
                     {/* Sidenav Links*/}
                     <div className="sidenav-Links">
                         {/* dashboard  */}
-                        <Link to={"/dashboard"}>
-                        <div className="dashboard-name-logo">
-                            <img className="dashboard_icon" src={DashBoard}  alt="dashboard" />
-                            <span className="dashboard-link fnt-poppins">DashBoard</span>
-                        </div>
+                        <Link to={"/"}>
+                            <div className={"dashboard-name-logo" + currentActive("/")}>
+                                <img className="dashboard_icon" src={currentActive("/") === "active" ? require('../../assets/Images/dashboardactive.png') : require('../../assets/Images/dashboard.png')} alt="dashboard" />
+                                <span className="dashboard-link fnt-poppins">DashBoard</span>
+                            </div>
                         </Link>
-                        
                         {/* Administrator */}
                         <Link to={"/administrator"}>
-                        <div className="sidenav-name-logo" >
-                            <img className="icon-width-admin" src={Administrator} alt="Administrator" />
-                            <span className="sidenav-link fnt-poppins">Administrator</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("administrator")}>
+                                <img className="icon-width-admin" src={currentActive("administrator") === "active" ? require('../../assets/Images/adminactive.png') : require('../../assets/Images/admin.png')} alt="Administrator" />
+                                <span className="sidenav-link fnt-poppins active">Administrator</span>
+                            </div>
                         </Link>
                         {/* Users */}
                         <Link to={"/users"}>
-                        <div className="sidenav-name-logo ">
-                            <img className="administrator_icon" alt="User" src={User} />
-                            <span className="sidenav-link fnt-poppins">Users</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("users")}>
+                                <img className="icon-width-admin" src={currentActive("users") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')} alt="Administrator" />
+                                <span className="sidenav-link fnt-poppins active">User</span>
+                            </div>
                         </Link>
+
                         {/* Subscription */}
                         <Link to={"/subscription"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Subscription" src={Subscription} />
-                            <span className="sidenav-link fnt-poppins">Subscription</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("subscription")}>
+                                <img className="administrator_icon" src={currentActive("subscription") === "active" ? require('../../assets/Images/subscriptionactive.png') : require('../../assets/Images/subscription.png')} alt="Subscription" />
+                                <span className="sidenav-link fnt-poppins">Subscription</span>
+                            </div>
                         </Link>
                         {/* Announcement */}
                         <Link to={"/announcement"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Announcement" src={Announcement} />
-                            <span className="sidenav-link fnt-poppins">Announcement</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/announcement")}>
+                                <img className="administrator_icon" src={currentActive("/announcement") === "active" ? require('../../assets/Images/announcementactive.png') : require('../../assets/Images/announcement.png')} alt="Announcement" />
+                                <span className="sidenav-link fnt-poppins">Announcement</span>
+                            </div>
                         </Link>
                         {/* Categories */}
                         <Link to={"/category"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Categories" src={Catogries} />
-                            <span className="sidenav-link fnt-poppins">Categories</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/category")}>
+                                <img className="administrator_icon" src={currentActive("/category") === "active" ? require('../../assets/Images/categoryactive.png') : require('../../assets/Images/category.png')} alt="Categories" />
+                                <span className="sidenav-link fnt-poppins">Categories</span>
+                            </div>
                         </Link>
                         {/* Newsletters */}
                         <Link to={"/newsletter"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Newsletter" src={Newsletter} />
-                            <span className="sidenav-link fnt-poppins">Newsletters</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/newsletter")}>
+                                <img className="administrator_icon" src={currentActive("/newsletter") === "active" ? require('../../assets/Images/newsletteractive.png') : require('../../assets/Images/newsletter.png')} alt="Newsletter" />
+                                <span className="sidenav-link fnt-poppins">Newsletters</span>
+                            </div>
                         </Link>
                         {/* Pages */}
                         <Link to={"/pages"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Pages" src={Pages} />
-                            <span className="sidenav-link fnt-poppins">Pages</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/pages")}>
+                                <img className="administrator_icon" src={currentActive("/pages") === "active" ? require('../../assets/Images/pagesactive.png') : require('../../assets/Images/pages.png')} alt="Pages" />
+                                <span className="sidenav-link fnt-poppins">Pages</span>
+                            </div>
                         </Link>
                         {/* General Setting */}
-                        <Link to={"/setting"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="General Setting" src={Setting} />
-                            <span className="sidenav-link fnt-poppins">General Setting</span>
-                        </div>
+                        <Link to={"/setting"} >
+                            <div className={"sidenav-name-logo" + currentActive("/setting")}>
+                                <img className="administrator_icon" src={currentActive("/setting") === "active" ? require('../../assets/Images/generalsettingactive.png') : require('../../assets/Images/Setting.png')} alt="General Setting" />
+                                <span className="sidenav-link fnt-poppins">General Setting</span>
+                            </div>
                         </Link>
                         {/* Compaigns */}
                         <Link to={"/campaign"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Compaign" src={Compaigns} />
-                            <span className="sidenav-link fnt-poppins">Compaigns</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/campaign")} >
+                                <img className="administrator_icon" src={currentActive("/campaign") === "active" ? require('../../assets/Images/compaignactive.png') : require('../../assets/Images/compaign.png')} alt="Compaign" />
+                                <span className="sidenav-link fnt-poppins">Compaigns</span>
+                            </div>
                         </Link>
                         {/* Products */}
                         <Link to={"/product"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Products" src={Products} />
-                            <span className="sidenav-link fnt-poppins">Products</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/product")}>
+                                <img className="administrator_icon" src={currentActive("/product") === "active" ? require('../../assets/Images/productactive.png') : require('../../assets/Images/product.png')} alt="Products" />
+                                <span className="sidenav-link fnt-poppins">Products</span>
+                            </div>
                         </Link>
                         {/* Adsons*/}
                         <Link to={"/adson"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Adson" src={Adsons} />
-                            <span className="sidenav-link fnt-poppins">Adsons</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/adson")}>
+                                <img className="administrator_icon" src={currentActive("/adson") === "active" ? require('../../assets/Images/adsonsactive.png') : require('../../assets/Images/adson.png')} alt="Adson" />
+                                <span className="sidenav-link fnt-poppins">Adsons</span>
+                            </div>
                         </Link>
                         {/* Coupan */}
                         <Link to={"/coupans"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Coupan" src={Coupan} />
-                            <span className="sidenav-link fnt-poppins">Coupan</span>
-                        </div>
+                            <div className={"sidenav-name-logo" + currentActive("/coupans")}>
+                                <img className="administrator_icon" src={currentActive("/coupans") === "active" ? require('../../assets/Images/coupanactive.png') : require('../../assets/Images/coupan.png')} alt="Coupan" />
+                                <span className="sidenav-link fnt-poppins">Coupan</span>
+                            </div>
                         </Link>
                         {/* Template */}
-                        <Link to={"tamplates"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Coupan" src={Template} />
-                            <span className="sidenav-link fnt-poppins">Templates</span>
-                        </div>
+                        <Link to={"/tamplates"} >
+                            <div className={"sidenav-name-logo" + currentActive("/tamplates")}>
+                                <img className="administrator_icon" src={currentActive("/tamplates") === "active" ? require('../../assets/Images/templateactive.png') : require('../../assets/Images/template.png')} alt="Coupan" />
+                                <span className="sidenav-link fnt-poppins">Templates</span>
+                            </div>
                         </Link>
                         {/* Files */}
-                        <Link to={"file"}>
-                        <div className="sidenav-name-logo">
-                            <img className="administrator_icon" alt="Files" src={File} />
-                            <span className="sidenav-link fnt-poppins">Files</span>
-                        </div>
+                        <Link to={"/file"}>
+                            <div className={"sidenav-name-logo" + currentActive("/file")}>
+                                <img className="administrator_icon" src={currentActive("/file") === "active" ? require('../../assets/Images/filesactive.png') : require('../../assets/Images/file.png')} alt="Files" />
+                                <span className="sidenav-link fnt-poppins">Files</span>
+                            </div>
                         </Link>
                         {/* Logout */}
                         <div className="sidenav-name-logo">

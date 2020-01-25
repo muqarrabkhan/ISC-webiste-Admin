@@ -82,7 +82,7 @@ const allRouters = () => {
                 <div className="right-section">
                         <Switch>
                             {/* Dashboard */}
-                            <Route path={"/dashboard"} component={Dashboard} />
+                            <Route path={"/"} exact component={Dashboard} />
                             {/* Administration */}
                             <Route path={"/add-administrator"} component={AddAdministrator} />
                             <Route path={"/admin-information"} component={AdminInformation} />
