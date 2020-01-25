@@ -2,16 +2,17 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {Link} from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 
-export default () => {
+const ViewAnnouncement= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Announcement</h6>
-                    <Link to={"/add-announcement"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                    <button onClick={()=>history.push("/add-announcement")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -46,9 +47,9 @@ export default () => {
                                      {/* buttons    */}
                                     <td>
                                         <div className="appling-flex-btns">
-                                            <Link to={"/edit-announcement"}><img className="edit-image-table" alt="edit-button" src={Editlogo} /></Link>
+                                            <img onClick={()=>history.push("/edit-announcement")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                             <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <Link to={"/announcement-details"}><span className="view-btn-of-table ">View Details</span></Link>
+                                           <span onClick={()=>history.push("/announcement-details")}className="cursor-pointer view-btn-of-table ">View Details</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -62,3 +63,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewAnnouncement);

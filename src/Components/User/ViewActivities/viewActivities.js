@@ -1,6 +1,6 @@
 import React from 'react'
-
-export default () => {
+import {withRouter} from 'react-router-dom'
+const ViewActivities= () => {
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -53,3 +53,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewActivities);

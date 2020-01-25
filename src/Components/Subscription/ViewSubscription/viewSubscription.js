@@ -1,16 +1,17 @@
 import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Style from './style'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-export default () => {
+const ViewSubscription= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Subscription</h6>
-                    <Link to={"/add-subscription-record"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                    <button onClick={()=>history.push("add-subscription-record")}className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -43,8 +44,8 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="is-flex">
-                                            <Link to={"/edit-subscription"}><img className="edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} /></Link>
-                                            <Link to={"/subscription-detail-record"}><span className="view-btn-of-table view-subscription-btn">View Details</span></Link>
+                                           <img onClick={()=>history.push("/edit-subscription")} className="cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
+                                            <span onClick={()=>history.push("/subscription-detail-record")} className="cursor-pointer view-btn-of-table view-subscription-btn">View Details</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -65,4 +66,6 @@ export default () => {
             </div>
         </>
     );
+
 }
+export default withRouter(ViewSubscription);

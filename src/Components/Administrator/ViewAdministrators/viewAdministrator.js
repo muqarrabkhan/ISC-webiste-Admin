@@ -1,19 +1,20 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
-import {Link} from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
-export default () => {
-    useEffect(() => {
 
-    }, []);
+const ViewAdministrator=(props) => {
+    let {history}=props;
+
+   
     return (
         <>
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Administrator</h6>
-                <button className="header-btn-of-table fnt-poppins">Create</button>
+                <button onClick={()=>history.push("/add-administrator")}className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
             </div>
             {/* Table of Administrator  */}
             <div className="Table-of-administrator">
@@ -48,9 +49,9 @@ export default () => {
                             <td>sub view</td>
                             <td>
                                 <div style={{display: "flex"}}>
-                                    <img className="edit-image-table" alt="edit-button" src={Editlogo}/>
+                                    <img onClick={()=>history.push("/edit-administrator")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo}/>
                                     <img className="delete-image-table" alt="delete-button" src={Deletelogo}/>
-                                    <span className="view-btn-of-table">View Details</span>
+                                    <span onClick={()=>history.push("/admin-information")} className="cursor-pointer view-btn-of-table">View Details</span>
                                 </div>
                             </td>
                         </tr>
@@ -69,3 +70,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewAdministrator);

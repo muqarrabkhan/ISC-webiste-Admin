@@ -2,9 +2,10 @@ import React from 'react'
 import Style from './style'
 import Deletelogo from '../../../../assets/Images/delete.svg'
 import Editlogo from '../../../../assets/Images/edit.svg'
-import {Link} from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 
-export default () => {
+const Campaign= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -55,8 +56,8 @@ export default () => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                        <Link to={"/user-information-activities"}><h6 className="fnt-poppins">User Activity</h6></Link>
-                        <Link to={"/user-information-campaings"}><h6 className="fnt-poppins has-margin-left-20 border-bottom-inside-header-of-table">Compaign</h6></Link>
+                        <h6 onClick={()=>history.push("/user-information-activities")}className="cursor-pointer fnt-poppins">User Activity</h6>
+                       <h6 onClick={()=>history.push("/ser-information-campaings")} className="cursor-pointer fnt-poppins has-margin-left-20 border-bottom-inside-header-of-table">Compaign</h6>
                         </div>
                     </div>
                     {/* Table-Title */}
@@ -111,3 +112,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(Campaign);

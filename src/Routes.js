@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 // SideNav
 import Sidenav from './Components/Sidenav/sidenav'
 // Dashboard
@@ -73,7 +73,7 @@ import ViewTamplates from './Components/Templates/ViewTemplates/viewtemplates'
 import EditFiles from './Components/Files/EditFile/editFile'
 import Viewfiles from './Components/Files/ViewFiles/viewFiles'
 
-const allRouters = () => {
+const AllRouters = () => {
     return (
         <div className="main-routes-div is-flex">
             {/* SideNav */}
@@ -157,4 +157,4 @@ const allRouters = () => {
         </div>
     );
 }
-export default withRouter(allRouters);
+export default withRouter(AllRouters);

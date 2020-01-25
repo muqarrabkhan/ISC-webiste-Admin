@@ -2,16 +2,17 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {Link} from 'react-router-dom' 
+import {withRouter} from 'react-router-dom' 
 
-export default () => {
+const ViewSetting= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Setting</h6>
-                    <Link to={"/add-setting"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                   <button onClick={()=>history.push("/add-setting")}className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -45,7 +46,7 @@ export default () => {
                                     <td>Maria Anders</td>
                                     <td>Germany</td>
                                     <td>
-                                        <Link to={"/edit-setting"}><img className="edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} /></Link>
+                                        <img onClick={()=>history.push("/edit-setting")} className="cursor-pointer edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} />
                                         <img className="delete-image-table setting-edit-btn" alt="edit-button" src={Deletelogo} />
                                     </td>
                                 </tr>
@@ -58,3 +59,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewSetting);

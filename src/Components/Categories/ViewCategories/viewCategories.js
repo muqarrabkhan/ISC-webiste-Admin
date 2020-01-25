@@ -2,16 +2,17 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const ViewCategories= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Category</h6>
-                    <Link to={"/add-category"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
+                   <button onClick={()=>history.push("/add-category")}className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -38,9 +39,9 @@ export default () => {
                                         <td>Active</td>
                                         <td>
                                             <div className="appling-flex-btns">
-                                                <Link to="/category"><img className="edit-image-table" alt="edit-button" src={Editlogo} /></Link>
+                                                <img onClick={()=>history.push("/category")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                 <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                                <Link to="/category-details"><span className="view-btn-of-table ">View Details</span></Link>
+                                                <span onClick={()=>history.push("/category-details")} className="cursor-pointer view-btn-of-table ">View Details</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -54,3 +55,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewCategories);

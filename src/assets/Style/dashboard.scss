@@ -2,7 +2,8 @@
 .dash-board-cards{
        width: 403px;
     height: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 18px 0 $dashbrd-card-box-shadow;
+    background: $dashbrd-card-background;
     border-radius:10px;
     .dashboard-card-headr{
      h1{
@@ -11,16 +12,17 @@
     }
 .dashboard-card-hr-line { 
       width: 361px;
-    height: 3px;
+    height: 1px;
     background:$dashboard-card-hr-vl-line;
 }
 .card-left-text {
            width: 192px;
         color:$dashboard-card-left-right-text;
     }
-.dashboard-card-vl{
-        border-left: 3px solid $dashboard-card-hr-vl-line;
-       height: 106px;
+.dashboard-cards-vl-line{
+    border: 1px solid #e0e0e0;
+    height: 106px;
+    width:1px;
 }
 .card-right-text {
         color:$dashboard-card-left-right-text;
@@ -41,7 +43,7 @@ width: 1311px;
 .Last-week-card-section{
        width: 265px;
     height: 400px;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 18px 0 $dashbrd-card-box-shadow;
      border-radius:10px;
 
 }

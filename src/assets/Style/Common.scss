@@ -23,11 +23,17 @@
 .fnt-size-25{
         font-size:25px;
 }
+.fnt-size-24{
+        font-size:24;
+}
 .fnt-size-15{
         font-size:15px;
 }
 .fnt-size-13{
         font-size:13px;
+}
+.fnt-weight-400{
+        font-weight:400;
 }
 .fnt-weight-600{
         font-weight:600;
@@ -41,4 +47,10 @@
 .cursor-pointer
 {
 cursor: pointer;
+}
+// dashboard-card-data-style
+.card-number-styling{
+        font-size: 24px;
+        font-weight: 600;
+        color: black;
 }
