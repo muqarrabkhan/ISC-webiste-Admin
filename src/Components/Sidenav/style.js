@@ -12,19 +12,20 @@ export default()=>{
             }
             .dashboard-main-dev .logo-dashboard{
                 padding-top: 3%;
-                padding-left: 23%;
+                padding-left: 20%;
+                width: 206px;
             }   
             .dashboard-name-logo {
                 width: 189px;
-                margin-top: 29%;
+                margin-top: 21%;
                 margin-left: 20%;
                 color: #c9ccd2;
             }
             span.dashboard-link.fnt-poppins {
                 padding-left: 18px;
             }
+
             // active state Styling stars here 
-           
             // .dashboard-name-logoactive {
             // }
             
@@ -33,7 +34,6 @@ export default()=>{
                 margin-left: 20%;
                 margin-top: 18%;
                 color: #e47529;
-                // color:#c9ccd2;
             }
             span.dashboard-link.fnt-poppins.active-text {
                 margin-left: 18px;
@@ -53,7 +53,7 @@ export default()=>{
             }
          
             .dashboard_icon{
-                width: 23px
+                width: 24px
             }
             .administrator_icon{
                 width: 23px

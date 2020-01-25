@@ -1,6 +1,6 @@
 import React from 'react'
 import {withRouter, Link} from 'react-router-dom'
-import Logo from '../../assets/Images/scteisbe.png'
+import Logo from '../../assets/Images/ISC_logo.png'
 import Style from './style'
 import Logout from '../../assets/Images/logout.png'
 
@@ -52,7 +52,6 @@ const Sidenav = (props) => {
                             <span className="sidenav-link fnt-poppins active">User</span>
                         </div>
                     </Link>
-
                     {/* Subscription */}
                     <Link to={"/subscription"}>
                         <div className={"sidenav-name-logo" + currentActive("subscription")}>
