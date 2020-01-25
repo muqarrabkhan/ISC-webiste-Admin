@@ -1,6 +1,6 @@
 import React from 'react'
 import Style from './style'
-import {Link, withRouter} from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 
 const UserInformation= (props) => {
     let{history}=props;

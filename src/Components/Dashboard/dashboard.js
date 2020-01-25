@@ -31,13 +31,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line has-margin-left-20 has-margin-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Today</h1>
-                          <p className="has-margin-left-65 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">105</p>
+                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
+                          <p className="has-margin-left-65 has-margin-top-20  fnt-poppins card-number-styling">105</p>
                         </div>
-                        <div className="dashboard-card-vl has-margin-top-10 "></div>
+                        <div className="dashboard-cards-vl-line has-margin-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
-                          <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">1105</p>
+                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
+                          <p className="has-margin-left-70 has-margin-top-20  fnt-poppins card-number-styling">1105</p>
                         </div>
                       </div>
                     </div>
@@ -49,13 +49,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line has-margin-left-20 has-margin-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Today</h1>
-                          <p className="has-margin-left-65 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">105</p>
+                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
+                          <p className="has-margin-left-65 has-margin-top-20  fnt-poppins card-number-styling">105</p>
                         </div>
-                        <div className="dashboard-card-vl has-margin-top-10 "></div>
+                        <div className="dashboard-cards-vl-line has-margin-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
-                          <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">1105</p>
+                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
+                          <p className="has-margin-left-70 has-margin-top-20  fnt-poppins card-number-styling ">1105</p>
                         </div>
                       </div>
                     </div>
@@ -67,20 +67,20 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line has-margin-left-20 has-margin-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Today</h1>
-                          <p className="has-margin-left-65 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">105</p>
+                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
+                          <p className="has-margin-left-65 has-margin-top-20 0 fnt-poppins card-number-styling">105</p>
                         </div>
-                        <div className="dashboard-card-vl has-margin-top-10 "></div>
+                        <div className="dashboard-cards-vl-line has-margin-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
-                          <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">1105</p>
+                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
+                          <p className="has-margin-left-70 has-margin-top-20  fnt-poppins card-number-styling">1105</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   {/* card second section2 start here */}
                   {/* first card section2*/}
-                  <div className=" dashboard-main-cards-div flex-row has-margin-top-60">
+                  <div className=" dashboard-main-cards-div flex-row has-margin-top-50">
                     <div className="dash-board-cards has-margin-left-20 $White-color">
                       <div className="dashboard-card-headr ">
                         <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Support Campaigns</h1>
@@ -88,13 +88,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line has-margin-left-20 has-margin-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Today</h1>
-                          <p className="has-margin-left-65 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">105</p>
+                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
+                          <p className="has-margin-left-65 has-margin-top-20  fnt-poppins card-number-styling">105</p>
                         </div>
-                        <div className="dashboard-card-vl has-margin-top-10 "></div>
+                        <div className="dashboard-cards-vl-line has-margin-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
-                          <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">1105</p>
+                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
+                          <p className="has-margin-left-70 has-margin-top-20  fnt-poppins card-number-styling">1105</p>
                         </div>
                       </div>
                     </div>
@@ -106,13 +106,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line has-margin-left-20 has-margin-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Today</h1>
-                          <p className="has-margin-left-65 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">105</p>
+                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
+                          <p className="has-margin-left-65 has-margin-top-20  fnt-poppins card-number-styling ">105</p>
                         </div>
-                        <div className="dashboard-card-vl has-margin-top-10 "></div>
+                        <div className="dashboard-cards-vl-line has-margin-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
-                          <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">1105</p>
+                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
+                          <p className="has-margin-left-70 has-margin-top-20  fnt-poppins card-number-styling ">1105</p>
                         </div>
                       </div>
                     </div>
@@ -124,13 +124,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line has-margin-left-20 has-margin-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Today</h1>
-                          <p className="has-margin-left-65 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600">105</p>
+                          <h1 className="has-margin-left-50 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
+                          <p className="has-margin-left-65 has-margin-top-20 card-number-styling fnt-poppins ">105</p>
                         </div>
-                        <div className="dashboard-card-vl has-margin-top-10 "></div>
+                        <div className="dashboard-cards-vl-line has-margin-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-600">Last Week</h1>
-                          <p className="has-margin-left-70 has-margin-top-20 fnt-size-20 fnt-poppins fnt-weight-600 ">1105</p>
+                          <h1 className="has-margin-left-45 has-margin-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
+                          <p className="has-margin-left-70 has-margin-top-20 card-number-styling fnt-poppins  ">1105</p>
                         </div>
                       </div>
                     </div>
