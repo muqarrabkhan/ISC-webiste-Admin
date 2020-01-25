@@ -1,7 +1,9 @@
 import React from 'react'
 import Style from './style'
+import {Link, withRouter} from 'react-router-dom'
 
-export default () => {
+const UserInformation= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -52,8 +54,8 @@ export default () => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                            <h6 className="fnt-poppins  has-margin-left-20 border-bottom-inside-header-of-table">User Activity</h6>
-                            <h6 className="fnt-poppins has-padding-left-20">Compaign</h6>
+                        <h6 onClick={()=>history.push("/user-information-activities")} className="fnt-poppins  has-margin-left-20 border-bottom-inside-header-of-table">User Activity</h6>
+              <h6 onClick={()=>history.push("/user-information-activities")} className="fnt-poppins has-padding-left-20">Compaign</h6>
                         </div>
                     </div>
                     {/* Table-Title */}
@@ -92,3 +94,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(UserInformation);

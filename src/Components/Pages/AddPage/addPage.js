@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import CKEditor from "react-ckeditor-component";
-
-export default () => {
+import {withRouter} from 'react-router-dom'
+const AddPage= (props) => {
+    let {history}=props;
     const [content, setContent] = useState("");
     console.log("content", content);
 
@@ -11,7 +12,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Page</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={()=>history.push("/pages")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form>
@@ -93,3 +94,4 @@ export default () => {
         </div>
     );
 }
+export default withRouter(AddPage);

@@ -1,7 +1,8 @@
 import React from 'react'
 import Image1 from '../../assets/Images/larki.jpg'
-
-export default () => {
+import {withRouter} from 'react-router-dom'
+const Dashboard= () => {
+ 
   return (
 
     <div className="container-fluid Table-for-administrator-main-div">
@@ -197,3 +198,4 @@ export default () => {
     </div>
   );
 }
+export default withRouter(Dashboard);

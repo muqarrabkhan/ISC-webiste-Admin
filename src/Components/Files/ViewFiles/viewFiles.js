@@ -1,8 +1,10 @@
 import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Style from './style'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const ViewFile=(props) => {
+    let {history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -24,11 +26,11 @@ export default () => {
                                 <tr className="fnt-poppins background-white has-height-100">
                                     <div className="is-flex main-div-of-file">
                                         <li className="has-padding-top-10  has-padding-left-10 list-style">Robots<span></span></li>
-                                        <img className="edit-image-table  has-margin-top-5 has-margin-left-20 has-width-20 has-height-20" alt="" src={Editlogo} />
+                                        <img onClick={()=>history.push("/edit-file")}className="cursor-pointer edit-image-table  has-margin-top-5 has-margin-left-20 has-width-20 has-height-20" alt="" src={Editlogo} />
                                     </div>
                                     <div className="is-flex main-div-of-file">
                                         <li className="has-padding-top-10 has-padding-left-10 list-style">Sitemap<span></span></li>
-                                        <img className="edit-image-table  has-margin-top-5 has-margin-left-10 has-width-20 has-height-20" alt="" src={Editlogo} />
+                                        <img onClick={()=>history.push("/edit-file")}className="cursor-pointer edit-image-table  has-margin-top-5 has-margin-left-10 has-width-20 has-height-20" alt="" src={Editlogo} />
                                     </div>
                                 </tr>
                             </table>
@@ -40,3 +42,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewFile);

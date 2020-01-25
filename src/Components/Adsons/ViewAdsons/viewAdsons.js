@@ -2,6 +2,7 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import {Link} from 'react-router-dom'
 
 export default () => {
     return (
@@ -10,7 +11,7 @@ export default () => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Adson</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                    <Link to={"/add-adson"}><button className="header-btn-of-table fnt-poppins">Create</button></Link>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -48,9 +49,9 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="appling-flex-btns">
-                                            <img className="edit-image-table" alt="edit-button" src={Editlogo} />
+                                            <Link to={"edit-adson"}><img className="edit-image-table" alt="edit-button" src={Editlogo} /></Link>
                                             <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <span className="view-btn-of-table">View Details</span>
+                                            <Link to={"view-details"}><span className="view-btn-of-table">View Details</span></Link>
                                         </div>
                                     </td>
                                 </tr>

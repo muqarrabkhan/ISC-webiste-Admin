@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import InputColor from 'react-input-color';
+import { Link } from 'react-router-dom'
 
 export default () => {
     const [initial] = useState('#5e72e4');
@@ -9,8 +10,8 @@ export default () => {
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
-                <h6 className="heading6-of-header fnt-poppins">Add Details</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <h6 className="heading6-of-header fnt-poppins">Ad Details</h6>
+                <Link to={"/add-adson"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>
@@ -186,10 +187,6 @@ export default () => {
                                         <input className="has-margin-top-10 fnt-poppins"></input>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
                             </div>
                         </div>
                     </div>

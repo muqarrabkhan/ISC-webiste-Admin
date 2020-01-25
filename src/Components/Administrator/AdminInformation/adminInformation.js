@@ -1,7 +1,9 @@
 import React from 'react'
 import Style from './style'
+import { withRouter } from 'react-router-dom';
 
-export default () => {
+const AdminInformation= () => {
+
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -86,3 +88,5 @@ export default () => {
         </>
     );
 }
+
+export default withRouter(AdminInformation);

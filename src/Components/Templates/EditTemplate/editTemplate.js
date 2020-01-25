@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import CKEditor from "react-ckeditor-component";
 import Image from '../../../assets/Images/admin.png'
+import {Link} from 'react-router-dom'
 
 export default () => {
     const [content, setContent] = useState("");
@@ -10,7 +11,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Edit Templates</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <Link to={"/tamplates"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
             </div>
             {/* Table of Administrator  */}
             <form>
@@ -20,7 +21,7 @@ export default () => {
                         {/* Table Section */}
                         <div className="container  Form-section-startup">
                             <div className="Form-section2-uploading-image">
-                                <img className="has-margin-left-55 has-margin-top-30" src={Image} />
+                                <img className="has-margin-left-55 has-margin-top-30" alt="" src={Image} />
                             </div>
                             <div className="Form-section2-uploading-btn">
                                 <button className="Save-btn-of-form has-margin-left-55 has-margin-top-20 fnt-poppins">Upload Image</button>

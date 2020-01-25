@@ -2,15 +2,17 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const ViewPages= (props) => {
+    let{history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Pages</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                    <button onClick={()=>history.push("/add-pages")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -36,8 +38,8 @@ export default () => {
                                     <td>03-18-2019</td>
                                     <td>
                                         <div className="is-flex">
-                                            <img className="edit-image-table" alt="edit-button" src={Editlogo} />
-                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                           <img onClick={()=>history.push("/edit-pages")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                           <img className="cursor-pointer delete-image-table" alt="delete-button" src={Deletelogo} />
                                         </div>
                                     </td>
                                 </tr>
@@ -55,3 +57,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewPages);

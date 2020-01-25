@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import CKEditor from "react-ckeditor-component";
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const EditFile= (props) => {
+    let{history}=props;
     const [content, setContent] = useState("");
     console.log("content", content);
 
@@ -10,7 +12,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Edit File</h6>
-                <button className="header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={()=>history.push("/file")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form>
@@ -46,3 +48,4 @@ export default () => {
         </div>
     );
 }
+export default withRouter(EditFile);

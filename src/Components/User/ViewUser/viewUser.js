@@ -2,19 +2,18 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const ViewUser= (props) => {
+    let {history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
-
                 {/* header */}
-
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Users</h6>
-                    <button className="header-btn-of-table fnt-poppins">Create</button>
+                   <button onClick={()=>history.push("/add-user")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
-
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
@@ -59,9 +58,9 @@ export default () => {
                                     <td>sub view</td>
                                     <td>
                                         <div className="is-flex">
-                                            <img className="edit-image-table" alt="edit-button" src={Editlogo} />
+                                            <img onClick={()=>history.push("/edit-user")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                             <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <span className="view-btn-of-table">View Details</span>
+                                            <span onClick={()=>history.push("/user-information-activities")} className="cursor-pointer view-btn-of-table">View Details</span>
                                             <span className="view-btn-of-table">Affiliate User</span>
                                         </div>
                                     </td>
@@ -93,3 +92,4 @@ export default () => {
         </>
     );
 }
+export default withRouter(ViewUser);
