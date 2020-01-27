@@ -39,7 +39,7 @@ const ViewCategories= (props) => {
                                         <td>Active</td>
                                         <td>
                                             <div className="appling-flex-btns">
-                                                <img onClick={()=>history.push("/category")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                <img onClick={()=>history.push("/edit-category")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                 <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
                                                 <span onClick={()=>history.push("/category-details")} className="cursor-pointer view-btn-of-table ">View Details</span>
                                             </div>
