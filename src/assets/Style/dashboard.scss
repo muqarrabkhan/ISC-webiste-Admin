@@ -19,10 +19,11 @@
            width: 192px;
         color:$dashboard-card-left-right-text;
     }
-.dashboard-cards-vl-line{
-    border: 1px solid #e0e0e0;
+.dashboard-cards-min-line{
+    width: 1.15px;
     height: 106px;
-    width:1px;
+    background: #e0e0e0;
+    
 }
 .card-right-text {
         color:$dashboard-card-left-right-text;
