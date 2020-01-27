@@ -24,13 +24,13 @@ const AddAdson=(props) => {
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Status**/}
-                                    <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
+                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="has-margin-top-20 fnt-poppins">Status*</label>
+                                                <label className="mrg-top-20 fnt-poppins">Status*</label>
                                             </div>
                                             <div>
-                                                <select className="has-margin-top-10 fnt-poppins">
+                                                <select className="mrg-top-10 fnt-poppins">
                                                     <option>Enable</option>
                                                     <option>Disable</option>
                                                 </select>
@@ -38,15 +38,15 @@ const AddAdson=(props) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="Form-section2-main-div-of-inputs has-margin-top-10">
+                                <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                     {/*Place On**/}
-                                    <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>Place On*</label>
                                             </div>
                                             <div>
-                                                <select className="has-margin-top-10 fnt-poppins">
+                                                <select className="mrg-top-10 fnt-poppins">
                                                     <option>Top Bar, Horizontal </option>
                                                     <option>Side Bar, Vertical </option>
                                                     <option>Bottom Bar Horizontal </option>
@@ -57,17 +57,17 @@ const AddAdson=(props) => {
                                 </div>
                             </div>
                             {/* radioButtons */}
-                            <div className="radios has-margin-top-20 has-margin-left-50">
+                            <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
                                     <label>Select Type</label>
-                                    <input className="has-margin-top-40" type="radio" id="radio1" name="radio" checked />
+                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked />
                                     <label className="label-of-radio" for="radio1">
                                         <div className="checker"></div>
                                         Global
                                 </label>
                                 </div>
                             </div>
-                            <div className="radios has-margin-left-50">
+                            <div className="radios mrg-left-50">
                                 <div className="radio">
                                     <input type="radio" id="radio2" name="radio" />
                                     <label className="label-of-radio" for="radio2">
@@ -77,9 +77,9 @@ const AddAdson=(props) => {
                                 </div>
                             </div>
                             {/* hashtag back color */}
-                            <div className="has-margin-left-50 has-margin-top-30">
+                            <div className="mrg-left-50 mrg-top-30">
                                 <label className="fnt-poppins ">Hash Tag Back Color</label>
-                                <div className="react-input-color has-margin-top-20"
+                                <div className="react-input-color mrg-top-20"
                                     style={{
                                         width: 80,
                                         height: 50,
@@ -93,58 +93,58 @@ const AddAdson=(props) => {
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Compaign**/}
-                                    <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
+                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="has-margin-top-20 fnt-poppins">Compaign*</label>
+                                                <label className="mrg-top-20 fnt-poppins">Compaign*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="Form-section2-main-div-of-inputs has-margin-top-10">
+                                <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                     {/*Compaign Url*/}
-                                    <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>Compaign Url*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10"></input>
+                                                <input className="mrg-top-10"></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {/* Ad link */}
-                            <div className="has-margin-top-30 has-margin-left-50">
+                            <div className="mrg-top-30 mrg-left-50">
                                 <label>Ad Link*</label>
                             </div>
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Ad Text***/}
-                                    <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
+                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="has-margin-top-20 fnt-poppins">Ad Text</label>
+                                                <label className="mrg-top-20 fnt-poppins">Ad Text</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="Form-section2-main-div-of-inputs has-margin-top-10">
+                                <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                     {/*Ad Button Text*/}
-                                    <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>Ad Button Text</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10"></input>
+                                                <input className="mrg-top-10"></input>
                                             </div>
                                         </div>
                                     </div>
@@ -153,45 +153,45 @@ const AddAdson=(props) => {
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Ad Image Url*/}
-                                    <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
+                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="has-margin-top-20 fnt-poppins">Ad Image Url</label>
+                                                <label className="mrg-top-20 fnt-poppins">Ad Image Url</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="Form-section2-main-div-of-inputs has-margin-top-10">
+                                <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                     {/*Start Date*/}
-                                    <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>Start Date*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins"></input>
+                                                <input className="mrg-top-10 fnt-poppins"></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {/*End Date*/}
-                            <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
+                            <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                 <div className="form-group">
                                     <div>
                                         <label>End Date</label>
                                     </div>
                                     <div>
-                                        <input className="has-margin-top-10 fnt-poppins"></input>
+                                        <input className="mrg-top-10 fnt-poppins"></input>
                                     </div>
                                 </div>
                             </div>
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                             </div>
                         </div>
                     </div>

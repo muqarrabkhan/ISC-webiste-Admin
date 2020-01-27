@@ -20,22 +20,22 @@ const addProductcompaign=(props) => {
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Product Name***/}
-                                    <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
+                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="has-margin-top-20 fnt-poppins">Campaign URL*</label>
+                                                <label className="mrg-top-20 fnt-poppins">Campaign URL*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="text" placeholder="Enter Name"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="text" placeholder="Enter Name"></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                              {/* buttons */}
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Add</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Add</button>
                             </div>
                         </div>
                     </div>
