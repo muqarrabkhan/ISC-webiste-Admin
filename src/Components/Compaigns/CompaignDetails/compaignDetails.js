@@ -23,8 +23,8 @@ const CompaignDetails= (props) => {
                             {/* choose file inputs start here */}
                             {/* Display Social Share Image */}
                             <div className="has-padding-top-20">
-                                <label className="has-margin-left-50 fnt-poppins">Dispaly/Social Share Image</label>
-                                <div class="field has-margin-top-20 has-margin-left-50">
+                                <label className="mrg-left-50 fnt-poppins">Dispaly/Social Share Image</label>
+                                <div class="field mrg-top-20 mrg-left-50">
                                     <div className="file is-small has-name ">
                                         <label className="file-label ">
                                             <input className="file-input  " type="file" name="resume" />
@@ -44,11 +44,11 @@ const CompaignDetails= (props) => {
                                 </div>
                             </div>
                             {/* Overlays Image choose button start here */}
-                            <div classNameName="has-margin-top-20">
-                                <label classNameName="has-margin-left-50 fnt-poppins" >Overlays (max 5 images)</label>
+                            <div classNameName="mrg-top-20">
+                                <label classNameName="mrg-left-50 fnt-poppins" >Overlays (max 5 images)</label>
                             </div>
                             {/* First choose file button */}
-                            <div className="field has-margin-top-20  has-margin-left-50">
+                            <div className="field mrg-top-20  mrg-left-50">
                                 <div className="file is-small has-name ">
                                     <label className="file-label ">
                                         <input className="file-input  " type="file" name="resume" />
@@ -67,7 +67,7 @@ const CompaignDetails= (props) => {
                                 </div>
                             </div>
                             {/* Second choose file button */}
-                            <div className="field has-margin-top-20 has-margin-left-50">
+                            <div className="field mrg-top-20 mrg-left-50">
                                 <div className="file is-small has-name ">
                                     <label className="file-label ">
                                         <input className="file-input  " type="file" name="resume" />
@@ -86,7 +86,7 @@ const CompaignDetails= (props) => {
                                 </div>
                             </div>
                             {/* Thirt choose file button  */}
-                            <div className="field has-margin-top-20 has-margin-left-50">
+                            <div className="field mrg-top-20 mrg-left-50">
                                 <div className="file is-small has-name ">
                                     <label className="file-label ">
                                         <input className="file-input  " type="file" name="resume" />
@@ -105,7 +105,7 @@ const CompaignDetails= (props) => {
                                 </div>
                             </div>
                             {/* Fourth choose file button */}
-                            <div className="field has-margin-top-20 has-margin-left-50">
+                            <div className="field mrg-top-20 mrg-left-50">
                                 <div className="file is-small has-name ">
                                     <label className="file-label ">
                                         <input className="file-input  " type="file" name="resume" />
@@ -124,7 +124,7 @@ const CompaignDetails= (props) => {
                                 </div>
                             </div>
                             {/* Fifth choose file button */}
-                            <div className="field has-margin-top-20  has-margin-left-50">
+                            <div className="field mrg-top-20  mrg-left-50">
                                 <div className="file is-small has-name ">
                                     <label className="file-label ">
                                         <input className="file-input  " type="file" name="resume" />
@@ -144,9 +144,9 @@ const CompaignDetails= (props) => {
                             </div>
                             <button className="Save-btn-of-form has-margin-left-50 fnt-poppins">Delete</button>
                             {/* hashtag back color */}
-                            <div className="has-margin-left-50 has-margin-top-30">
+                            <div className="mrg-left-50mrghas-margin-top-30">
                                 <label className="fnt-poppins ">Hash Tag Back Color</label>
-                                <div className="react-input-color has-margin-top-20"
+                                <div className="react-input-color mrg-top-20"
                                     style={{
                                         width: 80,
                                         height: 50,
@@ -160,35 +160,35 @@ const CompaignDetails= (props) => {
                             <div className="Form-main-div-of-sectons flex-row">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Campaign Name */}
-                                    <div className="Form-Inputs-Fields has-margin-top-30 has-margin-left-50">
+                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="has-margin-top-20 fnt-poppins">Campaign Name*</label>
+                                                <label className="mrg-top-20 fnt-poppins">Campaign Name*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="name" placeholder="Enter Name"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Short Discriptions */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Short Description</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10" placeholder="Enter Short Description"></input>
+                                                <input className="mrg-top-10" placeholder="Enter Short Description"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Category */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Category*</label>
                                             </div>
                                             <div>
-                                                <select className="has-margin-top-10">
+                                                <select className="mrg-top-10">
                                                     <option>Sports</option>
                                                     <option>Entertainment</option>
                                                     <option>Cause</option>
@@ -209,13 +209,13 @@ const CompaignDetails= (props) => {
                                         </div>
                                     </div>
                                     {/* facebook url */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label  >Facebook URL(optional)</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="url" placeholder="Enter facebook url" />
+                                                <input className="mrg-top-10 fnt-poppins" type="url" placeholder="Enter facebook url" />
                                             </div>
                                         </div>
                                     </div>
@@ -226,77 +226,77 @@ const CompaignDetails= (props) => {
                                                 <label >Hash-tag</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Start date */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Start Date</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="date" ></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="date" ></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 {/* Form section2 dv start here */}
-                                <div className="Form-section2-main-div-of-inputs has-margin-top-10">
+                                <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                     {/* slug */}
-                                    <div className="Form-Inputs-Fields has-margin-top-20 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Slug*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="slug" placeholder="Enter Slug"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="slug" placeholder="Enter Slug"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Description */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>Description</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* KeyWord */}
 
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Keyword</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Transparency */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>transparent overlay*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="number" ></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="number" ></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Hash Tag Font */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Hash-Tag Font:</label>
                                             </div>
                                             <div>
-                                                <select className="has-margin-top-10 fnt-poppins">
+                                                <select className="mrg-top-10 fnt-poppins">
                                                     <option>16</option>
                                                     <option>18</option>
                                                     <option>20</option>
@@ -310,13 +310,13 @@ const CompaignDetails= (props) => {
                                         </div>
                                     </div>
                                     {/* End date */}
-                                    <div className="Form-Inputs-Fields has-margin-top-10 has-margin-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >End Date</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10 fnt-poppins" type="date" ></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="date" ></input>
                                             </div>
                                         </div>
                                     </div>
@@ -325,9 +325,9 @@ const CompaignDetails= (props) => {
                             {/* Form section2 div end here */}
                             {/* file chosen button end here */}
                             {/* Cancel and Save button */}
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                             </div>
                         </div>
                     </div>

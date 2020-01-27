@@ -24,11 +24,11 @@ const EditFile= (props) => {
                             <div className="has-margin-bottom-20 extra-div">
                             </div>
                             {/*Page Content**/}
-                            <div className="has-margin-left-20 has-margin-top-20 fnt-poppins ck-Editor-of-editfile">
+                            <div className="mrg-left-20 mrg-top-20 fnt-poppins ck-Editor-of-editfile">
                                 <div>
                                     <label>Edit File Content*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <CKEditor
                                         content={content ? content : ""}
                                         events={{
@@ -37,9 +37,9 @@ const EditFile= (props) => {
                                         className="form-control" placeholder="Enter Description" rows="5" />
                                 </div>
                             </div>
-                            <div className="btns-of-add has-margin-left-20 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-20 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Update</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Update</button>
                             </div>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ const viewcompaign= (props) => {
                                 <option>User</option>
                                 <option>Admin</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins has-margin-left-15">
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
                                 <option>Select Category</option>
                                 <option>Sport</option>
                                 <option>Cause</option>
@@ -51,23 +51,23 @@ const viewcompaign= (props) => {
                                 <option>Culture</option>
                                 <option>Political</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins has-margin-left-15">
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
                                 <option>Select Compaign Type</option>
                                 <option>Support</option>
                                 <option>Petition</option>
                                 <option>Pledge</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins has-margin-left-15">
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
                                 <option>Select Compaign Package</option>
                                 <option>Free Compaign</option>
                                 <option>Premium Compaign</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins has-margin-left-15">
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
                                 <option>Sort By Support</option>
                                 <option>Highest Support</option>
                                 <option>Lowest Support</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins has-margin-left-15">
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
                                 <option>Select Coupan</option>
                                 <option>NONPROFIT</option>
                                 <option>SAJJAD10</option>
@@ -160,7 +160,7 @@ const viewcompaign= (props) => {
                                         <div className="has-margin-top-10">
                                         <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
                                         </div>
-                                        <div className="has-margin-top-10">
+                                        <div className="mrg-top-10">
                                             <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>
                                         </div>
                                     </td>
