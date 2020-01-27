@@ -72,7 +72,6 @@ import ViewTamplates from './Components/Templates/ViewTemplates/viewtemplates'
 // Files
 import EditFiles from './Components/Files/EditFile/editFile'
 import Viewfiles from './Components/Files/ViewFiles/viewFiles'
-
 const AllRouters = () => {
     return (
         <div className="main-routes-div is-flex">
