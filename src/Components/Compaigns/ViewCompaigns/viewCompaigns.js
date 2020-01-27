@@ -2,16 +2,17 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-export default () => {
+const viewcompaign= (props) => {
+    let {history}=props;
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Campaigns</h6>
-                    <Link to={"/create-camapaign"}><button className="cursor-pointer header-btn-of-table fnt-poppins">Create</button></Link>
+                   <button onClick={()=>history.push("/create-camapaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -152,12 +153,12 @@ export default () => {
                                     </td>
                                     <td className="btns-of-viewcompaign">
                                         <div className="is-flex">
-                                            <Link to={"/edit-campaign"}><img className="cursor-pointeredit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} /></Link>
-                                            <img className="edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
+                                            <img onClick={()=>history.push("/edit-campaign")} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
+                                            <img className="cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
                                             <span className="cursor-pointer view-btn-of-table ">Verify</span>
                                         </div>
                                         <div className="has-margin-top-10">
-                                        <Link to={"/Camapaign-details"}><span className="cursor-pointer view-btn-of-table has-width-40">View Details</span></Link>
+                                        <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
                                         </div>
                                         <div className="has-margin-top-10">
                                             <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>
@@ -173,3 +174,5 @@ export default () => {
         </>
     );
 }
+
+export default withRouter(viewcompaign);

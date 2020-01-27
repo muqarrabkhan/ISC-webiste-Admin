@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import InputColor from 'react-input-color';
-import {Link} from 'react-router-dom'
-
-export default () => {
+import { withRouter} from 'react-router-dom'
+const CreateCompaign= (props) => {
+    let {history}=props;
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
 
@@ -11,7 +11,7 @@ export default () => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Campaign</h6>
-                <Link to={"/campaign"}><button className="header-btn-of-table fnt-poppins">Back</button></Link>
+                <button onClick={()=>history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form >
@@ -338,3 +338,4 @@ export default () => {
         </div>
     );
 }
+export default withRouter(CreateCompaign)

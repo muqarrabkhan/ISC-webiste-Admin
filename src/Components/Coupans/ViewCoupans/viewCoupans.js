@@ -11,7 +11,7 @@ const viewCoupan=(props) => {
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Coupans</h6>
-                   <button onClick={()=> history.push=("/add-coupans")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                   <button onClick={()=> history.push("/add-coupans")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
