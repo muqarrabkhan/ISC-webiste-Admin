@@ -10,8 +10,9 @@ const Campaign= (props) => {
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
-                <div className="has-margin">
+                <div className="has-margin header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">User</h6>
+                    <button onClick={()=>history.push("/user-information-activities")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -56,8 +57,8 @@ const Campaign= (props) => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                        <h6 onClick={()=>history.push("/user-information-activities")}className="cursor-pointer fnt-poppins">User Activity</h6>
-                       <h6 onClick={()=>history.push("/ser-information-campaings")} className="cursor-pointer fnt-poppins has-margin-left-20 border-bottom-inside-header-of-table">Compaign</h6>
+                        <h6 onClick={()=>history.push("/user-information-activities")} className="cursor-pointer fnt-poppins">User Activity</h6>
+                       <h6 onClick={()=>history.push("/user-information-campaings")} className="cursor-pointer fnt-poppins has-margin-left-20 border-bottom-inside-header-of-table">Compaign</h6>
                         </div>
                     </div>
                     {/* Table-Title */}
@@ -93,12 +94,12 @@ const Campaign= (props) => {
                                     <td>
                                         <div className="appling-width-btns is-flex ">
                                             <div className=" is-flex image-btn-edit-delete-user-compaign">
-                                                <img className="edit-image-table" alt="" src={Editlogo} />
+                                                <img  onClick={()=>history.push("/edit-campaign")}className="cursor-pointer edit-image-table" alt="" src={Editlogo} />
                                                 <img className="delete-image-table" alt="" src={Deletelogo} />
                                             </div>
                                             <div className=" is-flex btn-of-view-user-compaign ">
-                                                <span className="view-btn-of-table">View Details</span>
-                                                <span className="view-btn-of-table">Affiliate User</span>
+                                                <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table">View Details</span>
+                                                <span className="cursor-pointer view-btn-of-table">Affiliate User</span>
                                             </div>
                                         </div>
                                     </td>

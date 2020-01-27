@@ -2,14 +2,16 @@ import React from 'react'
 import Style from './style'
 import { withRouter } from 'react-router-dom';
 
-const AdminInformation= () => {
+const AdminInformation= (props) => {
+    let {history}=props;
 
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
-                <div className="has-margin">
+                <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Administrator</h6>
+                    <button onClick={()=>history.push("/administrator")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">

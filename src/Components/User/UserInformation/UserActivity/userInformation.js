@@ -8,8 +8,9 @@ const UserInformation= (props) => {
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
-                <div className="has-margin">
+                <div className="has-margin header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">User</h6>
+                    <button onClick={()=>history.push("/users")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -54,8 +55,8 @@ const UserInformation= (props) => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                        <h6 onClick={()=>history.push("/user-information-activities")} className="fnt-poppins  has-margin-left-20 border-bottom-inside-header-of-table">User Activity</h6>
-              <h6 onClick={()=>history.push("/user-information-activities")} className="fnt-poppins has-padding-left-20">Compaign</h6>
+                        <h6 onClick={()=>history.push("/user-information-activities")} className="cursor-pointer fnt-poppins  has-margin-left-20 border-bottom-inside-header-of-table">User Activity</h6>
+                        <h6 onClick={()=>history.push("/user-information-campaings")} className="cursor-pointer fnt-poppins has-padding-left-20">Compaign</h6>
                         </div>
                     </div>
                     {/* Table-Title */}
