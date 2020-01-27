@@ -14,37 +14,37 @@ const AdminInformation= (props) => {
                     <button onClick={()=>history.push("/administrator")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                 </div>
                 {/* Table of Administrator  */}
-                <div className="Table-of-administrator">
+                <div className="container Table-of-administrator">
                     <div className="background-of-table">
                     </div>
                     {/* Make Admin Data */}
-                    <div className="has-margin-left-30">
-                        <div className="heading-user fnt-poppins  has-margin-top-30">
+                    <div className="mrg-left-30">
+                        <div className="heading-user fnt-poppins mrg-top-30">
                             <h3>Admin Information</h3>
                         </div>
                         <form>
                             {/* Name Email Role and Create Info data of Admin*/}
                             <div>
-                                <div className="has-margin-top-20">
+                                <div className="mrg-top-20">
                                     <div className="flex-justify fnt-poppins">
                                         <label>Name*</label>
                                         <input className=" fnt-poppins inputs-of-admistrator" />
                                     </div>
                                 </div>
-                                <div className="has-margin-top-20 fnt-poppins">
+                                <div className="mrg-top-20 fnt-poppins">
                                     <div>
                                         <div>
                                             <label>Email*</label>
                                             <input className="fnt-poppins inputs-of-admistrator" />
                                         </div>
                                     </div>
-                                    <div className="has-margin-top-20 fnt-poppins">
+                                    <div className="mrg-top-20 fnt-poppins">
                                         <div>
                                             <label>Role*</label>
                                             <input className="fnt-poppins inputs-of-admistrator" />
                                         </div>
                                     </div>
-                                    <div className="has-margin-top-20 has-margin-bottom-30 fnt-poppins">
+                                    <div className="mrg-top-20 has-margin-bottom-30 fnt-poppins">
                                         <div>
                                             <label>Create Info*</label>
                                             <input className="fnt-poppins inputs-of-admistrator" />

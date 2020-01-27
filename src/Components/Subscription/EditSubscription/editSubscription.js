@@ -22,62 +22,62 @@ const EditSubscription=(props) => {
                             <div className="has-margin-bottom-20 extra-div">
                             </div>
                             {/*Subscription Name**/}
-                            <div className="has-margin-left-60 fnt-poppins">
+                            <div className="mrg-left-60 fnt-poppins">
                                 <div>
                                     <label>Subscription Name*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/*Subscription Amount**/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Subscription Amount*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/*Discount Percentage*/}
-                            <div className="has-margin-left-60 fnt-poppins has-margin-top-20">
+                            <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
                                     <label>Discount Percentage</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                 <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/* Discount Name*/}
-                            <div className="has-margin-left-60 fnt-poppins has-margin-top-20">
+                            <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
                                     <label>Discount Name</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                 <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/* Discount Start Date*/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Discount Start Date</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator fnt-poppins" type="date"/>
                                 </div>
                             </div>
                             {/* Discount End Date*/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Discount End Date</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator fnt-poppins" type="date" />
                                 </div>
                             </div>
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                             </div>
 
                         </div>

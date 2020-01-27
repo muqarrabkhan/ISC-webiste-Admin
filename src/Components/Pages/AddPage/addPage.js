@@ -26,56 +26,56 @@ const AddPage= (props) => {
                             <div className="has-margin-bottom-20 extra-div">
                             </div>
                             {/* Meta Title**/}
-                            <div className="has-margin-left-60 fnt-poppins">
+                            <div className="mrg-left-60 fnt-poppins">
                                 <div>
                                     <label>Meta Title*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/* Meta Description**/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Meta Description*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <textarea className="textarea-of-admistrator" />
                                 </div>
                             </div>
                             {/*Meta Keywords**/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Meta Keywords*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/*Slug***/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Slug*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/*Page Heading***/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Page Heading*</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
                             {/*Page Content**/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins ck-Editor">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins ck-Editor">
                                 <div>
                                     <label>Page Content</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <CKEditor
                                         content={content ? content : ""}
                                         events={{
@@ -85,9 +85,9 @@ const AddPage= (props) => {
                                 </div>
                             </div>
                             {/*buttons*/}
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                             </div>
                         </div>
                     </div>

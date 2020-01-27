@@ -21,29 +21,29 @@ const AddUser= (props) => {
                             <div className="has-margin-bottom-20 extra-div">
                             </div>
                             {/* Name*/}
-                            <div className="has-margin-left-60 fnt-poppins">
+                            <div className="mrg-left-60 fnt-poppins">
                                 <div>
                                     <label>Name</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator"/>
                                 </div>
                             </div>
                             {/* Email*/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Email</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator"/>
                                 </div>
                             </div>
                             {/* Select Password*/}
-                            <div className="has-margin-left-60 fnt-poppins has-margin-top-20">
+                            <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
                                     <label>Select Password</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins">
                                         <option>Custom Password</option>
                                         <option>Random Password</option>
@@ -51,27 +51,27 @@ const AddUser= (props) => {
                                 </div>
                             </div>
                             {/* Password*/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Password</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator"/>
                                 </div>
                             </div>
                             {/* Confirm Password*/}
-                            <div className="has-margin-left-60 has-margin-top-20 fnt-poppins">
+                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
                                     <label>Confirm Password</label>
                                 </div>
-                                <div className="has-margin-top-10">
+                                <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator"/>
                                 </div>
                             </div>
                         
-                            <div className="btns-of-add has-margin-left-60 has-margin-top-30 fnt-poppins">
+                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                               <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                              <button className="Save-btn-of-form has-margin-left-20 fnt-poppins">Save</button>  
+                              <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>  
                             </div>
 
                         </div>
