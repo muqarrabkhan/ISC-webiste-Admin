@@ -1,20 +1,21 @@
 import React from 'react'
-import {withRouter} from 'react-router-dom'
+// import Style from './style'
+import '../../../assets/Style/Common.scss'
+import { withRouter} from 'react-router-dom'
 
-const EditUser=(props) => {
-    let{history}=props;
-
+const EditUser= (props) => {
+    let {history}=props;
     return (
+
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
-                <h6 className="heading6-of-header fnt-poppins">Edit Administrator</h6>
+                <h6 className="heading6-of-header fnt-poppins">Edit User</h6>
                 <button onClick={()=>history.push("/users")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form>
                 <div className="Table-of-administrator">
-
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
@@ -33,10 +34,14 @@ const EditUser=(props) => {
                             {/* Email*/}
                             <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
-                                    <label>Email</label>
+                                    <label>Status</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                <select className="inputs-of-admistrator fnt-poppins">
+                                        <option>Active</option>
+                                        <option>In-Active</option>
+                                        <option>Creater</option>
+                                    </select>
                                 </div>
                             </div>
                             {/* Select Role*/}
@@ -53,17 +58,14 @@ const EditUser=(props) => {
                                 </div>
                             </div>
                             {/* checkbox */}
-                            <label className="checkbox">
-                            </label>
                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
                                     <label>Update Password</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="checkbox-for-edit-forms mrg-left-5" type="checkbox" />
+                                <input className="checkbox-for-edit-forms mrg-left-5" type="checkbox" />
                                 </div>
                             </div>
-                            <input type="radio" className="radio" />
                             {/* Select Password*/}
                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
@@ -85,8 +87,6 @@ const EditUser=(props) => {
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
-
-
                             {/* Confirm Password*/}
                             <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
@@ -96,16 +96,15 @@ const EditUser=(props) => {
                                     <input className="inputs-of-admistrator" />
                                 </div>
                             </div>
-
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </form>
+            {/* <Style/> */}
         </div>
     );
 }

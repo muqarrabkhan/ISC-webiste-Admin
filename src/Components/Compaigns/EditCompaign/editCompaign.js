@@ -19,7 +19,7 @@ const EditCompaign =(props) => {
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
-                        <div className="container  Form-section-startup">
+                        <div className="container Form-section-startup Form-sections-startups-responsive">
                             {/* choose file inputs start here */}
                             {/* Display Social Share Image */}
                             <div className="has-padding-top-20">
@@ -157,7 +157,7 @@ const EditCompaign =(props) => {
                                 </div>
                                 <InputColor initialHexColor={initial} onChange={setColor} />
                             </div>
-                            <div className="Form-main-div-of-sectons flex-row">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs ">
                                     {/* Campaign Name */}
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">

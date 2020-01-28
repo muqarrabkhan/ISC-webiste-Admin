@@ -1,0 +1,45 @@
+@media (max-width: 1199px) and (min-width: 1024px) { }
+@media (max-width: 1023px) and (min-width: 992px) { 
+
+input.inputs-of-admistrator {
+        width: 600px!important;
+        margin-left: -33px;
+    }
+select.inputs-of-admistrator {
+    width: 600px!important;
+    margin-left: -33px;
+}
+.Form-section-startup label{
+    margin-left: -30px;
+}
+.Form-sections-startups-responsive label {
+    margin-left:0px!important;
+}
+.inputs-for-responsive{
+    margin-left: 0px;
+    width: 600px!important;
+    
+}
+.textarea-of-admistrator{
+    width: 600px!important;
+    margin-left: -33px;
+
+}
+.Form-main-div-of-sectons.flex-row.flex-column-responsive {
+    display: flex!important;
+    flex-direction: column!important;
+}
+.radios{
+    width:200px!important;
+}
+.radios-of-group {
+    width:200px!important;
+}
+.ck-Editor{
+    width:600px!important;
+    margin-left:30px;
+}
+.ck-Editor label{
+    margin-left:0px;
+}
+}

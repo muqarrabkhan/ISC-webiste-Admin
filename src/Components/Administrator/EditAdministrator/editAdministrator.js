@@ -34,10 +34,13 @@ const EditAdministrator= (props) => {
                             {/* Email*/}
                             <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
-                                    <label>Email</label>
+                                    <label>Status</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                <select className="inputs-of-admistrator fnt-poppins">
+                                        <option>Active</option>
+                                        <option>In-Active</option>
+                                    </select>
                                 </div>
                             </div>
                             {/* Select Role*/}

@@ -1,6 +1,7 @@
 // table Styling start here 
 @import './Color.scss';
 
+
 .blanck-dev{
  height:3vh;
 }
@@ -12,7 +13,8 @@
         background:$White-color;
         padding-top: 10px;
     }
-    .inputs-of-admistrator{
+    
+    .inputs-for-responsive{
         width: 900px;
         height: 40px;
         padding: 10px;
@@ -46,6 +48,15 @@
         width: 900px;
     }
 
+}
+
+.inputs-of-admistrator{
+    width: 900px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    border: 1px solid $Tabel-action-border-color;
 }
 
 // create Compaign form and also using Template Page
