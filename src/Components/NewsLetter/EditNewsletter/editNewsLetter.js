@@ -17,17 +17,17 @@ const EditNewsletter= (props) => {
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
-                        <div className="container  Form-section-startup">
+                        <div className="container  Form-section-startup Form-sections-startups-responsive ">
                             <div className="Form-section2-uploading-image">
                                 <img className="mrg-left-55 mrg-top-30" alt="upload-img" src={Image} />
                             </div>
                             <div className="Form-section2-uploading-btn">
                                 <button className="Save-btn-of-form mrg-left-55 mrg-top-20 fnt-poppins">Upload Image</button>
                             </div>
-                            <div className="Form-main-div-of-sectons flex-row">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* NewsLetter Name***/}
-                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
+                                    <div className="Form-Inputs-Fields  mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
                                                 <label className="mrg-top-20 fnt-poppins">NewsLetter Name*</label>

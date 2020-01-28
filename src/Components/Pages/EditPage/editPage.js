@@ -20,7 +20,7 @@ const EditPage= (props) => {
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
-                        <div className="Form-section-startup">
+                        <div className="Form-section-startup ">
                             <div className="has-margin-bottom-20 extra-div">
                             </div>
                             {/* Meta Title**/}

@@ -27,26 +27,26 @@ const UserInformation= (props) => {
                                 <div className="mrg-top-20">
                                     <div className="flex-justify fnt-poppins">
                                         <label>Name*</label>
-                                        <input className=" fnt-poppins inputs-of-admistrator" />
+                                        <input className=" fnt-poppins inputs-for-responsive" />
                                     </div>
                                 </div>
                                 <div className="mrg-top-20 fnt-poppins">
                                     <div>
                                         <div>
                                             <label>Email*</label>
-                                            <input className="fnt-poppins inputs-of-admistrator" />
+                                            <input className="fnt-poppins inputs-for-responsive" />
                                         </div>
                                     </div>
                                     <div className="mrg-top-20 fnt-poppins">
                                         <div>
                                             <label>Facebook Link*</label>
-                                            <input className="fnt-poppins inputs-of-admistrator" />
+                                            <input className="fnt-poppins inputs-for-responsive" />
                                         </div>
                                     </div>
                                     <div className="mrg-top-20 has-margin-bottom-30 fnt-poppins">
                                         <div>
                                             <label>Create Info*</label>
-                                            <input className="fnt-poppins inputs-of-admistrator" />
+                                            <input className="fnt-poppins inputs-for-responsive" />
                                         </div>
                                     </div>
                                 </div>

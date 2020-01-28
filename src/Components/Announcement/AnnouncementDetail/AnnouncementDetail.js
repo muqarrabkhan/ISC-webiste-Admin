@@ -7,7 +7,7 @@ const AnnouncementDetails =(props) => {
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
-                <h6 className="heading6-of-header fnt-poppins">Edit Announcement</h6>
+                <h6 className="heading6-of-header fnt-poppins"> Announcement Details</h6>
                <button onClick={()=>history.push("/announcement")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
