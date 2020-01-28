@@ -32,13 +32,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling">105</p>
+                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data ">Today</h1>
+                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
                         </div>
                         <div className="dashboard-cards-min-line mrg-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
-                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling">1105</p>
+                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                         </div>
                       </div>
                     </div>
@@ -50,13 +50,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
-                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling">105</p>
+                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
                         </div>
                         <div className="dashboard-cards-min-line mrg-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
-                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling ">1105</p>
+                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                         </div>
                       </div>
                     </div>
@@ -68,13 +68,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20 0 fnt-poppins card-number-styling">105</p>
+                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                          <p className="mrg-left-70 mrg-top-20 0 fnt-poppins card-number-styling number-data-responsive">105</p>
                         </div>
                         <div className="dashboard-cards-min-line mrg-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling">1105</p>
+                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                         </div>
                       </div>
                     </div>
@@ -89,13 +89,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling">105</p>
+                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
                         </div>
                         <div className="dashboard-cards-min-line mrg-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling">1105</p>
+                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                         </div>
                       </div>
                     </div>
@@ -107,13 +107,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling ">105</p>
+                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
                         </div>
                         <div className="dashboard-cards-min-line mrg-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling ">1105</p>
+                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                         </div>
                       </div>
                     </div>
@@ -125,13 +125,13 @@ const Dashboard= () => {
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20 card-number-styling fnt-poppins ">105</p>
+                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                          <p className="mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">105</p>
                         </div>
                         <div className="dashboard-cards-min-line mrg-top-10 "></div>
                         <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400">Last Week</h1>
-                          <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins  ">1105</p>
+                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                          <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">1105</p>
                         </div>
                       </div>
                     </div>
