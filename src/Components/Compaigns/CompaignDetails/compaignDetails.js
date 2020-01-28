@@ -44,8 +44,8 @@ const CompaignDetails= (props) => {
                                 </div>
                             </div>
                             {/* Overlays Image choose button start here */}
-                            <div classNameName="mrg-top-20">
-                                <label classNameName="mrg-left-50 fnt-poppins" >Overlays (max 5 images)</label>
+                            <div className="mrg-top-20">
+                                <label className="mrg-left-50 fnt-poppins" >Overlays (max 5 images)</label>
                             </div>
                             {/* First choose file button */}
                             <div className="field mrg-top-20  mrg-left-50">
@@ -144,7 +144,7 @@ const CompaignDetails= (props) => {
                             </div>
                             <button className="Save-btn-of-form has-margin-left-50 fnt-poppins">Delete</button>
                             {/* hashtag back color */}
-                            <div className="mrg-left-50mrghas-margin-top-30">
+                            <div className="mrg-left-50 mrghas-margin-top-30">
                                 <label className="fnt-poppins ">Hash Tag Back Color</label>
                                 <div className="react-input-color mrg-top-20"
                                     style={{

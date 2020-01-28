@@ -35,7 +35,7 @@ const viewcompaign= (props) => {
                                 <option>User</option>
                                 <option>Admin</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-50">
                                 <option>Select Category</option>
                                 <option>Sport</option>
                                 <option>Cause</option>

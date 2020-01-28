@@ -20,8 +20,8 @@ const ViewUser= (props) => {
                     </div>
                     <div className="Table-Header">
                         <h6 className="fnt-poppins">All User Records</h6>
-                        <div>
-                            <select className="select-option-of-adminstrator fnt-poppins">
+                        <div className="table-data-row">
+                            <select className="select-option-of-adminstrator fnt-poppins select-input-responsive">
                                 <option>Select User Status</option>
                                 <option>Active</option>
                                 <option>In-Active</option>
@@ -32,7 +32,7 @@ const ViewUser= (props) => {
                                 <option>Affiliated User</option>
                             </select>
                         </div>
-                        <div>
+                        <div className="table-data-row" >
                             <input className="input-for-search fnt-poppins input-for-search-user-1" placeholder="Name" />
                             <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Email" />
                         </div>
@@ -74,14 +74,8 @@ const ViewUser= (props) => {
                                     <td></td>
                                     <td>Number</td>
                                 </tr>
-
                             </tbody>
-
-
                         </table>
-
-
-
                     </div>
 
 
