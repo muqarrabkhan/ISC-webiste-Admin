@@ -1,6 +1,70 @@
-@media (max-width: 1199px) and (min-width: 1024px) { }
-@media (max-width: 1023px) and (min-width: 992px) { 
+@media (max-width: 1400px) and (min-width: 1200px) { 
 
+
+
+}
+
+
+// 1024 to 1199 media Quries start here
+@media (max-width: 1199px) and (min-width: 1024px) { 
+    input.inputs-of-admistrator {
+        width: 600px!important;
+        margin-left: -33px;
+    }
+select.inputs-of-admistrator {
+    width: 600px!important;
+    margin-left: -33px;
+}
+.Form-section-startup label{
+    margin-left: -30px;
+}
+.Form-sections-startups-responsive label {
+    margin-left:0px!important;
+}
+.inputs-for-responsive{
+    margin-left: 0px;
+    width: 600px!important; 
+}
+.textarea-of-admistrator{
+    width: 600px!important;
+    margin-left: -33px;
+}
+.Form-main-div-of-sectons.flex-row.flex-column-responsive {
+    display: flex!important;
+    flex-direction: column!important;
+}
+.radios{
+    width:200px!important;
+}
+.radios-of-group {
+    width:200px!important;
+}
+.ck-Editor{
+    width:600px!important;
+    margin-left:30px;
+}
+.ck-Editor label{
+    margin-left:0px;
+}
+.ck-editor-of-compaign{
+    width: 600px;
+    .ck-editor-of-compaign-border{
+    border-right: 1px solid $radio-color;
+    }
+}
+.redonly-input{
+    width:600px;
+}
+.Save-btns-of-forms-responsive{
+    margin-left: -30px;
+}
+label.overlay-responsive-social-img.mrg-left-50.fnt-poppins {
+    margin-left: 50px!important;
+}
+} 
+// 1024 to 1199 media Quries end Here
+// 992 to 1023 media Quries start here
+@media (max-width: 1023px) and (min-width: 992px) { 
 input.inputs-of-admistrator {
         width: 600px!important;
         margin-left: -33px;
@@ -42,4 +106,22 @@ select.inputs-of-admistrator {
 .ck-Editor label{
     margin-left:0px;
 }
+.ck-editor-of-compaign{
+    width: 600px;
+
+    .ck-editor-of-compaign-border{
+    border-right: 1px solid $radio-color;
+    }
 }
+.redonly-input{
+    width:600px;
+}
+.Save-btns-of-forms-responsive{
+    margin-left: -30px;
+
+}
+label.overlay-responsive-social-img.mrg-left-50.fnt-poppins {
+    margin-left: 50px!important;
+}
+}
+// 992 to 1023 media Quries end Here

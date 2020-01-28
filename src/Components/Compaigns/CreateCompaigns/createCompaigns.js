@@ -19,11 +19,11 @@ const CreateCompaign= (props) => {
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
-                        <div className="container  Form-section-startup">
+                        <div className="container  Form-section-startup Form-sections-startups-responsive">
                             {/* choose file inputs start here */}
                             {/* Display Social Share Image */}
                             <div className="has-padding-top-20">
-                                <label className="mrg-left-50 fnt-poppins">Dispaly/Social Share Image</label>
+                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Dispaly/Social Share Image</label>
                                 <div className="field mrg-top-20 mrg-left-50">
                                     <div className="file is-small has-name ">
                                         <label className="file-label ">
@@ -45,7 +45,7 @@ const CreateCompaign= (props) => {
                             </div>
                             {/* Overlays Image choose button start here */}
                             <div className="mrg-top-20">
-                                <label className="mrg-left-50 fnt-poppins" >Overlays (max 5 images)</label>
+                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Overlays (max 5 images)</label>
                             </div>
                             {/* First choose file button */}
                             <div className="field mrg-top-20 mrg-left-50">
@@ -159,7 +159,7 @@ const CreateCompaign= (props) => {
                                 <InputColor initialHexColor={initial} onChange={setColor} />
                             </div>
 
-                            <div className="Form-main-div-of-sectons flex-row">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs ">
                                     {/* Campaign Name */}
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">

@@ -21,8 +21,8 @@ const ViewDetails=(props) => {
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
-                        <div className="container  Form-section-startup">
-                            <div className="Form-main-div-of-sectons flex-row">
+                        <div className="container  Form-section-startup Form-sections-startups-responsive ">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Status**/}
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
@@ -91,7 +91,7 @@ const ViewDetails=(props) => {
                                 </div>
                                 <InputColor initialHexColor={initial} onChange={setColor} />
                             </div>
-                            <div className="Form-main-div-of-sectons flex-row">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Compaign**/}
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
@@ -123,7 +123,7 @@ const ViewDetails=(props) => {
                             <div className="mrg-top-30 mrg-left-50">
                                 <label>Ad Link*</label>
                             </div>
-                            <div className="Form-main-div-of-sectons flex-row">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Ad Text***/}
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
@@ -151,7 +151,7 @@ const ViewDetails=(props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="Form-main-div-of-sectons flex-row">
+                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs  ">
                                     {/* Ad Image Url*/}
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">

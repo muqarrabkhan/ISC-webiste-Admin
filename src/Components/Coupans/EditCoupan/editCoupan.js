@@ -75,7 +75,7 @@ const editCoupan=(props) => {
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" placeholder="asd" />
                                 </div>
-                                <button className="Save-btn-of-form mrg-top-10 fnt-poppins">Link Copy</button>
+                                <button className="Save-btn-of-form Save-btns-of-forms-responsive mrg-top-10 fnt-poppins">Link Copy</button>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>

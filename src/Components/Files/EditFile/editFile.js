@@ -20,15 +20,15 @@ const EditFile= (props) => {
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
                         {/* Table Section */}
-                        <div className="Form-section-startup">
+                        <div className="Form-section-startup Form-sections-startups-responsive">
                             <div className="has-margin-bottom-20 extra-div">
                             </div>
                             {/*Page Content**/}
-                            <div className="mrg-left-20 mrg-top-20 fnt-poppins ck-Editor-of-editfile">
+                            <div className="ck-editor-of-compaign mrg-left-20 mrg-top-20 fnt-poppins ck-Editor-of-editfile">
                                 <div>
                                     <label>Edit File Content*</label>
                                 </div>
-                                <div className="mrg-top-10">
+                                <div className="ck-editor-of-compaign-border mrg-top-10">
                                     <CKEditor
                                         content={content ? content : ""}
                                         events={{
