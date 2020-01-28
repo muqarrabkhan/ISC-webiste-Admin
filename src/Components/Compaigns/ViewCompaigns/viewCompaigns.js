@@ -157,7 +157,7 @@ const viewcompaign= (props) => {
                                             <img className="cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
                                             <span className="cursor-pointer view-btn-of-table ">Verify</span>
                                         </div>
-                                        <div className="has-margin-top-10">
+                                        <div className="mrg-top-10">
                                         <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
                                         </div>
                                         <div className="mrg-top-10">

@@ -23,7 +23,7 @@ const EditCompaign =(props) => {
                             {/* choose file inputs start here */}
                             {/* Display Social Share Image */}
                             <div className="has-padding-top-20">
-                                <label className="has-margin-left-50 fnt-poppins">Dispaly/Social Share Image</label>
+                                <label className="mrg-left-50 fnt-poppins">Dispaly/Social Share Image</label>
                                 <div className="field mrg-top-20 mrg-left-50">
                                     <div className="file is-small has-name ">
                                         <label className="file-label ">
@@ -44,7 +44,7 @@ const EditCompaign =(props) => {
                                 </div>
                             </div>
                             {/* Overlays Image choose button start here */}
-                            <div className="has-margin-top-20">
+                            <div className="mrg-top-20">
                                 <label className="mrg-left-50 fnt-poppins" >Overlays (max 5 images)</label>
                             </div>
                             {/* First choose file button */}

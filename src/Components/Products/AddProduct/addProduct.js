@@ -19,7 +19,7 @@ const addProduct=(props) => {
                         {/* Table Section */}
                         <div className="container  Form-section-startup">
                             <div className="Form-section2-uploading-image">
-                                <img className="mrg-left has-margin-top-30" alt="upload-img" src={Image} />
+                                <img className="mrg-left-55 mrg-top-30" alt="upload-img" src={Image} />
                             </div>
                             <div className="Form-section2-uploading-btn">
                                 <button className="Save-btn-of-form mrg-left-55 mrg-top-20 fnt-poppins">Upload Image</button>
@@ -57,12 +57,12 @@ const addProduct=(props) => {
                                                 <label>Product Short Description*</label>
                                             </div>
                                             <div>
-                                                <input className="has-margin-top-10" type="slug" placeholder="Enter Slug"></input>
+                                                <input className="mrg-top-10" type="slug" placeholder="Enter Slug"></input>
                                             </div>
                                         </div>
                                     </div>
                                     {/*Product Url* */}
-                                    <div className="Form-Inputs-Fields mrgtop-10 mrg-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label>Product Url*</label>
