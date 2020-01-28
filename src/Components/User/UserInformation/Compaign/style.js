@@ -4,7 +4,7 @@ export default () => {
     return (
         <style>
             {`
-            .inputs-of-admistrator{
+            .inputs-for-responsive{
                 width: 900px;
                 height: 40px;
                 padding: 10px;

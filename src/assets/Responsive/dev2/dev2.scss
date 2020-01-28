@@ -1,10 +1,46 @@
 @media (max-width: 1400px) and (min-width: 1200px) { 
-
-
-
+    input.inputs-of-admistrator {
+    width: 750px!important;
+    }
+    select.inputs-of-admistrator {
+        width: 750px!important;
+        // margin-left: -33px;
+    }
+    .textarea-of-admistrator{
+        width: 750px!important;
+        // margin-left: -33px;
+    }
+    .inputs-for-responsive{
+        // margin-left: 0px;
+        width: 750px!important; 
+    }
+    .radios{
+        width:400px!important;
+    }
+    .radios-of-group {
+        width:400px!important;
+    }
+    .Form-Inputs-Fields input {
+        width: 400px!important;
+    }
+    .Form-Inputs-Fields select {
+        width: 400px;
+    }
+    .ck-Editor{
+        width:750px!important;
+        // margin-left:30px;
+    }
+    .ck-editor-of-compaign{
+        width: 750px;
+        .ck-editor-of-compaign-border{
+        border-right: 1px solid $radio-color;
+        }
+    }
+    .redonly-input{
+        width:750px;
+    }
 }
-
-
+// 1200 to 1400 Quries end here
 // 1024 to 1199 media Quries start here
 @media (max-width: 1199px) and (min-width: 1024px) { 
     input.inputs-of-admistrator {
