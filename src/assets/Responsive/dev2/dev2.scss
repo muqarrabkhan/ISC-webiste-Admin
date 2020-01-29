@@ -1,4 +1,41 @@
 @media (max-width: 1400px) and (min-width: 1200px) { 
+ //  dashboard responsive start here
+ .dash-board-cards {
+ width: 286px!important;
+margin-left: 20px!important;
+ }
+  .dashboard-card-hr-line {
+  width: 265px !important;
+  margin-left: 15px !important;
+}
+ .card-left-text {
+width: 142px!important;
+ h1{
+  margin-left: 38px;
+}
+ p{
+    margin-left: 50px;
+    }
+ }
+ .card-right-text {
+ h1{
+    margin-left: 25px;
+  }
+ p{
+  margin-left: 50px;
+  }
+}
+.dashboard-main-cards-div{
+     margin-top: 20px;
+}
+ .Last-week-card-section {
+width: 210px!important;
+}
+.Table-Header {
+ width: 95%!important;
+ margin-left: 2.5%;
+ }
+//  dashboard responsive end here
     input.inputs-of-admistrator {
     width: 750px!important;
     }
