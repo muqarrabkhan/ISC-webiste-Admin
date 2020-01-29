@@ -1,6 +1,7 @@
 import React from 'react'
 import Image1 from '../../assets/Images/larki.jpg'
 import {withRouter} from 'react-router-dom'
+import Style from './style'
 const Dashboard= () => {
  
   return (
@@ -12,7 +13,7 @@ const Dashboard= () => {
       </div>
 
       {/* Table of Administrator  */}
-      <div className="container-fluid">
+      <div className="container">
         <form>
           <div className="Table-of-administrator">
             <div className="background-of-table">
@@ -23,14 +24,14 @@ const Dashboard= () => {
                 </div>
                 {/* Dashboard  Campaign cards start here      */}
                 {/* <first card */}
-                <div className="container">
+                
                   <div className=" dashboard-main-cards-div flex-row ">
                     <div className="dash-board-cards mrg-left-20 $White-color">
                       <div className="dashboard-card-headr ">
                         <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600 ">Total Support</h1>
                       </div>
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main div d-flex flex-row">
+                      <div className="card-inner-main-div d-flex flex-row">
                         <div className="card-left-text  ">
                           <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data ">Today</h1>
                           <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
@@ -43,7 +44,7 @@ const Dashboard= () => {
                       </div>
                     </div>
                     {/* second card */}
-                    <div className="dash-board-cards mrg-left-50 $White-color">
+                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
                       <div className="dashboard-card-headr">
                         <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">Total New Campaigns</h1>
                       </div>
@@ -61,7 +62,7 @@ const Dashboard= () => {
                       </div>
                     </div>
                     {/* Third card */}
-                    <div className="dash-board-cards mrg-left-50 $White-color">
+                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
                       <div className="dashboard-card-headr">
                         <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Users</h1>
                       </div>
@@ -100,10 +101,11 @@ const Dashboard= () => {
                       </div>
                     </div>
                     {/* second card  section2*/}
-                    <div className="dash-board-cards mrg-left-50 $White-color">
+                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
                       <div className="dashboard-card-headr">
                         <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Petition Campaigns</h1>
                       </div>
+                      <div className="dashboard-inner-responsive-contents"></div>
                       <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
                       <div className="card-inner-main div d-flex flex-row">
                         <div className="card-left-text  ">
@@ -118,7 +120,7 @@ const Dashboard= () => {
                       </div>
                     </div>
                     {/* Third card  section2*/}
-                    <div className="dash-board-cards mrg-left-50 $White-color">
+                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
                       <div className="dashboard-card-headr">
                         <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Pledge Campaigns</h1>
                       </div>
@@ -136,7 +138,7 @@ const Dashboard= () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                
                 {/* dashboard Campaign card end here */}
                 {/* dashboard lastweek Campaign card start here */}
                 <div className="container last-week-main-dev ">
@@ -144,7 +146,7 @@ const Dashboard= () => {
                     <h1 className=" fnt-poppins white-color fnt-size-20">Last Week Campaigns</h1>
                     <div className="is-flex">
                       <div className="has-padding-right-20 has-padding-top-5 fnt-poppins">View</div>
-                      <select className="select-option-of-adminstrator fnt-poppins">
+                      <select className="select-option-of-adminstrator dashboard-responsive-select-opt-wdth fnt-poppins">
                         <option>Campaigns</option>
                         <option>Petitions</option>
                         <option>Pledges</option>
@@ -196,6 +198,7 @@ const Dashboard= () => {
           </div>
         </form>
       </div>
+      <Style/>
     </div>
   );
 }

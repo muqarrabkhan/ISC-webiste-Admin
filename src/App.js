@@ -10,5 +10,6 @@ export default () => {
             <BrowserRouter>
                 <Routes />
             </BrowserRouter>
+
     );
 }
