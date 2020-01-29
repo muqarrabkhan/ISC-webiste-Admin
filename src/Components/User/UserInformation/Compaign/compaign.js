@@ -76,7 +76,7 @@ const Campaign= (props) => {
                                     <th>Is Premium?</th>
                                     <th>Show On Category</th>
                                     <th>Status</th>
-                                    <th className="bodr-of-none">IP Address</th>
+                                    <th className="bodr-of-none">Action</th>
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
@@ -92,13 +92,16 @@ const Campaign= (props) => {
                                     <td>sub view</td>
                                     <td>sub view</td>
                                     <td>
-                                        <div className="appling-width-btns is-flex ">
+                                        <div className="appling-width-btns ">
                                             <div className=" is-flex image-btn-edit-delete-user-compaign">
                                                 <img  onClick={()=>history.push("/edit-campaign")}className="cursor-pointer edit-image-table" alt="" src={Editlogo} />
                                                 <img className="delete-image-table" alt="" src={Deletelogo} />
                                             </div>
                                             <div className=" is-flex btn-of-view-user-compaign ">
                                                 <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table">View Details</span>
+                                                
+                                            </div>
+                                            <div className=" is-flex btn-of-view-user-compaign ">
                                                 <span className="cursor-pointer view-btn-of-table">Affiliate User</span>
                                             </div>
                                         </div>
