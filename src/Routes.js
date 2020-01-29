@@ -72,8 +72,6 @@ import ViewTamplates from './Components/Templates/ViewTemplates/viewtemplates'
 // Files
 import EditFiles from './Components/Files/EditFile/editFile'
 import Viewfiles from './Components/Files/ViewFiles/viewFiles'
-// Practice File
-import PracticeFile from './Components/Practicefile/practicefile'
 const AllRouters = () => {
     return (
         <div className="main-routes-div is-flex">
@@ -152,8 +150,6 @@ const AllRouters = () => {
                             {/* File */}
                             <Route path={"/edit-file"} component={EditFiles} />
                             <Route path={"/file"} component={Viewfiles} />
-                            {/* PracticeFile */}
-                            <Route Path={"/practice-file"} component={PracticeFile}/>
                         </Switch>
                 </div>
             </div>
