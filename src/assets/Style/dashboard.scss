@@ -1,6 +1,6 @@
 @import './Color.scss';
 .dash-board-cards{
-       width: 403px;
+    //    width: 403px;
     height: 200px;
     box-shadow: 0 0 18px 0 $dashbrd-card-box-shadow;
     background: $dashbrd-card-background;
@@ -30,6 +30,9 @@
     }
 }
 // Last Week campaign styling start
+.dashboard-responsive-select-opt-wdth{
+    width:160px;
+}
 .last-week-main-dev{
     .Last-week-cards-main-dev{
         justify-content: space-evenly;
