@@ -28,9 +28,9 @@ export default () => {
             {
                 height: 51px;
             }
-            span.cursor-pointer.view-btn-of-table {
+           .cursor-pointer.view-btn-of-table {
              width: 119px;
-            }
+            } 
             `}
         </style>
     );

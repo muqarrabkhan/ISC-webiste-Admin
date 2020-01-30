@@ -48,10 +48,10 @@ const ViewAdministrator=(props) => {
                             <td>09-03-2019</td>
                             <td>sub view</td>
                             <td>
-                                <div style={{display: ""}}>
+                                <div style={{display: "flex"}}>
                                     <img onClick={()=>history.push("/edit-administrator")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo}/>
                                     <img className="delete-image-table" alt="delete-button" src={Deletelogo}/>
-                                    <span onClick={()=>history.push("/admin-information")} className="cursor-pointer view-btn-of-table">View Details</span>
+                                    <span onClick={()=>history.push("/admin-information")} className="cursor-pointer view-btn-of-table hgt-setng">View Details</span>
                                 </div>
                             </td>
                         </tr>

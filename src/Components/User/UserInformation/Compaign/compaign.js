@@ -97,7 +97,7 @@ const Campaign= (props) => {
                                                 <img  onClick={()=>history.push("/edit-campaign")}className="cursor-pointer edit-image-table" alt="" src={Editlogo} />
                                                 <img className="delete-image-table" alt="" src={Deletelogo} />
                                             </div>
-                                            <div className=" is-flex btn-of-view-user-compaign ">
+                                            <div className=" btn-of-view-user-compaign ">
                                                 <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table">View Details</span>
                                                 
                                             </div>

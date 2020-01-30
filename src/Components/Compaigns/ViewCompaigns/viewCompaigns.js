@@ -97,7 +97,7 @@ const viewcompaign= (props) => {
                         </div>
                     </div>
                     {/* Table-Title */}
-                    <div className="container-fluid Table-title">
+                    <div className="Table-title">
                         <table className="main-table-heading">
                             <thead className="heading-of-table background-color-head">
                                 <tr className="table-row-of-head fnt-poppins">
