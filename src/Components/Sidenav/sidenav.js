@@ -7,8 +7,8 @@ import Logout from '../../assets/Images/logout.png'
 const Sidenav = (props) => {
     let { location: routerLocation } = props;
     let location = routerLocation.pathname;
-    const [show,setShow] = useState(false);
-    const [showSetting,setShowSetting] = useState(false);
+    const [show, setShow] = useState(false);
+    const [showSetting, setShowSetting] = useState(false);
     // function for user
     const hideShow = () => {
         if (show === false) {
@@ -69,21 +69,20 @@ const Sidenav = (props) => {
                                 <img className="icon-width-admin"
                                     src={currentActive("users") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')}
                                     alt="Administrator" />
-                                    <span className="sidenav-link fnt-poppins active" onClick={() => hideShow(false)}>User</span>
-                                    {
-                                    show ? 
-                                    <img className="icon-width-admin has-margin-left-30"
-                                    src={require('../../assets/Images/upwardarrow.png')}
-                                    alt="Administrator" style={{width:"15px",height:"10px"}}/>
-                                     : 
-                                    <img className="icon-width-admin has-margin-left-30"
-                                    src={require('../../assets/Images/downwardarrow.png')}
-                                    alt="Administrator" style={{width:"15px",height:"10px"}} />
-                                     }
+                                <span className="sidenav-link fnt-poppins active" onClick={() => hideShow(false)}>User</span>
+                                {
+                                    show ?
+                                        <img className="icon-width-admin has-margin-left-30"
+                                            src={require('../../assets/Images/upwardarrow.png')}
+                                            alt="Administrator" style={{ width: "15px", height: "10px" }} />
+                                        :
+                                        <img className="icon-width-admin has-margin-left-30"
+                                            src={require('../../assets/Images/downwardarrow.png')}
+                                            alt="Administrator" style={{ width: "15px", height: "10px" }} />
+                                }
                             </div>
                         </Link>
-                        {
-                            show ?
+                        {show ?
                             <div className="has-margin-left-20">
                                 <Link to={"/users"}>
                                     <div className={"sidenav-name-logo" + currentActive("users")}>
@@ -95,8 +94,8 @@ const Sidenav = (props) => {
                                         <span className="sidenav-link fnt-poppins active">View Activities</span>
                                     </div>
                                 </Link>
-                                </div>
-                        :""}
+                            </div>
+                            : ""}
                         {/* Subscription */}
                         <Link to={"/subscription"}>
                             <div className={"sidenav-name-logo" + currentActive("subscription")}>
@@ -143,18 +142,30 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* General Setting */}
-                        <Link to={"/setting"}>
+                        <Link onClick={() => hideShowSetting(false)}>
                             <div className={"sidenav-name-logo" + currentActive("setting")}>
-                            <img className="administrator_icon"
+                                <img className="administrator_icon"
                                     src={currentActive("setting") === "active" ? require('../../assets/Images/generalsettingactive.png') : require('../../assets/Images/Setting.png')}
                                     alt="General Setting" />
-                                    <span className="sidenav-link fnt-poppins active" onClick={() => hideShowSetting(false)}>General Setting</span>
-                                {/* <span className="has-margin-left-30">{arrow}</span> */}
+                                <span className="sidenav-link fnt-poppins active" onClick={() => hideShowSetting(false)}>Setting</span>
+                                { showSetting ?
+                                        <img className="icon-width-admin has-margin-left-30"
+                                            src={require('../../assets/Images/upwardarrow.png')}
+                                            alt="Administrator" style={{ width: "15px", height: "10px" }} />
+                                        :
+                                        <img className="icon-width-admin has-margin-left-30"
+                                            src={require('../../assets/Images/downwardarrow.png')}
+                                            alt="Administrator" style={{ width: "15px", height: "10px" }} />
+                                }
                             </div>
                         </Link>
-                        {
-                            showSetting ?
+                        {showSetting ?
                             <div className="has-margin-left-30">
+                                <Link to={"/setting"}>
+                                    <div className={"sidenav-name-logo" + currentActive("setting")}>
+                                        <span className="sidenav-link fnt-poppins active">Setting</span>
+                                    </div>
+                                </Link>
                                 <Link to={"/live-setting"}>
                                     <div className={"sidenav-name-logo" + currentActive("live-setting")}>
                                         {/* <img className="icon-width-admin"
@@ -163,8 +174,8 @@ const Sidenav = (props) => {
                                         <span className="sidenav-link fnt-poppins active">Live Setting</span>
                                     </div>
                                 </Link>
-                                </div>
-                        :""}
+                            </div>
+                            : ""}
                         {/* Compaigns */}
                         <Link to={"/campaign"}>
                             <div className={"sidenav-name-logo" + currentActive("campaign")}>
