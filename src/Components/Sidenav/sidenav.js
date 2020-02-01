@@ -64,13 +64,22 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Users */}
-                        <Link to={"/users"}>
+                        <Link to={"/users"} onClick={() => hideShow(false)}>
                             <div className={"sidenav-name-logo" + currentActive("users")}>
                                 <img className="icon-width-admin"
                                     src={currentActive("users") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')}
                                     alt="Administrator" />
                                     <span className="sidenav-link fnt-poppins active" onClick={() => hideShow(false)}>User</span>
-                                {/* <span className="has-margin-left-30">{arrow}</span> */}
+                                    {
+                                    show ? 
+                                    <img className="icon-width-admin has-margin-left-30"
+                                    src={require('../../assets/Images/upwardarrow.png')}
+                                    alt="Administrator" style={{width:"15px",height:"10px"}}/>
+                                     : 
+                                    <img className="icon-width-admin has-margin-left-30"
+                                    src={require('../../assets/Images/downwardarrow.png')}
+                                    alt="Administrator" style={{width:"15px",height:"10px"}} />
+                                     }
                             </div>
                         </Link>
                         {
@@ -78,9 +87,6 @@ const Sidenav = (props) => {
                             <div className="has-margin-left-20">
                                 <Link to={"/view-activities"}>
                                     <div className={"sidenav-name-logo" + currentActive("view-activities")}>
-                                        {/* <img className="icon-width-admin"
-                                            src={currentActive("users") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')}
-                                            alt="Administrator" /> */}
                                         <span className="sidenav-link fnt-poppins active">View Activities</span>
                                     </div>
                                 </Link>
