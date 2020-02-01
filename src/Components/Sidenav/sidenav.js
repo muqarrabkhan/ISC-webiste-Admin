@@ -64,7 +64,7 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Users */}
-                        <Link to={"/users"} onClick={() => hideShow(false)}>
+                        <Link onClick={() => hideShow(false)}>
                             <div className={"sidenav-name-logo" + currentActive("users")}>
                                 <img className="icon-width-admin"
                                     src={currentActive("users") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')}
@@ -85,6 +85,11 @@ const Sidenav = (props) => {
                         {
                             show ?
                             <div className="has-margin-left-20">
+                                <Link to={"/users"}>
+                                    <div className={"sidenav-name-logo" + currentActive("users")}>
+                                        <span className="sidenav-link fnt-poppins active">View Users</span>
+                                    </div>
+                                </Link>
                                 <Link to={"/view-activities"}>
                                     <div className={"sidenav-name-logo" + currentActive("view-activities")}>
                                         <span className="sidenav-link fnt-poppins active">View Activities</span>
