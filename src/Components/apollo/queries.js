@@ -1,5 +1,14 @@
 import gql from 'graphql-tag';
 
+export const LOGIN_USER = gql`
+  mutation adminLogin($email:String!,$password:String!){
+    adminLogin(email:$email , password:$password){
+      response
+    }
+  }
+
+`
+
 export const getSinglePost = (id) =>
     gql`{
       singlePost(id:"${id}") {

@@ -40,7 +40,7 @@ import ViewNewsLetter from './Components/NewsLetter/ViewNewsLetter/viewNewslette
 import AddPages from './Components/Pages/AddPage/addPage'
 import EditPages from './Components/Pages/EditPage/editPage'
 import ViewPages from './Components/Pages/ViewPages/viewPages'
-// Settings
+// Setting
 import AddSetting from './Components/Setting/AddSetting/AddSetting'
 import EditSetting from './Components/Setting/EditSetting/editSetting'
 import LiveSetting from './Components/Setting/LiveSetting/liveSetting'
@@ -80,8 +80,6 @@ const AllRouters = () => {
             <div className="main-routes main-dev-of-routes">
                 <div className="right-section">
                         <Switch>
-                            {/* Dashboard */}
-                            <Route path={"/"} exact component={Dashboard} />
                             {/* Administration */}
                             <Route path={"/add-administrator"} component={AddAdministrator} />
                             <Route path={"/admin-information"} component={AdminInformation} />
@@ -150,6 +148,8 @@ const AllRouters = () => {
                             {/* File */}
                             <Route path={"/edit-file"} component={EditFiles} />
                             <Route path={"/file"} component={Viewfiles} />
+                             {/* Dashboard */}
+                             <Route path={"/"} exact={true} component={Dashboard} />
                         </Switch>
                 </div>
             </div>
