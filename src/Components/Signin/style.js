@@ -30,7 +30,7 @@ export default()=>(
     backdrop-filter: blur(30px);
     box-shadow: 1px 6px 6px 0 rgba(0, 0, 0, 0.16);
     position: relative;
-    background-color:#323b52;
+    background-color:#4379E9;
 }
 
 .login-background-color .login {
@@ -109,8 +109,8 @@ form.input-form {
     width: 114px;
     height: 39px;
     border-radius: 4px;
-    border: 1px solid #323b52;
-    background: #323b52;
+    border: 1px solid #4379E9;
+    background: #4379E9;
     color: #fff;    
 }
 .signin-forgrt-password {
