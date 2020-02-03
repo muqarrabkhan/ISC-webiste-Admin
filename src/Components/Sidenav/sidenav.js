@@ -3,9 +3,10 @@ import { withRouter, Link } from 'react-router-dom'
 import Logo from '../../assets/Images/ISC_logo.png'
 import Style from './style'
 import Logout from '../../assets/Images/logout.png'
+import cookie from 'react-cookies'
 
 const Sidenav = (props) => {
-    let { location: routerLocation } = props;
+    let { location: routerLocation , history } = props;
     let location = routerLocation.pathname;
     const [show, setShow] = useState(false);
     const [showSetting, setShowSetting] = useState(false);
@@ -18,7 +19,7 @@ const Sidenav = (props) => {
             setShow(false);
         }
     }
-    // function for Setting
+    // function for Setting of hide and show 
     const hideShowSetting = () => {
         if (showSetting === false) {
             setShowSetting(true);
@@ -35,6 +36,16 @@ const Sidenav = (props) => {
             return location.indexOf(value) === 1 ? "active" : ""
         }
     }
+    // logout function
+    const logout = () => {
+        let age = localStorage.getItem("age");
+        cookie.remove('token', {
+            maxAge: parseInt(age),
+            path: "/sigin"
+        });
+        localStorage.removeItem("age");
+        history.push("/sigin");
+    };
     return (
         <>
             <div className="container-fluid dashboard-main-dev">
@@ -228,7 +239,7 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Logout */}
-                        <Link to={"/sigin"}>
+                        <Link to={"/sigin"} onClick={()=>logout()}>
                             <div className="sidenav-name-logo">
                                 <img className="administrator_icon" alt="Logout" src={Logout} />
                                 <span className="sidenav-link fnt-poppins">Logout</span>
