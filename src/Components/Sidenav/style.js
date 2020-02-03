@@ -6,7 +6,7 @@ export default()=>{
         <style>
         {`
              .dashboard-main-dev {
-                background: #323b52;
+                background: #4379E9;
                 width: 330px;
                 min-height: 160vh;
             }
@@ -19,7 +19,7 @@ export default()=>{
                 width: 189px;
                 margin-top: 21%;
                 margin-left: 20%;
-                color: #c9ccd2;
+                color: #a4c0fb;
             }
             span.dashboard-link.fnt-poppins {
                 padding-left: 18px;
@@ -33,7 +33,7 @@ export default()=>{
                 width: 189px;
                 margin-left: 20%;
                 margin-top: 18%;
-                color: #e47529;
+                color: #ffffff;
             }
             span.dashboard-link.fnt-poppins.active-text {
                 margin-left: 18px;
@@ -44,7 +44,7 @@ export default()=>{
             .sidenav-name-logoactive {
                 margin-top: 10%!important;
                 margin-left: 20%!important;
-                color: #e47529;
+                color: #fff;
             }
             // ends here
             .dashboard-name-logo .dashboard-link {
@@ -68,13 +68,13 @@ export default()=>{
             }
             .sidenav-name-logo .sidenav-link{
                 margin-left: 18px;
-                color: #c9ccd2;
+                color: #a4c0fb;
             }
             span.sidenav-link.fnt-poppins {
                 margin-left: 20px;
             }
             .sidenav-link:hover{
-                color: #e47529;
+                color: #fff;
             }
 
 

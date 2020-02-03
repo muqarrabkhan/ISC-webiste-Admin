@@ -81,8 +81,8 @@ const AddAdministrator=(props) => {
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="cursor-pointer cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <button className="cursor-pointer Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                             </div>
                         </div>
                     </div>

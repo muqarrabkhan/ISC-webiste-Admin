@@ -15,7 +15,7 @@ export default()=>{
            
               }
               .viewAnnouncement-Table-header{
-                background:#01c2c4;
+                background:#4379E9;
               }
               .appling-flex-btns{
                   display:flex;

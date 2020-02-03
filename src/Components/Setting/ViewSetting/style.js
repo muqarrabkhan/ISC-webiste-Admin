@@ -16,7 +16,7 @@ export default()=>{
       
     }
     .setting-header-title{
-        background:#01c2c4;
+        background:#4379E9;
         
     }
     .setting-edit-btn{

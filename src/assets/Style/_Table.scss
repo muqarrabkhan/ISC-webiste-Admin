@@ -20,11 +20,20 @@
     margin: 12px;
     width: 122px;
     height: 37px;
-    background: $Table-Button-color;
-    border: 1px solid $Table-Button-color!important;
+    background: $btn-bg-color-save;
+    border: 1px solid $btn-bg-color-save!important;
     border-radius: 6px;
     color: $White-color;
     font-size: 17px;
+    &:hover {
+        background-color: #3f44d6;
+    }
+    
+
+}
+.button:hover {
+    background: red;
+
 }
 .background-of-table {
     background: $Table-Background;
