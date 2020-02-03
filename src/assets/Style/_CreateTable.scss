@@ -35,6 +35,7 @@
         height: 39px;
         border-radius: 4px;
         border: 1px solid $Tabel-action-border-color; 
+        font-size: 15px;
         cursor: pointer;
         &:hover {
             background-color: #e3dede;
@@ -48,6 +49,7 @@
         border: 1px solid $btn-bg-color-save;
         background: $btn-bg-color-save;
         color: $White-color;  
+        font-size: 15px;
         cursor: pointer; 
         &:hover {
             background-color: #3f44d6;

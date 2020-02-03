@@ -168,9 +168,6 @@ const Sidenav = (props) => {
                                 </Link>
                                 <Link to={"/live-setting"}>
                                     <div className={"sidenav-name-logo" + currentActive("live-setting")}>
-                                        {/* <img className="icon-width-admin"
-                                            src={currentActive("users") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')}
-                                            alt="Administrator" /> */}
                                         <span className="sidenav-link fnt-poppins active">Live Setting</span>
                                     </div>
                                 </Link>
