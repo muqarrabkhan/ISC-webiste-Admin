@@ -15,7 +15,7 @@ const App = (props) => {
     useEffect(() => {
         let token = cookie.load("token");
         if (token) {
-            if (location.pathname.indexOf("sigin") !== -1) {
+            if (location.pathname.indexOf("signin") !== -1) {
                 history.push("/signin");
             }
             else {
@@ -25,7 +25,7 @@ const App = (props) => {
     }, [history, location.pathname])
     return (
             <Switch>
-                <Route path={"/sigin"} exact component={Signin} />
+                <Route path={"/signin"} exact component={Signin} />
                 <Route path={"/"} component={AllRoutes} />
             </Switch>
     );

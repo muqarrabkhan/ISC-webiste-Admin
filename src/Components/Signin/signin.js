@@ -13,11 +13,10 @@ const Signin = (props) => {
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
     const [error, setError] = useState("");
-    
-    
+
     const userAuthentication = e => {
         e.preventDefault();
-        let payLoad = {email: email, password: password};
+        let payLoad = {Email: email, Password: password};
         axios.post(apiPath + "/adminLogin", payLoad).then(response => {
             localStorage.setItem("age", remember ? 1296000 : 86400);
             cookie.save('token', response.data.token, {maxAge: (remember ? 1296000 : 86400), path: "/"});

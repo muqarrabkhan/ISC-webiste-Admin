@@ -41,10 +41,10 @@ const Sidenav = (props) => {
         let age = localStorage.getItem("age");
         cookie.remove('token', {
             maxAge: parseInt(age),
-            path: "/sigin"
+            path: "/signin"
         });
         localStorage.removeItem("age");
-        history.push("/sigin");
+        history.push("/signin");
     };
     return (
         <>
@@ -239,7 +239,7 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Logout */}
-                        <Link to={"/sigin"} onClick={()=>logout()}>
+                        <Link to={"/signin"} onClick={()=>logout()}>
                             <div className="sidenav-name-logo">
                                 <img className="administrator_icon" alt="Logout" src={Logout} />
                                 <span className="sidenav-link fnt-poppins">Logout</span>
