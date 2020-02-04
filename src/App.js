@@ -12,6 +12,7 @@ import cookie from 'react-cookies'
 
 const App = (props) => {
     let { history, location } = props;
+
     useEffect(() => {
         let token = cookie.load("token");
         if (token) {
@@ -24,10 +25,12 @@ const App = (props) => {
         }
     }, [])
     return (
+        <WrapRootElement>
             <Switch>
                 <Route path={"/signin"} exact component={Signin} />
                 <Route path={"/"} component={AllRoutes} />
             </Switch>
+        </WrapRootElement>
     );
 }
 export default withRouter(App);

@@ -1,9 +1,17 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Image1 from '../../assets/Images/larki.jpg'
 import { withRouter } from 'react-router-dom'
 import Style from './style'
 import ReactPaginate from "react-paginate";
+import { useQuery } from '@apollo/react-hooks';
+import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 const Dashboard = () => {
+  console.log("tests");
+
+  const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
+  useEffect(()=>{
+    console.log("test",data);
+  },[data])
 
   return (
 
