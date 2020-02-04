@@ -5,7 +5,7 @@ import Logo from '../../assets/Images/ISC_logo.png'
 import '../../assets/Style/Common.scss'
 import axios from 'axios';
 import cookie from 'react-cookies'
-import {apiPath} from '../../Config'
+import {apiPath} from '../../config'
 
 const Signin = (props) => {
     let {history} = props;

@@ -18,11 +18,11 @@ const App = (props) => {
             if (location.pathname.indexOf("signin") !== -1) {
                 history.push("/signin");
             }
-            else {
+            else if(location.pathname.indexOf("/") !== -1){
                 history.push("/");
             }
         }
-    }, [history, location.pathname])
+    }, [])
     return (
             <Switch>
                 <Route path={"/signin"} exact component={Signin} />
