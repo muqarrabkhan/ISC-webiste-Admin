@@ -7,7 +7,7 @@ import fetch from 'isomorphic-fetch';
 const WrapRootElement = ({children}) => {
 
     const client = new ApolloClient({
-        uri: 'https://vft2h7l6zrbudbynw462k2ndnu.appsync-api.us-east-1.amazonaws.com/graphql',
+        uri: 'https://isc-website-cms-services.herokuapp.com/private/adminLogin',
         request: operation => {
             operation.setContext({
                 headers: {

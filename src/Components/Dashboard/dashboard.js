@@ -1,9 +1,10 @@
 import React from 'react'
 import Image1 from '../../assets/Images/larki.jpg'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Style from './style'
-const Dashboard= () => {
- 
+import ReactPaginate from "react-paginate";
+const Dashboard = () => {
+
   return (
 
     <div className="container-fluid Table-for-administrator-main-div">
@@ -24,121 +25,121 @@ const Dashboard= () => {
                 </div>
                 {/* Dashboard  Campaign cards start here      */}
                 {/* <first card */}
-                
-                  <div className=" dashboard-main-cards-div flex-row ">
-                    <div className="dash-board-cards mrg-left-20 $White-color">
-                      <div className="dashboard-card-headr ">
-                        <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600 ">Total Support</h1>
-                      </div>
-                      <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main-div d-flex flex-row">
-                        <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data ">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
-                        </div>
-                        <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                        <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
-                        </div>
-                      </div>
+
+                <div className=" dashboard-main-cards-div flex-row ">
+                  <div className="dash-board-cards mrg-left-20 $White-color">
+                    <div className="dashboard-card-headr ">
+                      <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600 ">Total Support</h1>
                     </div>
-                    {/* second card */}
-                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
-                      <div className="dashboard-card-headr">
-                        <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">Total New Campaigns</h1>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
+                    <div className="card-inner-main-div d-flex flex-row">
+                      <div className="card-left-text  ">
+                        <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data ">Today</h1>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
                       </div>
-                      <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main div d-flex flex-row">
-                        <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
-                        </div>
-                        <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                        <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                          <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Third card */}
-                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
-                      <div className="dashboard-card-headr">
-                        <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Users</h1>
-                      </div>
-                      <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main div d-flex flex-row">
-                        <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20 0 fnt-poppins card-number-styling number-data-responsive">105</p>
-                        </div>
-                        <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                        <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
-                        </div>
+                      <div className="dashboard-cards-min-line mrg-top-10 "></div>
+                      <div className="card-right-text">
+                        <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                       </div>
                     </div>
                   </div>
-                  {/* card second section2 start here */}
-                  {/* first card section2*/}
-                  <div className=" dashboard-main-cards-div flex-row mrg-top-50">
-                    <div className="dash-board-cards mrg-left-20 $White-color">
-                      <div className="dashboard-card-headr ">
-                        <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Support Campaigns</h1>
-                      </div>
-                      <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main div d-flex flex-row">
-                        <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
-                        </div>
-                        <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                        <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
-                        </div>
-                      </div>
+                  {/* second card */}
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                    <div className="dashboard-card-headr">
+                      <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">Total New Campaigns</h1>
                     </div>
-                    {/* second card  section2*/}
-                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
-                      <div className="dashboard-card-headr">
-                        <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Petition Campaigns</h1>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
+                    <div className="card-inner-main div d-flex flex-row">
+                      <div className="card-left-text  ">
+                        <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
                       </div>
-                      <div className="dashboard-inner-responsive-contents"></div>
-                      <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main div d-flex flex-row">
-                        <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
-                        </div>
-                        <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                        <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                          <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Third card  section2*/}
-                    <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
-                      <div className="dashboard-card-headr">
-                        <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Pledge Campaigns</h1>
-                      </div>
-                      <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
-                      <div className="card-inner-main div d-flex flex-row">
-                        <div className="card-left-text  ">
-                          <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                          <p className="mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">105</p>
-                        </div>
-                        <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                        <div className="card-right-text">
-                          <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                          <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">1105</p>
-                        </div>
+                      <div className="dashboard-cards-min-line mrg-top-10 "></div>
+                      <div className="card-right-text">
+                        <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
                       </div>
                     </div>
                   </div>
-                
+                  {/* Third card */}
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                    <div className="dashboard-card-headr">
+                      <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Users</h1>
+                    </div>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
+                    <div className="card-inner-main div d-flex flex-row">
+                      <div className="card-left-text  ">
+                        <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                        <p className="mrg-left-70 mrg-top-20 0 fnt-poppins card-number-styling number-data-responsive">105</p>
+                      </div>
+                      <div className="dashboard-cards-min-line mrg-top-10 "></div>
+                      <div className="card-right-text">
+                        <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* card second section2 start here */}
+                {/* first card section2*/}
+                <div className=" dashboard-main-cards-div flex-row mrg-top-50">
+                  <div className="dash-board-cards mrg-left-20 $White-color">
+                    <div className="dashboard-card-headr ">
+                      <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Support Campaigns</h1>
+                    </div>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
+                    <div className="card-inner-main div d-flex flex-row">
+                      <div className="card-left-text  ">
+                        <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
+                      </div>
+                      <div className="dashboard-cards-min-line mrg-top-10 "></div>
+                      <div className="card-right-text">
+                        <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
+                      </div>
+                    </div>
+                  </div>
+                  {/* second card  section2*/}
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                    <div className="dashboard-card-headr">
+                      <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Petition Campaigns</h1>
+                    </div>
+                    <div className="dashboard-inner-responsive-contents"></div>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
+                    <div className="card-inner-main div d-flex flex-row">
+                      <div className="card-left-text  ">
+                        <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">105</p>
+                      </div>
+                      <div className="dashboard-cards-min-line mrg-top-10 "></div>
+                      <div className="card-right-text">
+                        <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">1105</p>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Third card  section2*/}
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                    <div className="dashboard-card-headr">
+                      <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Pledge Campaigns</h1>
+                    </div>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10"></div>
+                    <div className="card-inner-main div d-flex flex-row">
+                      <div className="card-left-text  ">
+                        <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
+                        <p className="mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">105</p>
+                      </div>
+                      <div className="dashboard-cards-min-line mrg-top-10 "></div>
+                      <div className="card-right-text">
+                        <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
+                        <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">1105</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* dashboard Campaign card end here */}
                 {/* dashboard lastweek Campaign card start here */}
                 <div className="container last-week-main-dev ">
@@ -154,7 +155,7 @@ const Dashboard= () => {
                       </select>
                     </div>
                   </div>
-                {/* 1st Card of Last Week Views and of Compaigns */}
+                  {/* 1st Card of Last Week Views and of Compaigns */}
                   <div className="is-flex Last-week-cards-main-dev">
                     <div className="Last-week-card-section mrg-top-50">
                       <img src={Image1} alt="" />
@@ -164,7 +165,7 @@ const Dashboard= () => {
                         <button className="Save-btn-of-form mrg-top-20 fnt-poppins">Support</button>
                       </div>
                     </div>
-                 {/* 2nd Card of Last Week Views and of Compaigns */}
+                    {/* 2nd Card of Last Week Views and of Compaigns */}
                     <div className="Last-week-card-section mrg-top-50">
                       <img src={Image1} alt="" />
                       <div className="mrg-top-10  text-center" >
@@ -173,7 +174,7 @@ const Dashboard= () => {
                         <button className="Save-btn-of-form mrg-top-20 fnt-poppins">Support</button>
                       </div>
                     </div>
-                 {/* 3rd Card of Last Week Views and of Compaigns */}                    
+                    {/* 3rd Card of Last Week Views and of Compaigns */}
                     <div className="Last-week-card-section mrg-top-50">
                       <img src={Image1} alt="" />
                       <div className="mrg-top-10  text-center" >
@@ -182,7 +183,7 @@ const Dashboard= () => {
                         <button className="Save-btn-of-form mrg-top-20 fnt-poppins">Support</button>
                       </div>
                     </div>
-                 {/* 4th Card of Last Week Views and of Compaigns */}                    
+                    {/* 4th Card of Last Week Views and of Compaigns */}
                     <div className="Last-week-card-section mrg-top-50">
                       <img src={Image1} alt="" />
                       <div className="mrg-top-10 text-center" >
@@ -193,12 +194,25 @@ const Dashboard= () => {
                     </div>
                   </div>
                 </div>
+                <div className="has-margin-top-40">
+                  <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                    nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                    breakLabel={". . ."}
+                    breakClassName={"break-me"}
+                    pageCount={5}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={5}
+                    containerClassName={"digit-icons main"}
+                    subContainerClassName={"container column"}
+                    activeClassName={"p-one"} />
+                </div>
               </div>
             </div>
           </div>
         </form>
       </div>
-      <Style/>
+      <Style />
     </div>
   );
 }

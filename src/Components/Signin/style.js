@@ -104,6 +104,7 @@ form.input-form {
     height: 39px;
     border-radius: 4px;
     border: 1px solid #989ca8;
+    font-size:15px;
 }
 .Save-btn-of-signin{
     width: 114px;
@@ -112,6 +113,7 @@ form.input-form {
     border: 1px solid #4379E9;
     background: #4379E9;
     color: #fff;    
+    font-size:15px;
 }
 .signin-forgrt-password {
     justify-content: flex-end;
