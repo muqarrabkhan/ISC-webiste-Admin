@@ -6,8 +6,8 @@ import './assets/Style/Style.scss'
 import 'bulma-helpers/css/bulma-helpers.min.css'
 import AllRoutes from './Routes'
 import Signin from './Components/Signin/signin'
-// import {ApolloProvider} from '@apollo/react-hooks';
-import WrapElement from './Components/apollo/wrap-root-element'
+import {ApolloProvider} from '@apollo/react-hooks';
+import WrapRootElement from './Components/apollo/wrap-root-element'
 import cookie from 'react-cookies'
 
 const App = (props) => {
@@ -24,12 +24,10 @@ const App = (props) => {
         }
     }, [history, location.pathname])
     return (
-        <WrapElement>
             <Switch>
                 <Route path={"/sigin"} exact component={Signin} />
                 <Route path={"/"} component={AllRoutes} />
             </Switch>
-        </WrapElement>
     );
 }
 export default withRouter(App);
