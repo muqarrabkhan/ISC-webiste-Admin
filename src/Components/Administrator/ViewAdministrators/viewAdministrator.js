@@ -11,7 +11,6 @@ const ViewAdministrator = (props) => {
     const { loading, error, data } = useQuery(ADMIN_DASHBOARD);
     // Loader
     if (loading) return <Loader/> 
-
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">

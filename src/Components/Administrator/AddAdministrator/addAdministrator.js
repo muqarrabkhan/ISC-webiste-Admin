@@ -13,38 +13,67 @@ const AddAdministrator = (props) => {
     const [name, setName] = useState([]);
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
+    const [confirmPassword, setConfirmPassword] = useState([]);
     const [roleId, setRoleId] = useState([]);
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
+    const [btnText, setBtnText] = useState("Save");
     const [data] = useMutation(CREATE_ADMIN);
-    let Ip = ""
-    publicIp.v4().then(ip => {
-        Ip = ip;
-    });
-
     let uid = uuid();
     // console.log("uuid",uid.substr(uid.length - 8));
     const addAdmin = (event) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-        data({
-            variables: {
-                Name: name,
-                Email: email,
-                Password: password,
-                RoleId: parseInt(roleId),
-                Status: status,
-                CreatedDate: currentDate,
-                CreatedIp: 123,
-                CreatedBy: 1
-                // CreatedIp:parseInt(createdIp),
-                // CreatedBy:parseInt(createdBy)
-            }
-        }).then(res => {
-            history.push(apiPath + "/adminLogin/" + res.data.createAdmin.error)
-            window.location.reload("/administrator");
-        })
+        if (!name) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!email) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!password) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!confirmPassword) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (password !== confirmPassword) {
+            setBtnText("UPLOADING");
+            window.alert("Password not matching");
+            return 0;
+        }
+        if (!status) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        else {
+            let Ip = ""
+            publicIp.v4().then(ip => {
+                Ip = ip;
+            });
+            // console.log(Ip);
+            data({
+                variables: {
+                    Name: name,
+                    Email: email,
+                    Password: password,
+                    RoleId: parseInt(roleId),
+                    Status: status,
+                    CreatedDate: currentDate,
+                    CreatedIp: 123,
+                    CreatedBy: 1
+                    // CreatedIp:parseInt(createdIp),
+                    // CreatedBy:parseInt(createdBy)
+                }
+            }).then(res => {
+                history.push(apiPath + "/adminLogin/" + res.data.createAdmin.error)
+                window.location.reload("/administrator");
+            })
+        }
     }
     const hide = () => {
         if (select === false) {
@@ -79,6 +108,7 @@ const AddAdministrator = (props) => {
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={name}
                                         onChange={event => setName(event.target.value)} />
+
                                 </div>
                             </div>
                             {/* Email*/}
@@ -135,7 +165,8 @@ const AddAdministrator = (props) => {
                                             <label>Confirm Password</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" />
+                                            <input className="inputs-of-admistrator" value={confirmPassword}
+                                                onChange={event => setConfirmPassword(event.target.value)} />
                                         </div>
                                     </div>
                                 </>
@@ -152,7 +183,7 @@ const AddAdministrator = (props) => {
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cursor-pointer cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="cursor-pointer Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="cursor-pointer Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                             </div>
                         </div>
                     </div>
