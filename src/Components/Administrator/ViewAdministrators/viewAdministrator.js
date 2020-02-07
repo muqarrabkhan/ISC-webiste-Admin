@@ -50,8 +50,8 @@ const ViewAdministrator = (props) => {
                                     <tr className="table-row-data-of-body fnt-poppins">
                                         <td>{sin.Name}</td>
                                         <td>{sin.Email}</td>
-                                        <td>09-03-2019</td>
-                                        <td>sub view</td>
+                                        <td>{sin.Status}</td>
+                                        <td>{sin.RoleId}</td>
                                         <td>
                                             <div style={{ display: "flex" }}>
                                                 <img onClick={() => history.push("/edit-administrator")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
