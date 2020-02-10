@@ -6,5 +6,15 @@ adminDashboard
     {   
       TotalSupportToday
       TotalSupportLastWeek
+      TotalNewCampaignToday
+      TotalNewCampaignLastWeek
+      TotalNewUsersToday
+      TotalNewUsersLastWeek
+      TotalNewSupportCampaignToday
+      TotalNewSupportCampaignLastWeek
+      TotalNewpetitionsCampaignToday
+      TotalNewpetitionsCampaignLastWeek
+      TotalNewpledgesCampaignToday
+      TotalNewpledgesCampaignLastWeek
     }
 }`;
