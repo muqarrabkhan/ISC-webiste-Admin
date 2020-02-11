@@ -264,7 +264,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   {/* 1st Card of Last Week Views and of Compaigns */}
-                  <div className=" is-flex  mrg-left-20">
+                  <div className=" is-flex last-week-wraping-cards mrg-left-20">
                     {cards && cards.length != 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
@@ -279,7 +279,7 @@ const Dashboard = () => {
                     ) : <h1>Loading...</h1>}
                   </div>
                 </div>
-                <div className="">
+                <div className="mrg-top-0">
                   <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
                     nextLabel={<span className="fa fa-chevron-right "> > </span>}
                     breakLabel={". . ."}
