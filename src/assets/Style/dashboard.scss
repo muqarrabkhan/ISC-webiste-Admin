@@ -33,8 +33,11 @@
 .dashboard-responsive-select-opt-wdth{
     width:160px;
 }
+.last-week-wraping-cards{
+    flex-wrap: wrap;
+}
 .last-week-main-dev{
-    min-height:75vh ;
+    min-height:80vh ;
 .dashboard-Lastweek-Campaign-hdr{
 width: 1311px;
     height: 69px;
@@ -42,7 +45,7 @@ width: 1311px;
 
 }
 .Last-week-card-section{
-    width: 289px;
+    width: 288px!important;
     height: 440px;
     box-shadow: 0 0 18px 0 $dashbrd-card-box-shadow;
      border-radius:10px;
