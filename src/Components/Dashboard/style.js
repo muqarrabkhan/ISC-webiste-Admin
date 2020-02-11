@@ -5,7 +5,7 @@ export default ()=>{
                    {`
                      .dash-board-cards{
                          flex:1!important;
-                      }  
+                      } 
 
                    `}
                </style>

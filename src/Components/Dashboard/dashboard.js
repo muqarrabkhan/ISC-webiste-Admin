@@ -16,32 +16,33 @@ const Dashboard = () => {
   const [cards, setCards] = useState([]);
   const [compaignType, setCompaignType] = useState("");
   const [page, setPage] = useState(1);
-
+   const[totalpage, setTotalPage]=useState(1)
   const handlePageClick = (value) => {
     setPage(value.selected + 1);
     allCompagins({
       variables: {
-        limit: 10,
-        page: value.selected+1,
+        limit: 4,
+        page: value.selected + 1,
         CampaignType: compaignType
       }
     })
       .then(res => {
         setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+      setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
       })
   }
 
   useEffect(() => {
     allCompagins({
       variables: {
-        limit: 5,
+        limit: 4,
         page: 1,
         CampaignType: ""
       }
     })
       .then(res => {
         setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-
+        setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
       })
   }, []);
 
@@ -51,13 +52,14 @@ const Dashboard = () => {
         setCompaignType(value);
         allCompagins({
           variables: {
-            limit: 10,
+            limit: 4,
             page: page,
             CampaignType: ""
           }
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
           })
         return;
       }
@@ -66,13 +68,14 @@ const Dashboard = () => {
         setCompaignType(value);
         allCompagins({
           variables: {
-            limit: 10,
+            limit: 4,
             page: page,
             CampaignType: "Support"
           }
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+            setTotalPage(res.data&&res.data.lastWeekCampaignPagination.campaigns )
           })
         return;
       }
@@ -81,13 +84,14 @@ const Dashboard = () => {
         setCompaignType(value);
         allCompagins({
           variables: {
-            limit: 10,
+            limit: 4,
             page: page,
             CampaignType: "Pledege"
           }
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+            setTotalPage( res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
           })
         return;
       }
@@ -95,13 +99,14 @@ const Dashboard = () => {
         setCompaignType(value);
         allCompagins({
           variables: {
-            limit: 10,
+            limit: 4,
             page: page,
             CampaignType: "Petition"
           }
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+            setTotalPage( res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
           })
         return;
       }
@@ -258,9 +263,9 @@ const Dashboard = () => {
                     </div>
                   </div>
                   {/* 1st Card of Last Week Views and of Compaigns */}
-                  {cards && cards.length != 0 ? cards.map((single, index) =>
-                    <div className="is-flex has-margin-left-30">
-                      <div className="is-flex Last-week-cards-main-dev">
+                  <div className=" is-flex  mrg-left-20">
+                    {cards && cards.length != 0 ? cards.map((single, index) =>
+                      <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
                           <img src={Image1} alt="" />
                           <div className="mrg-top-10  text-center" >
@@ -270,15 +275,15 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                    </div>) : <Loader />}
-
+                    ) : <Loader />}
+                  </div>
                 </div>
-                <div className="has-margin-top-40">
+                <div className="">
                   <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
                     nextLabel={<span className="fa fa-chevron-right "> > </span>}
                     breakLabel={". . ."}
                     breakClassName={"break-me"}
-                    pageCount={5}
+                    pageCount={totalpage}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={handlePageClick}
