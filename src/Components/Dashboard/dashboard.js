@@ -16,7 +16,8 @@ const Dashboard = () => {
   const [cards, setCards] = useState([]);
   const [compaignType, setCompaignType] = useState("");
   const [page, setPage] = useState(1);
-   const[totalpage, setTotalPage]=useState(1)
+  const [totalpage, setTotalPage]=useState(1)
+  
   const handlePageClick = (value) => {
     setPage(value.selected + 1);
     allCompagins({
