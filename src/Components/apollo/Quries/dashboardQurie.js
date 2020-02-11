@@ -1,11 +1,20 @@
 import gql from 'graphql-tag';
 
-export const ADMIN_DASHBOARD= gql`
+export const ADMIN_DASHBOARD=gql`
 { 
-    admins{
-        Id
-        Email
-        
+adminDashboard
+    {   
+      TotalSupportToday
+      TotalSupportLastWeek
+      TotalNewCampaignToday
+      TotalNewCampaignLastWeek
+      TotalNewUsersToday
+      TotalNewUsersLastWeek
+      TotalNewSupportCampaignToday
+      TotalNewSupportCampaignLastWeek
+      TotalNewpetitionsCampaignToday
+      TotalNewpetitionsCampaignLastWeek
+      TotalNewpledgesCampaignToday
+      TotalNewpledgesCampaignLastWeek
     }
-}
-`;
+}`;
