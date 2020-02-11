@@ -21,7 +21,7 @@ const Dashboard = () => {
     setPage(value.selected + 1);
     allCompagins({
       variables: {
-        limit: 4,
+        limit:4,
         page: value.selected + 1,
         CampaignType: compaignType
       }
@@ -59,7 +59,7 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
+            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1])
           })
         return;
       }
@@ -75,7 +75,7 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage(res.data&&res.data.lastWeekCampaignPagination.campaigns )
+            setTotalPage(res && res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [])
           })
         return;
       }
@@ -275,7 +275,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                    ) : <Loader />}
+                    ) : <h1>Loading...</h1>}
                   </div>
                 </div>
                 <div className="">
