@@ -14,27 +14,45 @@ const Dashboard = () => {
   const { loading, data } = useQuery(ADMIN_DASHBOARD);
   const [allCompagins] = useMutation(DASHBOARD_MUTATION);
   const [cards, setCards] = useState([]);
+  const [compaignType, setCompaignType] = useState("");
+  const [page, setPage] = useState(1);
+
+  const handlePageClick = (value) => {
+    setPage(value.selected + 1);
+    allCompagins({
+      variables: {
+        limit: 10,
+        page: value.selected+1,
+        CampaignType: compaignType
+      }
+    })
+      .then(res => {
+        setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+      })
+  }
 
   useEffect(() => {
     allCompagins({
       variables: {
-        limit: 10,
+        limit: 5,
         page: 1,
         CampaignType: ""
       }
     })
       .then(res => {
         setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+
       })
   }, []);
 
   const typeHandler = (value) => {
     switch (value) {
-      case "":
+      case "": {
+        setCompaignType(value);
         allCompagins({
           variables: {
             limit: 10,
-            page: 1,
+            page: page,
             CampaignType: ""
           }
         })
@@ -42,12 +60,14 @@ const Dashboard = () => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
           })
         return;
+      }
 
-      case "Support":
+      case "Support": {
+        setCompaignType(value);
         allCompagins({
           variables: {
             limit: 10,
-            page: 1,
+            page: page,
             CampaignType: "Support"
           }
         })
@@ -55,12 +75,14 @@ const Dashboard = () => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
           })
         return;
+      }
 
-      case "Pledege":
+      case "Pledege": {
+        setCompaignType(value);
         allCompagins({
           variables: {
             limit: 10,
-            page: 1,
+            page: page,
             CampaignType: "Pledege"
           }
         })
@@ -68,19 +90,21 @@ const Dashboard = () => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
           })
         return;
-
-      case "Petition":
+      }
+      case "Petition": {
+        setCompaignType(value);
         allCompagins({
           variables: {
             limit: 10,
-            page: 1,
+            page: page,
             CampaignType: "Petition"
           }
         })
           .then(res => {
-              setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
+            setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
           })
         return;
+      }
     }
   }
 
@@ -240,7 +264,7 @@ const Dashboard = () => {
                         <div className="Last-week-card-section mrg-top-50">
                           <img src={Image1} alt="" />
                           <div className="mrg-top-10  text-center" >
-                            <h4 className="fnt-size-15 fnt-poppins">Update Profile Picture</h4>
+                            <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
                             <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.Name}</p>
                             <button className="Save-btn-of-form mrg-top-20 fnt-poppins">{single.CampaignType}</button>
                           </div>
@@ -257,7 +281,7 @@ const Dashboard = () => {
                     pageCount={5}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
-                    onPageChange={5}
+                    onPageChange={handlePageClick}
                     containerClassName={"digit-icons main"}
                     subContainerClassName={"container column"}
                     activeClassName={"p-one"} />
