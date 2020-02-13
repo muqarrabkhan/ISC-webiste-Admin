@@ -18,6 +18,7 @@ const AddAdministrator = (props) => {
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
     const [btnText, setBtnText] = useState("Save");
+    // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
     const [data] = useMutation(CREATE_ADMIN);
     let uid = uuid();
     // console.log("uuid",uid.substr(uid.length - 8));
