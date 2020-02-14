@@ -2,8 +2,7 @@ import gql from 'graphql-tag';
 
 export const ADMIN_DASHBOARD=gql`
 {
-  TotalNewUsersToday {
-    
+  
     TotalSupportToday
     TotalSupportLastWeek
     TotalNewCampaignToday
@@ -16,11 +15,6 @@ export const ADMIN_DASHBOARD=gql`
     TotalNewpetitionsCampaignLastWeek
     TotalNewpledgesCampaignToday
     TotalNewpledgesCampaignLastWeek
-  }
-  TotalSupportToday
-  TotalSupportLastWeek
-  TotalNewCampaignToday{
-    TotalNewCampaignToday
-  }
+  
 }
 `;
