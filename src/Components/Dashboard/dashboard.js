@@ -18,7 +18,7 @@ const Dashboard = () => {
   const [compaignType, setCompaignType] = useState("");
   const [page, setPage] = useState(1);
   const [totalpage, setTotalPage]=useState(1)
-  
+  // console
   console.log(data);
   
   const handlePageClick = (value) => {
