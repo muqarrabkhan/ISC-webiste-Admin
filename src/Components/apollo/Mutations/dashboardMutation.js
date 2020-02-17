@@ -23,6 +23,7 @@ export const DASHBOARD_MUTATION = gql`
         Image
         Overlay
       }
+      totalPages
     }
   }
   `;
