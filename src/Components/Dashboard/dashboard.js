@@ -18,8 +18,7 @@ const Dashboard = () => {
   const [compaignType, setCompaignType] = useState("");
   const [page, setPage] = useState(1);
   const [totalpage, setTotalPage]=useState(1)
-  // console
-  console.log(data);
+
   
   const handlePageClick = (value) => {
     setPage(value.selected + 1);
@@ -84,13 +83,13 @@ const Dashboard = () => {
         return;
       }
 
-      case "Pledege": {
+      case "Pledeges": {
         setCompaignType(value);
         allCompagins({
           variables: {
             limit: 4,
             page: page,
-            CampaignType: "Pledege"
+            CampaignType: "Pledeges"
           }
         })
           .then(res => {
@@ -262,7 +261,7 @@ const Dashboard = () => {
                         <option value="">All</option>
                         <option value="Support">Support</option>
                         <option value="Petition">Petitions</option>
-                        <option value="Pledege">Pledges</option>
+                        <option value="Pledeges">Pledges</option>
                       </select>
                     </div>
                   </div>
