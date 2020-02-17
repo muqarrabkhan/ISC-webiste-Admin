@@ -7,6 +7,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
+import Image from '../../assets/Images/datashow.png'
 
 
 const Dashboard = () => {
@@ -78,18 +79,19 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage(res && res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [])
+            setTotalPage( res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
           })
         return;
       }
 
-      case "Pledeges": {
+
+      case "Pledge": {
         setCompaignType(value);
         allCompagins({
           variables: {
             limit: 4,
             page: page,
-            CampaignType: "Pledeges"
+            CampaignType: "Pledge"
           }
         })
           .then(res => {
@@ -261,7 +263,7 @@ const Dashboard = () => {
                         <option value="">All</option>
                         <option value="Support">Support</option>
                         <option value="Petition">Petitions</option>
-                        <option value="Pledeges">Pledges</option>
+                        <option value="Pledge">Pledges</option>
                       </select>
                     </div>
                   </div>
@@ -274,11 +276,15 @@ const Dashboard = () => {
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
                             <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.Name}</p>
-                            <button className="Save-btn-of-form mrg-top-20 fnt-poppins">{single.CampaignType}</button>
+                            <button className="Save-btn-of-form resonsive-save-butten-cards mrg-top-20 fnt-poppins">{single.CampaignType}</button>
                           </div>
                         </div>
                       </div>
-                    ) : <h1>Loading...</h1>}
+                    ) :
+                    <div className="last-week-card-data-not-show-image is-flex">
+                      <h1 className="fnt-size-25 fnt-weight-600 fnt-poppins">No Campaigns Found</h1>
+                      </div>
+                      }
                   </div>
                 </div>
                 <div className="mrg-top-0">
