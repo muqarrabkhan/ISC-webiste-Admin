@@ -21,6 +21,7 @@ export const DASHBOARD_MUTATION = gql`
         CampaignType
         campaign_needed
         Image
+        Overlay
       }
     }
   }

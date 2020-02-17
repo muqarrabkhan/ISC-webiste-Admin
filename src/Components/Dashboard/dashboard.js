@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Image1 from '../../assets/Images/larki.jpg'
 import { withRouter } from 'react-router-dom'
 import Style from './style'
 import ReactPaginate from "react-paginate";
@@ -7,7 +6,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
-import Image from '../../assets/Images/datashow.png'
+import { overlays, camapignImage } from '../../config'
 
 const Dashboard = () => {
 
@@ -17,21 +16,21 @@ const Dashboard = () => {
   const [cards, setCards] = useState([]);
   const [compaignType, setCompaignType] = useState("");
   const [page, setPage] = useState(1);
-  const [totalpage, setTotalPage]=useState(1)
+  const [totalpage, setTotalPage] = useState(1)
 
-  
+
   const handlePageClick = (value) => {
     setPage(value.selected + 1);
     allCompagins({
       variables: {
-        limit:4,
+        limit: 4,
         page: value.selected + 1,
         CampaignType: compaignType
       }
     })
       .then(res => {
         setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-      setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
+        setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
       })
   }
 
@@ -45,7 +44,7 @@ const Dashboard = () => {
     })
       .then(res => {
         setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-        setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
+        setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
       })
   }, []);
 
@@ -62,7 +61,7 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1])
+            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1]);
           })
         return;
       }
@@ -78,7 +77,7 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage( res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
+            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
           })
         return;
       }
@@ -95,7 +94,7 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage( res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
+            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
           })
         return;
       }
@@ -110,7 +109,7 @@ const Dashboard = () => {
         })
           .then(res => {
             setCards(res && res.data && res.data.lastWeekCampaignPagination.campaigns ? res.data.lastWeekCampaignPagination.campaigns : []);
-            setTotalPage( res.data && res.data.lastWeekCampaignPagination.totalPages? res.data.lastWeekCampaignPagination.totalPages : [1] )
+            setTotalPage(res.data && res.data.lastWeekCampaignPagination.totalPages ? res.data.lastWeekCampaignPagination.totalPages : [1])
           })
         return;
       }
@@ -271,7 +270,7 @@ const Dashboard = () => {
                     {cards && cards.length != 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
-                          <img src={Image1} alt="" />
+                          <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image : (single.Overlay ? overlays + single.Overlay : "")})`, backgroundSize: 'cover', height: '270px' }}></div>
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
                             <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.Name}</p>
@@ -280,10 +279,10 @@ const Dashboard = () => {
                         </div>
                       </div>
                     ) :
-                    <div className="last-week-card-data-not-show-image is-flex">
-                      <h1 className="fnt-size-25 fnt-weight-600 fnt-poppins">No Campaigns Found</h1>
+                      <div className="last-week-card-data-not-show-image is-flex">
+                        <h1 className="fnt-size-25 fnt-weight-600 fnt-poppins">No Campaigns Found</h1>
                       </div>
-                      }
+                    }
                   </div>
                 </div>
                 <div className="mrg-top-0">
