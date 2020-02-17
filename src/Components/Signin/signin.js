@@ -6,16 +6,32 @@ import '../../assets/Style/Common.scss'
 import axios from 'axios';
 import cookie from 'react-cookies'
 import {apiPath} from '../../config'
+import {validateEmail}from '../commonComponents/utils'
 
 const Signin = (props) => {
     let {history} = props;
     const [email, setEmail] = useState("");
+    const [emailValidator, setEmailValidator] = useState(false);
     const [password, setPassword] = useState("");
+    const [passwordValidator, setPasswordValidator] = useState(false);
     const [remember, setRemember] = useState(false);
     const [error, setError] = useState("");
 
     const userAuthentication = e => {
         e.preventDefault();
+        if ( !email || !validateEmail(email) || !password || password.length < 8) {
+           
+            if (!email) {
+                setEmailValidator(true)
+            }
+            if (!validateEmail(email)) {
+                setEmailValidator(true)
+            }
+            if (!password || password.length < 8) {
+                setPasswordValidator(true)
+            }
+        }
+        else{
         let payLoad = {Email: email, Password: password};
         axios.post(apiPath + "/adminLogin", payLoad).then(response => {
             localStorage.setItem("age", remember ? 1296000 : 86400);
@@ -32,6 +48,7 @@ const Signin = (props) => {
                     setError("Email does not exist");
                 }
             });
+        }
     };
     return (    
         <div className="Container-fluid login-background-color">
@@ -44,12 +61,22 @@ const Signin = (props) => {
                 <div className="login-form">
                     <form className="input-form" onSubmit={(event)=>userAuthentication(event)}>
                         <h2 className="Sign-in fnt-poppins">Sign in</h2>
-                        <input className="has-margin-top-60 input-text flirt fnt-poppins" type="email" name="User" placeholder="Email" required
-                            onChange={event=>setEmail(event.target.value)}
+                        <input className="has-margin-top-60 input-text flirt fnt-poppins"  name="User" placeholder="Email" 
+                            onChange={event=>{
+                                setEmailValidator(false);
+                                setEmail(event.target.value)
+                            }}
                         />
-                        <input className="input-text signin-input fnt-poppins" type="password" name="password" placeholder="Password" required
-                            onChange={event=>setPassword(event.target.value)}
+                         {emailValidator ?
+                         <p className="help is-danger required-field-text">{email ? "Invalid email address" : "This field is required"}</p>: <p className="help is-danger required-field-text"></p>}
+                        <input className="input-text signin-input fnt-poppins"  name="password" placeholder="Password" 
+                            onChange={event=>{
+                                setPasswordValidator(false);
+                                setPassword(event.target.value)
+                            }}
                         />
+                          {passwordValidator ?
+                                        <p className="help is-danger required-field-text">{password ? "Password length should be 8 characters" : "This field is required"}</p> : <p className="help is-danger required-field-text"></p>}
                         <div className="custom-control checkbox-sigin-page custom-checkbox signin-checkbox">
                             <input id="checked" className="custom-control-input has-margin-top-5" type="checkbox" 
                             onChange={event=>setRemember(event.target.checked)}
