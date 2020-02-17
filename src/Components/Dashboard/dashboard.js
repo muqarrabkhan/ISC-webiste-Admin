@@ -9,7 +9,6 @@ import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
 import Image from '../../assets/Images/datashow.png'
 
-
 const Dashboard = () => {
 
   // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
