@@ -69,7 +69,7 @@ const Signin = (props) => {
                         />
                          {emailValidator ?
                          <p className="help is-danger required-field-text">{email ? "Invalid email address" : "This field is required"}</p>: <p className="help is-danger required-field-text"></p>}
-                        <input className="input-text signin-input fnt-poppins"  name="password" placeholder="Password" 
+                        <input className="input-text signin-input fnt-poppins"  name="password" type="password" placeholder="Password" 
                             onChange={event=>{
                                 setPasswordValidator(false);
                                 setPassword(event.target.value)
