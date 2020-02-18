@@ -22,6 +22,7 @@ export const DASHBOARD_MUTATION = gql`
         campaign_needed
         Image
         Overlay
+        CategoryId
       }
       totalPages
     }

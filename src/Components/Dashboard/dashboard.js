@@ -273,12 +273,12 @@ const Dashboard = () => {
                           <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image : (single.Overlay ? overlays + single.Overlay : "")})`, backgroundSize: 'cover', height: '270px' }}></div>
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
-                            <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.Name}</p>
+                            <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.CategoryId}</p>
                             <button className="Save-btn-of-form resonsive-save-butten-cards mrg-top-20 fnt-poppins">{single.CampaignType}</button>
                           </div>
                         </div>
                       </div>
-                    ) :
+                    ):
                       <div className="last-week-card-data-not-show-image is-flex">
                         <h1 className="fnt-size-25 fnt-weight-600 fnt-poppins">No Campaigns Found</h1>
                       </div>

@@ -15,6 +15,17 @@ export const ADMIN_DASHBOARD=gql`
     TotalNewpetitionsCampaignLastWeek
     TotalNewpledgesCampaignToday
     TotalNewpledgesCampaignLastWeek
-  
+    
+
 }
+`;
+
+export const DASHBOARD_CATEGORIES=gql`
+{
+    campaignCategories{
+    Name
+    description
+    Status
+    }
+}    
 `;
