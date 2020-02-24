@@ -19,6 +19,7 @@ export default()=>{
                 .appling-flex-btns{
                     display:flex;
                 }
+
             `}
         </style>
     );
