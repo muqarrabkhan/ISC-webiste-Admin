@@ -1,18 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {withRouter} from 'react-router-dom'
+import ReactPaginate from "react-paginate";
+import { withRouter } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks';
+import { VIEWUSERS_MUTATION } from '../../apollo/Mutations/viewUsersMutation'
+const ViewUser = (props) => {
+    let { history } = props;
+    const [page, setPage] = useState(1);
+    const [viewUsers, setViewUsers] = useState([]);
+    const [totalPage, setTotalPage] = useState(1);
+    const [data] = useMutation(VIEWUSERS_MUTATION);
 
-const ViewUser= (props) => {
-    let {history}=props;
+    const handlePageClick = (value) => {
+        setPage(value.selected + 1);
+        data({
+            variables: {
+                limit: 10,
+                page: value.selected + 1
+
+            }
+        })
+            .then(res => {
+                setViewUsers(res && res.data.users && res.data.users.users ? res.data.users.users : []);
+                setTotalPage(res && res.data.users && res.data.users.users.totalPages ? res.data.users.users.totalPages : [1]);
+            })
+    }
+    useEffect(() => {
+        data({
+            variables: {
+                limit: 10,
+                page: 1
+            }
+        }).then(res => {
+
+            setViewUsers(res && res.data.users && res.data.users.users ? res.data.users.users : []);
+            setTotalPage(res && res.data.users && res.data.users.users.totalPages ? res.data.users.users.totalPages : [1]);
+
+
+        })
+    }, []);
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Users</h6>
-                   <button onClick={()=>history.push("/add-user")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                    <button onClick={() => history.push("/add-user")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -51,22 +86,23 @@ const ViewUser= (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
-                                    <td>sub view</td>
-                                    <td>
-                                        <div className="is-flex">
-                                            <img onClick={()=>history.push("/edit-user")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <span onClick={()=>history.push("/user-information-activities")} className="cursor-pointer view-btn-of-table">View Details</span>
-                                            <span className="view-btn-of-table">Affiliate User</span>
-                                        </div>
-                                    </td>
-                                </tr>
-
-
+                                {viewUsers && viewUsers.length != 0 ? viewUsers.map(single =>
+                                    <tr className="table-row-data-of-body fnt-poppins">
+                                        <td>{single.Name}</td>
+                                        <td>{single.Email}</td>
+                                        <td>{single.Status}</td>
+                                        <td>{single.is_affiliated}</td>
+                                        <td>
+                                            <div className="is-flex">
+                                                <img onClick={() => history.push("/edit-user")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                <span onClick={() => history.push("/user-information-activities")} className="cursor-pointer view-btn-of-table">View Details</span>
+                                                <span className="view-btn-of-table">Affiliate User</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                                    : ""}
                                 <tr className="table-footer">
                                     <td>Total</td>
                                     <td></td>
@@ -76,6 +112,19 @@ const ViewUser= (props) => {
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div className="mrg-top-0">
+                        <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                            nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                            breakLabel={". . ."}
+                            breakClassName={"break-me"}
+                            pageCount={totalPage}
+                            marginPagesDisplayed={1}
+                            pageRangeDisplayed={1}
+                            onPageChange={handlePageClick}
+                            containerClassName={"digit-icons main"}
+                            subContainerClassName={"container column"}
+                            activeClassName={"p-one"} />
                     </div>
 
 

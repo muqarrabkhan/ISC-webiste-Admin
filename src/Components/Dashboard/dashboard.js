@@ -6,7 +6,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
-import { overlays, camapignImage } from '../../config'
+import { overlays, camapignImage } from '../../Config'
 
 const Dashboard = () => {
 
@@ -38,7 +38,7 @@ const Dashboard = () => {
     allCompagins({
       variables: {
         limit: 4,
-        page: 1,
+        page: page,
         CampaignType: ""
       }
     })
@@ -267,7 +267,7 @@ const Dashboard = () => {
                   </div>
                   {/* 1st Card of Last Week Views and of Compaigns */}
                   <div className=" is-flex last-week-wraping-cards mrg-left-20">
-                    {cards && cards.length != 0 ? cards.map((single, index) =>
+                    {cards && cards.length !== 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
                           <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image : (single.Overlay ? overlays + single.Overlay : "")})`, backgroundSize: 'cover', height: '270px' }}></div>
