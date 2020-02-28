@@ -3,9 +3,13 @@ import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
 import {withRouter} from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks'
+import { PAGES } from '../../apollo/Quries/pagesQurie'
 
 const ViewPages= (props) => {
     let{history}=props;
+    const { loading, data } = useQuery(PAGES);
+
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -33,9 +37,10 @@ const ViewPages= (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
+                            {data && data.length!==0 && data.getwebpages.map((single,index)=>
                                 <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
+                                    <td>{single.pageTitle}</td>
+                                    <td>{single.slug}</td>
                                     <td>
                                         <div className="is-flex">
                                            <img onClick={()=>history.push("/edit-pages")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
@@ -43,11 +48,7 @@ const ViewPages= (props) => {
                                         </div>
                                     </td>
                                 </tr>
-                                <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td>Number</td>
-                                </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
