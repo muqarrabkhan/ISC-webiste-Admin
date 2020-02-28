@@ -1,18 +1,56 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks';
+import { NEWSLETTERS } from '../../apollo/Mutations/newsletterMutation'
+import ReactPaginate from "react-paginate";
 
-const ViewNewsletter= (props) => {
-    let{history}=props;
+const ViewNewsletter = (props) => {
+
+    let { history } = props;
+    const [newsletter] = useMutation(NEWSLETTERS);
+    const [data, setData] = useState([]);
+    const [totalNewsletter, setTotalNewsletter] = useState("");
+    const [totalPages, setTotalPages] = useState(1);
+    const [page, setPage] = useState(1);
+
+    const handlePageClick = (value) => {
+        setPage(value.selected + 1);
+        newsletter({
+            variables: {
+                limit: 10,
+                page: value.selected + 1
+            }
+        })
+            .then(res => {
+                setData(res && res.data.newsletters && res.data.newsletters.newsletters ? res.data.newsletters.newsletters : [])
+                setTotalPages(res && res.data.newsletters.totalPages ? res.data.newsletters.totalPages : [1])
+                setTotalNewsletter(res && res.data.newsletters && res.data.newsletters.totalnewsletters);
+            })
+    }
+
+    useEffect(() => {
+        newsletter({
+            variables: {
+                limit: 10,
+                page: 1
+            }
+        }).then(res => {
+            setData(res && res.data.newsletters && res.data.newsletters.newsletters ? res.data.newsletters.newsletters : [])
+            setTotalPages(res && res.data.newsletters.totalPages ? res.data.newsletters.totalPages : [1])
+            setTotalNewsletter(res && res.data.newsletters && res.data.newsletters.totalnewsletters);
+        })
+    }, []);
+
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Newsletters</h6>
-                  <button onClick={()=>history.push("/add-newsletter")}className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                    <button onClick={() => history.push("/add-newsletter")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -34,30 +72,42 @@ const ViewNewsletter= (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
-                                    <td>sub view</td>
-                                    <td>
-                                        <div className="applying-flex">
-                        <img onClick={()=>history.push("/edit-newsletter")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo}/>
-                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo}/>   
-                                        </div>
-                                    </td>
-                                </tr>
+                                {data && data.length !== 0 && data.map((single, index) =>
+                                    <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                        <td>{single.name}</td>
+                                        <td>03-18-2019</td>
+                                        <td>09-03-2019</td>
+                                        <td>{single.datetime}</td>
+                                        <td>
+                                            <div className="applying-flex">
+                                                <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
                                 <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Number</td>
+                                    <td colSpan={4}>Total</td>
+                                    <td>{totalNewsletter}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div className="mrg-top-0">
+                        <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                            nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                            breakLabel={". . ."}
+                            breakClassName={"break-me"}
+                            pageCount={totalPages}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageClick}
+                            containerClassName={"digit-icons main"}
+                            subContainerClassName={"container column"}
+                            activeClassName={"p-one"} />
+                    </div>
                 </div>
-            <Style/>
+                <Style />
             </div>
         </>
     );
