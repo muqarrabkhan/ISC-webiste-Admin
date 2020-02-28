@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { NEWSLETTERS } from '../../apollo/Mutations/newsletterMutation'
 import ReactPaginate from "react-paginate";
+import Loader from '../../commonComponents/Loader/loader'
 
 const ViewNewsletter = (props) => {
 
@@ -35,7 +36,7 @@ const ViewNewsletter = (props) => {
         newsletter({
             variables: {
                 limit: 10,
-                page: 1
+                page: page + 1
             }
         }).then(res => {
             setData(res && res.data.newsletters && res.data.newsletters.newsletters ? res.data.newsletters.newsletters : [])
@@ -46,69 +47,71 @@ const ViewNewsletter = (props) => {
 
     return (
         <>
-            <div className="container-fluid Table-for-administrator-main-div">
-                {/* header */}
-                <div className="header-of-viewAdministrator">
-                    <h6 className="heading6-of-header fnt-poppins">Newsletters</h6>
-                    <button onClick={() => history.push("/add-newsletter")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
-                </div>
-                {/* Table of Administrator  */}
-                <div className="Table-of-administrator">
-                    <div className="background-of-table">
+            {data && data.length !== 0 ?
+                <div className="container-fluid Table-for-administrator-main-div">
+                    {/* header */}
+                    <div className="header-of-viewAdministrator">
+                        <h6 className="heading6-of-header fnt-poppins">Newsletters</h6>
+                        <button onClick={() => history.push("/add-newsletter")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                     </div>
-                    <div className="Table-Header">
-                        <h6 className="fnt-poppins">All Newsletters Record</h6>
-                    </div>
-                    {/* Table-Title */}
-                    <div className="container-fluid Table-title">
-                        <table className="main-table-heading">
-                            <thead className="heading-of-table background-color-head">
-                                <tr className="table-row-of-head fnt-poppins">
-                                    <th>Name</th>
-                                    <th>Template Name</th>
-                                    <th>Status</th>
-                                    <th>Scheduled Date And Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="table-of-data">
-                                {data && data.length !== 0 && data.map((single, index) =>
-                                    <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                        <td>{single.name}</td>
-                                        <td>03-18-2019</td>
-                                        <td>09-03-2019</td>
-                                        <td>{single.datetime}</td>
-                                        <td>
-                                            <div className="applying-flex">
-                                                <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            </div>
-                                        </td>
+                    {/* Table of Administrator  */}
+                    <div className="Table-of-administrator">
+                        <div className="background-of-table">
+                        </div>
+                        <div className="Table-Header">
+                            <h6 className="fnt-poppins">All Newsletters Record</h6>
+                        </div>
+                        {/* Table-Title */}
+                        <div className="container-fluid Table-title">
+                            <table className="main-table-heading">
+                                <thead className="heading-of-table background-color-head">
+                                    <tr className="table-row-of-head fnt-poppins">
+                                        <th>Name</th>
+                                        <th>Template Name</th>
+                                        <th>Status</th>
+                                        <th>Scheduled Date And Time</th>
+                                        <th>Actions</th>
                                     </tr>
-                                )}
-                                <tr className="table-footer">
-                                    <td colSpan={4}>Total</td>
-                                    <td>{totalNewsletter}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="table-of-data">
+                                    {data && data.length !== 0 && data.map((single, index) =>
+                                        <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                            <td>{single.name}</td>
+                                            <td>03-18-2019</td>
+                                            <td>09-03-2019</td>
+                                            <td>{single.datetime}</td>
+                                            <td>
+                                                <div className="applying-flex">
+                                                    <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                    <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )}
+                                    <tr className="table-footer">
+                                        <td colSpan={4}>Total</td>
+                                        <td>{totalNewsletter}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="mrg-top-0">
+                            <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                                nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                                breakLabel={". . ."}
+                                breakClassName={"break-me"}
+                                pageCount={totalPages}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageClick}
+                                containerClassName={"digit-icons main"}
+                                subContainerClassName={"container column"}
+                                activeClassName={"p-one"} />
+                        </div>
                     </div>
-                    <div className="mrg-top-0">
-                        <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
-                            nextLabel={<span className="fa fa-chevron-right "> > </span>}
-                            breakLabel={". . ."}
-                            breakClassName={"break-me"}
-                            pageCount={totalPages}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={handlePageClick}
-                            containerClassName={"digit-icons main"}
-                            subContainerClassName={"container column"}
-                            activeClassName={"p-one"} />
-                    </div>
+                    <Style />
                 </div>
-                <Style />
-            </div>
+                : <Loader />}
         </>
     );
 }

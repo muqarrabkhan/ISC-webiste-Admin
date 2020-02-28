@@ -4,6 +4,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import { SUBSCRIPTION } from '../../apollo/Quries/subscriptionQurie'
+import Loader from '../../commonComponents/Loader/loader'
 
 const ViewSubscription = (props) => {
     let { history } = props;
@@ -11,6 +12,7 @@ const ViewSubscription = (props) => {
 
     return (
         <>
+        {!loading ?
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
@@ -41,9 +43,9 @@ const ViewSubscription = (props) => {
                             <tbody className="table-of-data">
                                 {data && data.length!==0 && data.Subscriptions.map((single,index)=>
                                 <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                    <td>{single.name}</td>
-                                    <td>{single.amount}</td>
-                                    <td>{single.discount_precentage}</td>
+                                    <td>{single.name ? single.name: " - "}</td>
+                                    <td>{single.amount ? single.amount : " 0 "}</td>
+                                    <td>{single.discount_precentage ? single.discount_precentage :"-"}</td>
                                     <td>{single.discount_name}</td>
                                     <td>sub view</td>
                                     <td>sub view</td>
@@ -61,6 +63,7 @@ const ViewSubscription = (props) => {
                 </div>
                 <Style />
             </div>
+        :<Loader/>}
         </>
     );
 

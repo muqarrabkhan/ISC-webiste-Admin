@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CATEGORIES } from '../../apollo/Mutations/categoriesMutation'
 import ReactPaginate from "react-paginate";
+import Loader from '../../commonComponents/Loader/loader'
 
 const ViewCategories = (props) => {
     let { history } = props;
@@ -31,7 +32,6 @@ const ViewCategories = (props) => {
             })
     }
 
-
     useEffect(() => {
         categories({
             variables: {
@@ -47,6 +47,7 @@ const ViewCategories = (props) => {
 
     return (
         <>
+            {data && data.length!==0 ? 
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
@@ -106,6 +107,7 @@ const ViewCategories = (props) => {
                 </div>
                 <Style />
             </div>
+            :<Loader/>}
         </>
     );
 }
