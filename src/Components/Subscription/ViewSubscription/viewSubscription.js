@@ -2,16 +2,22 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Style from './style'
 import { withRouter } from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks'
+import { SUBSCRIPTION } from '../../apollo/Quries/subscriptionQurie'
+import Loader from '../../commonComponents/Loader/loader'
 
-const ViewSubscription= (props) => {
-    let{history}=props;
+const ViewSubscription = (props) => {
+    let { history } = props;
+    const { loading, data } = useQuery(SUBSCRIPTION);
+
     return (
         <>
+        {!loading ?
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Subscription</h6>
-                    <button onClick={()=>history.push("add-subscription-record")}className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                    <button onClick={() => history.push("add-subscription-record")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -35,35 +41,29 @@ const ViewSubscription= (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
-                                    <td>sub view</td>
+                                {data && data.length!==0 && data.Subscriptions.map((single,index)=>
+                                <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                    <td>{single.name ? single.name: " - "}</td>
+                                    <td>{single.amount ? single.amount : " 0 "}</td>
+                                    <td>{single.discount_precentage ? single.discount_precentage :"-"}</td>
+                                    <td>{single.discount_name}</td>
                                     <td>sub view</td>
                                     <td>sub view</td>
                                     <td>
                                         <div className="is-flex">
-                                           <img onClick={()=>history.push("/edit-subscription")} className="cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
-                                            <span onClick={()=>history.push("/subscription-detail-record")} className="cursor-pointer view-btn-of-table view-subscription-btn">View Details</span>
+                                            <img onClick={() => history.push("/edit-subscription")} className="cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
+                                            <span onClick={() => history.push("/subscription-detail-record")} className="cursor-pointer view-btn-of-table view-subscription-btn">View Details</span>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Number</td>
-                                </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <Style />
             </div>
+        :<Loader/>}
         </>
     );
 

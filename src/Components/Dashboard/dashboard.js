@@ -8,6 +8,7 @@ import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
 import { overlays, camapignImage } from '../../Config'
 
+
 const Dashboard = () => {
 
   // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
@@ -270,7 +271,8 @@ const Dashboard = () => {
                     {cards && cards.length !== 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
-                          <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image : (single.Overlay ? overlays + single.Overlay : "")})`, backgroundSize: 'cover', height: '270px' }}></div>
+                          <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image : (single.Overlay ? overlays + single.Overlay : "")})`, backgroundSize: 'cover', height: '270px' }}>
+                          </div>
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
                             <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.CategoryId}</p>
@@ -278,7 +280,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                    ):
+                    ) :
                       <div className="last-week-card-data-not-show-image is-flex">
                         <h1 className="fnt-size-25 fnt-weight-600 fnt-poppins">No Campaigns Found</h1>
                       </div>

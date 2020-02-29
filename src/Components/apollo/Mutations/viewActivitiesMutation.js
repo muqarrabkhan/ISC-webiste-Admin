@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-export const USERACTIVITY_MUTATION = gql`
+export const VIEW_MUTATION = gql`
 mutation userActivity(
     $page:Int!,
     $limit:Int!
@@ -17,8 +17,15 @@ mutation userActivity(
         UserId
         CampaignId
         CreatedDate
+    
     }
-totalPages 
+    totaluserActivity
+    totalPages
+    currentPage
+    error
+    
     }
   }
-`
+`;
+
+
