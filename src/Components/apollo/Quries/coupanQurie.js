@@ -6,6 +6,10 @@ export const COUPANS =gql `
               Coupon_code
       Discount_percentage
       Status_coupon
+      userName {
+        Name
+       
+      }
           
     }
 }

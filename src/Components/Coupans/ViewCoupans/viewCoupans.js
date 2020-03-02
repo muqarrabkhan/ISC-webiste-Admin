@@ -4,12 +4,14 @@ import Style from './style'
 import {withRouter} from 'react-router-dom'
 import {useQuery} from '@apollo/react-hooks'
 import {COUPANS} from '../../apollo/Quries/coupanQurie'
+import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 
 const ViewCoupan=(props) => {
     let {history}=props;
-    const {loading , data}=useQuery(COUPANS);
-    
+    const {Loader , data}=useQuery(COUPANS);
+  
+   
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -55,8 +57,8 @@ const ViewCoupan=(props) => {
                                 <tr key={index} className="table-row-data-of-body fnt-poppins">
                                     <td>{single.Coupon_code ? single.Coupon_code : "-"}</td>
                                     <td>{single.Discount_percentage ? single.Discount_percentage :"-"}</td>
+                                    <td>{single.userName.Name ? single.userName.Name : "-"}</td>
                                     <td>{single.Status_coupon ? single.Status_coupon : "-"}</td>
-                                    <td>sub view</td>
                                     <td>sub view</td>
                                     <td>sub view</td>
                                     <td>
@@ -68,6 +70,19 @@ const ViewCoupan=(props) => {
                         </table>
                     </div>
                 </div>
+                <div className="has-margin-top-40">
+                            <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                                nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                                breakLabel={". . ."}
+                                breakClassName={"break-me"}
+                                pageCount={5}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={3}
+                                onPageChange={5}
+                                containerClassName={"digit-icons main"}
+                                subContainerClassName={"container column"}
+                                activeClassName={"p-one"} />
+                        </div>
                 <Style />
             </div>
         </>
