@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { NEWSLETTERS } from '../../apollo/Mutations/newsletterMutation'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
+import {standardDate} from '../../functions/index'
 
 const ViewNewsletter = (props) => {
 
@@ -77,9 +78,9 @@ const ViewNewsletter = (props) => {
                                     {data && data.length !== 0 && data.map((single, index) =>
                                         <tr key={index} className="table-row-data-of-body fnt-poppins">
                                             <td>{single.name}</td>
-                                            <td>03-18-2019</td>
-                                            <td>09-03-2019</td>
-                                            <td>{single.datetime}</td>
+                                            <td>{single.Template.Title}</td>
+                                            <td>{single.status}</td>
+                                            <td>{standardDate(single.datetime).standardDate}</td>
                                             <td>
                                                 <div className="applying-flex">
                                                     <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

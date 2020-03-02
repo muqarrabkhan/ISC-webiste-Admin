@@ -17,6 +17,7 @@ mutation userActivity(
         UserId
         CampaignId
         CreatedDate
+        
     
     }
     totaluserActivity

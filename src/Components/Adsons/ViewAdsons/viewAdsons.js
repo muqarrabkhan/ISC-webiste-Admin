@@ -2,17 +2,23 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks'
+import { ADSONS } from '../../apollo/Quries/adsonsQurie'
+import Loader from '../../commonComponents/Loader/loader'
 
-const viewAdson=(props) => {
-    let{history}=props;
+const ViewAdson = (props) => {
+    let { history } = props;
+    const { loading, data } = useQuery(ADSONS);
+
     return (
         <>
+        {!loading ? 
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Adson</h6>
-                    <button onClick={()=> history.push("/add-adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                    <button onClick={() => history.push("/add-adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -42,35 +48,30 @@ const viewAdson=(props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
-                                    <td>sub view</td>
-                                    <td>sub view</td>
-                                    <td>
-                                        <div className="appling-flex-btns">
-                                            <img onClick={()=>history.push("/edit-adson")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                            <span onClick={()=>history.push("/view-details")} className="cursor-pointer view-btn-of-table">View Details</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Number</td>
-                                </tr>
+                                {data && data.length !== 0 && data.getAdsons.map((single, index) =>
+                                    <tr className="table-row-data-of-body fnt-poppins">
+                                        <td>{single.type ? single.type : "-"}</td>
+                                        <td>{single.place_on ? single.place_on : "-"}</td>
+                                        <td>09-03-2019</td>
+                                        <td>sub view</td>
+                                        <td>{single.status ? single.status : "-"}</td>
+                                        <td>
+                                            <div className="appling-flex-btns">
+                                                <img onClick={() => history.push("/edit-adson")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                <span onClick={() => history.push("/view-details")} className="cursor-pointer view-btn-of-table">View Details</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <Style />
             </div>
+            :<Loader/>}
         </>
     );
 }
-export default withRouter(viewAdson)
+export default withRouter(ViewAdson)

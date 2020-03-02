@@ -36,7 +36,7 @@ const ViewUser = (props) => {
         allUsers({
             variables: {
                 page: 1,
-                limit: 5
+                limit: 10
             }
         }
         ).then(response => {
@@ -94,10 +94,10 @@ const ViewUser = (props) => {
                                 <tbody className="table-of-data">
                                     {users && users.length !== 0 && users.map((single, index) =>
                                         <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                            <td>{single.Name}</td>
-                                            <td>{single.Email}</td>
-                                            <td>{single.Status}</td>
-                                            <td>{single.is_affiliated}</td>
+                                            <td>{single.Name ? single.Name :"-"}</td>
+                                            <td>{single.Email ? single.Email :"-"}</td>
+                                            <td>{single.Status ? single.Status :"-"}</td>
+                                            <td>{single.is_affiliated ? single.is_affiliated: "-"}</td>
                                             <td>
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-user")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

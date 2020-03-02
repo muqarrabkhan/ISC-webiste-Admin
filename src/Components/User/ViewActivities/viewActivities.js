@@ -5,13 +5,14 @@ import { camapignImage, campaignLogo_baseurl } from '../../../config'
 import { useMutation } from '@apollo/react-hooks';
 import { VIEW_MUTATION } from '../../apollo/Mutations/viewActivitiesMutation'
 import Loader from '../../commonComponents/Loader/loader'
+import {standardDate} from '../../functions/index'
 
 const ViewActivities = () => {
     const [page, setPage] = useState(1);
     const [userActivity, setUserActivity] = useState([]);
     const [totalPage, setTotalPage] = useState(1);
     const [data] = useMutation(VIEW_MUTATION);
-    const [totalCustomers, setTotalCustomers] = useState([]);
+    const [totalCustomers , setTotalCustomers] = useState("");
     const handlePageClick = (value) => {
         setPage(value.selected + 1);
         data({
@@ -23,7 +24,7 @@ const ViewActivities = () => {
             .then(res => {
                 setUserActivity(res && res.data.userActivity && res.data.userActivity.userActivity ? res.data.userActivity.userActivity : []);
                 setTotalPage(res && res.data.userActivity.totalPages ? res.data.userActivity.totalPages : [1])
-                setTotalCustomers(res && res.data.users && res.data.users.totalusers);
+                setTotalCustomers(res && res.data.userActivity && res.data.userActivity.totaluserActivity);
             })
     }
     useEffect(() => {
@@ -36,7 +37,9 @@ const ViewActivities = () => {
 
             setUserActivity(res && res.data.userActivity && res.data.userActivity.userActivity ? res.data.userActivity.userActivity : []);
             setTotalPage(res && res.data.userActivity.totalPages ? res.data.userActivity.totalPages : [1])
-            setTotalCustomers(res && res.data.users && res.data.users.totalusers);
+            setTotalCustomers(res && res.data.userActivity && res.data.userActivity.totaluserActivity);
+            console.log(res && res.data.userActivity && res.data.userActivity.totaluserActivity);
+            
         })
     }, []);
     return (
@@ -70,17 +73,23 @@ const ViewActivities = () => {
                                 <tbody className="table-of-data">
                                     {userActivity && userActivity.length != 0 ? userActivity.map(single =>
                                         <tr className="table-row-data-of-body fnt-poppins">
-                                            <td><img src={single.Image ? camapignImage + single.Image : (single.campaignLogo_baseurl ? campaignLogo_baseurl + single.campaignLogo_baseurl : "")} alt="" /></td>
+                                            <td className="has-margin-top-15" style={{
+                                                backgroundImage: `url(${single.Image ? camapignImage + single.Image : ""})`,
+                                                backgroundSize: 'contain',
+                                                height: '143px',
+                                                backgroundRepeat: 'no-repeat'
+                                            }}></td>
+                                            {/* <td><img src={single.Image ? camapignImage + single.Image : (single.campaignLogo_baseurl ? campaignLogo_baseurl + single.Image : "")} alt="" /></td> */}
                                             <td>{single.UserId}</td>
                                             <td>{single.CampaignId}</td>
-                                            <td>{single.CreatedDate}</td>
-                                            <td>sub view</td>
+                                            <td>{standardDate(single.CreatedDate).standardDate}</td>
+                                            <td>{standardDate(single.CreatedDate).time}</td>
                                             <td>sub view</td>
                                         </tr>
                                     ) : ""}
                                     <tr className="table-footer">
                                         <td colSpan={5}>Total</td>
-                                        <td>{totalCustomers}</td>
+                                        <td>{totalCustomers}</td> 
                                     </tr>
                                 </tbody>
                             </table>
@@ -100,7 +109,7 @@ const ViewActivities = () => {
                         </div>
                     </div>
                 </div>
-               : <Loader />}
+                : <Loader />}
         </>
     );
 }

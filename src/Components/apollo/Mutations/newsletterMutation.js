@@ -7,7 +7,12 @@ mutation newsletters($page:Int,$limit:Int)
         {
             newsletters {
                 name
-                datetime 
+                datetime
+                status 
+                Template{
+                    Title
+                    Email
+                  }
               }
               totalPages
               currentPage

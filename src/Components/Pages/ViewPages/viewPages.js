@@ -42,8 +42,8 @@ const ViewPages = (props) => {
                                 <tbody className="table-of-data">
                                     {data && data.length !== 0 && data.getwebpages.map((single, index) =>
                                         <tr className="table-row-data-of-body fnt-poppins">
-                                            <td>{single.pageTitle}</td>
-                                            <td>{single.slug}</td>
+                                            <td>{single.pageTitle ? single.pageTitle : "-"}</td>
+                                            <td>{single.slug ? single.slug : "-"}</td>
                                             <td>
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-pages")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

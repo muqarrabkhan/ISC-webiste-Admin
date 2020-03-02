@@ -1,5 +1,4 @@
 import crypto from 'crypto';
-import arraySort from 'array-sort';
 
 let key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456',
     iv = '1234567890Abcdef';
@@ -31,8 +30,7 @@ export const getParams = function (url) {
 
 
 export const standardDate = (dat) => {
-    const date = new Date(dat).toLocaleString("en-US", {timeZone: "America/New_York"});
-    const newDate = new Date(date);
+    const newDate = new Date(dat);
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let time = formatAMPM(newDate);
@@ -126,76 +124,6 @@ export const decryptObj = (obj) => {
     return obj;
 };
 
-export const sortTypeSwitch = (data, type, alreadyType) => {
-    switch (type) {
-        case "title":
-            if (alreadyType && alreadyType === 'titleInverse') {
-                return {data: arraySort(data, 'title'), type: "title"};
-            }
-            else {
-                return {data: arraySort(data, 'title', {reverse: true}), type: "titleInverse"};
-            }
-        case "titleInverse":
-            return {data: arraySort(data, 'title', {reverse: true}), type: "titleInverse"};
-        case "created_at":
-            if (alreadyType && alreadyType === "created_atInverse") {
-                return {data: arraySort(data, 'created_at'), type: "created_at"};
-            }
-            else {
-                return {data: arraySort(data, 'created_at', {reverse: true}), type: "created_atInverse"};
-            }
-        case "created_atInverse":
-            return {data: arraySort(data, 'created_at', {reverse: true}), type: "created_atInverse"};
-        case "updated_at":
-            if (alreadyType && alreadyType === "updated_atInverse") {
-                return {data: arraySort(data, 'updated_at'), type: "updated_at"};
-            }
-            else {
-                return {data: arraySort(data, 'updated_at', {reverse: true}), type: "updated_atInverse"};
-            }
-        case "updated_atInverse":
-            return {data: arraySort(data, 'updated_at', {reverse: true}), type: "updated_atInverse"};
-        case "status":
-            if (alreadyType && alreadyType === "statusInverse") {
-                return {data: arraySort(data, 'status'), type: "status"};
-            }
-            else {
-                return {data: arraySort(data, 'status', {reverse: true}), type: "statusInverse"};
-            }
-        case "statusInverse":
-            return {data: arraySort(data, 'status', {reverse: true}), type: "statusInverse"};
-
-            case "code":
-            if (alreadyType && alreadyType === "codeInverse") {
-                return {data: arraySort(data, 'code'), type: "code"};
-            }
-            else {
-                return {data: arraySort(data, 'code', {reverse: true}), type: "codeInverse"};
-            }
-        case "codeInverse":
-            return {data: arraySort(data, 'code', {reverse: true}), type: "codeInverse"};
-        case "name":
-            if (alreadyType && alreadyType === "nameInverse") {
-                return {data: arraySort(data, 'name'), type: "name"};
-            }
-            else {
-                return {data: arraySort(data, 'name', {reverse: true}), type: "nameInverse"};
-            }
-        case "nameInverse":
-            return {data: arraySort(data, 'name', {reverse: true}), type: "nameInverse"};
-        case "role":
-            if (alreadyType && alreadyType === "roleInverse") {
-                return {data: arraySort(data, 'role.name'), type: "role"};
-            }
-            else {
-                return {data: arraySort(data, 'role.name', {reverse: true}), type: "roleInverse"};
-            }
-        case "roleInverse":
-            return {data: arraySort(data, 'role.name', {reverse: true}), type: "roleInverse"};
-        default:
-            return {data: data, type: type};
-    }
-};
 
 export const getRoutes = (type) => {
     switch(type){

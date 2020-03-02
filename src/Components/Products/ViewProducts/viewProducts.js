@@ -15,7 +15,7 @@ const ViewProduct = (props) => {
     const [products] = useMutation(PRODUCTS);
     const [data, setData] = useState("");
     const [totalPages, setTotalPage] = useState(1);
-    const [totalCustomers, setTotalCustomers] = useState([]);
+    const [totalProducts, setTotalProducts] = useState([]);
     const [page, setPage] = useState(1);
 
     const pageHandler = (value) => {
@@ -29,7 +29,7 @@ const ViewProduct = (props) => {
         ).then(response => {
             setData(response && response.data && response.data.getAllProducts ? response.data.getAllProducts.products : []);
             setTotalPage(response && response.data.getAllProducts ? response.data.getAllProducts.totalPages : [1]);
-            setTotalCustomers(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
+            setTotalProducts(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
         })
     }
 
@@ -44,12 +44,13 @@ const ViewProduct = (props) => {
         ).then(response => {
             setData(response && response.data && response.data.getAllProducts ? response.data.getAllProducts.products : []);
             setTotalPage(response && response.data.getAllProducts ? response.data.getAllProducts.totalPages : [1]);
-            setTotalCustomers(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
+            setTotalProducts(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
         })
     }, [])
 
     return (
         <>
+        {data && data.length!==0 ? 
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
@@ -81,8 +82,8 @@ const ViewProduct = (props) => {
                             <tbody className="table-of-data">
                                 {data && data.length !== 0 && data.map((single, index) =>
                                     <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                        <td>{single.Name}</td>
-                                        <td>{single.CreatedBy}</td>
+                                        <td>{single.Name ? single.Name : "-"}</td>
+                                        <td>{single.CreatedBy ? single.CreatedBy : "-"}</td>
                                         {single.image ?
                                             <td className="has-margin-top-15" style={{
                                                 backgroundImage: `url(${single.image ? productImages + single.image : ""})`,
@@ -112,7 +113,7 @@ const ViewProduct = (props) => {
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>Number</td>
+                                    <td>{totalProducts}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -133,6 +134,7 @@ const ViewProduct = (props) => {
                 </div>
                 <Style />
             </div>
+            :<Loader/>}
         </>
     );
 }

@@ -2,9 +2,14 @@ import React from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Style from './style'
 import {withRouter} from 'react-router-dom'
+import {useQuery} from '@apollo/react-hooks'
+import {COUPANS} from '../../apollo/Quries/coupanQurie'
+import Loader from '../../commonComponents/Loader/loader'
 
-const viewCoupan=(props) => {
+const ViewCoupan=(props) => {
     let {history}=props;
+    const {loading , data}=useQuery(COUPANS);
+    
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -46,10 +51,11 @@ const viewCoupan=(props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
+                                {data && data.length!==0 && data.getCoupons.map((single,index)=>
+                                <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                    <td>{single.Coupon_code ? single.Coupon_code : "-"}</td>
+                                    <td>{single.Discount_percentage ? single.Discount_percentage :"-"}</td>
+                                    <td>{single.Status_coupon ? single.Status_coupon : "-"}</td>
                                     <td>sub view</td>
                                     <td>sub view</td>
                                     <td>sub view</td>
@@ -57,15 +63,7 @@ const viewCoupan=(props) => {
                                    <img onClick={()=>history.push("/edit-coupans")}  className=" cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                     </td>
                                 </tr>
-                                <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Number</td>
-                                </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -75,4 +73,4 @@ const viewCoupan=(props) => {
         </>
     );
 }
-export default withRouter(viewCoupan)
+export default withRouter(ViewCoupan)
