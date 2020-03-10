@@ -2,8 +2,10 @@ import React from 'react'
 import Style from './style'
 import { withRouter} from 'react-router-dom'
 
+
 const UserInformation= (props) => {
     let{history}=props;
+   
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -72,13 +74,15 @@ const UserInformation= (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
+                            
                                 <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
-                                    <td>sub view</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
                                     <td>sub view</td>
                                 </tr>
+                            
                                 <tr className="table-footer">
                                     <td>Total</td>
                                     <td></td>
@@ -86,9 +90,12 @@ const UserInformation= (props) => {
                                     <td></td>
                                     <td>Number</td>
                                 </tr>
+                             
+                        
                             </tbody>
                         </table>
                     </div>
+                 
                 </div>
             </div>
             <Style />

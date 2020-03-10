@@ -58,7 +58,6 @@ const ViewPages = (props) => {
                     </div>
                     <Style />
                 </div>
-
                 : <Loader />}
         </>
 

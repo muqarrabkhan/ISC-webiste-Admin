@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ADMIN } from '../../apollo/Mutations/createAdminMutation'
-import { apiPath } from '../../../Config'
+import { apiPath } from '../../../config'
 import uuid from 'uuid'
 import publicIp from 'public-ip'
 

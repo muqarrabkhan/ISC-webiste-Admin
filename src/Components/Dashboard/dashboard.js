@@ -6,7 +6,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
-import { overlays, camapignImage } from '../../Config'
+import { overlays, camapignImage } from '../../config'
 
 const Dashboard = () => {
 
@@ -270,7 +270,13 @@ const Dashboard = () => {
                     {cards && cards.length != 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
-                          <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image : (single.Overlay ? overlays + single.Overlay : "")})`, backgroundSize: 'cover', height: '270px' }}>
+                          <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image 
+                            :
+                             (single.Overlay ? overlays + single.Overlay : "")})`,
+                              backgroundSize: 'contain',  
+                               minHeight: '255px' ,
+                               backgroundRepeat:"no-repeat"
+                               }}>
                           </div>
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
