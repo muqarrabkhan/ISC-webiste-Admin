@@ -9,6 +9,7 @@ import Loader from '../../commonComponents/Loader/loader'
 const ViewAdministrator = (props) => {
     let { history } = props;
     const { loading, error, data } = useQuery(ADMIN_DASHBOARD);
+    console.log(data)
     // Loader
     if (loading) return <Loader/> 
     return (

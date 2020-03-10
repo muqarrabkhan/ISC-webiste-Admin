@@ -6,6 +6,8 @@ export const ADSONS = gql`
           type
       place_on
       status
+      enddate
+    startdate
     }
 }
 `;

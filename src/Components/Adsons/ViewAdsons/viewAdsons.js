@@ -52,8 +52,8 @@ const ViewAdson = (props) => {
                                     <tr className="table-row-data-of-body fnt-poppins">
                                         <td>{single.type ? single.type : "-"}</td>
                                         <td>{single.place_on ? single.place_on : "-"}</td>
-                                        <td>09-03-2019</td>
-                                        <td>sub view</td>
+                                        <td>{single.startdate?single.startdate:""}</td>
+                                        <td>{single.enddate?single.enddate:""}</td>
                                         <td>{single.status ? single.status : "-"}</td>
                                         <td>
                                             <div className="appling-flex-btns">
