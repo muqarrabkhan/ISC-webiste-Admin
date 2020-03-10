@@ -16,6 +16,7 @@ const Signin = (props) => {
     const [passwordValidator, setPasswordValidator] = useState(false);
     const [remember, setRemember] = useState(false);
     const [error, setError] = useState("");
+    const [btnText,setBtnText]=useState("Signin");
 
     const userAuthentication = e => {
         e.preventDefault();
@@ -32,6 +33,7 @@ const Signin = (props) => {
             }
         }
         else {
+            setBtnText("Loading");
             let payLoad = { Email: email, Password: password };
             axios.post(apiPath + "/adminLogin", payLoad).then(response => {
                 localStorage.setItem("age", remember ? 1296000 : 86400);
@@ -88,7 +90,7 @@ const Signin = (props) => {
                         </div>
                         <div className="btns-of-add has-margin-left-40 has-margin-top-30 fnt-poppins">
                             <button className="cancel-btn-of-sigin fnt-poppins">Cancel</button>
-                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins" type="submit">Signin</button>
+                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins" type="submit">{btnText}</button>
                         </div>
                     </form>
                 </div>

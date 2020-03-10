@@ -8,7 +8,6 @@ import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import Loader from '../commonComponents/Loader/loader'
 import { overlays, camapignImage } from '../../config'
 
-
 const Dashboard = () => {
 
   // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });

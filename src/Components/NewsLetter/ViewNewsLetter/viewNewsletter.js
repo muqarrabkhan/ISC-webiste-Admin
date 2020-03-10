@@ -77,10 +77,10 @@ const ViewNewsletter = (props) => {
                                 <tbody className="table-of-data">
                                     {data && data.length !== 0 && data.map((single, index) =>
                                         <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                            <td>{single.name}</td>
-                                            <td>{single.Template.Title}</td>
-                                            <td>{single.status}</td>
-                                            <td>{standardDate(single.datetime).standardDate}</td>
+                                            <td>{single.name ? single.name : "-"}</td>
+                                            <td>{single.Template ? single.Template && single.Template.Title : "-"}</td>
+                                            <td>{single.status ? single.status : "-"}</td>
+                                            <td>{single.datetime ? standardDate(single.datetime).time : "-"}</td>
                                             <td>
                                                 <div className="applying-flex">
                                                     <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
