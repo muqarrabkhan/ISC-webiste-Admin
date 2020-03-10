@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { PRODUCTS } from '../../apollo/Mutations/productsMutation'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
-import { productImages, campaignLogo_baseurl } from '../../../config'
+import { productImages, campaignLogo_baseurl } from '../../../Config'
 
 const ViewProduct = (props) => {
 
