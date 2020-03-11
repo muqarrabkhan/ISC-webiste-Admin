@@ -64,7 +64,7 @@ const AddAdministrator = (props) => {
                     Email: email,
                     Password: password ? password : uid.toString(),
                     RoleId: parseInt(roleId),
-                    Status: status,
+                    Status: "Enable",
                     CreatedDate: currentDate,
                     CreatedIp: parseInt(ipAddress),
                     CreatedBy: 1
@@ -108,7 +108,7 @@ const AddAdministrator = (props) => {
                                     <label>Name</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={name}
+                                    <input className="inputs-of-admistrator" value={name} required
                                         onChange={event => setName(event.target.value)} />
                                 </div>
                             </div>
@@ -118,7 +118,7 @@ const AddAdministrator = (props) => {
                                     <label>Email</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={email}
+                                    <input className="inputs-of-admistrator" value={email} required
                                         onChange={event => setEmail(event.target.value)} />
                                 </div>
                             </div>
@@ -140,7 +140,7 @@ const AddAdministrator = (props) => {
                                     <label>Select Role</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <select className="inputs-of-admistrator fnt-poppins"
+                                    <select className="inputs-of-admistrator fnt-poppins" required
                                         onChange={event => setRoleId(event.target.value)}>
                                         <option >Select Role</option>
                                         <option value="1">Super Admin</option>
@@ -173,21 +173,6 @@ const AddAdministrator = (props) => {
                                 </>
                             }
                             {/* extra data */}
-                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
-                                <div>
-                                    <label>Status</label>
-                                </div>
-                                <div className="mrg-top-10">
-                                    <select className="inputs-of-admistrator"
-                                        onChange={event => setStatus(event.target.value)}>
-                                        <option>Select Status</option>
-                                        <option value="Enable">Enable</option>
-                                        <option value="Delete">Delete</option>
-                                    </select>
-                                    {/* <input className="inputs-of-admistrator" value={status}
-                                        onChange={event => setStatus(event.target.value)} /> */}
-                                </div>
-                            </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cursor-pointer cancel-btn-of-form fnt-poppins">Cancel</button>
                                 <button className="cursor-pointer Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
