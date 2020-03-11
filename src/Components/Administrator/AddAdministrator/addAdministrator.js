@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ADMIN } from '../../apollo/Mutations/createAdminMutation'
-import { apiPath } from '../../../config'
 import uuid from 'uuid'
 import publicIp from 'public-ip'
 
@@ -17,10 +16,16 @@ const AddAdministrator = (props) => {
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
     const [btnText, setBtnText] = useState("Save");
-    // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
+    const [ipAddress,setIpAddress]=useState();
     const [data] = useMutation(CREATE_ADMIN);
-    let uid = uuid();
-    console.log("uuid",uid.substr(uid.length - 8));
+
+    // let uid = uuid();
+    // console.log("uuid",uid.substr(uid.length - 8));
+    const publicIp = require('public-ip');
+    (async () => {
+        setIpAddress( await publicIp.v4());
+    })();
+
     const addAdmin = (event) => {
         event.preventDefault();
         let currentDate = new Date();
@@ -51,11 +56,6 @@ const AddAdministrator = (props) => {
             return 0;
         }
         else {
-            let Ip = ""
-            publicIp.v4().then(ip => {
-                Ip = ip;
-            });
-            // console.log(Ip);
             data({
                 variables: {
                     Name: name,
@@ -64,9 +64,8 @@ const AddAdministrator = (props) => {
                     RoleId: parseInt(roleId),
                     Status: status,
                     CreatedDate: currentDate,
-                    CreatedIp: 123,
+                    CreatedIp: parseInt(ipAddress),
                     CreatedBy: 1
-                    // CreatedIp:parseInt(createdIp),
                     // CreatedBy:parseInt(createdBy)
                 }
             }).then(res => {
@@ -132,6 +131,9 @@ const AddAdministrator = (props) => {
                                     </select>
                                 </div>
                             </div>
+                            {
+                                <p>{uuid}</p>
+                            }
                             {/* Select Role*/}
                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
