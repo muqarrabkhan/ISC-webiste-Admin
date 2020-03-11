@@ -82,10 +82,10 @@ const ViewAdministrator = (props) => {
                             <tbody className="table-of-data">
                             {users && users.length !== 0 && users.map((single, index) =>
                                     <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                        <td>{single.Name}</td>
-                                        <td>{single.Email}</td>
-                                        <td>{single.Status}</td>
-                                        <td>{single.RoleId}</td>
+                                        <td>{single.Name ? single.Name : "-"}</td>
+                                        <td>{single.Email ? single.Email :"-"}</td>
+                                        <td>{single.Status ? single.Status :"-"}</td>
+                                        <td>{single.RoleId ? single.RoleId : "-"}</td>
                                         <td>
                                             <div style={{ display: "flex" }}>
                                                 <img onClick={() => history.push("/edit-administrator")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
@@ -103,14 +103,14 @@ const ViewAdministrator = (props) => {
                             </tbody>
                         </table>
                         <div className="has-margin-top-40">
-                            <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                        <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
                                 nextLabel={<span className="fa fa-chevron-right "> > </span>}
                                 breakLabel={". . ."}
                                 breakClassName={"break-me"}
-                                pageCount={5}
+                                pageCount={totalPages}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={5}
-                                onPageChange={5}
+                                onPageChange={pageHandler}
                                 containerClassName={"digit-icons main"}
                                 subContainerClassName={"container column"}
                                 activeClassName={"p-one"} />

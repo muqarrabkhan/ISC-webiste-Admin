@@ -70,8 +70,7 @@ const AddAdministrator = (props) => {
                     // CreatedBy:parseInt(createdBy)
                 }
             }).then(res => {
-                history.push(apiPath + "/adminLogin/" + res.data.createAdmin.error)
-                window.location.reload("/administrator");
+                history.push("/administrator")
             })
         }
     }
@@ -156,7 +155,7 @@ const AddAdministrator = (props) => {
                                             <label>Password</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" value={password}
+                                            <input type="password" className="inputs-of-admistrator" value={password}
                                                 onChange={event => setPassword(event.target.value)} />
                                         </div>
                                     </div>
@@ -165,7 +164,7 @@ const AddAdministrator = (props) => {
                                             <label>Confirm Password</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" value={confirmPassword}
+                                            <input type="password" className="inputs-of-admistrator" value={confirmPassword}
                                                 onChange={event => setConfirmPassword(event.target.value)} />
                                         </div>
                                     </div>
