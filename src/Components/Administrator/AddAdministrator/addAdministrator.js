@@ -10,57 +10,59 @@ const AddAdministrator = (props) => {
     let { history } = props;
     const [name, setName] = useState([]);
     const [email, setEmail] = useState([]);
-    const [password, setPassword] = useState([]);
-    const [confirmPassword, setConfirmPassword] = useState([]);
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [roleId, setRoleId] = useState([]);
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
     const [btnText, setBtnText] = useState("Save");
-    const [ipAddress,setIpAddress]=useState();
+    const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
 
-    // let uid = uuid();
-    // console.log("uuid",uid.substr(uid.length - 8));
+    let uid = uuid();
+    console.log("uuid", uid.toString());
     const publicIp = require('public-ip');
     (async () => {
-        setIpAddress( await publicIp.v4());
+        setIpAddress(await publicIp.v4());
     })();
 
     const addAdmin = (event) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-        if (!name) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (!email) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (!password) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (!confirmPassword) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (password !== confirmPassword) {
-            setBtnText("UPLOADING");
-            window.alert("Password not matching");
-            return 0;
-        }
-        if (!status) {
-            setBtnText("UPLOADING");
-            return 0;
+        if (!name || !email) {
+            if (!name) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (!email) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (!password) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (!confirmPassword) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (password !== confirmPassword) {
+                setBtnText("UPLOADING");
+                window.alert("Password not matching");
+                return 0;
+            }
+            if (!status) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
         }
         else {
             data({
                 variables: {
                     Name: name,
                     Email: email,
-                    Password: password,
+                    Password: password ? password : uid.toString(),
                     RoleId: parseInt(roleId),
                     Status: status,
                     CreatedDate: currentDate,
@@ -79,6 +81,8 @@ const AddAdministrator = (props) => {
         }
         else {
             setSelect(false);
+            setPassword(uid.toString());
+            setConfirmPassword(uid.toString());
         }
     }
 
@@ -106,7 +110,6 @@ const AddAdministrator = (props) => {
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={name}
                                         onChange={event => setName(event.target.value)} />
-
                                 </div>
                             </div>
                             {/* Email*/}
@@ -131,9 +134,6 @@ const AddAdministrator = (props) => {
                                     </select>
                                 </div>
                             </div>
-                            {
-                                <p>{uuid}</p>
-                            }
                             {/* Select Role*/}
                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
@@ -157,7 +157,7 @@ const AddAdministrator = (props) => {
                                             <label>Password</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input type="password" className="inputs-of-admistrator" value={password}
+                                            <input type="password" className="inputs-of-admistrator" value={password} required
                                                 onChange={event => setPassword(event.target.value)} />
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@ const AddAdministrator = (props) => {
                                             <label>Confirm Password</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input type="password" className="inputs-of-admistrator" value={confirmPassword}
+                                            <input type="password" className="inputs-of-admistrator" value={confirmPassword} required
                                                 onChange={event => setConfirmPassword(event.target.value)} />
                                         </div>
                                     </div>
@@ -178,8 +178,14 @@ const AddAdministrator = (props) => {
                                     <label>Status</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={status}
-                                        onChange={event => setStatus(event.target.value)} />
+                                    <select className="inputs-of-admistrator"
+                                        onChange={event => setStatus(event.target.value)}>
+                                        <option>Select Status</option>
+                                        <option value="Enable">Enable</option>
+                                        <option value="Delete">Delete</option>
+                                    </select>
+                                    {/* <input className="inputs-of-admistrator" value={status}
+                                        onChange={event => setStatus(event.target.value)} /> */}
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
