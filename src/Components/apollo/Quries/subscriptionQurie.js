@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const SUBSCRIPTION =gql `
+export const SUBSCRIPTION = gql`
 {
     Subscriptions{
       id
@@ -8,6 +8,9 @@ export const SUBSCRIPTION =gql `
       amount
       discount_name
       discount_precentage
+      date_created
+      discount_start_date
+      discount_end_date
     }
   }
 `;

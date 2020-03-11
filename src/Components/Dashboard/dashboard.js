@@ -18,7 +18,6 @@ const Dashboard = () => {
   const [page, setPage] = useState(1);
   const [totalpage, setTotalPage] = useState(1)
 
-
   const handlePageClick = (value) => {
     setPage(value.selected + 1);
     allCompagins({
@@ -272,7 +271,7 @@ const Dashboard = () => {
                         <div className="Last-week-card-section mrg-top-50">
                           <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image 
                             :
-                             (single.Overlay ? overlays + single.Overlay : "")})`,
+                             single.Overlay ? overlays + single.Overlay : ""})`,
                               backgroundSize: 'contain',  
                                minHeight: '255px' ,
                                backgroundRepeat:"no-repeat"

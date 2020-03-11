@@ -44,6 +44,7 @@ export const standardDate = (dat) => {
     let monthNumber = ("0" + (newDate.getMonth() + 1)).slice(-2);
     let fullYear = newDate.getFullYear();
     let standardDate = monthNumber + "-" + dateNumber + "-" + fullYear;
+
     return {
         standardDate: standardDate,
         time: time,
@@ -55,7 +56,8 @@ export const standardDate = (dat) => {
         dateNumber: dateNumber,
         monthName: monthName,
         monthNumber: monthNumber,
-        fullYear: fullYear
+        fullYear: fullYear,
+
     };
 };
 

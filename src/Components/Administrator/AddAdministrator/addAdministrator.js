@@ -6,7 +6,6 @@ import { apiPath } from '../../../config'
 import uuid from 'uuid'
 import publicIp from 'public-ip'
 
-
 const AddAdministrator = (props) => {
 
     let { history } = props;
@@ -21,7 +20,7 @@ const AddAdministrator = (props) => {
     // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
     const [data] = useMutation(CREATE_ADMIN);
     let uid = uuid();
-    // console.log("uuid",uid.substr(uid.length - 8));
+    console.log("uuid",uid.substr(uid.length - 8));
     const addAdmin = (event) => {
         event.preventDefault();
         let currentDate = new Date();

@@ -1,19 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import { withRouter } from 'react-router-dom';
-import ReactPaginate from "react-paginate";
-import { useQuery } from '@apollo/react-hooks';
-import { ADMIN_DASHBOARD } from '../../apollo/Quries/adminstratorQuries'
+import { useMutation } from '@apollo/react-hooks'
+import { ADMIN } from '../../apollo/Mutations/adminMutation'
 import Loader from '../../commonComponents/Loader/loader'
+import ReactPaginate from "react-paginate";
+
 const ViewAdministrator = (props) => {
     let { history } = props;
-    const { loading, error, data } = useQuery(ADMIN_DASHBOARD);
-    console.log(data)
-    // Loader
-    if (loading) return <Loader/> 
+
+    const [users, setUsers] = useState([]);
+    const [allPages] = useMutation(ADMIN);
+    const [totalPages, setTotalPage] = useState(1);
+    const [totalCustomers, setTotalCustomers] = useState([]);
+    const [page, setPage] = useState(1);
+
+    const pageHandler = (value) => {
+        setPage(value.selected + 1);
+        allPages({
+            variables: {
+                page: value.selected + 1,
+                limit: 10
+            }
+        }
+        ).then(response => {
+            setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+            setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
+            setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+        })
+    }
+
+    useEffect(() => {
+        allPages({
+            variables: {
+                page: 1,
+                limit: 10
+            }
+        }
+        ).then(response => {
+            setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+            setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
+            setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+        })
+    }, [])
+
     return (
         <>
+        {users && users.length!==0 ? 
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
@@ -46,12 +80,12 @@ const ViewAdministrator = (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                {data && data.admins.map(sin =>
-                                    <tr className="table-row-data-of-body fnt-poppins">
-                                        <td>{sin.Name}</td>
-                                        <td>{sin.Email}</td>
-                                        <td>{sin.Status}</td>
-                                        <td>{sin.RoleId}</td>
+                            {users && users.length !== 0 && users.map((single, index) =>
+                                    <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                        <td>{single.Name}</td>
+                                        <td>{single.Email}</td>
+                                        <td>{single.Status}</td>
+                                        <td>{single.RoleId}</td>
                                         <td>
                                             <div style={{ display: "flex" }}>
                                                 <img onClick={() => history.push("/edit-administrator")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
@@ -62,11 +96,8 @@ const ViewAdministrator = (props) => {
                                     </tr>
                                 )}
                                 <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Number</td>
+                                    <td colspan={4}>Total</td>
+                                    <td>{totalCustomers}</td>
                                 </tr>
 
                             </tbody>
@@ -87,6 +118,7 @@ const ViewAdministrator = (props) => {
                     </div>
                 </div>
             </div>
+            :<Loader/>}
         </>
     );
 }

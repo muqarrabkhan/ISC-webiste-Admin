@@ -14,9 +14,20 @@ mutation userActivity(
     userActivity
     {
         Image
-        UserId
         CampaignId
         CreatedDate
+        CampaignName {
+          Id
+          Name
+          error
+        }
+        userName {
+          Id
+          Name
+          Status
+          is_affiliated
+          CreatedDate
+          }
         
     
     }

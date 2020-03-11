@@ -22,7 +22,9 @@ export default()=>{
     .setting-edit-btn{
      height:35px;
     }
-  
+    .totalData-row{
+      background:white;
+    }
     
     `}
     </style>

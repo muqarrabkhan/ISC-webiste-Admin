@@ -1,20 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
 import { withRouter } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
-import { PAGES } from '../../apollo/Quries/pagesQurie'
+import { useMutation } from '@apollo/react-hooks'
+import { PAGES } from '../../apollo/Mutations/pagesMutation'
 import Loader from '../../commonComponents/Loader/loader'
+import ReactPaginate from "react-paginate";
 
 const ViewPages = (props) => {
     let { history } = props;
-    const { loading, data } = useQuery(PAGES);
+
+    const [users, setUsers] = useState([]);
+    const [allPages] = useMutation(PAGES);
+    const [totalPages, setTotalPage] = useState(1);
+    const [totalCustomers, setTotalCustomers] = useState([]);
+    const [page, setPage] = useState(1);
+
+    const pageHandler = (value) => {
+        setPage(value.selected + 1);
+        allPages({
+            variables: {
+                page: value.selected + 1,
+                limit: 5
+            }
+        }
+        ).then(response => {
+            setUsers(response && response.data && response.data.getwebpages ? response.data.getwebpages.webpages : []);
+            setTotalPage(response && response.data.getwebpages ? response.data.getwebpages.totalPages : [1]);
+            setTotalCustomers(response && response.data.getwebpages && response.data.getwebpages.totalwebpages);
+        })
+    }
+
+    useEffect(() => {
+        allPages({
+            variables: {
+                page: 1,
+                limit: 10
+            }
+        }
+        ).then(response => {
+            setUsers(response && response.data && response.data.getwebpages ? response.data.getwebpages.webpages : []);
+            setTotalPage(response && response.data.getwebpages ? response.data.getwebpages.totalPages : [1]);
+            setTotalCustomers(response && response.data.getwebpages && response.data.getwebpages.totalwebpages);
+        })
+    }, [])
 
     return (
 
         <>
-            {!loading ?
+            {users && users.length !== 0 ?
                 <div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
@@ -40,7 +75,7 @@ const ViewPages = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody className="table-of-data">
-                                    {data && data.length !== 0 && data.getwebpages.map((single, index) =>
+                                    {users && users.length !== 0 && users.map((single, index) =>
                                         <tr className="table-row-data-of-body fnt-poppins">
                                             <td>{single.pageTitle ? single.pageTitle : "-"}</td>
                                             <td>{single.slug ? single.slug : "-"}</td>
@@ -52,8 +87,25 @@ const ViewPages = (props) => {
                                             </td>
                                         </tr>
                                     )}
+                                    <tr>
+                                        <td className="has-padding-left-15" colSpan={2}>Total</td>
+                                        <td className="has-padding-left-20">{totalCustomers}</td>
+                                    </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div className="mrg-top-10">
+                            <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                                nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                                breakLabel={". . ."}
+                                breakClassName={"break-me"}
+                                pageCount={totalPages}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={pageHandler}
+                                containerClassName={"digit-icons main"}
+                                subContainerClassName={"container column"}
+                                activeClassName={"p-one"} />
                         </div>
                     </div>
                     <Style />
