@@ -1,16 +1,17 @@
-import React,{useState} from 'react'
-import { withRouter} from 'react-router-dom'
+import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_SETTING } from '../../apollo/Mutations/createSetting'
 import publicIp from 'public-ip'
 
-const AddSetting= (props) => {
-    let {history}=props;
+const AddSetting = (props) => {
+    let { history } = props;
 
     const [addSetting] = useMutation(CREATE_SETTING);
     const [fieldName, setFieldName] = useState("");
     const [keyText, setKeyText] = useState("");
     const [value, setvalue] = useState("");
+    const [settingType, setSettingType] = useState("");
     const [ipAddress, setIpAddress] = useState("");
 
     const publicIp = require('public-ip');
@@ -27,8 +28,9 @@ const AddSetting= (props) => {
                 fieldName: fieldName,
                 Keytext: keyText,
                 CreatedIp: parseInt(ipAddress),
-                value:value,
-                createdDate:crntDate    
+                value: value,
+                setting_type: settingType,
+                createdDate: crntDate
             }
         }).then(res => {
             history.push("/setting")
@@ -40,10 +42,10 @@ const AddSetting= (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add General Setting</h6>
-                <button onClick={()=>history.push("/setting")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/setting")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form onSubmit={event=>createSetting(event)}>
+            <form onSubmit={event => createSetting(event)}>
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
@@ -58,7 +60,7 @@ const AddSetting= (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={fieldName}
-                                        onChange={event=>setFieldName(event.target.value)}
+                                        onChange={event => setFieldName(event.target.value)}
                                     />
                                 </div>
                             </div>
@@ -69,7 +71,7 @@ const AddSetting= (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={keyText}
-                                        onChange={event=>setKeyText(event.target.value)}
+                                        onChange={event => setKeyText(event.target.value)}
                                     />
                                 </div>
                             </div>
@@ -80,7 +82,7 @@ const AddSetting= (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={value}
-                                        onChange={event=>setvalue(event.target.value)}
+                                        onChange={event => setvalue(event.target.value)}
                                     />
                                 </div>
                             </div>
@@ -90,12 +92,13 @@ const AddSetting= (props) => {
                                     <label>Setting type*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <select className="inputs-of-admistrator fnt-poppins">
-                                            <option>General</option>
-                                        	<option>Payment</option>
-                                        	<option>Social</option>
-                                        	<option>Email</option>
-                                        	<option>Apps</option>
+                                    <select onChange={event => setSettingType(event.target.value)} className="inputs-of-admistrator fnt-poppins">
+                                        <option>-:Select Type:-</option>
+                                        <option value="General">General</option>
+                                        <option value="Payment">Payment</option>
+                                        <option value="Social">Social</option>
+                                        <option value="Email">Email</option>
+                                        <option value="Apps">Apps</option>
                                     </select>
                                 </div>
                             </div>
