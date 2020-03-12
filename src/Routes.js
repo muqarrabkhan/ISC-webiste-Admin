@@ -115,6 +115,7 @@ const AllRouters = (props) => {
                             <Route path={"/announcement"} component={ViewAnnouncement} />
                             {/* Cateories */}
                             <Route path={"/add-category"} component={AddCategory} />
+                            <Route path={"/category-details/:id"} component={CategoryDetails} />
                             <Route path={"/category-details"} component={CategoryDetails} />
                             <Route path={"/edit-category"} component={EditCategory} />
                             <Route path={"/category"} component={ViewCategory} />

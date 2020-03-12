@@ -1,61 +1,76 @@
-import React from 'react'
-import {withRouter} from 'react-router-dom'
+import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks';
+import { SINGLE_CATEGORY } from '../../apollo/Quries/singleCategoryQurie'
+import Loader from '../../commonComponents/Loader/loader'
+import { standardDate } from '../../functions'
 
-const CategoryDetails =(props) => {
-    let{history}=props;
+const CategoryDetails = (props) => {
+    let { history, match } = props;
+    let id = match.params && match.params.id ? match.params.id : "";
+    const { loading, data } = useQuery(SINGLE_CATEGORY(id));
+    let date = data && data.length !== 0 && data.SingleCategory ? data.SingleCategory.CreatedDate : "";
+    date = standardDate(date).standardDate;
 
     return (
-        <div className="container-fluid Table-for-administrator-main-div">
-            {/* header */}
-            <div className="header-of-viewAdministrator">
-                <h6 className="heading6-of-header fnt-poppins">Category Information</h6>
-               <button onClick={()=>history.push("/category")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
-            </div>
-            {/* Table of Administrator  */}
-            <form>
-                <div className="Table-of-administrator">
-                    <div className="background-of-table">
-                        <div className="blanck-dev"></div>
-                        {/* Table Section */}
-                        <div className="Form-section-startup">
-                            <div className="has-margin-bottom-20 extra-div">
-                            </div>
-                            {/* Category Name***/}
-                            <div className="mrg-left-60 fnt-poppins">
-                                <div>
-                                    <label>Category Name*</label>
+        <>
+            {!loading ?
+
+                <div className="container-fluid Table-for-administrator-main-div">
+                    {/* header */}
+                    < div className="header-of-viewAdministrator">
+                        <h6 className="heading6-of-header fnt-poppins">Category Information</h6>
+                        <button onClick={() => history.push("/category")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                    </div>
+                    {/* Table of Administrator  */}
+                    <form>
+                        <div className="Table-of-administrator">
+                            <div className="background-of-table">
+                                <div className="blanck-dev"></div>
+                                {/* Table Section */}
+                                <div className="Form-section-startup">
+                                    <div className="has-margin-bottom-20 extra-div">
+                                    </div>
+                                    <div className="mrg-left-60 fnt-poppins">
+                                        <div>
+                                            <label>Category Name*</label>
+                                        </div>
+                                        <div className="mrg-top-10">
+                                            <input className="inputs-of-admistrator fnt-poppins cursor-pointer-not-allowed"
+                                                value={data && data.length !== 0 && data.SingleCategory && data.SingleCategory.Name} />
+                                        </div>
+                                    </div>
+                                    {/* Description**/}
+                                    <div className="mrg-left-60 mrg-top-20 fnt-poppins">
+                                        <div>
+                                            <label>Description*</label>
+                                        </div>
+                                        <div className="mrg-top-10">
+                                            <textarea className="textarea-of-admistrator fnt-poppins cursor-pointer-not-allowed"
+                                                value={data && data.length !== 0 && data.SingleCategory && data.SingleCategory.description} />
+                                        </div>
+                                    </div>
+                                    {/*Creation Info*/}
+                                    <div className="mrg-left-60 mrg-top-20 fnt-poppins">
+                                        <div>
+                                            <label>Creation Info*</label>
+                                        </div>
+                                        <div className="mrg-top-10">
+                                            <textarea className="textarea-of-admistrator fnt-poppins cursor-pointer-not-allowed"
+                                                value={date} />
+                                        </div>
+                                    </div>
+                                    <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
+                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Edit</button>
+                                    </div>
                                 </div>
-                                <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
-                                </div>
-                            </div>
-                            {/* Description**/}
-                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
-                                <div>
-                                    <label>Description*</label>
-                                </div>
-                                <div className="mrg-top-10">
-                                    <textarea className="textarea-of-admistrator" />
-                                </div>
-                            </div>
-                            {/*Creation Info*/}
-                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
-                                <div>
-                                    <label>Creation Info*</label>
-                                </div>
-                                <div className="mrg-top-10">
-                                    <textarea className="textarea-of-admistrator" />
-                                </div>
-                            </div>
-                            <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Update</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+                    </form>
+                </div >
+                : <Loader />}
+        </>
     );
 }
 export default withRouter(CategoryDetails);
