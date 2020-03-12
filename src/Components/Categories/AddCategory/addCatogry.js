@@ -1,17 +1,46 @@
-import React from 'react'
-import {withRouter} from 'react-router-dom'
+import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { CREATE_CATEGORY } from '../../apollo/Mutations/createCategory'
+import publicIp from 'public-ip'
 
-const AddCategory=(props) => {
-    let{history}=props;
+const AddCategory = (props) => {
+    let { history } = props;
+
+    const [addCategory] = useMutation(CREATE_CATEGORY);
+    const [name, setName] = useState("");
+    const [description, setDiscription] = useState("");
+    const [ipAddress, setIpAddress] = useState("");
+
+    const publicIp = require('public-ip');
+    (async () => {
+        setIpAddress(await publicIp.v4());
+    })();
+
+    const createCategories = (event) => {
+        event.preventDefault();
+        addCategory({
+            variables: {
+                Name: name,
+                description: description,
+                CreatedIp: parseInt(ipAddress),
+                CreatedBy: 1,
+                Status:"Enable"
+            }
+        }).then(res => {
+            history.push("/category")
+        })
+    }
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Category</h6>
-                <button onClick={()=>history.push("/category")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/category")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form>
+            <form onSubmit={event => createCategories(event)}>
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
@@ -25,7 +54,9 @@ const AddCategory=(props) => {
                                     <label>Category Name*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator"/>
+                                    <input className="inputs-of-admistrator" value={name}
+                                        onChange={event => setName(event.target.value)}
+                                    />
                                 </div>
                             </div>
                             {/* Description**/}
@@ -34,13 +65,15 @@ const AddCategory=(props) => {
                                     <label>Description*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <textarea className="textarea-of-admistrator" />
+                                    <textarea className="textarea-of-admistrator" value={description}
+                                        onChange={event => setDiscription(event.target.value)}
+                                    />
                                 </div>
                             </div>
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                              <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                              <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>  
+                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>
                     </div>

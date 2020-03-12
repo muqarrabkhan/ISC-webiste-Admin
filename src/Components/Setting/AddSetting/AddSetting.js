@@ -1,8 +1,40 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { withRouter} from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { CREATE_SETTING } from '../../apollo/Mutations/createSetting'
+import publicIp from 'public-ip'
 
 const AddSetting= (props) => {
     let {history}=props;
+
+    const [addSetting] = useMutation(CREATE_SETTING);
+    const [fieldName, setFieldName] = useState("");
+    const [keyText, setKeyText] = useState("");
+    const [value, setvalue] = useState("");
+    const [ipAddress, setIpAddress] = useState("");
+
+    const publicIp = require('public-ip');
+    (async () => {
+        setIpAddress(await publicIp.v4());
+    })();
+
+    const createSetting = (event) => {
+        event.preventDefault();
+        let crntDate = new Date();
+        crntDate = crntDate.toISOString();
+        addSetting({
+            variables: {
+                fieldName: fieldName,
+                Keytext: keyText,
+                CreatedIp: parseInt(ipAddress),
+                value:value,
+                createdDate:crntDate    
+            }
+        }).then(res => {
+            history.push("/setting")
+        })
+    }
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -11,7 +43,7 @@ const AddSetting= (props) => {
                 <button onClick={()=>history.push("/setting")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form>
+            <form onSubmit={event=>createSetting(event)}>
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
@@ -25,7 +57,9 @@ const AddSetting= (props) => {
                                     <label>Name*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator" value={fieldName}
+                                        onChange={event=>setFieldName(event.target.value)}
+                                    />
                                 </div>
                             </div>
                             {/*Key*/}
@@ -34,7 +68,9 @@ const AddSetting= (props) => {
                                     <label>Key*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator" value={keyText}
+                                        onChange={event=>setKeyText(event.target.value)}
+                                    />
                                 </div>
                             </div>
                             {/*Value*/}
@@ -43,7 +79,9 @@ const AddSetting= (props) => {
                                     <label>Value*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator" value={value}
+                                        onChange={event=>setvalue(event.target.value)}
+                                    />
                                 </div>
                             </div>
                             {/*Setting type*/}
@@ -64,7 +102,7 @@ const AddSetting= (props) => {
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>
                     </div>

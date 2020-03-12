@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { NEWSLETTERS } from '../../apollo/Mutations/newsletterMutation'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
-import {standardDate} from '../../functions/index'
+import { standardDate } from '../../functions/index'
 
 const ViewNewsletter = (props) => {
 
@@ -46,6 +46,9 @@ const ViewNewsletter = (props) => {
         })
     }, []);
 
+    console.log(standardDate);
+
+
     return (
         <>
             {data && data.length !== 0 ?
@@ -75,20 +78,27 @@ const ViewNewsletter = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody className="table-of-data">
-                                    {data && data.length !== 0 && data.map((single, index) =>
-                                        <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                            <td>{single.name ? single.name : "-"}</td>
-                                            <td>{single.Template ? single.Template && single.Template.Title : "-"}</td>
-                                            <td>{single.status ? single.status : "-"}</td>
-                                            <td>{single.datetime ? standardDate(single.datetime).time : "-"}</td>
-                                            <td>
-                                                <div className="applying-flex">
-                                                    <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                    <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )}
+                                    {data && data.length !== 0 && data.map((single, index) => {
+                                        console.log(single.datetime);
+                                        return (
+                                            <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                                <td>{single.name ? single.name : "-"}</td>
+                                                <td>{single.Template ? single.Template && single.Template.Title : "-"}</td>
+                                                <td>{single.status ? single.status : "-"}</td>
+                                                <td className="is-flex">
+                                                    <span>{single.datetime ? standardDate(parseInt(single.datetime)).standardDate : "-"}</span>
+                                                    <span className="has-margin-left-15">{single.datetime ? standardDate(parseInt(single.datetime)).time : "-"}</span>
+
+                                                </td>
+                                                <td>
+                                                    <div className="applying-flex">
+                                                        <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                        <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                     <tr className="table-footer">
                                         <td colSpan={4}>Total</td>
                                         <td>{totalNewsletter}</td>

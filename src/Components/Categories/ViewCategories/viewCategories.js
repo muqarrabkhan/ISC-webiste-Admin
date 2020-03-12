@@ -77,7 +77,7 @@ const ViewCategories = (props) => {
                                 {data && data.length !== 0 && data.map((single, index) =>
                                     <tr key={index} className="fnt-poppins background-white">
                                         <td>{single.Name ? single.Name : "-"}</td>
-                                        <td>{single.Status ? single.Status : "-"}</td>
+                                        <td>{single && single.Status ? single.Status : "-"}</td>
                                         <td>
                                             <div className="appling-flex-btns">
                                                 <img onClick={() => history.push("/edit-category")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

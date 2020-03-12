@@ -21,7 +21,7 @@ const ViewSetting = (props) => {
         allPages({
             variables: {
                 page: value.selected + 1,
-                limit: 5
+                limit: 10
             }
         }
         ).then(response => {
