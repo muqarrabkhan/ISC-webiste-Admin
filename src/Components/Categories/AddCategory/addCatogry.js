@@ -32,6 +32,8 @@ const AddCategory = (props) => {
         })
     }
 
+    console.log(ipAddress);
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}

@@ -3,9 +3,14 @@ import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
 import { withRouter} from 'react-router-dom'
+import {useQuery} from '@apollo/react-hooks'
+import {SINGLE_CATEGORY} from '../../apollo/Quries/announcementQurie'
 
 const ViewAnnouncement= (props) => {
+    
     let{history}=props;
+    const {loading ,data}=useQuery(SINGLE_CATEGORY);
+    
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -34,8 +39,9 @@ const ViewAnnouncement= (props) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr className="fnt-poppins background-white">
-                                    <td>Alfreds Futterkiste</td>
+                                {data && data.length !==0 && data.getannouncements.map((single,index)=>
+                                <tr key={index} className="fnt-poppins background-white">
+                                    <td>{single.title}</td>
                                     <td>
                                         <div className="switch-btn-of-tables">
                                             <label className="switch">
@@ -47,12 +53,13 @@ const ViewAnnouncement= (props) => {
                                      {/* buttons    */}
                                     <td>
                                         <div className="appling-flex-btns">
-                                            <img onClick={()=>history.push("/edit-announcement")}className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                            <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                            <img onClick={()=>history.push("/edit-announcement")} className="has-cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                            <img className="delete-image-table has-cursor-pointer" alt="delete-button" src={Deletelogo} />
                                            <span onClick={()=>history.push("/announcement-details")}className="cursor-pointer view-btn-of-table ">View Details</span>
                                         </div>
                                     </td>
                                 </tr>
+                                )}
                                 </tbody>
                             </table>
                         </div>

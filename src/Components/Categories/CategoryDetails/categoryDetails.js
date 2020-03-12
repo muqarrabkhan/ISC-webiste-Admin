@@ -13,8 +13,8 @@ const CategoryDetails = (props) => {
     date = standardDate(date).standardDate;
 
     const ipInt = require('ip-to-int');
-    console.log("Ip To decimal ",ipInt('89.150.79.17').toInt());
-    console.log("Decimal to Ip",ipInt('1503022865').toIP());
+    console.log("Ip To decimal ",ipInt('203.124.63.3').toInt());
+    console.log("Decimal to Ip",ipInt('3413917443').toIP());
     
 
     return (
@@ -41,7 +41,7 @@ const CategoryDetails = (props) => {
                                             <label>Category Name*</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator fnt-poppins cursor-pointer-not-allowed"
+                                            <input className="inputs-of-admistrator fnt-poppins cursor-pointer-not-allowed" disabled
                                                 value={data && data.length !== 0 && data.SingleCategory && data.SingleCategory.Name} />
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@ const CategoryDetails = (props) => {
                                             <label>Description*</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <textarea className="textarea-of-admistrator fnt-poppins cursor-pointer-not-allowed"
+                                            <textarea className="textarea-of-admistrator fnt-poppins cursor-pointer-not-allowed" disabled
                                                 value={data && data.length !== 0 && data.SingleCategory && data.SingleCategory.description} />
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@ const CategoryDetails = (props) => {
                                             <label>Creation Info*</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <textarea className="textarea-of-admistrator fnt-poppins cursor-pointer-not-allowed"
+                                            <textarea className="textarea-of-admistrator fnt-poppins cursor-pointer-not-allowed"disabled
                                                 value={date} />
                                         </div>
                                     </div>
