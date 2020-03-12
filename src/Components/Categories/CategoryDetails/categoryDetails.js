@@ -12,6 +12,11 @@ const CategoryDetails = (props) => {
     let date = data && data.length !== 0 && data.SingleCategory ? data.SingleCategory.CreatedDate : "";
     date = standardDate(date).standardDate;
 
+    const ipInt = require('ip-to-int');
+    console.log("Ip To decimal ",ipInt('89.150.79.17').toInt());
+    console.log("Decimal to Ip",ipInt('1503022865').toIP());
+    
+
     return (
         <>
             {!loading ?
