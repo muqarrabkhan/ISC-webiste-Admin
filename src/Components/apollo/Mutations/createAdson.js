@@ -35,5 +35,3 @@ mutation createadson(
             }
     }
 `;
-
-    // $ad_link: String,

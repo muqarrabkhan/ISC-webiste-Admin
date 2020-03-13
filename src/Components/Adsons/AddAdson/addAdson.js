@@ -105,7 +105,7 @@ const AddAdson = (props) => {
                             <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
                                     <label>Select Type</label>
-                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked
+                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio"
                                         value="Global"
                                         onChange={event => setType(event.target.value)}
                                         onClick={() => setShowHide(false)}
