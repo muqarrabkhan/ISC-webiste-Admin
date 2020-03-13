@@ -5,6 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { ALL_USERS } from '../../apollo/Mutations/usersMutation'
 import { useMutation } from '@apollo/react-hooks';
+import {DELETE_USER} from '../../apollo/Mutations/deleteUser'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 
@@ -12,6 +13,7 @@ const ViewUser = (props) => {
     let { history } = props;
     const [users, setUsers] = useState([]);
     const [allUsers] = useMutation(ALL_USERS);
+    const [deleteuser]=useMutation(DELETE_USER);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
@@ -45,6 +47,16 @@ const ViewUser = (props) => {
             setTotalCustomers(response && response.data.users && response.data.users.totalusers);
         })
     }, [])
+    const deleteUsers=(Id)=>{
+        deleteuser({
+            variables:{
+                Id:parseInt(Id),
+            }
+        }).then(response=>{
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/users")
+        })
+    }
 
 
     return (
@@ -101,7 +113,7 @@ const ViewUser = (props) => {
                                             <td>
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-user")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                    <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                    <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={()=>deleteUsers(single.Id)}src={Deletelogo} />
                                                     <span onClick={() => history.push("/user-information-activities")} className="cursor-pointer view-btn-of-table">View Details</span>
                                                     <span className="view-btn-of-table">Affiliate User</span>
                                                 </div>
