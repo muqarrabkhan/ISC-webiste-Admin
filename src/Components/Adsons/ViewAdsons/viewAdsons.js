@@ -5,6 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { ADSONS } from '../../apollo/Mutations/adsonsMutation'
+import { DELETE_ADSON } from '../../apollo/Mutations/deleteAdson'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 
@@ -12,6 +13,7 @@ const ViewAdson = (props) => {
     let { history } = props;
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(ADSONS);
+    const [deleteAdson] = useMutation(DELETE_ADSON);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
@@ -44,7 +46,16 @@ const ViewAdson = (props) => {
             setTotalCustomers(response && response.data.getAdsons && response.data.getAdsons.totaladsons);
         })
     }, [])
-
+    const deleteAdsons = (id) => {
+        deleteAdson({
+            variables: {
+                id: parseInt(id),
+            }
+        }).then(res => {
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/adson")
+        })
+    }
 
     return (
         <>
@@ -93,7 +104,7 @@ const ViewAdson = (props) => {
                                             <td>
                                                 <div className="appling-flex-btns">
                                                     <img onClick={() => history.push("/edit-adson")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                    <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                    <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={() => deleteAdsons(single.id)} src={Deletelogo} />
                                                     <span onClick={() => history.push("/view-details")} className="cursor-pointer view-btn-of-table">View Details</span>
                                                 </div>
                                             </td>
