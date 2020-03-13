@@ -1,21 +1,60 @@
 import React, { useState } from 'react'
 import InputColor from 'react-input-color';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { CREATE_ADSON } from '../../apollo/Mutations/createAdson'
 
-const AddAdson=(props) => {
-    let {history}=props;
-    
+const AddAdson = (props) => {
+    let { history } = props;
+
     const [initial] = useState('#5e72e4');
+    const [showHide, setShowHide] = useState(false);
     const [color, setColor] = useState({});
+    const [addAdson] = useMutation(CREATE_ADSON);
+    const [status, setStatus] = useState("");
+    const [type, setType] = useState("");
+    const [placeOn, setPlaceOn] = useState("");
+    const [adLink, setAdLink] = useState("");
+    const [adText, setAdText] = useState("");
+    const [adButton, setAdButton] = useState("");
+    const [adImage, setAdImage] = useState("");
+    const [bgColor, setBgColor] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+
+    let currentDate = new Date();
+    currentDate = currentDate.toISOString();
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        addAdson({
+            variables: {
+                user_id: 1,
+                status: status,
+                place_on:parseInt(placeOn),
+                type: type,
+                // bgcolor: color,
+                ad_text: adText,
+                ad_button: adButton,
+                ad_image: adImage,
+                startdate: startDate,
+                enddate: endDate,
+                date_created: currentDate
+            }
+        }).then(res => {
+            history.push("/adson")
+        })
+    }
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Adson</h6>
-                <button onClick={()=> history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form>
+            <form onSubmit={event=>onSubmit(event)}>
                 <div className="Table-of-administrator">
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
@@ -30,9 +69,12 @@ const AddAdson=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Status*</label>
                                             </div>
                                             <div>
-                                                <select className="mrg-top-10 fnt-poppins">
-                                                    <option>Enable</option>
-                                                    <option>Disable</option>
+                                                <select className="mrg-top-10 fnt-poppins"
+                                                    onChange={event => setStatus(event.target.value)}
+                                                >
+                                                    <option>Select Status</option>
+                                                    <option value="Enable">Enable</option>
+                                                    <option value="Disable">Disable</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -46,10 +88,13 @@ const AddAdson=(props) => {
                                                 <label>Place On*</label>
                                             </div>
                                             <div>
-                                                <select className="mrg-top-10 fnt-poppins">
-                                                    <option>Top Bar, Horizontal </option>
-                                                    <option>Side Bar, Vertical </option>
-                                                    <option>Bottom Bar Horizontal </option>
+                                                <select className="mrg-top-10 fnt-poppins"
+                                                    onChange={event => setPlaceOn(event.target.value)}
+                                                >
+                                                    <option>Select place_on</option>
+                                                    <option value="1">Top Bar, Horizontal </option>
+                                                    <option value="2">Side Bar, Vertical </option>
+                                                    <option value="3">Bottom Bar Horizontal </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -60,7 +105,11 @@ const AddAdson=(props) => {
                             <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
                                     <label>Select Type</label>
-                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked />
+                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked
+                                        value="Global"
+                                        onChange={event => setType(event.target.value)}
+                                        onClick={() => setShowHide(false)}
+                                    />
                                     <label className="label-of-radio" for="radio1">
                                         <div className="checker"></div>
                                         Global
@@ -69,7 +118,11 @@ const AddAdson=(props) => {
                             </div>
                             <div className="radios mrg-left-50">
                                 <div className="radio">
-                                    <input type="radio" id="radio2" name="radio" />
+                                    <input type="radio" id="radio2" name="radio"
+                                        value="SpecificCampaign"
+                                        onChange={event => setType(event.target.value)}
+                                        onClick={() => setShowHide(true)}
+                                    />
                                     <label className="label-of-radio" for="radio2">
                                         <div className="checker"></div>
                                         <div>Specific Campaign</div>
@@ -88,36 +141,40 @@ const AddAdson=(props) => {
                                     }}>
                                     {color.hex}
                                 </div>
-                                <InputColor initialHexColor={initial} onChange={setColor} />
+                                <InputColor initialHexColor={initial}
+                                //  value={color} onChange={event => setColor(event.target.value)}
+                                  />
                             </div>
-                            <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
-                                <div className="Form-section1-main-div-of-inputs  ">
-                                    {/* Compaign**/}
-                                    <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
-                                        <div className="form-group">
-                                            <div>
-                                                <label className="mrg-top-20 fnt-poppins">Compaign*</label>
+                            {showHide ?
+                                <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
+                                    <div className="Form-section1-main-div-of-inputs  ">
+                                        {/* Compaign**/}
+                                        <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
+                                            <div className="form-group">
+                                                <div>
+                                                    <label className="mrg-top-20 fnt-poppins">Compaign*</label>
+                                                </div>
+                                                <div>
+                                                    <input className="mrg-top-10 fnt-poppins" />
+                                                </div>
                                             </div>
-                                            <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                        </div>
+                                    </div>
+                                    <div className="Form-section2-main-div-of-inputs mrg-top-10">
+                                        {/*Compaign Url*/}
+                                        <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
+                                            <div className="form-group">
+                                                <div>
+                                                    <label>Compaign Url*</label>
+                                                </div>
+                                                <div>
+                                                    <input className="mrg-top-10"></input>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="Form-section2-main-div-of-inputs mrg-top-10">
-                                    {/*Compaign Url*/}
-                                    <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
-                                        <div className="form-group">
-                                            <div>
-                                                <label>Compaign Url*</label>
-                                            </div>
-                                            <div>
-                                                <input className="mrg-top-10"></input>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                : ""}
                             {/* Ad link */}
                             <div className="mrg-top-30 mrg-left-50">
                                 <label>Ad Link*</label>
@@ -131,7 +188,9 @@ const AddAdson=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Ad Text</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins" value={adText}
+                                                    onChange={event => setAdText(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +203,9 @@ const AddAdson=(props) => {
                                                 <label>Ad Button Text</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10"></input>
+                                                <input className="mrg-top-10" valur={adButton}
+                                                    onChange={event => setAdButton(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +220,9 @@ const AddAdson=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Ad Image Url</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins" value={adImage}
+                                                    onChange={event => setAdImage(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +235,8 @@ const AddAdson=(props) => {
                                                 <label>Start Date*</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="date" value={startDate}
+                                                    onChange={event => setStartDate(event.target.value)} />
                                             </div>
                                         </div>
                                     </div>
@@ -185,13 +249,14 @@ const AddAdson=(props) => {
                                         <label>End Date</label>
                                     </div>
                                     <div>
-                                        <input className="mrg-top-10 fnt-poppins"></input>
+                                        <input className="mrg-top-10 fnt-poppins" type="date" value={endDate}
+                                            onChange={event => setEndDate(event.target.value)} />
                                     </div>
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>
                     </div>
