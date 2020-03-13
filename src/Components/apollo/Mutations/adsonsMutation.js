@@ -11,6 +11,8 @@ mutation getAdsons($page:Int,$limit:Int)
                 enddate
                 type
                 status
+                id
+                user_id
               }
               totalPages
               totaladsons
