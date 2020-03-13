@@ -5,7 +5,7 @@ import Logo from '../../assets/Images/ISC_logo.png'
 import '../../assets/Style/Common.scss'
 import axios from 'axios';
 import cookie from 'react-cookies'
-import { apiPath } from '../../config'
+import { apiPath } from '../../Config'
 import { validateEmail } from '../commonComponents/utils'
 
 const Signin = (props) => {
@@ -90,7 +90,7 @@ const Signin = (props) => {
                         </div>
                         <div className="btns-of-add has-margin-left-40 has-margin-top-30 fnt-poppins">
                             <button className="cancel-btn-of-sigin fnt-poppins">Cancel</button>
-                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins" type="submit">{btnText}</button>
+                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins" type="submit">Signin</button>
                         </div>
                     </form>
                 </div>

@@ -8,7 +8,7 @@ import { PRODUCTS } from '../../apollo/Mutations/productsMutation'
 import {DELETE_PRODUCT} from '../../apollo/Mutations/deleteProduct'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
-import { productImages, campaignLogo_baseurl } from '../../../config'
+import { productImages, campaignLogo_baseurl } from '../../../Config'
 
 const ViewProduct = (props) => {
 

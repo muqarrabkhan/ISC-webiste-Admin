@@ -110,6 +110,7 @@ const AllRouters = (props) => {
                             <Route path={"/subscription"} component={ViewSubscription} />
                             {/* Announcemnent */}
                             <Route path={"/add-announcement"} component={AddAnnouncement} />
+                            <Route path={"/announcement-details/:id"} component={AnnouncementDetail} />
                             <Route path={"/announcement-details"} component={AnnouncementDetail} />
                             <Route path={"/edit-announcement"} component={EditAnnouncemnent} />
                             <Route path={"/announcement"} component={ViewAnnouncement} />
@@ -147,6 +148,7 @@ const AllRouters = (props) => {
                             <Route path={"/add-adson"} component={AddAdson} />
                             <Route path={"/edit-adson"} component={EditAdson} />
                             <Route path={"/adson"} component={ViewAdson} />
+                            <Route path={"/view-details/:id"} component={ViewDetails} />
                             <Route path={"/view-details"} component={ViewDetails} />
                             {/* Coupans */}
                             <Route path={"/add-coupans"} component={AddCoupans} />

@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
-
+import {useQuery} from '@apollo/react-hooks'
+import { SINGLE_ADSONS} from '../../apollo/Quries/singleAdson'
+import Loader from '../../Loading/loader'
 const ViewDetails=(props) => {
-    let {history}=props;
+    let {history,match}=props;
+    let id = match.params && match.params.id ? match.params.id : "";
+    const { loading, data } = useQuery(SINGLE_ADSONS(id))
 
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
     return (
+        <>
+        {!loading ?
 
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -31,10 +37,9 @@ const ViewDetails=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Status*</label>
                                             </div>
                                             <div>
-                                                <select className="mrg-top-10 fnt-poppins">
-                                                    <option>Enable</option>
-                                                    <option>Disable</option>
-                                                </select>
+                                            
+                                                 <input className="mrg-top-10 fnt-poppins" disabled value={data&&data.getAdsonbyId.status}/>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -47,11 +52,7 @@ const ViewDetails=(props) => {
                                                 <label>Place On*</label>
                                             </div>
                                             <div>
-                                                <select className="mrg-top-10 fnt-poppins">
-                                                    <option>Top Bar, Horizontal </option>
-                                                    <option>Side Bar, Vertical </option>
-                                                    <option>Bottom Bar Horizontal </option>
-                                                </select>
+                                            <input className="mrg-top-10 fnt-poppins" disabled value={data&&data.getAdsonbyId.place_on}/>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +62,8 @@ const ViewDetails=(props) => {
                             <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
                                     <label>Select Type</label>
-                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked />
+                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked 
+                                     value={data&&data.getAdsonbyId.type}/>
                                     <label className="label-of-radio" for="radio1">
                                         <div className="checker"></div>
                                         Global
@@ -70,7 +72,8 @@ const ViewDetails=(props) => {
                             </div>
                             <div className="radios mrg-left-50">
                                 <div className="radio">
-                                    <input type="radio" id="radio2" name="radio" />
+                                    <input type="radio" id="radio2" name="radio" 
+                                    value={data&&data.getAdsonbyId.type}/>
                                     <label className="label-of-radio" for="radio2">
                                         <div className="checker"></div>
                                         <div>Specific Campaign</div>
@@ -89,7 +92,10 @@ const ViewDetails=(props) => {
                                     }}>
                                     {color.hex}
                                 </div>
-                                <InputColor initialHexColor={initial} onChange={setColor} />
+                                 <InputColor 
+                                initialHexColor={initial} onChange={setColor} 
+                                disabled
+                                value={data&&data.getAdsonbyId.bgcolor} />
                             </div>
                             <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs  ">
@@ -100,7 +106,8 @@ const ViewDetails=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Compaign*</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +139,8 @@ const ViewDetails=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Ad Text</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins" disabled
+                                                value={data&&data.getAdsonbyId. ad_text}/>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +153,8 @@ const ViewDetails=(props) => {
                                                 <label>Ad Button Text</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10"></input>
+                                                <input className="mrg-top-10"disabled
+                                                value={data&&data.getAdsonbyId.ad_button}/>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +169,8 @@ const ViewDetails=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Ad Image Url</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins"disabled
+                                                value={data&&data.getAdsonbyId.ad_image} />
                                             </div>
                                         </div>
                                     </div>
@@ -173,7 +183,8 @@ const ViewDetails=(props) => {
                                                 <label>Start Date*</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins"></input>
+                                                <input className="mrg-top-10 fnt-poppins"disabled
+                                                value={data&&data.getAdsonbyId.startdate}/>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +197,8 @@ const ViewDetails=(props) => {
                                         <label>End Date</label>
                                     </div>
                                     <div>
-                                        <input className="mrg-top-10 fnt-poppins"></input>
+                                        <input className="mrg-top-10 fnt-poppins"disabled
+                                        value={data&&data.getAdsonbyId.enddate}/>
                                     </div>
                                 </div>
                             </div>
@@ -195,6 +207,9 @@ const ViewDetails=(props) => {
                 </div>
             </form>
         </div>
+:<Loader/>
+}
+</>
     );
 }
 export default withRouter(ViewDetails);

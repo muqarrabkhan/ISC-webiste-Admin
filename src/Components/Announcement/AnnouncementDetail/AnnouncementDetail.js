@@ -1,14 +1,19 @@
 import React from 'react'
-import { withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks';
+import { SINGLE_ANNOUNCEMENT } from '../../apollo/Quries/singleAnnouncement'
+import Loader from '../../commonComponents/Loader/loader'
 
-const AnnouncementDetails =(props) => {
-    let{history}=props;
+const AnnouncementDetails = (props) => {
+    let { history, match } = props;
+    let id = match.params && match.params.id ? match.params.id : "";
+    const { loading, data } = useQuery(SINGLE_ANNOUNCEMENT(id));
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins"> Announcement Details</h6>
-               <button onClick={()=>history.push("/announcement")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/announcement")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form>
@@ -25,7 +30,8 @@ const AnnouncementDetails =(props) => {
                                     <label>Announcement Title*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator cursor-pointer-not-allowed" disabled
+                                        value={data && data.singleannouncements && data.singleannouncements.title} />
                                 </div>
                             </div>
                             {/* Announcement Detail*/}
@@ -33,8 +39,9 @@ const AnnouncementDetails =(props) => {
                                 <div>
                                     <label>Announcement Detail*</label>
                                 </div>
-                                <div className="mrg-top-10">
-                                    <textarea className="textarea-of-admistrator" />
+                                <div className="*mrg-top-10">
+                                    <textarea className="textarea-of-admistrator cursor-pointer-not-allowed" disabled
+                                        value={data && data.singleannouncements && data.singleannouncements.detail} />
                                 </div>
                             </div>
                             {/* Announcement Link**/}
@@ -43,7 +50,8 @@ const AnnouncementDetails =(props) => {
                                     <label>Announcement Link*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator cursor-pointer-not-allowed" disabled
+                                        value={data && data.singleannouncements && data.singleannouncements.link} />
                                 </div>
                             </div>
                             {/* buttons */}
