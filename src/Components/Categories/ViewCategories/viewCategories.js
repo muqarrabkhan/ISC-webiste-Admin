@@ -5,6 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CATEGORIES } from '../../apollo/Mutations/categoriesMutation'
+import { DELETE_CATEGORY} from '../../apollo/Mutations/deleteCategory'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 
@@ -12,6 +13,7 @@ const ViewCategories = (props) => {
     let { history  } = props;
 
     const [categories] = useMutation(CATEGORIES);
+    const [deleteCategory]=useMutation( DELETE_CATEGORY);
     const [data, setData] = useState([]);
     const [totalCategories, setTotalCategories] = useState("");
     const [totalPages, setTotalPages] = useState(1);
@@ -45,7 +47,17 @@ const ViewCategories = (props) => {
             setTotalCategories(res && res.data.getCategories && res.data.getCategories.totalCategories);
         })
     }, []);
-    
+    const deleteCategories=(id)=>{
+        deleteCategory({
+            variables:{
+                id:parseInt(id),
+            }
+        }).then(response=>{
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/category")
+        })
+
+    }
 
     return (
         <>
@@ -83,7 +95,7 @@ const ViewCategories = (props) => {
                                                 <td>
                                                     <div className="appling-flex-btns">
                                                         <img onClick={() => history.push("/edit-category")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                        <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                        <img className="delete-image-table" alt="delete-button" onClick={()=>deleteCategories(single.Id)}src={Deletelogo} />
                                                         <span onClick={() => history.push("/category-details/" + single.Id)} className="cursor-pointer view-btn-of-table ">View Details</span>
                                                     </div>
                                                 </td>

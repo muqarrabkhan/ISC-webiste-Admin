@@ -6,6 +6,7 @@ mutation Templates($page:Int,$limit:Int)
         Templates(page:$page,limit:$limit)
         {
             Template{
+                Id
                 Title
                 Status
                 Subject

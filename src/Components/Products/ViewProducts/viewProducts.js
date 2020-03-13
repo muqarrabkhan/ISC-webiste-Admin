@@ -5,6 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { PRODUCTS } from '../../apollo/Mutations/productsMutation'
+import {DELETE_PRODUCT} from '../../apollo/Mutations/deleteProduct'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 import { productImages, campaignLogo_baseurl } from '../../../config'
@@ -13,6 +14,7 @@ const ViewProduct = (props) => {
 
     let { history } = props;
     const [products] = useMutation(PRODUCTS);
+    const [deleteProduct]=useMutation(DELETE_PRODUCT);
     const [data, setData] = useState("");
     const [totalPages, setTotalPage] = useState(1);
     const [totalProducts, setTotalProducts] = useState([]);
@@ -47,6 +49,16 @@ const ViewProduct = (props) => {
             setTotalProducts(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
         })
     }, [])
+    const deleteProducts=(Id)=>{
+        deleteProduct({
+            variables:{
+                Id:parseInt(Id),
+            }
+        }).then(response=>{
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/product")
+        })
+    }
 
     return (
         <>
@@ -98,7 +110,7 @@ const ViewProduct = (props) => {
                                         <td>
                                             <div className="applying-flex-products-btn">
                                                 <img onClick={() => history.push("/edit-product")} className=" cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
-                                                <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={()=>deleteProducts(single.Id)} src={Deletelogo} />
                                                 <span className="cursor-pointer view-btn-of-table view-subscription-btn-products">Assign</span>
                                                 <span onClick={() => history.push("/view-all-campaign")} className="cursor-pointer view-btn-of-table view-subscription-btn-products">View</span>
 

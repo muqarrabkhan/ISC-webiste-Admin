@@ -9,6 +9,7 @@ mutation setting($page:Int,$limit:Int)
                 fieldName
                 Keytext
                 setting_type
+                ID
               }
               totalsettings
               totalPages

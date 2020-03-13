@@ -5,6 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { SETTING } from '../../apollo/Mutations/settingMutation'
+import {DELETE_SETTING} from '../../apollo/Mutations/deleteSetting'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 
@@ -12,6 +13,7 @@ const ViewSetting = (props) => {
     let { history } = props;
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(SETTING);
+    const [deleteSetting]=useMutation(DELETE_SETTING);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
@@ -44,6 +46,16 @@ const ViewSetting = (props) => {
             setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
         })
     }, [])
+    const deleteSettings=(id)=>{
+        deleteSetting({
+            variables:{
+                id:parseInt(id),
+            }
+        }).then(response=>{
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/setting")
+        })
+    }
 
     return (
         <>
@@ -89,7 +101,7 @@ const ViewSetting = (props) => {
                                                 <td>{single.setting_type ? single.setting_type : "-"}</td>
                                                 <td>
                                                     <img onClick={() => history.push("/edit-setting")} className="cursor-pointer edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} />
-                                                    <img className="delete-image-table setting-edit-btn" alt="edit-button" src={Deletelogo} />
+                                                    <img className="delete-image-table setting-edit-btn" alt="edit-button" onClick={()=> deleteSettings(single.ID)}src={Deletelogo} />
                                                 </td>
                                             </tr>
                                         )}

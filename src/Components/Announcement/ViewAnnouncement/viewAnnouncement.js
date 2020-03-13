@@ -3,16 +3,29 @@ import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
 import { withRouter} from 'react-router-dom'
-import {useQuery} from '@apollo/react-hooks'
+import {useQuery, useMutation} from '@apollo/react-hooks'
 import {SINGLE_CATEGORY} from '../../apollo/Quries/announcementQurie'
-
+import {DELETE_ANNOUNCEMENT} from '../../apollo/Mutations/deleteAnnouncement'
+import Loader from '../../Loading/loader'
 const ViewAnnouncement= (props) => {
     
     let{history}=props;
     const {loading ,data}=useQuery(SINGLE_CATEGORY);
-    
+    const [deleteannouncement]=useMutation(DELETE_ANNOUNCEMENT);
+    const deleteAnnouncements=(id)=>{
+        deleteannouncement({
+            variables:{
+                id:parseInt(id),
+            }
+        }).then(response=>{
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/announcement")
+        })
+    }
     return (
+       
         <>
+        {!loading ?
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
@@ -54,7 +67,7 @@ const ViewAnnouncement= (props) => {
                                     <td>
                                         <div className="appling-flex-btns">
                                             <img onClick={()=>history.push("/edit-announcement")} className="has-cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                            <img className="delete-image-table has-cursor-pointer" alt="delete-button" src={Deletelogo} />
+                                            <img className="delete-image-table has-cursor-pointer" alt="delete-button"onClick={()=>deleteAnnouncements(single.id)} src={Deletelogo} />
                                            <span onClick={()=>history.push("/announcement-details")}className="cursor-pointer view-btn-of-table ">View Details</span>
                                         </div>
                                     </td>
@@ -67,6 +80,7 @@ const ViewAnnouncement= (props) => {
                 </div>
                 <Style />
             </div>
+:<Loader/>}
         </>
     );
 }

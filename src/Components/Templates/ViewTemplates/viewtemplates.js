@@ -4,6 +4,7 @@ import Deletelogo from '../../../assets/Images/delete.svg'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { TEMPLATE } from '../../apollo/Mutations/templateMutation'
+import {DELETE_TEMPALTE } from '../../apollo/Mutations/deleteTemplate'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 import {standardDate} from '../../functions'
@@ -13,6 +14,7 @@ const ViewTemplate = (props) => {
 
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(TEMPLATE);
+    const [deleteTemplate] = useMutation(DELETE_TEMPALTE);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
@@ -45,6 +47,16 @@ const ViewTemplate = (props) => {
             setTotalCustomers(response && response.data.Templates && response.data.Templates.totalTemplate);
         })
     }, [])
+    const deleteTemplates = (Id) => {
+        deleteTemplate({
+            variables: {
+                Id: parseInt(Id),
+            }
+        }).then(res => {
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/tamplates")
+        })
+    }
 
     return (
         <>
@@ -90,7 +102,7 @@ const ViewTemplate = (props) => {
                                             <td>
                                                 <div style={{ display: "flex" }}>
                                                     <img onClick={() => history.push("/edit-tamplates")} className="has-cursor-pointer edit-image-table" alt="" src={Editlogo} />
-                                                    <img className=" has-cursor-pointer delete-image-table" alt="" src={Deletelogo} />
+                                                    <img className=" has-cursor-pointer delete-image-table" alt="" onClick={()=>deleteTemplates(single.Id)} src={Deletelogo} />
                                                 </div>
                                             </td>
                                         </tr>
