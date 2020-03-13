@@ -8,6 +8,7 @@ mutation getwebpages($page:Int,$limit:Int)
             webpages{
                 pageTitle
                 slug
+                id
               }
               totalPages
               totalwebpages

@@ -5,6 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { PAGES } from '../../apollo/Mutations/pagesMutation'
+import {  DELETE_WEB_PAGE} from '../../apollo/Mutations/deletePagesMutation'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 
@@ -13,11 +14,12 @@ const ViewPages = (props) => {
 
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(PAGES);
+    const [deletePage] =useMutation(DELETE_WEB_PAGE);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
 
-    const pageHandler = (value) => {
+    const pageHandler = (value ) => {
         setPage(value.selected + 1);
         allPages({
             variables: {
@@ -44,7 +46,19 @@ const ViewPages = (props) => {
             setTotalPage(response && response.data.getwebpages ? response.data.getwebpages.totalPages : [1]);
             setTotalCustomers(response && response.data.getwebpages && response.data.getwebpages.totalwebpages);
         })
+      
     }, [])
+    const deletePages=(id)=>{
+    deletePage({
+        variables:{
+            id: parseInt(id),
+        }
+    }).then(response=>{
+        if (window.confirm("Are you sure you want to delete Data"));
+        window.location.replace("/pages")
+
+    })
+}
 
     return (
 
@@ -76,13 +90,13 @@ const ViewPages = (props) => {
                                 </thead>
                                 <tbody className="table-of-data">
                                     {users && users.length !== 0 && users.map((single, index) =>
-                                        <tr className="table-row-data-of-body fnt-poppins">
+                                        <tr key={index} className="table-row-data-of-body fnt-poppins">
                                             <td>{single.pageTitle ? single.pageTitle : "-"}</td>
                                             <td>{single.slug ? single.slug : "-"}</td>
                                             <td>
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-pages")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                    <img className="cursor-pointer delete-image-table" alt="delete-button" src={Deletelogo} />
+                                                    <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={()=>deletePages(single.id)} src={Deletelogo} />
                                                 </div>
                                             </td>
                                         </tr>
