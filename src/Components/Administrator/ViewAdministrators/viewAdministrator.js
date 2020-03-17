@@ -54,7 +54,7 @@ const ViewAdministrator = (props) => {
             }
         }).then(res => {
             if (window.confirm("Are you sure you want to delete Data"));
-            // window.location.replace("/admin")
+            window.location.replace("/admin")
         })
     }
 
@@ -102,9 +102,9 @@ const ViewAdministrator = (props) => {
                                             <td>{single.Status ? single.Status : "-"}</td>
                                             {single && single.RoleId ?
                                                 <div>
-                                                    <td>{single && single.RoleId ==1 ? "Super Admin" : ""}</td>
-                                                    <td>{single && single.RoleId ==2?"Moderator": ""}</td>
-                                                    <td>{single && single.RoleId ==3 ? "Creater" : ""}</td>
+                                                    <td>{single && single.RoleId == 1 ? "Super Admin" : ""}</td>
+                                                    <td>{single && single.RoleId == 2 ? "Moderator" : ""}</td>
+                                                    <td>{single && single.RoleId == 3 ? "Creater" : ""}</td>
                                                 </div>
                                                 : ""}
                                             <td>

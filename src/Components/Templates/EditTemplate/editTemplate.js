@@ -3,7 +3,7 @@ import CKEditor from "react-ckeditor-component";
 import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
 import { SINGLE_TEMPLATE } from '../../apollo/Quries/singleTemplate'
-import { useQuery , useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_TEMPLATE } from '../../apollo/Mutations/updateTemplate'
 import Loader from '../../commonComponents/Loader/loader'
 
@@ -28,7 +28,7 @@ const EditTemplate = (props) => {
                 Content: content,
                 Status: renderData.Status,
                 Type: renderData.Type,
-                Category:renderData.Category
+                Category: renderData.Category
             }
         }).then(res => {
             window.location.replace("/tamplates");
@@ -145,12 +145,12 @@ const EditTemplate = (props) => {
                                                 </div>
                                                 <div>
                                                     <select className="mrg-top-10 fnt-poppins" type="keyword"
-                                                    value={renderData && renderData.Category}
-                                                    onChange={event => {
-                                                        let dupilcateName = { ...renderData }
-                                                        dupilcateName.Category = event.target.value
-                                                        setRenderData({ ...dupilcateName })
-                                                    }}
+                                                        value={renderData && renderData.Category}
+                                                        onChange={event => {
+                                                            let dupilcateName = { ...renderData }
+                                                            dupilcateName.Category = event.target.value
+                                                            setRenderData({ ...dupilcateName })
+                                                        }}
                                                     >
                                                         <option>Select Category</option>
                                                         <option value="signUp">SignUp Confirmation</option>
@@ -165,7 +165,8 @@ const EditTemplate = (props) => {
                                     <div className="radios mrg-top-20 mrg-left-50">
                                         <div className="radio">
                                             <label>Select Type</label>
-                                            <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked={renderData && renderData.Type == "Website"}
+                                            <input className="mrg-top-40" type="radio" id="radio1" name="radio"
+                                                checked={renderData && renderData.Type == "Website"}
                                                 onChange={event => {
                                                     let dupilcateName = { ...renderData }
                                                     dupilcateName.Type = event.target.value

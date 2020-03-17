@@ -21,15 +21,7 @@ mutation userActivity(
           Name
           error
         }
-        userName {
-          Id
-          Name
-          Status
-          is_affiliated
-          CreatedDate
-          }
-        
-    
+
     }
     totaluserActivity
     totalPages
@@ -40,4 +32,12 @@ mutation userActivity(
   }
 `;
 
+
+// userName {
+//   Id
+//   Name
+//   Status
+//   is_affiliated
+//   CreatedDate
+//   }
 
