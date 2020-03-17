@@ -1,18 +1,25 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Style from './style'
 import { withRouter } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks'
 import { SINGLE_ADMIN } from '../../apollo/Quries/singleAdmin'
 import { standardDate } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
-
+import publicIp from 'public-ip'
 const AdminInformation = (props) => {
     let { history, match } = props;
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_ADMIN(id))
-
+    const [ipAddress, setIpAddress] = useState("");
+    console.log(data && data)
     let date = data && data.singleadminbyId && data.singleadminbyId.CreatedDate;
     date = standardDate(date).standardDate;
+    let getDate = data && data.singleadminbyId && data.singleadminbyId.Activity&& data.singleadminbyId.Activity.ModifiedDate;
+getDate = standardDate(date).standardDate;
+const publicIp = require('public-ip');
+(async () => {
+    setIpAddress(await publicIp.v4());
+})();
     return (
         <>
             {!loading ?
@@ -89,30 +96,25 @@ const AdminInformation = (props) => {
                                     <tr className="table-row-of-head fnt-poppins">
                                         <th>Modified By</th>
                                         <th>Date</th>
-                                        <th>Time</th>
+                                       
                                         <th className="bodr-of-none">IP Address</th>
                                     </tr>
                                 </thead>
                                 <tbody className="table-of-data">
-                                    <tr className="table-row-data-of-body fnt-poppins">
-                                        <td>Excellence in Learning & Development Form</td>
-                                        <td>03-18-2019</td>
-                                        <td>09-03-2019</td>
-                                        <td>sub view</td>
-                                    </tr>
-                                    <tr className="table-footer">
-                                        <td>Total</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>Number</td>
-                                    </tr>
+                                    {data && data.singleadminbyId && data.singleadminbyId.Activity ? data.singleadminbyId.Activity.map(single =>
+                                        <tr className="table-row-data-of-body fnt-poppins">
+                                            <td>{single.ModifiedBy}</td>
+                                            <td>{getDate}</td>
+                                            <td>{ipAddress}</td>
+                                        </tr>
+                                         ) : ""}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <Style />
                 </div>
-                : <Loader/>}
+                : <Loader />}
         </>
     );
 }
