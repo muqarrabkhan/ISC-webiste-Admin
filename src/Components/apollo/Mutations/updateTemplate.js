@@ -9,7 +9,8 @@ mutation updateatemplate(
     $FromText: String,
     $Content: String,
     $Status: String,
-    $Type: String
+    $Type: String,
+    $Category: String
     )
     {
         updateatemplate(
@@ -20,8 +21,9 @@ mutation updateatemplate(
             FromText: $FromText,
             Content: $Content
             Status:$Status,
-            Type:$Type
-            )
+            Type:$Type,
+            Category: $Category
+           )
         {
         error
         }

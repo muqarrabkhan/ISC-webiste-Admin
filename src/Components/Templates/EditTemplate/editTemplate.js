@@ -3,7 +3,7 @@ import CKEditor from "react-ckeditor-component";
 import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
 import { SINGLE_TEMPLATE } from '../../apollo/Quries/singleTemplate'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery , useMutation } from '@apollo/react-hooks'
 import { UPDATE_TEMPLATE } from '../../apollo/Mutations/updateTemplate'
 import Loader from '../../commonComponents/Loader/loader'
 
@@ -27,7 +27,8 @@ const EditTemplate = (props) => {
                 FromText: renderData.FromText,
                 Content: content,
                 Status: renderData.Status,
-                Type: renderData.Type
+                Type: renderData.Type,
+                Category:renderData.Category
             }
         }).then(res => {
             window.location.replace("/tamplates");
@@ -130,26 +131,37 @@ const EditTemplate = (props) => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="form-group has-margin-left-50">
-                                                    <div>
-                                                        <label>Select Category</label>
-                                                    </div>
-                                                    <div>
-                                                        <select className="mrg-top-10 fnt-poppins" type="keyword"
-                                                                                                                    >
-                                                            <option>Select Category</option>
-                                                            <option value="signUp">SignUp Confirmation</option>
-                                                            <option value="welcome">Welcome</option >
-                                                            <option value="CreateCampaign">Create Campaign</option >
-                                                        </select>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     {/* From Name* */}
 
                                     {/* radioButtons */}
+                                    <div className="form-group has-margin-left-50">
+                                        <div className="is-flex Form-Inputs-Fields mrg-top-10 fnt-poppins">
+                                            <div className="form-group">
+                                                <div>
+                                                    <label>Select Category</label>
+                                                </div>
+                                                <div>
+                                                    <select className="mrg-top-10 fnt-poppins" type="keyword"
+                                                    value={renderData && renderData.Category}
+                                                    onChange={event => {
+                                                        let dupilcateName = { ...renderData }
+                                                        dupilcateName.Category = event.target.value
+                                                        setRenderData({ ...dupilcateName })
+                                                    }}
+                                                    >
+                                                        <option>Select Category</option>
+                                                        <option value="signUp">SignUp Confirmation</option>
+                                                        <option value="welcome">Welcome</option >
+                                                        <option value="CreateCampaign">Create Campaign</option >
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="radios mrg-top-20 mrg-left-50">
                                         <div className="radio">
                                             <label>Select Type</label>

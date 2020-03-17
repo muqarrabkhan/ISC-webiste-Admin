@@ -12,6 +12,7 @@ export const SINGLE_TEMPLATE = (Id) => gql`
         Content
         Status
         Type
+        Category
     }
   }
 `;
