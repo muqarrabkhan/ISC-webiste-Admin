@@ -114,7 +114,7 @@ const EditTemplate = (props) => {
                                                 </div>
                                             </div>
                                             {/* Password* */}
-                                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                            <div className="is-flex Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                                 <div className="form-group">
                                                     <div>
                                                         <label>From Name*</label>
@@ -128,6 +128,20 @@ const EditTemplate = (props) => {
                                                                 setRenderData({ ...dupilcateName })
                                                             }}
                                                         />
+                                                    </div>
+                                                </div>
+                                                <div className="form-group has-margin-left-50">
+                                                    <div>
+                                                        <label>Select Category</label>
+                                                    </div>
+                                                    <div>
+                                                        <select className="mrg-top-10 fnt-poppins" type="keyword"
+                                                                                                                    >
+                                                            <option>Select Category</option>
+                                                            <option value="signUp">SignUp Confirmation</option>
+                                                            <option value="welcome">Welcome</option >
+                                                            <option value="CreateCampaign">Create Campaign</option >
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>

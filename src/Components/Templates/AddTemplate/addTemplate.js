@@ -18,6 +18,7 @@ const AddTemplate = (props) => {
     const [status, setStatus] = useState("");
     const [type, setType] = useState("");
     const [ipAddress, setIpAddress] = useState();
+    const [category, setCategory] = useState("");
 
     const publicIp = require('public-ip');
     (async () => {
@@ -41,7 +42,8 @@ const AddTemplate = (props) => {
                 Type: type,
                 CreatedIp: parseInt(ipAddress),
                 CreatedBy: 1,
-                CreatedDate: currentDate
+                CreatedDate: currentDate,
+                Category: category
             }
         }).then(res => {
             history.push("/tamplates")
@@ -92,6 +94,7 @@ const AddTemplate = (props) => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                     {/*Subject* */}
                                     <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
@@ -117,14 +120,14 @@ const AddTemplate = (props) => {
                                                 <input className="mrg-top-10" type="password" placeholder="Enter Keyword" value={password}
                                                     onChange={event => setPassword(event.target.value)}
                                                     required
-                                               />
+                                                />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {/* From Name* */}
-                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins is-flex">
                                 <div className="form-group">
                                     <div>
                                         <label>From Name*</label>
@@ -134,6 +137,22 @@ const AddTemplate = (props) => {
                                             onChange={event => setFromText(event.target.value)}
                                             required
                                         />
+                                    </div>
+                                </div>
+                                <div className="form-group has-margin-left-50">
+                                    <div>
+                                        <label>Select Category</label>
+                                    </div>
+                                    <div>
+                                        <select className="mrg-top-10 fnt-poppins" type="keyword"
+                                            onChange={event => setCategory(event.target.value)}
+                                            required
+                                        >
+                                            <option>Select Category</option>
+                                            <option value="signUp">SignUp Confirmation</option>
+                                            <option value="welcome">Welcome</option >
+                                            <option value="CreateCampaign">Create Campaign</option >
+                                        </select>
                                     </div>
                                 </div>
                             </div>

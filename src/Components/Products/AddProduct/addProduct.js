@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/react-hooks'
 import { CREATE_PRODUCT } from '../../apollo/Mutations/createProduct'
 import { productImages, campaignLogo_baseurl, productImage_BaseUrl } from '../../../config'
 import axios from 'axios'
-import { split } from 'apollo-link'
 
 const AddProduct = (props) => {
     let { history } = props
@@ -19,7 +18,7 @@ const AddProduct = (props) => {
     const [weight, setWeight] = useState("");
     const [height, setHeight] = useState("");
     const [width, setWidth] = useState("");
-    const [variation, setVariation] = useState([{ name: "", value: [] }])
+    const [variation, setVariation] = useState([{ name: "", value: "" }])
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
@@ -187,11 +186,10 @@ const AddProduct = (props) => {
                                     </div>
                                 </div>
                             </div>
-{/* a */}
                             <div className="Form-section2-main-div-of-inputs has-margin-top-10 is-flex">
                                 {/*Product Short Description**/}
                                 <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <div>
                                             <label className="mrg-top-20 fnt-poppins">Variation (Ex: Red,Yellow,Green/S,M,L Value Should be Comma Separated)
                                                 </label>
@@ -206,7 +204,7 @@ const AddProduct = (props) => {
                                                 }}
                                             />
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="Form-Inputs-Fields has-margin-top-20">
                                         <div className="form-group">
                                             <div>
@@ -223,7 +221,7 @@ const AddProduct = (props) => {
                                     </div>
                                 </div>
                                 <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <div>
                                             <label>Variation Label  (Ex: Color, Size etc)</label>
                                         </div>
@@ -237,7 +235,7 @@ const AddProduct = (props) => {
                                                 }}
                                             />
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="Form-Inputs-Fields has-margin-top-20">
                                         <div className="form-group">
                                             <div>
@@ -276,6 +274,31 @@ const AddProduct = (props) => {
                                                 <input className="mrg-top-10 fnt-poppins" type="name" placeholder="Enter Name"
                                                     value={weight}
                                                     onChange={event => setWeight(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Form-section2-main-div-of-inputs has-margin-top-10 ">
+                                {/*Product Short Description**/}
+                                <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins is-flex">
+                                    <div className="form-group">
+                                        <div>
+                                            <label>Variation</label>
+                                        </div>
+                                        <div>
+                                            <input className="mrg-top-10" type="slug"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="Form-Inputs-Fields has-margin-left-50">
+                                        <div className="form-group">
+                                            <div>
+                                                <label className="mrg-top-20 fnt-poppins">Variation Label</label>
+                                            </div>
+                                            <div>
+                                                <input className="mrg-top-10 fnt-poppins" type="name" placeholder="Enter Name"
                                                 />
                                             </div>
                                         </div>

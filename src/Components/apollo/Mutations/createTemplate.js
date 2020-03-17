@@ -12,11 +12,12 @@ mutation createTemplate(
     $CreatedIp: Int,
     $CreatedBy: Int,
     $CreatedDate: DateTime,
-    $Type: String
+    $Type: String,
+    $Category:String
     ){
         
         createTemplate(
-            Title:$Title,
+        Title:$Title,
         Subject:$Subject,
         Email:$Email,
         Password:$Password,
@@ -26,6 +27,7 @@ mutation createTemplate(
         CreatedIp:$CreatedIp,
         CreatedBy:$CreatedBy,
         CreatedDate:$CreatedDate,
+        Category:$Category,
         Type:$Type
     )
     {
