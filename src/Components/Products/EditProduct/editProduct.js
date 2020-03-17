@@ -1,9 +1,12 @@
 import React from 'react'
 import Image from '../../../assets/Images/admin.png'
 import {withRouter} from 'react-router-dom'
- 
+
 const editProduct=(props) => {
-    let {history}=props;
+    let {history , match }=props;
+    let data = match.params && match.params.id ? match.params.id :"";
+    console.log("data",data)
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}

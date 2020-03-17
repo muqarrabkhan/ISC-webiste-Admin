@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
@@ -12,6 +12,7 @@ const ViewAnnouncement = (props) => {
     let { history } = props;
     const { loading, data } = useQuery(SINGLE_CATEGORY);
     const [deleteannouncement] = useMutation(DELETE_ANNOUNCEMENT);
+    const [onOff, setOnOff] = useState(true);
     const deleteAnnouncements = (id) => {
         deleteannouncement({
             variables: {
@@ -22,6 +23,7 @@ const ViewAnnouncement = (props) => {
             window.location.replace("/announcement")
         })
     }
+
     return (
 
         <>
@@ -55,18 +57,28 @@ const ViewAnnouncement = (props) => {
                                         {data && data.length !== 0 && data.getannouncements.map((single, index) =>
                                             <tr key={index} className="fnt-poppins background-white">
                                                 <td>{single.title}</td>
-                                                <td>
-                                                    <div className="switch-btn-of-tables">
-                                                        <label className="switch">
-                                                            <input type="checkbox" />
-                                                            <span className="slider"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                {/* buttons    */}
+                                                {single && single.flag == 1 ?
+                                                    <td>
+                                                        <div className="switch-btn-of-tables">
+                                                            <label className="switch">
+                                                                <input type="checkbox" checked={single.flag}/>
+                                                                <span className="slider"></span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    :
+                                                    <td>
+                                                        <div className="switch-btn-of-tables">
+                                                            <label className="switch">
+                                                                <input type="checkbox"/>
+                                                                <span className="slider"></span>
+                                                            </label>
+                                                        </div>
+                                                    </td>}
+                                                {/* buttons  */}
                                                 <td>
                                                     <div className="appling-flex-btns">
-                                                        <img onClick={() => history.push("/edit-announcement")} className="has-cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                        <img onClick={() => history.push("/edit-announcement/" + single.id)} className="has-cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                         <img className="delete-image-table has-cursor-pointer" alt="delete-button" onClick={() => deleteAnnouncements(single.id)} src={Deletelogo} />
                                                         <span onClick={() => history.push("/announcement-details/" + single.id)} className="cursor-pointer view-btn-of-table">View Details</span>
                                                     </div>

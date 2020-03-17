@@ -1,21 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CKEditor from "react-ckeditor-component";
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { SINGLE_PAGE } from '../../apollo/Quries/singlePage'
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { UPDATE_PAGE } from '../../apollo/Mutations/updatePage'
+import Loader from '../../commonComponents/Loader/loader'
 
-const EditPage= (props) => {
-    let{history}=props;
+const EditPage = (props) => {
+    let { history, match } = props;
     const [content, setContent] = useState("");
-    console.log("content", content);
+    let id = match.params && match.params.id ? match.params.id : "";
+    const { loading, data } = useQuery(SINGLE_PAGE(id));
+    const [editData] = useMutation(UPDATE_PAGE);
+    const [renderData, setRenderData] = useState("");
+
+    const updateUser = (event) => {
+        event.preventDefault();
+        editData({
+            variables: {
+                id: parseInt(id),
+                MetaKeywords: renderData.MetaKeywords,
+                pageTitle: renderData.pageTitle,
+                MetaDescription: renderData.MetaDescription,
+                pageHeading: renderData.pageHeading,
+                pageContent: renderData.pageContent
+            }
+        }).then(res => {
+            window.location.replace("/pages");
+        })
+    }
+
+    useEffect(() => {
+        setRenderData(data && data.singlewebpages ? { ...data.singlewebpages } : {});
+        setContent(data && data.singlewebpages && data.singlewebpages.pageContent ? data.singlewebpages.pageContent : "")
+    }, [data])
 
     return (
+        <>
+        {!loading ?
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Edit Page</h6>
-               <button onClick={()=>history.push("/pages")}className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/pages")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form>
+            <form onSubmit={event => updateUser(event)}>
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
@@ -29,7 +59,14 @@ const EditPage= (props) => {
                                     <label>Meta Title*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator"
+                                        value={renderData && renderData.pageTitle}
+                                        onChange={event => {
+                                            let dupilcateName = { ...renderData }
+                                            dupilcateName.pageTitle = event.target.value
+                                            setRenderData({ ...dupilcateName })
+                                        }}
+                                    />
                                 </div>
                             </div>
                             {/* Meta Description**/}
@@ -38,7 +75,14 @@ const EditPage= (props) => {
                                     <label>Meta Description*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <textarea className="textarea-of-admistrator" />
+                                    <textarea className="textarea-of-admistrator"
+                                        value={renderData && renderData.MetaDescription}
+                                        onChange={event => {
+                                            let dupilcateName = { ...renderData }
+                                            dupilcateName.MetaDescription = event.target.value
+                                            setRenderData({ ...dupilcateName })
+                                        }}
+                                    />
                                 </div>
                             </div>
                             {/*Meta Keywords**/}
@@ -47,16 +91,14 @@ const EditPage= (props) => {
                                     <label>Meta Keywords*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
-                                </div>
-                            </div>
-                            {/*Slug***/}
-                            <div className="mrg-left-60 mrg-top-20 fnt-poppins">
-                                <div>
-                                    <label>Slug*</label>
-                                </div>
-                                <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator"
+                                        value={renderData && renderData.MetaKeywords}
+                                        onChange={event => {
+                                            let dupilcateName = { ...renderData }
+                                            dupilcateName.MetaKeywords = event.target.value
+                                            setRenderData({ ...dupilcateName })
+                                        }}
+                                    />
                                 </div>
                             </div>
                             {/*Page Heading***/}
@@ -65,7 +107,14 @@ const EditPage= (props) => {
                                     <label>Page Heading*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" />
+                                    <input className="inputs-of-admistrator"
+                                        value={renderData && renderData.pageHeading}
+                                        onChange={event => {
+                                            let dupilcateName = { ...renderData }
+                                            dupilcateName.pageHeading = event.target.value
+                                            setRenderData({ ...dupilcateName })
+                                        }}
+                                    />
                                 </div>
                             </div>
                             {/*Page Content**/}
@@ -77,7 +126,9 @@ const EditPage= (props) => {
                                     <CKEditor
                                         content={content ? content : ""}
                                         events={{
-                                            "change": (event) => setContent(event.editor.getData())
+                                            "change": (event) => {
+                                                setContent(event.editor.getData())
+                                            }
                                         }}
                                         className="form-control" placeholder="Enter Description" rows="5" />
                                 </div>
@@ -85,13 +136,15 @@ const EditPage= (props) => {
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+        :<Loader/>}
+        </>
     );
 }
 export default withRouter(EditPage);

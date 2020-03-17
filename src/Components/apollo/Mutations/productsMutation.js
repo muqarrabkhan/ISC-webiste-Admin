@@ -12,6 +12,7 @@ mutation getAllProducts($page:Int,
                 Status
                 CreatedBy
                 image
+                sale_price
                 base_price
               }
               totalProducts

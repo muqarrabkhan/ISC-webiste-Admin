@@ -6,6 +6,7 @@ mutation adminspagination($page:Int,$limit:Int)
         adminspagination(page:$page,limit:$limit)
         {
             admins{
+                Id
                 Name
                 Email
                 Status

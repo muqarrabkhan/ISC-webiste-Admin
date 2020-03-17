@@ -93,7 +93,7 @@ const AddSetting = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <select onChange={event => setSettingType(event.target.value)} className="inputs-of-admistrator fnt-poppins">
-                                        <option>-:Select Type:-</option>
+                                        <option>Select Type</option>
                                         <option value="General">General</option>
                                         <option value="Payment">Payment</option>
                                         <option value="Social">Social</option>

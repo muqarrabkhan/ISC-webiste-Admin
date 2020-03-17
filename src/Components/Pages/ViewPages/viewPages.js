@@ -95,7 +95,7 @@ const ViewPages = (props) => {
                                             <td>{single.slug ? single.slug : "-"}</td>
                                             <td>
                                                 <div className="is-flex">
-                                                    <img onClick={() => history.push("/edit-pages")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                    <img onClick={() => history.push("/edit-pages/"+single.id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                     <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={()=>deletePages(single.id)} src={Deletelogo} />
                                                 </div>
                                             </td>

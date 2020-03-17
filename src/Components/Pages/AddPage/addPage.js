@@ -15,6 +15,7 @@ const AddPage = (props) => {
     const [btnText, setBtnText] = useState("Save");
     const [pageContent, setPageContent] = useState("");
     const [ipAddress, setIpAddress] = useState();
+
     const [data] = useMutation(CREATE_WEB_PAGE);
     const publicIp = require('public-ip');
     (async () => {
@@ -22,48 +23,13 @@ const AddPage = (props) => {
     })();
     const addPage = (event) => {
         event.preventDefault();
-
-        // if (!metaKeywords) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (!metaDescription) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (!pageTitle) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (!pageHeading) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-
-        // } if (!pageContent) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // else {
-        console.log(
-            data({
-                variables: {
-                    MetaKeywords: metaKeywords,
-                    pageTitle: pageTitle,
-                    pageHeading: pageHeading,
-                    MetaDescription: metaDescription,
-                    pageContent: pageContent,
-                    createdBy: 1,
-                    createdIp: parseInt(ipAddress),
-                }
-            })
-        )
         data({
             variables: {
                 MetaKeywords: metaKeywords,
                 pageTitle: pageTitle,
                 pageHeading: pageHeading,
                 MetaDescription: metaDescription,
-                pageContent: pageContent,
+                pageContent: content,
                 createdBy: 1,
                 createdIp: parseInt(ipAddress),
             }
@@ -72,7 +38,7 @@ const AddPage = (props) => {
             history.push("/pages")
         })
     }
-    // }
+
 
 
 
@@ -139,13 +105,17 @@ const AddPage = (props) => {
                                     <label>Page Content</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <CKEditor
+                                    <CKEditor 
+                                        value={content}
                                         content={content ? content : ""}
                                         events={{
                                             "change": (event) => setContent(event.editor.getData())
                                         }}
                                         className="form-control" placeholder="Enter Description" rows="5" required value={pageContent}
-                                        onChange={event => setPageContent(event.target.value)} />
+                                        onChange={event => {
+                                            setContent(event.target.value)
+                                        }
+                                        } />
                                 </div>
                             </div>
                             {/*buttons*/}

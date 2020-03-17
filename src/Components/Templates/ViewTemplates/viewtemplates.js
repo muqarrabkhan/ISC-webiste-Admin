@@ -101,7 +101,7 @@ const ViewTemplate = (props) => {
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).standardDate : "-"}</td>
                                             <td>
                                                 <div style={{ display: "flex" }}>
-                                                    <img onClick={() => history.push("/edit-tamplates")} className="has-cursor-pointer edit-image-table" alt="" src={Editlogo} />
+                                                    <img onClick={() => history.push("/edit-tamplates/"+single.Id)} className="has-cursor-pointer edit-image-table" alt="" src={Editlogo} />
                                                     <img className=" has-cursor-pointer delete-image-table" alt="" onClick={()=>deleteTemplates(single.Id)} src={Deletelogo} />
                                                 </div>
                                             </td>

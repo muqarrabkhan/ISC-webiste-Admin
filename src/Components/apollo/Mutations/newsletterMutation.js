@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const NEWSLETTERS =gql `
+export const NEWSLETTERS = gql`
 mutation newsletters($page:Int,$limit:Int)
     {
         newsletters(page:$page,limit:$limit)
@@ -10,9 +10,10 @@ mutation newsletters($page:Int,$limit:Int)
                 datetime
                 status 
                 Template{
-                    Title
-                    Email
-                  }
+                Title
+                Email
+                Id    
+            }
               }
               totalPages
               currentPage

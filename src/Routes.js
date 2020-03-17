@@ -92,18 +92,23 @@ const AllRouters = (props) => {
                         <Switch>
                             {/* Administration */}
                             <Route path={"/add-administrator"} component={AddAdministrator} />
+                            <Route path={"/admin-information/:id"} component={AdminInformation} />
                             <Route path={"/admin-information"} component={AdminInformation} />
+                            <Route path={"/edit-administrator/:id"} component={EditAdministrator} />
                             <Route path={"/edit-administrator"} component={EditAdministrator} />
                             <Route path={"/administrator"} component={ViewAdministrator} />
                             {/* Users */}
                             <Route path={"/add-user"} component={AddUser} />
+                            <Route path={"/edit-user/:id"} component={EditUser} />
                             <Route path={"/edit-user"} component={EditUser} />
                             <Route path={"/user-information-campaings"} component={UserInformationCampaigns} />
+                            <Route path={"/user-information-activities/:id"} component={UserInformationActivities} />
                             <Route path={"/user-information-activities"} component={UserInformationActivities} />
                             <Route path={"/view-activities"} component={ViewActivities} />
                             <Route path={"/users"} component={ViewUser} />
                             {/* Subscription */}
                             <Route path={"/add-subscription-record"} component={AddSubscriptionRecord} />
+                            <Route path={"/edit-subscription/:id"} component={EditSubscription} />
                             <Route path={"/edit-subscription"} component={EditSubscription} />
                             <Route path={"/edit-subscription-detail"} component={EditSubscriptionDetails} />
                             <Route path={"/subscription-detail-record"} component={SubscriptionDetailRecord} />
@@ -112,12 +117,14 @@ const AllRouters = (props) => {
                             <Route path={"/add-announcement"} component={AddAnnouncement} />
                             <Route path={"/announcement-details/:id"} component={AnnouncementDetail} />
                             <Route path={"/announcement-details"} component={AnnouncementDetail} />
+                            <Route path={"/edit-announcement/:id"} component={EditAnnouncemnent} />
                             <Route path={"/edit-announcement"} component={EditAnnouncemnent} />
                             <Route path={"/announcement"} component={ViewAnnouncement} />
                             {/* Cateories */}
                             <Route path={"/add-category"} component={AddCategory} />
                             <Route path={"/category-details/:id"} component={CategoryDetails} />
                             <Route path={"/category-details"} component={CategoryDetails} />
+                            <Route path={"/edit-category/:id"} component={EditCategory} />
                             <Route path={"/edit-category"} component={EditCategory} />
                             <Route path={"/category"} component={ViewCategory} />
                             {/* Newsletter */}
@@ -126,10 +133,12 @@ const AllRouters = (props) => {
                             <Route path={"/newsletter"} component={ViewNewsLetter} />
                             {/* Pages */}
                             <Route path={"/add-pages"} component={AddPages} />
+                            <Route path={"/edit-pages/:id"} component={EditPages} />
                             <Route path={"/edit-pages"} component={EditPages} />
                             <Route path={"/pages"} component={ViewPages} />
                             {/* Settings */}
                             <Route path={"/add-setting"} component={AddSetting} />
+                            <Route path={"/edit-setting/:id"} component={EditSetting} />
                             <Route path={"/edit-setting"} component={EditSetting} />
                             <Route path={"/live-setting"} component={LiveSetting} />
                             <Route path={"/setting"} component={ViewSetting} />
@@ -141,7 +150,9 @@ const AllRouters = (props) => {
                             {/* Product */}
                             <Route path={"/add-product"} component={AddProduct} />
                             <Route path={"/add-product-incamapaign"} component={AddProductInCampaign} />
+                            <Route path={"/edit-product/:id"} component={EditProduct} />
                             <Route path={"/edit-product"} component={EditProduct} />
+                            <Route path={"/view-all-campaign/:id"} component={ViewAllCampaign} />
                             <Route path={"/view-all-campaign"} component={ViewAllCampaign} />
                             <Route path={"/product"} component={ViewProduct} />
                             {/* Adsons */}
@@ -156,6 +167,7 @@ const AllRouters = (props) => {
                             <Route path={"/coupans"} component={ViewCoupans} />
                             {/* Templates */}
                             <Route path={"/add-tamplates"} component={AddTamplates} />
+                            <Route path={"/edit-tamplates/:id"} component={EditTamplates} />
                             <Route path={"/edit-tamplates"} component={EditTamplates} />
                             <Route path={"/tamplates"} component={ViewTamplates} />
                             {/* File */}

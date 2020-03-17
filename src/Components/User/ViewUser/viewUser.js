@@ -112,9 +112,9 @@ const ViewUser = (props) => {
                                             <td>{single.is_affiliated ? single.is_affiliated: "-"}</td>
                                             <td>
                                                 <div className="is-flex">
-                                                    <img onClick={() => history.push("/edit-user")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                    <img onClick={() => history.push("/edit-user/"+single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                     <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={()=>deleteUsers(single.Id)}src={Deletelogo} />
-                                                    <span onClick={() => history.push("/user-information-activities")} className="cursor-pointer view-btn-of-table">View Details</span>
+                                                    <span onClick={() => history.push("/user-information-activities/"+single.Id)} className="cursor-pointer view-btn-of-table">View Details</span>
                                                     <span className="view-btn-of-table">Affiliate User</span>
                                                 </div>
                                             </td>

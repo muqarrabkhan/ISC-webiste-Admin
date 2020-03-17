@@ -53,7 +53,7 @@ const ViewSetting = (props) => {
             }
         }).then(response=>{
             if (window.confirm("Are you sure you want to delete Data"));
-            window.location.replace("/setting")
+            // window.location.replace("/setting")
         })
     }
 
@@ -100,8 +100,8 @@ const ViewSetting = (props) => {
                                                 <td>{single.Keytext ? single.Keytext : "-"}</td>
                                                 <td>{single.setting_type ? single.setting_type : "-"}</td>
                                                 <td>
-                                                    <img onClick={() => history.push("/edit-setting")} className="cursor-pointer edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} />
-                                                    <img className="delete-image-table setting-edit-btn" alt="edit-button" onClick={()=> deleteSettings(single.ID)}src={Deletelogo} />
+                                                    <img onClick={() => history.push("/edit-setting/"+single.ID)} className="cursor-pointer edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} />
+                                                    <img className="has-cursor-pointer delete-image-table setting-edit-btn" alt="edit-button" onClick={()=> deleteSettings(single.ID)}src={Deletelogo} />
                                                 </td>
                                             </tr>
                                         )}

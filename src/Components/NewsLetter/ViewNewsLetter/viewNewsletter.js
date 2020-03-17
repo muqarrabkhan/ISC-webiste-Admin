@@ -92,7 +92,7 @@ const ViewNewsletter = (props) => {
                                                 </td>
                                                 <td>
                                                     <div className="applying-flex">
-                                                        <img onClick={() => history.push("/edit-newsletter")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                        <img onClick={() => history.push("/edit-newsletter/"+single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                         <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
                                                     </div>
                                                 </td>
