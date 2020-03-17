@@ -187,6 +187,7 @@ const AddProduct = (props) => {
                                     </div>
                                 </div>
                             </div>
+{/* a */}
                             <div className="Form-section2-main-div-of-inputs has-margin-top-10 is-flex">
                                 {/*Product Short Description**/}
                                 <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
