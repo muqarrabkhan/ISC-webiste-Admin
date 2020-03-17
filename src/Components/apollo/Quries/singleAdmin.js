@@ -10,7 +10,13 @@ export const SINGLE_ADMIN=(Id)=>gql`
         Name
         Status
         CreatedDate
-        
+        Activity
+        {
+          ModifiedBy
+          ModifiedDate
+          ModifiedIp
+          
+        }  
   }
 }
 `;

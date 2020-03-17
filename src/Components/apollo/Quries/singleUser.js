@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const SINGLE_USER=(Id)=>gql`
+export const SINGLE_USER = (Id) => gql`
 {
     getuserbyId(Id:${Id}){
         Id
@@ -10,7 +10,17 @@ export const SINGLE_USER=(Id)=>gql`
         Status
         CreatedIp
         FacebookId
+        CreatedDate  
+          useractivity {
+          Image
+           Type
+        CampaignName {
+         Name
+  }
+      is_activity_aws
         CreatedDate
-    }
+        CreatedIp
+}
+  }
   }
 `;

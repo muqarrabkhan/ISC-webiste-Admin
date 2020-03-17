@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { SINGLE_USER } from '../../../apollo/Quries/singleUser'
-import { useQuery  } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import { standardDate } from '../../../functions'
-
+import { viewActivities_img } from '../../../../config'
+import publicIp from 'public-ip'
 const UserInformation = (props) => {
     let { history, match } = props;
+    const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
+    console.log("test", data && data.getuserbyId);
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
-
+    let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
+    getDate = standardDate(getDate).time;
+    const publicIp = require('public-ip');
+    (async () => {
+        setIpAddress(await publicIp.v4());
+    })();
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -36,7 +44,7 @@ const UserInformation = (props) => {
                                     <div className="flex-justify fnt-poppins">
                                         <label>Name*</label>
                                         <input className=" fnt-poppins inputs-for-responsive" disabled
-                                            value={data && data.getuserbyId && data.getuserbyId.Name}
+                                            value={data && data.getuserbyId && data.getuserbyId.Name ? data.getuserbyId.Name : "--"}
                                         />
                                     </div>
                                 </div>
@@ -45,7 +53,7 @@ const UserInformation = (props) => {
                                         <div>
                                             <label>Email*</label>
                                             <input className="fnt-poppins inputs-for-responsive" disabled
-                                                value={data && data.getuserbyId && data.getuserbyId.Email}
+                                                value={data && data.getuserbyId && data.getuserbyId.Email ? data.getuserbyId.Email : "--"}
                                             />
                                         </div>
                                     </div>
@@ -53,7 +61,7 @@ const UserInformation = (props) => {
                                         <div>
                                             <label>Facebook Link*</label>
                                             <input className="fnt-poppins inputs-for-responsive" disabled
-                                                value={data && data.getuserbyId && data.getuserbyId.FacebookId}
+                                                value={data && data.getuserbyId && data.getuserbyId.FacebookId ? data.getuserbyId.FacebookId : "--"}
                                             />
                                         </div>
                                     </div>
@@ -61,7 +69,7 @@ const UserInformation = (props) => {
                                         <div>
                                             <label>Create Info*</label>
                                             <input className="fnt-poppins inputs-for-responsive" disabled
-                                                value={date}
+                                                value={date ? date : "--"}
                                             />
                                         </div>
                                     </div>
@@ -88,24 +96,22 @@ const UserInformation = (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>sub view</td>
-                                </tr>
-
-                                <tr className="table-footer">
-                                    <td>Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Number</td>
-                                </tr>
-
-
+                                {data && data.getuserbyId && data.getuserbyId.useractivity ? data.getuserbyId.useractivity.map(single =>
+                                    <tr className="table-row-data-of-body fnt-poppins">
+                                        {single && single.Image ?
+                                            <td className="has-margin-top-15" style={{
+                                                backgroundImage: `url(${single.Image ? viewActivities_img + single.Image : ""})`,
+                                                backgroundSize: 'contain',
+                                                height: '143px',
+                                                backgroundRepeat: 'no-repeat'
+                                            }}></td>
+                                            : <div style={{ marginTop: "10px", marginLeft: "20px", height: '143px' }}>No-Image</div>}
+                                        <td>{single.Type ? single.Type : "--"}</td>
+                                        <td>{single.CampaignName && single.CampaignName.Name ? single.CampaignName.Name : "--"}</td>
+                                        <td>{getDate ? getDate : "--"}</td>
+                                        <td>{ipAddress ? ipAddress : "--"}</td>
+                                    </tr>
+                                ):""}
                             </tbody>
                         </table>
                     </div>
