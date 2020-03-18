@@ -18,7 +18,6 @@ const AddAdministrator = (props) => {
     const [btnText, setBtnText] = useState("Save");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
-    const [roleIdValidator, setRoleIdValidator] = useState(false);
 
     let uid = uuid();
     const publicIp = require('public-ip');
@@ -54,9 +53,6 @@ const AddAdministrator = (props) => {
         if (!status) {
             setBtnText("UPLOADING");
             return 0;
-        }
-        if (!roleId) {
-            setRoleIdValidator(true);
         }
         else {
             data({
@@ -142,10 +138,7 @@ const AddAdministrator = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" required
-                                        onChange={event => {
-                                            setRoleIdValidator(false)
-                                            setRoleId(event.target.value)
-                                        }
+                                        onChange={event => {setRoleId(event.target.value)}
                                         }>
                                         <option >Select Role</option>
                                         <option value="1">Super Admin</option>
@@ -153,7 +146,6 @@ const AddAdministrator = (props) => {
                                         <option value="3">Creater</option>
                                     </select>
                                 </div>
-                                {roleId && "select RoleId" }
                             </div>
                             {/* Password*/}
                             {select &&

@@ -11,7 +11,6 @@ const UserInformation = (props) => {
     const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
-    console.log("test", data && data.getuserbyId);
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
     let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
@@ -79,8 +78,8 @@ const UserInformation = (props) => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                            <h6 onClick={() => history.push("/user-information-activities")} className="cursor-pointer fnt-poppins  mrg-left-20 border-bottom-inside-header-of-table">User Activity</h6>
-                            <h6 onClick={() => history.push("/user-information-campaings")} className="cursor-pointer fnt-poppins has-padding-left-20">Compaign</h6>
+                            <h6 onClick={() => history.push("/user-information-activities/"+id)} className="cursor-pointer fnt-poppins  mrg-left-20 border-bottom-inside-header-of-table">User Activity</h6>
+                            <h6 onClick={() => history.push("/user-information-campaings/"+id)} className="cursor-pointer fnt-poppins has-padding-left-20">Compaign</h6>
                         </div>
                     </div>
                     {/* Table-Title */}

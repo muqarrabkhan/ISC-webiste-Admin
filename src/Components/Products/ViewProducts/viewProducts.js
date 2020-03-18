@@ -140,7 +140,8 @@ const ViewProduct = (props) => {
                     </div>
                     <Style />
                 </div>
-                : <Loader />}
+                : 
+                <Loader />}
         </>
     );
 }

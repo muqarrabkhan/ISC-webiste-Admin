@@ -101,7 +101,7 @@ const AllRouters = (props) => {
                         <Route path={"/add-user"} component={AddUser} />
                         <Route path={"/edit-user/:id"} component={EditUser} />
                         <Route path={"/edit-user"} component={EditUser} />
-                        <Route path={"/user-information-campaings"} component={UserInformationCampaigns} />
+                        <Route path={"/user-information-campaings/:id"} component={UserInformationCampaigns} />
                         <Route path={"/user-information-activities/:id"} component={UserInformationActivities} />
                         <Route path={"/user-information-activities"} component={UserInformationActivities} />
                         <Route path={"/view-activities"} component={ViewActivities} />
