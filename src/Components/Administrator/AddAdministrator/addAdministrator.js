@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_ADMIN } from '../../apollo/Mutations/createadminmutation'
+import { CREATE_ADMIN } from '../../apollo/Mutations/createAdminMutation'
 import uuid from 'uuid'
 import publicIp from 'public-ip'
 
@@ -29,6 +29,7 @@ const AddAdministrator = (props) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
+       
         if (!name) {
             setBtnText("UPLOADING");
             return 0;
@@ -138,13 +139,17 @@ const AddAdministrator = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" required
-                                        onChange={event => {setRoleId(event.target.value)}
+                                        onChange={event => {
+                                           
+                                            setRoleId(event.target.value)
+                                        }
                                         }>
                                         <option >Select Role</option>
                                         <option value="1">Super Admin</option>
                                         <option value="2">Moderator</option>
                                         <option value="3">Creater</option>
                                     </select>
+                                  
                                 </div>
                             </div>
                             {/* Password*/}

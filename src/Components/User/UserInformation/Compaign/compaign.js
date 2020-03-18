@@ -27,7 +27,7 @@ const Campaign = (props) => {
                 {/* header */}
                 <div className="has-margin header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">User</h6>
-                    <button onClick={() => history.push("/user-information-activities")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                    <button onClick={() => history.push("/users/"+id)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
