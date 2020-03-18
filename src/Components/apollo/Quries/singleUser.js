@@ -9,7 +9,6 @@ export const SINGLE_USER = (Id) => gql`
         Password
         Status
         CreatedIp
-        FacebookId
         CreatedDate  
           useractivity {
           Image

@@ -11,6 +11,7 @@ const UserInformation = (props) => {
     const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
+    console.log("test",data)
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
     let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
@@ -99,7 +100,7 @@ const UserInformation = (props) => {
                                     <tr className="table-row-data-of-body fnt-poppins">
                                         {single && single.Image ?
                                             <td className="has-margin-top-15" style={{
-                                                backgroundImage: `url(${single.Image ? viewActivities_img + single.Image : ""})`,
+                                                backgroundImage: `url(${single.Image ? viewActivities_img + single.Image : "no image"})`,
                                                 backgroundSize: 'contain',
                                                 height: '143px',
                                                 backgroundRepeat: 'no-repeat'
