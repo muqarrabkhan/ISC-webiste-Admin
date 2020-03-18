@@ -4,7 +4,8 @@ import { withRouter} from 'react-router-dom'
 const CreateCompaign= (props) => {
     let {history}=props;
     const [initial] = useState('#5e72e4');
-    const [color, setColor] = useState({});
+    const [color, setColor] = useState("");
+    
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">

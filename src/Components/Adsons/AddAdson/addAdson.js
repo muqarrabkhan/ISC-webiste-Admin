@@ -9,7 +9,7 @@ const AddAdson = (props) => {
 
     const [initial] = useState('#5e72e4');
     const [showHide, setShowHide] = useState(false);
-    const [color, setColor] = useState({});
+    const [color, setColor] = useState("");
     const [addAdson] = useMutation(CREATE_ADSON);
     const [status, setStatus] = useState("");
     const [type, setType] = useState("");
@@ -33,7 +33,7 @@ const AddAdson = (props) => {
                 status: status,
                 place_on:parseInt(placeOn),
                 type: type,
-                // bgcolor: color,
+                bgcolor: color.hex.toString(),
                 ad_text: adText,
                 ad_button: adButton,
                 ad_image: adImage,
@@ -143,7 +143,7 @@ const AddAdson = (props) => {
                                     {color.hex}
                                 </div>
                                 <InputColor initialHexColor={initial}
-                                //  value={color} onChange={event => setColor(event.target.value)}
+                                  onChange={setColor}
                                   />
                             </div>
                             {showHide ?
