@@ -103,7 +103,7 @@ const ViewAdson = (props) => {
                                             <td>{single.status ? single.status : "-"}</td>
                                             <td>
                                                 <div className="appling-flex-btns">
-                                                    <img onClick={() => history.push("/edit-adson")} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                    <img onClick={() => history.push("/edit-adson/"+single.id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                     <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={() => deleteAdsons(single.id)} src={Deletelogo} />
                                                     <span onClick={() => history.push("/view-details/"+single.id)} className="cursor-pointer view-btn-of-table">View Details</span>
                                                 </div>

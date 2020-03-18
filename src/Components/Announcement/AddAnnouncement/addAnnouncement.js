@@ -50,6 +50,7 @@ const AddAnnouncement = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator"
+                                        required
                                         value={title}
                                         onChange={event => setTitle(event.target.value)}
                                     />
@@ -62,6 +63,7 @@ const AddAnnouncement = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <textarea className="textarea-of-admistrator"
+                                        required
                                         value={detail}
                                         onChange={event => setDetail(event.target.value)} />
                                 </div>
@@ -73,6 +75,7 @@ const AddAnnouncement = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator"
+                                        required
                                         value={link}
                                         onChange={event => setLink(event.target.value)}
                                     />

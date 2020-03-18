@@ -18,7 +18,7 @@ const AddProduct = (props) => {
     const [weight, setWeight] = useState("");
     const [height, setHeight] = useState("");
     const [width, setWidth] = useState("");
-    const [variation, setVariation] = useState([{ name: "", value: "" }])
+    const [variation, setVariation] = useState([])
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
@@ -33,7 +33,6 @@ const AddProduct = (props) => {
                 };
                 axios.post("https://isc-website-cms-services.herokuapp.com/uploadProductMedia", final).then(res => {
                     setImage(res.data.imageUrl);
-
                 });
             });
     };
@@ -48,12 +47,16 @@ const AddProduct = (props) => {
     };
 
     const addVariation = () => {
-        let obj = { name: variation.name, value: [variation.value].toString().split(',') }
-        console.log(obj)
+        let duplicateVariation = [...variation]
+        duplicateVariation.push({ name: "", value: "" })
+        setVariation(duplicateVariation);
     }
-
     const onSubmit = (event) => {
         event.preventDefault();
+        let duplicateVariation=[...variation]
+        duplicateVariation.forEach(sin => {
+            sin.value = sin.value.split(",");
+        })
         addProduct({
             variables: {
                 Name: name,
@@ -66,7 +69,7 @@ const AddProduct = (props) => {
                 height: parseFloat(height),
                 width: parseFloat(width),
                 length: parseFloat(length),
-                variation: variation
+                variation: duplicateVariation ? JSON.stringify(duplicateVariation) : JSON.stringify([])
             }
         }).then(res => {
             history.push("/product")
@@ -255,46 +258,50 @@ const AddProduct = (props) => {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="Form-section2-main-div-of-inputs has-margin-top-10 ">
                                 {/*Product Short Description**/}
-                                <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins is-flex">
-                                    <div className="form-group">
-                                        <div>
-                                            <label>Variation Label</label>
-                                        </div>
-                                        <div>
-                                            <input className="mrg-top-10" type="slug"
-                                                value={variation.name}
-                                                onChange={event => {
-                                                    let duplicateVariation = { ...variation }
-                                                    duplicateVariation.name = event.target.value
-                                                    setVariation(duplicateVariation)
-                                                }}
-                                            />
-                                            {/* <div className="btns-of-add mrg-top-30 fnt-poppins">
-                                                <button className="Save-btn-of-form fnt-poppins"
-                                                    onClick={() => addVariation()}
-                                                >Add Variation</button>
-                                            </div> */}
-                                        </div>
-                                    </div>
-                                    <div className="Form-Inputs-Fields has-margin-left-50">
+                                {variation && variation.map((single, index) =>
+                                    <div key={index} className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins is-flex">
                                         <div className="form-group">
                                             <div>
-                                                <label className="mrg-top-20 fnt-poppins">Variation Name</label>
+                                                <label>Variation Label</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10" type="slug" value={variation.value}
+                                                <input className="mrg-top-10" type="slug"
+                                                    value={single.name}
                                                     onChange={event => {
-                                                        let duplicateVariation = { ...variation }
-                                                        duplicateVariation.value = event.target.value
-                                                        duplicateVariation.value.toString().split(',')
+                                                        let duplicateVariation = [...variation]
+                                                        duplicateVariation[index].name = event.target.value
                                                         setVariation(duplicateVariation)
                                                     }}
                                                 />
+
+                                            </div>
+                                        </div>
+                                        <div className="Form-Inputs-Fields has-margin-left-50">
+                                            <div className="form-group">
+                                                <div>
+                                                    <label className="mrg-top-20 fnt-poppins">Variation Name</label>
+                                                </div>
+                                                <div>
+                                                    <input className="mrg-top-10" type="slug"
+                                                        value={single.value}
+                                                        onChange={event => {
+                                                            let duplicateVariation = [...variation]
+                                                            duplicateVariation[index].value = event.target.value
+                                                            setVariation(duplicateVariation)
+                                                        }}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                )}
+                                <div className="btns-of-add mrg-top-30 has-margin-left-60 fnt-poppins">
+                                    <span className="Save-btn-of-form fnt-poppins"
+                                        onClick={() => addVariation()}
+                                    >Add Variation</span>
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">

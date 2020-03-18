@@ -13,6 +13,7 @@ export const SINGLE_ADSONS =(id)=>gql`
         enddate
         type
         bgcolor
+        campaign_id
       }
   }
 `;

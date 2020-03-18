@@ -34,7 +34,6 @@ const AddPage = (props) => {
                 createdIp: parseInt(ipAddress),
             }
         }).then(res => {
-            console.log(res)
             history.push("/pages")
         })
     }

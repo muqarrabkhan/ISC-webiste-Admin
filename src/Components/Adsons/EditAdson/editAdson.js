@@ -1,21 +1,53 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import InputColor from 'react-input-color';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { SINGLE_ADSONS } from '../../apollo/Quries/singleAdson'
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { UPDATE_ADSON } from '../../apollo/Mutations/updateAdson'
 
-const EditAdson=(props) => {
-    let {history}=props;
-    
+const EditAdson = (props) => {
+    let { history, match } = props;
+    let id = match.params && match.params.id ? match.params.id : "";
+    const { loading, data } = useQuery(SINGLE_ADSONS(id))
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
+
+    const [editData] = useMutation(UPDATE_ADSON);
+    const [renderData, setRenderData] = useState("");
+
+    useEffect(() => {
+        setRenderData(data && data.getAdsonbyId ? {...data.getAdsonbyId} : "");
+    }, [data, data && data.getAdsonbyId])
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        editData({
+            variables: {
+                id: parseInt(id),
+                status: renderData.status,
+                place_on:parseInt(renderData.place_on),
+                type: renderData.type
+                // ad_text: adText,
+                // ad_button: adButton,
+                // ad_image: adImage,
+                // startdate: startDate,
+                // enddate: endDate,
+                // date_created: currentDate
+            }
+        }).then(res => {
+            history.push("/adson")
+        })
+    }
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update Adson</h6>
-                <button onClick={()=>history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form>
+            <form onSubmit={event=>onSubmit(event)}>
                 <div className="Table-of-administrator">
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
@@ -30,9 +62,18 @@ const EditAdson=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Status*</label>
                                             </div>
                                             <div>
-                                                <select className="mrg-top-10 fnt-poppins">
-                                                    <option>Enable</option>
-                                                    <option>Disable</option>
+                                                <select className="mrg-top-10 fnt-poppins"
+                                                    value={renderData && renderData.status}
+                                                    onChange={event => {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.status = event.target.value
+                                                        setRenderData(duplicateData)
+                                                    }
+                                                    }
+                                                >
+                                                    <option>Select Status</option>
+                                                    <option value="Enable">Enable</option>
+                                                    <option value="Disable">Disable</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -46,10 +87,18 @@ const EditAdson=(props) => {
                                                 <label>Place On*</label>
                                             </div>
                                             <div>
-                                                <select className="mrg-top-10 fnt-poppins">
-                                                    <option>Top Bar, Horizontal </option>
-                                                    <option>Side Bar, Vertical </option>
-                                                    <option>Bottom Bar Horizontal </option>
+                                                <select className="mrg-top-10 fnt-poppins"
+                                                    value={renderData && renderData.place_on}
+                                                    onChange={event => {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.place_on = event.target.value
+                                                        setRenderData(duplicateData)
+                                                    }
+                                                    }>
+                                                    <option>Select place_on</option>
+                                                    <option value="1">Top Bar, Horizontal</option>
+                                                    <option value="2">Side Bar, Vertical</option>
+                                                    <option value="3">Bottom Bar Horizontal</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -60,7 +109,14 @@ const EditAdson=(props) => {
                             <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
                                     <label>Select Type</label>
-                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio" checked />
+                                    <input className="mrg-top-40" type="radio" id="radio1" name="radio"
+                                        checked={renderData && renderData.type == "Global"}
+                                        onChange={event => {
+                                            let duplicateData = { ...renderData }
+                                            duplicateData.type = "Global"
+                                            setRenderData(duplicateData)
+                                        }
+                                        } />
                                     <label className="label-of-radio" for="radio1">
                                         <div className="checker"></div>
                                         Global
@@ -69,7 +125,15 @@ const EditAdson=(props) => {
                             </div>
                             <div className="radios mrg-left-50">
                                 <div className="radio">
-                                    <input type="radio" id="radio2" name="radio" />
+                                    <input type="radio" id="radio2" name="radio"
+                                        checked={renderData && renderData.type == "SpecificCampaign"}
+                                        onChange={event => {
+                                            let duplicateData = { ...renderData }
+                                            duplicateData.type = "SpecificCampaign"
+                                            setRenderData(duplicateData)
+                                        }
+                                        }
+                                    />
                                     <label className="label-of-radio" for="radio2">
                                         <div className="checker"></div>
                                         <div>Specific Campaign</div>
@@ -131,7 +195,15 @@ const EditAdson=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Ad Text</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins"
+                                                    value={renderData && renderData.ad_text}
+                                                    onChange={event => {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.ad_text = event.target.value
+                                                        setRenderData(duplicateData)
+                                                    }
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +216,15 @@ const EditAdson=(props) => {
                                                 <label>Ad Button Text</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10"></input>
+                                                <input className="mrg-top-10"
+                                                    value={renderData && renderData.ad_button}
+                                                    onChange={event => {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.ad_button = event.target.value
+                                                        setRenderData(duplicateData)
+                                                    }
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +239,15 @@ const EditAdson=(props) => {
                                                 <label className="mrg-top-20 fnt-poppins">Ad Image Url</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins"
+                                                    value={renderData && renderData.ad_image}
+                                                    onChange={event => {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.ad_image = event.target.value
+                                                        setRenderData(duplicateData)
+                                                    }
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +260,15 @@ const EditAdson=(props) => {
                                                 <label>Start Date*</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins"></input>
+                                                <input className="mrg-top-10 fnt-poppins"
+                                                    value={renderData && renderData.startdate}
+                                                    onChange={event => {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.startdate = event.target.value
+                                                        setRenderData(duplicateData)
+                                                    }
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -185,13 +281,21 @@ const EditAdson=(props) => {
                                         <label>End Date</label>
                                     </div>
                                     <div>
-                                        <input className="mrg-top-10 fnt-poppins"></input>
+                                        <input className="mrg-top-10 fnt-poppins"
+                                            value={renderData && renderData.enddate}
+                                            onChange={event => {
+                                                let duplicateData = { ...renderData }
+                                                duplicateData.enddate = event.target.value
+                                                setRenderData(duplicateData)
+                                            }
+                                            }
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>
                     </div>

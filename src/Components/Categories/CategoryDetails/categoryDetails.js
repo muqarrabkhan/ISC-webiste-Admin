@@ -12,11 +12,6 @@ const CategoryDetails = (props) => {
     let date = data && data.length !== 0 && data.SingleCategory ? data.SingleCategory.CreatedDate : "";
     date = standardDate(date).standardDate;
 
-    const ipInt = require('ip-to-int');
-    console.log("Ip To decimal ",ipInt('203.124.63.3').toInt());
-    console.log("Decimal to Ip",ipInt('3413917443').toIP());
-    
-
     return (
         <>
             {!loading ?
@@ -67,7 +62,9 @@ const CategoryDetails = (props) => {
                                     </div>
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Edit</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins"
+                                        onClick={() => history.push("/edit-category/"+id)}
+                                        >Edit</button>
                                     </div>
                                 </div>
                             </div>

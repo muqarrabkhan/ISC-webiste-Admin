@@ -59,7 +59,9 @@ const AddSetting = (props) => {
                                     <label>Name*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={fieldName}
+                                    <input className="inputs-of-admistrator"
+                                        required
+                                        value={fieldName}
                                         onChange={event => setFieldName(event.target.value)}
                                     />
                                 </div>
@@ -70,7 +72,9 @@ const AddSetting = (props) => {
                                     <label>Key*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={keyText}
+                                    <input className="inputs-of-admistrator"
+                                        required
+                                        value={keyText}
                                         onChange={event => setKeyText(event.target.value)}
                                     />
                                 </div>
@@ -81,7 +85,9 @@ const AddSetting = (props) => {
                                     <label>Value*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={value}
+                                    <input className="inputs-of-admistrator"
+                                        required
+                                        value={value}
                                         onChange={event => setvalue(event.target.value)}
                                     />
                                 </div>
@@ -92,7 +98,7 @@ const AddSetting = (props) => {
                                     <label>Setting type*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <select onChange={event => setSettingType(event.target.value)} className="inputs-of-admistrator fnt-poppins">
+                                    <select required onChange={event => setSettingType(event.target.value)} className="inputs-of-admistrator fnt-poppins">
                                         <option>Select Type</option>
                                         <option value="General">General</option>
                                         <option value="Payment">Payment</option>

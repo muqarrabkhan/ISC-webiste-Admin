@@ -60,7 +60,9 @@ const AnnouncementDetails = (props) => {
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Update</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins"
+                                        onClick={() => history.push("/edit-announcement/"+id)}
+                                        >Edit</button>
                                     </div>
                                 </div>
                             </div>

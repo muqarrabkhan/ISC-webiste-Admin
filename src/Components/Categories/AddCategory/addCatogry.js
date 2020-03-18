@@ -25,14 +25,13 @@ const AddCategory = (props) => {
                 description: description,
                 CreatedIp: parseInt(ipAddress),
                 CreatedBy: 1,
-                Status:"Enable"
+                Status: "Enable"
             }
         }).then(res => {
             history.push("/category")
         })
     }
 
-    console.log(ipAddress);
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -57,6 +56,7 @@ const AddCategory = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={name}
+                                        required
                                         onChange={event => setName(event.target.value)}
                                     />
                                 </div>
@@ -68,6 +68,7 @@ const AddCategory = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <textarea className="textarea-of-admistrator" value={description}
+                                        required
                                         onChange={event => setDiscription(event.target.value)}
                                     />
                                 </div>

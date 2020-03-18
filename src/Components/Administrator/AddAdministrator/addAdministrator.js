@@ -18,6 +18,7 @@ const AddAdministrator = (props) => {
     const [btnText, setBtnText] = useState("Save");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
+    const [roleIdValidator, setRoleIdValidator] = useState(false);
 
     let uid = uuid();
     const publicIp = require('public-ip');
@@ -29,32 +30,33 @@ const AddAdministrator = (props) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-        if (!name || !email) {
-            if (!name) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!email) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!password) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!confirmPassword) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (password !== confirmPassword) {
-                setBtnText("UPLOADING");
-                window.alert("Password not matching");
-                return 0;
-            }
-            if (!status) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
+        if (!name) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!email) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!password) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!confirmPassword) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (password !== confirmPassword) {
+            setBtnText("UPLOADING");
+            window.alert("Password not matching");
+            return 0;
+        }
+        if (!status) {
+            setBtnText("UPLOADING");
+            return 0;
+        }
+        if (!roleId) {
+            setRoleIdValidator(true);
         }
         else {
             data({
@@ -108,7 +110,7 @@ const AddAdministrator = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={name} required
-                                        onChange={event => setName(event.target.value)} />
+                                        onChange={event => { setName(event.target.value) }} />
                                 </div>
                             </div>
                             {/* Email*/}
@@ -117,7 +119,7 @@ const AddAdministrator = (props) => {
                                     <label>Email</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={email} required
+                                    <input className="inputs-of-admistrator" type="email" value={email} required
                                         onChange={event => setEmail(event.target.value)} />
                                 </div>
                             </div>
@@ -140,13 +142,18 @@ const AddAdministrator = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" required
-                                        onChange={event => setRoleId(event.target.value)}>
+                                        onChange={event => {
+                                            setRoleIdValidator(false)
+                                            setRoleId(event.target.value)
+                                        }
+                                        }>
                                         <option >Select Role</option>
                                         <option value="1">Super Admin</option>
                                         <option value="2">Moderator</option>
                                         <option value="3">Creater</option>
                                     </select>
                                 </div>
+                                {roleId && "select RoleId" }
                             </div>
                             {/* Password*/}
                             {select &&

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import { SINGLE_ADSONS } from '../../apollo/Quries/singleAdson'
 import Loader from '../../Loading/loader'
+
+
 const ViewDetails = (props) => {
     let { history, match } = props;
     let id = match.params && match.params.id ? match.params.id : "";
@@ -95,7 +97,7 @@ const ViewDetails = (props) => {
                                         <InputColor
                                             initialHexColor={initial} onChange={setColor}
                                             disabled
-                                            value={data && data.getAdsonbyId.bgcolor} />
+                                            value={data && data.getAdsonbyId && data.getAdsonbyId.bgcolor} />
                                     </div>
                                     <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                         <div className="Form-section1-main-div-of-inputs  ">
@@ -107,6 +109,7 @@ const ViewDetails = (props) => {
                                                     </div>
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins"
+                                                            value={data && data.getAdsonbyId.campaign_id}
                                                         />
                                                     </div>
                                                 </div>
@@ -120,7 +123,7 @@ const ViewDetails = (props) => {
                                                         <label>Compaign Url*</label>
                                                     </div>
                                                     <div>
-                                                        <input className="mrg-top-10"></input>
+                                                        <input className="mrg-top-10" />
                                                     </div>
                                                 </div>
                                             </div>

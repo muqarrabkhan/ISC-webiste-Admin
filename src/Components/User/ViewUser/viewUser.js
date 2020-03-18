@@ -30,7 +30,6 @@ const ViewUser = (props) => {
             setUsers(response && response.data && response.data.users ? response.data.users.users : []);
             setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
             setTotalCustomers(response && response.data.users && response.data.users.totalusers);
-            console.log(response && response.data.users && response.data.users.currentPage);
         })
     }
 

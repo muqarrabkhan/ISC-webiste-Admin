@@ -169,7 +169,8 @@ const EditTemplate = (props) => {
                                                 checked={renderData && renderData.Type == "Website"}
                                                 onChange={event => {
                                                     let dupilcateName = { ...renderData }
-                                                    dupilcateName.Type = event.target.value
+
+                                                    dupilcateName.Type = "Website"
                                                     setRenderData({ ...dupilcateName })
                                                 }}
                                             />
@@ -181,10 +182,11 @@ const EditTemplate = (props) => {
                                     </div>
                                     <div className="radios mrg-left-50">
                                         <div className="radio">
-                                            <input type="radio" id="radio2" name="radio" checked={renderData && renderData.Type == "NewsLetter"}
+                                            <input type="radio" id="radio2" name="radio"
+                                                checked={renderData && renderData.Type == "NewsLetter"}
                                                 onChange={event => {
                                                     let dupilcateName = { ...renderData }
-                                                    dupilcateName.Type = event.target.value
+                                                    dupilcateName.Type = "NewsLetter"
                                                     setRenderData({ ...dupilcateName })
                                                 }}
                                             />
@@ -198,10 +200,11 @@ const EditTemplate = (props) => {
                                     <div className="radios-of-group mrg-top-20 mrg-left-50">
                                         <div className="radio-of-group">
                                             <label>Select Status</label>
-                                            <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups" checked={renderData && renderData.Status == "Enable"}
+                                            <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups"
+                                                checked={renderData && renderData.Status == "Enable"}
                                                 onChange={event => {
                                                     let dupilcateName = { ...renderData }
-                                                    dupilcateName.Status = event.target.value
+                                                    dupilcateName.Status = "Enable"
                                                     setRenderData({ ...dupilcateName })
                                                 }}
                                             />
@@ -217,7 +220,7 @@ const EditTemplate = (props) => {
                                                 checked={renderData && renderData.Status == "Delete"}
                                                 onChange={event => {
                                                     let dupilcateName = { ...renderData }
-                                                    dupilcateName.Status = event.target.value
+                                                    dupilcateName.Status = "Delete"
                                                     setRenderData({ ...dupilcateName })
                                                 }}
                                             />

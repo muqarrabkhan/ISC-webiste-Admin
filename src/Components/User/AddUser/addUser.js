@@ -27,7 +27,6 @@ const AddUser = (props) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-        if (!name || !email) {
             if (!name) {
                 setBtnText("UPLOADING");
                 return 0;
@@ -53,7 +52,6 @@ const AddUser = (props) => {
                 setBtnText("UPLOADING");
                 return 0;
             }
-        }
         else {
             data({
                 variables: {
@@ -114,7 +112,7 @@ const AddUser = (props) => {
                                     <label>Email</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={email} required
+                                    <input className="inputs-of-admistrator" type="email" value={email} required
                                         onChange={event=>setEmail(event.target.value)}/>
                                 </div>
                             </div>
