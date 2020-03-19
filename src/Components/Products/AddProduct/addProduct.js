@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { CREATE_PRODUCT } from '../../apollo/Mutations/createProduct'
 import { productImages, campaignLogo_baseurl, productImage_BaseUrl } from '../../../config'
 import axios from 'axios'
+import { apiPath } from '../../../config'
 
 const AddProduct = (props) => {
     let { history } = props
@@ -31,7 +32,7 @@ const AddProduct = (props) => {
                     imageFile: data,
                     imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
                 };
-                axios.post("https://isc-website-cms-services.herokuapp.com/uploadProductMedia", final).then(res => {
+                axios.post(apiPath + '/uploadProductMedia', final).then(res => {
                     setImage(res.data.imageUrl);
                 });
             });
@@ -270,7 +271,7 @@ const AddProduct = (props) => {
                                             <div>
                                                 <input className="mrg-top-10" type="slug"
                                                     value={single.name}
-                                                    onChange={event => {
+                                                    onChange={event =>{
                                                         let duplicateVariation = [...variation]
                                                         duplicateVariation[index].name = event.target.value
                                                         setVariation(duplicateVariation)
@@ -299,7 +300,7 @@ const AddProduct = (props) => {
                                     </div>
                                 )}
                                 <div className="btns-of-add mrg-top-30 has-margin-left-60 fnt-poppins">
-                                    <span className="Save-btn-of-form fnt-poppins"
+                                    <span className="has-padding-5 Save-btn-of-form fnt-poppins"
                                         onClick={() => addVariation()}
                                     >Add Variation</span>
                                 </div>

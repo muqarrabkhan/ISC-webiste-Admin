@@ -29,31 +29,32 @@ const AddAdministrator = (props) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-       
-        if (!name) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (!email) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (!password) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (!confirmPassword) {
-            setBtnText("UPLOADING");
-            return 0;
-        }
-        if (password !== confirmPassword) {
-            setBtnText("UPLOADING");
-            window.alert("Password not matching");
-            return 0;
-        }
-        if (!status) {
-            setBtnText("UPLOADING");
-            return 0;
+        if (!name || !email || !password) {
+            if (!name) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (!email) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (!password) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (!confirmPassword) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
+            if (password !== confirmPassword) {
+                // setBtnText("UPLOADING");
+                window.alert("Password not matching");
+                return 0;
+            }
+            if (!status) {
+                setBtnText("UPLOADING");
+                return 0;
+            }
         }
         else {
             data({
@@ -77,10 +78,10 @@ const AddAdministrator = (props) => {
         if (select === false) {
             setSelect(true);
         }
-        else {
-            setSelect(false);
+        else{
             setPassword(uid.toString());
-            setConfirmPassword(uid.toString());
+            setConfirmPassword(setPassword);
+            setSelect(false);
         }
     }
 
@@ -140,7 +141,6 @@ const AddAdministrator = (props) => {
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" required
                                         onChange={event => {
-                                           
                                             setRoleId(event.target.value)
                                         }
                                         }>
@@ -149,7 +149,7 @@ const AddAdministrator = (props) => {
                                         <option value="2">Moderator</option>
                                         <option value="3">Creater</option>
                                     </select>
-                                  
+
                                 </div>
                             </div>
                             {/* Password*/}

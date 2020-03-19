@@ -151,7 +151,10 @@ const AddTemplate = (props) => {
                                             <option>Select Category</option>
                                             <option value="signUp">SignUp Confirmation</option>
                                             <option value="welcome">Welcome</option >
-                                            <option value="CreateCampaign">Create Campaign</option >
+                                            <option value="CreateCampaign">Create Campaign</option>
+                                            <option value="forgetPassword">Forget Password</option>
+                                            <option value="countCampaign">Campaign Count</option>
+                                            
                                         </select>
                                     </div>
                                 </div>

@@ -341,7 +341,7 @@ const EditProduct = (props) => {
                                     </div>
                                 )}
                                 <div className="btns-of-add mrg-top-30 has-margin-left-60 fnt-poppins">
-                                    <span className="Save-btn-of-form fnt-poppins"
+                                    <span className="has-padding-5 Save-btn-of-form fnt-poppins"
                                         onClick={() => addVariation()}
                                     >Add Variation</span>
                                 </div>

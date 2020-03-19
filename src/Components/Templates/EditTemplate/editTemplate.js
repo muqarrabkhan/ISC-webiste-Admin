@@ -156,6 +156,8 @@ const EditTemplate = (props) => {
                                                         <option value="signUp">SignUp Confirmation</option>
                                                         <option value="welcome">Welcome</option >
                                                         <option value="CreateCampaign">Create Campaign</option >
+                                                        <option value="forgetPassword">Forget Password</option>
+                                                        <option value="countCampaign">Campaign Count</option>
                                                     </select>
                                                 </div>
 
