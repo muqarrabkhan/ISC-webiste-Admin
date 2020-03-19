@@ -1,25 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { SINGLE_USER } from '../../../apollo/Quries/singleUser'
 import { useQuery } from '@apollo/react-hooks'
 import { standardDate } from '../../../functions'
 import { viewActivities_img } from '../../../../config'
-import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
+
 const UserInformation = (props) => {
     let { history, match } = props;
     const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
-    console.log("test",data)
+
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
     let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     getDate = standardDate(getDate).time;
+
     const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
+
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
+
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -79,8 +85,8 @@ const UserInformation = (props) => {
                     </div>
                     <div className="Table-Header">
                         <div className="is-flex">
-                            <h6 onClick={() => history.push("/user-information-activities/"+id)} className="cursor-pointer fnt-poppins  mrg-left-20 border-bottom-inside-header-of-table">User Activity</h6>
-                            <h6 onClick={() => history.push("/user-information-campaings/"+id)} className="cursor-pointer fnt-poppins has-padding-left-20">Compaign</h6>
+                            <h6 onClick={() => history.push("/user-information-activities/" + id)} className="cursor-pointer fnt-poppins  mrg-left-20 border-bottom-inside-header-of-table">User Activity</h6>
+                            <h6 onClick={() => history.push("/user-information-campaings/" + id)} className="cursor-pointer fnt-poppins has-padding-left-20">Compaign</h6>
                         </div>
                     </div>
                     {/* Table-Title */}
@@ -109,9 +115,9 @@ const UserInformation = (props) => {
                                         <td>{single.Type ? single.Type : "--"}</td>
                                         <td>{single.CampaignName && single.CampaignName.Name ? single.CampaignName.Name : "--"}</td>
                                         <td>{getDate ? getDate : "--"}</td>
-                                        <td>{ipAddress ? ipAddress : "--"}</td>
+                                        <td>{single.CreatedIp ? ipInt(single.CreatedIp).toInt() : ""}</td>
                                     </tr>
-                                ):""}
+                                ) : ""}
                             </tbody>
                         </table>
                     </div>

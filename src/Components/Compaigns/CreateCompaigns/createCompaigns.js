@@ -18,60 +18,12 @@ const CreateCompaign = (props) => {
     const [color, setColor] = useState("");
     const [secondaryColor, setSecondaryColor] = useState("");
     const [tertiary, setTertiaryColor] = useState("");
-
     const [addMoreImage, setAddMoreImage] = useState("");
     const [bannerimage, setBannerImage] = useState("");
     const [overLayimage, setOverlayImage] = useState("");
-
     const [createCampaign] = useMutation(CREATE_CAMPAIGN);
 
-    const addImage = () => {
-        let duplicateImage = [...addMoreImage]
-        duplicateImage.push({ image: "" })
-        setAddMoreImage(duplicateImage)
-    }
-
-
-    const uploadProductImage = (event) => {
-        const file = event.target.files[0];
-        getBase64(file).then(
-            data => {
-                let final = {
-                    imageFile: data,
-                    imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
-                };
-                axios.post(apiPath + "/uploadProductMedia", final).then(res => {
-                    setBannerImage(res.data.imageUrl);
-                });
-            });
-    };
-
-    const uploadOverlayImage = (event) => {
-        const file = event.target.files[0];
-        getBase64(file).then(
-            data => {
-                let final = {
-                    imageFile: data,
-                    imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
-                };
-                axios.post(apiPath + "/uploadProductMedia", final).then(res => {
-                    setOverlayImage(res.data.imageUrl)
-                });
-            });
-    };
-
-
-
-    const getBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-    };
-
-
+    // create Campaign State
     const [name, setName] = useState("")
     const [campaignType, setCampaignType] = useState("")
     const [shortDescription, setShortDescription] = useState("")
@@ -83,42 +35,95 @@ const CreateCompaign = (props) => {
     const [facebook, setfacebook_url] = useState("")
     const [twitter, settwitter_url] = useState("")
     const [website, setwebsite_url] = useState("")
-    const [primary_color, setPrimary_color] = useState("")
-    const [secondary_Color, setSecondary_Color] = useState("")
-    const [tertiary_Color, setTertiary_Color] = useState("")
-    const [overlay, setOverlay] = useState("")
-    const [banner, setBanner] = useState("")
-    // Createduser
-    // StorefrontId
+
+
+    const addImage = () => {
+        let duplicateImage = [...addMoreImage]
+        duplicateImage.push("")
+        setAddMoreImage(duplicateImage)
+    }
+
+
+    const uploadProductImage = (event) => {
+        const file = event.target.files[0];
+        getBase64(file).then(
+            data => {
+                let final = {
+                    imageFile: data,
+
+                };
+                axios.post(apiPath + "/bannerUpload", final).then(res => {
+                    setBannerImage(res.data.imageUrl);
+                });
+            });
+    };
+
+    const uploadOverlayImage = (event,index) => {
+        const file = event.target.files[0];
+        let duplicateImage = [...addMoreImage]
+        getBase64(file).then(
+            data => {
+                let final = {
+                    imageFile: data,
+                };
+                axios.post(apiPath + "/uploadLogo", final).then(res => {
+                    duplicateImage[index] =res.data.imageUrl; 
+                    setAddMoreImage(duplicateImage);
+                });
+            });
+    };
+
+    const getBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    };
+
+    const handeler = (value) => {
+        switch (value) {
+            case "Petition":
+                return setCampaignType("Petition")
+
+            case "Fundraiser":
+                return setCampaignType("Fundraiser")
+
+            case "Pledge":
+                return setCampaignType("Pledge")
+        }
+    }
 
 
     const onSubmit = (event) => {
         event.preventDefault();
         createCampaign({
             variables: {
-                // Name,
-                // CampaignType,
-                // ShortDescription,
-                // CategoryId,
-                // Description,
-                // StartDate:$StartDate,
-                // EndDate:$EndDate,
-                // goal_support,
-                // facebook_url,
-                // twitter_url,
-                // website_url,
-                // Primary_color,
-                // Secondary_color,
-                // Tertiary_color,
-                // Overlay,
-                // Banner,
-                // Createduser,
-                // StorefrontId
+                Name: name,
+                CampaignType: campaignType,
+                ShortDescription: shortDescription,
+                CategoryId: parseInt(categoryId),
+                Description: description,
+                StartDate: new Date().toISOString(),
+                EndDate: new Date().toISOString(),
+                goal_support: parseInt(goalSupport),
+                facebook_url: facebook,
+                twitter_url: twitter,
+                website_url: website,
+                Primary_color: color.hex.toString(),
+                Secondary_color: secondaryColor.hex.toString(),
+                Tertiary_color: tertiary.hex.toString(),
+                Logo: addMoreImage[0],
+                Banner: bannerimage,
+                Createduser: "Admin",
+                StorefrontId: 123
             }
         }).then(res => {
-            history.push("/product")
+            // history.push("/product")
         })
     }
+
 
 
     return (
@@ -129,7 +134,7 @@ const CreateCompaign = (props) => {
                 <button onClick={() => history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form >
+            <form onSubmit={event => onSubmit(event)}>
                 <div className="Table-of-administrator">
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
@@ -192,10 +197,10 @@ const CreateCompaign = (props) => {
                                 <div key={index}>
                                     <div className="Form-section2-uploading-image">
                                         <div className="has-padding-top-20">
-                                            {overLayimage ?
+                                            {single ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${overLayimage ? campaignLogo_baseurl + overLayimage : "no-image"})`,
+                                                        backgroundImage: `url(${campaignLogo_baseurl + single })`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
@@ -220,7 +225,8 @@ const CreateCompaign = (props) => {
                                             <input className="file-input fnt-poppins"
                                                 type="file" name="resume"
                                                 accept="image/*"
-                                                onChange={event => uploadOverlayImage(event)} />
+                                                onChange={event => uploadOverlayImage(event,index)}
+                                                 />
                                             <span className="file-cta">
                                                 <span className="file-icon">
                                                     <i className="fas fa-upload"></i>
@@ -332,28 +338,38 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label>Facebook URL(optional)</label>
+                                                <label>Select CampaignType</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="url" placeholder="Enter facebook url"
-                                                    value={facebook}
-                                                    onChange={event => setfacebook_url(event.target.value)}
+                                                <select className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"
+                                                    onChange={(event) => handeler(event.target.value)}
+                                                >
+                                                    <option>Select Campaign Type</option>
+                                                    <option value="Fundraiser">Fundraiser</option>
+                                                    <option value="Petition">Petition</option>
+                                                    <option value="Pledge">Petition</option>
 
-                                                />
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     {/* Hash Tag */}
-                                    {/* <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
+                                            {campaignType ?
+                                                <label className="">
+                                                    {campaignType === "Fundraiser" ? "Monetary Goal" : ""}
+                                                    {campaignType === "Petition" ? "Petition Goal" : ""}
+                                                    {campaignType === "Pledge" ? "No of Pledges Aiming For" : ""}
+                                                </label>
+                                                : "Select Campaign Type First"}
                                             <div>
-                                                <label>Hash-tag</label>
-                                            </div>
-                                            <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"
+                                                    onChange={(event) => setgoal_support(event.target.value)}
+                                                />
                                             </div>
                                         </div>
-                                    </div> */}
+                                    </div>
                                     {/* Start date */}
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
@@ -363,8 +379,7 @@ const CreateCompaign = (props) => {
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="date"
                                                     value={startDate}
-                                                    onChange={event => setName(event.target.value)}
-
+                                                    onChange={event => setStartDate(event.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -379,7 +394,8 @@ const CreateCompaign = (props) => {
                                                 <label >Category*</label>
                                             </div>
                                             <div>
-                                                <select className="has-margin-top-10 fnt-poppins">
+                                                <select className="has-margin-top-10 fnt-poppins"
+                                                    onChange={event => setCategoryId(event.target.value)}>
                                                     <option>Select Category</option>
                                                     {data && data.campaignCategories && data.campaignCategories.map((single, index) =>
                                                         <option value={single.Id}>{single.Name}</option>
@@ -396,7 +412,11 @@ const CreateCompaign = (props) => {
                                                 <label>Description</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"
+                                                    value={description}
+                                                    onChange={event => setDescription(event.target.value)}
+
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -405,10 +425,13 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label >Keyword</label>
+                                                <label>Facebook Url</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"
+                                                    value={facebook}
+                                                    onChange={(event) => setfacebook_url(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -419,7 +442,10 @@ const CreateCompaign = (props) => {
                                                 <label>Twitter Url</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="number" ></input>
+                                                <input className="mrg-top-10 fnt-poppins"
+                                                    value={twitter}
+                                                    onChange={event => settwitter_url(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -430,7 +456,10 @@ const CreateCompaign = (props) => {
                                                 <label >Website Url</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" />
+                                                <input className="mrg-top-10 fnt-poppins"
+                                                    value={website}
+                                                    onChange={event => setwebsite_url(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -441,7 +470,10 @@ const CreateCompaign = (props) => {
                                                 <label >End Date</label>
                                             </div>
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="date"></input>
+                                                <input className="mrg-top-10 fnt-poppins" type="date"
+                                                    value={endDate}
+                                                    onChange={event => setEndDate(event.target.value)}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -451,7 +483,7 @@ const CreateCompaign = (props) => {
                             {/* Cancel and Save button */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>
                     </div>

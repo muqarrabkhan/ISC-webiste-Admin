@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ADMIN } from '../../apollo/Mutations/createadminmutation'
@@ -21,9 +21,15 @@ const AddAdministrator = (props) => {
 
     let uid = uuid();
     const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
+    
+    useEffect(()=>{
+        publicIp.v4().then(ip=>{
+            setIpAddress(ip);
+        })
+    },[])
+
+    console.log(ipAddress)
+    
 
     const addAdmin = (event) => {
         event.preventDefault();
