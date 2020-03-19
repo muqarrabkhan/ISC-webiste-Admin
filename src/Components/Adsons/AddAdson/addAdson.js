@@ -3,6 +3,8 @@ import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_ADSON } from '../../apollo/Mutations/createAdson'
+import axios, { CancelToken } from "axios";
+import { apiPath } from '../../../config'
 
 const AddAdson = (props) => {
     let { history } = props;
@@ -21,6 +23,32 @@ const AddAdson = (props) => {
     const [bgColor, setBgColor] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    // const [searchList]
+
+    let cancel;
+
+    const onChageKeyword = (value) => {
+        cancel && cancel();
+        axios.post(
+            apiPath + "/campainNameSearch",
+            {
+                Name: value
+            },
+            {
+                cancelToken: new CancelToken(function executor(c) {
+                    // An executor function receives a cancel function as a parameter
+                    cancel = c;
+                })
+            }
+        )
+            .then(res =>{
+                console.log(res.data);
+             })
+
+    }
+
+
+
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
@@ -31,7 +59,7 @@ const AddAdson = (props) => {
             variables: {
                 user_id: 1,
                 status: status,
-                place_on:parseInt(placeOn),
+                place_on: parseInt(placeOn),
                 type: type,
                 bgcolor: color.hex.toString(),
                 ad_text: adText,
@@ -54,7 +82,7 @@ const AddAdson = (props) => {
                 <button onClick={() => history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form onSubmit={event=>onSubmit(event)}>
+            <form onSubmit={event => onSubmit(event)}>
                 <div className="Table-of-administrator">
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
@@ -143,8 +171,8 @@ const AddAdson = (props) => {
                                     {color.hex}
                                 </div>
                                 <InputColor initialHexColor={initial}
-                                  onChange={setColor}
-                                  />
+                                    onChange={setColor}
+                                />
                             </div>
                             {showHide ?
                                 <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
@@ -153,10 +181,12 @@ const AddAdson = (props) => {
                                         <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                             <div className="form-group">
                                                 <div>
-                                                    <label className="mrg-top-20 fnt-poppins">Compaign*</label>
+                                                    <label className="mrg-top-20 fnt-poppins">Compaign**</label>
                                                 </div>
                                                 <div>
-                                                    <input className="mrg-top-10 fnt-poppins" />
+                                                    <input className="mrg-top-10 fnt-poppins" 
+                                                    onChange={event=>onChageKeyword(event.target.value)}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

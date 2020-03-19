@@ -4,6 +4,8 @@ import{withRouter} from 'react-router-dom'
 
 const AddNewsletter= (props) => {
     let{history}=props;
+    
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}

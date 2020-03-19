@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
 import InputColor from 'react-input-color';
-import { withRouter} from 'react-router-dom'
-const CreateCompaign= (props) => {
-    let {history}=props;
+import { withRouter } from 'react-router-dom'
+const CreateCompaign = (props) => {
+    let { history } = props;
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState("");
-    
+    const [addMoreImage, setAddMoreImage] = useState("");
+
+    const addImage = () => {
+        let duplicateImage = {...addMoreImage}
+        duplicateImage.push({image:""})
+        setAddMoreImage(duplicateImage)
+    }
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Campaign</h6>
-                <button onClick={()=>history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form >
@@ -68,85 +74,98 @@ const CreateCompaign= (props) => {
                                 </div>
                             </div>
                             {/* Second choose file button */}
-                            <div className="field mrg-top-20 mrg-left-50">
-                                <div className="file is-small has-name ">
-                                    <label className="file-label ">
-                                        <input className="file-input  " type="file" name="resume" />
-                                        <span className="file-cta">
-                                            <span className="file-icon">
-                                                <i className="fas fa-upload"></i>
+                            {addMoreImage && addMoreImage.map((single, index) =>
+                                <div key={index}>
+                                    <div className="field mrg-top-20 mrg-left-50">
+                                        <div className="file is-small has-name ">
+                                            <label className="file-label ">
+                                                <input className="file-input  " type="file" name="resume"
+                                                    value={single.image}
+                                                    onChange={event => {
+                                                        let duplicateVariation = {...addMoreImage}
+                                                        duplicateVariation[index].image = event.target.value
+                                                        setAddMoreImage(duplicateVariation)
+                                                    }}
+                                                />
+                                                <span className="file-cta">
+                                                    <span className="file-icon">
+                                                        <i className="fas fa-upload"></i>
+                                                    </span>
+                                                    <span className="file-label fnt-poppins">
+                                                        Choose file...
                                             </span>
-                                            <span className="file-label fnt-poppins">
-                                                Choose file...
-                                            </span>
-                                        </span>
-                                        <span className="file-name fnt-poppins">
-                                            No file choosen...
+                                                </span>
+                                                <span className="file-name fnt-poppins">
+                                                    No file choosen...
                                          </span>
-                                    </label>
-                                </div>
-                            </div>
-                            {/* Thirt choose file button  */}
-                            <div className="field mrg-top-20 mrg-left-50">
-                                <div className="file is-small has-name ">
-                                    <label className="file-label ">
-                                        <input className="file-input  " type="file" name="resume" />
-                                        <span className="file-cta">
-                                            <span className="file-icon">
-                                                <i className="fas fa-upload"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {/* Thirt choose file button  */}
+                                    {/* <div className="field mrg-top-20 mrg-left-50">
+                                        <div className="file is-small has-name ">
+                                            <label className="file-label ">
+                                                <input className="file-input  " type="file" name="resume" />
+                                                <span className="file-cta">
+                                                    <span className="file-icon">
+                                                        <i className="fas fa-upload"></i>
+                                                    </span>
+                                                    <span className="file-label fnt-poppins">
+                                                        Choose file...
                                             </span>
-                                            <span className="file-label fnt-poppins">
-                                                Choose file...
-                                            </span>
+                                                </span>
+                                                <span className="file-name fnt-poppins">
+                                                    No file choosen...
                                         </span>
-                                        <span className="file-name fnt-poppins">
-                                            No file choosen...
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            {/* Fourth choose file button */}
-                            <div className="field mrg-top-20 mrg-left-50">
-                                <div className="file is-small has-name ">
-                                    <label className="file-label ">
-                                        <input className="file-input  " type="file" name="resume" />
-                                        <span className="file-cta">
-                                            <span className="file-icon">
-                                                <i className="fas fa-upload"></i>
-                                            </span>
-                                            <span className="file-label fnt-poppins">
-                                                Choose file...
+                                            </label>
+                                        </div>
+                                    </div> */}
+                                    {/* Fourth choose file button */}
+                                    {/* <div className="field mrg-top-20 mrg-left-50">
+                                        <div className="file is-small has-name ">
+                                            <label className="file-label ">
+                                                <input className="file-input  " type="file" name="resume" />
+                                                <span className="file-cta">
+                                                    <span className="file-icon">
+                                                        <i className="fas fa-upload"></i>
+                                                    </span>
+                                                    <span className="file-label fnt-poppins">
+                                                        Choose file...
                                            </span>
+                                                </span>
+                                                <span className="file-name fnt-poppins">
+                                                    No file choosen...
                                         </span>
-                                        <span className="file-name fnt-poppins">
-                                            No file choosen...
+                                            </label>
+                                        </div>
+                                    </div> */}
+                                    {/* Fifth choose file button */}
+                                    {/* <div className="field mrg-top-20 mrg-left-50">
+                                        <div className="file is-small has-name ">
+                                            <label className="file-label ">
+                                                <input className="file-input  " type="file" name="resume" />
+                                                <span className="file-cta">
+                                                    <span className="file-icon">
+                                                        <i className="fas fa-upload"></i>
+                                                    </span>
+                                                    <span className="file-label fnt-poppins">
+                                                        Choose file...
                                         </span>
-                                    </label>
-                                </div>
-                            </div>
-                            {/* Fifth choose file button */}
-                            <div className="field mrg-top-20 mrg-left-50">
-                                <div className="file is-small has-name ">
-                                    <label className="file-label ">
-                                        <input className="file-input  " type="file" name="resume" />
-                                        <span className="file-cta">
-                                            <span className="file-icon">
-                                                <i className="fas fa-upload"></i>
-                                            </span>
-                                            <span className="file-label fnt-poppins">
-                                                Choose file...
-                                        </span>
-                                        </span>
-                                        <span className="file-name fnt-poppins">
-                                            No file choosen...
+                                                </span>
+                                                <span className="file-name fnt-poppins">
+                                                    No file choosen...
                                      </span>
-                                    </label>
+                                            </label>
+                                        </div>
+                                    </div> */}
                                 </div>
-                            </div>
-                            <button className="Save-btn-of-form mrg-left-50 fnt-poppins">Delete</button>
+                            )}
+                            <span className="Save-btn-of-form mrg-left-50 fnt-poppins"
+                                onClick={() => addImage()}
+                            >Add Image</span>
                             {/* hashtag back color */}
                             <div className="mrg-left-50 mrg-top-30">
-                            <label className="fnt-poppins ">Hash Tag Back Color</label> 
+                                <label className="fnt-poppins ">Hash Tag Back Color</label>
                                 <div className="react-input-color has-margin-top-20"
                                     style={{
                                         width: 80,
@@ -156,7 +175,7 @@ const CreateCompaign= (props) => {
                                     }}>
                                     {color.hex}
                                 </div>
-                                       
+
                                 <InputColor initialHexColor={initial} onChange={setColor} />
                             </div>
 

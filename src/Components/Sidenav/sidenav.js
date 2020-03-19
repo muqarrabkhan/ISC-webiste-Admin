@@ -203,14 +203,14 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Adsons*/}
-                        <Link to={"/adson"}>
+                        {/* <Link to={"/adson"}>
                             <div className={"sidenav-name-logo" + currentActive("adson")}>
                                 <img className="administrator_icon"
                                     src={currentActive("adson") === "active" ? require('../../assets/Images/adsonsactive.png') : require('../../assets/Images/adson.png')}
                                     alt="Adson" />
                                 <span className="sidenav-link fnt-poppins">Adsons</span>
                             </div>
-                        </Link>
+                        </Link> */}
                         {/* Coupan */}
                         <Link to={"/coupans"}>
                             <div className={"sidenav-name-logo" + currentActive("coupans")}>
