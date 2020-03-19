@@ -1,18 +1,134 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { standardDate } from '../../functions/index'
+import ReactPaginate from "react-paginate";
+import { VIEW_CAMPAIGN } from '../../apollo/Mutations/campaignMutation'
 
-const viewcompaign= (props) => {
-    let {history}=props;
+const ViewCompaign = (props) => {
+    let { history } = props;
+    const [campaign, setCampaign] = useState([])
+    const [totalPages, setTotalPages] = useState(1);
+    const [page, setPage] = useState(1);
+    const [campaignType, setCampaignType] = useState("");
+    // const [totalCampaigns,setTotalCampaigns]=useState([]);
+    const [getCampaign] = useMutation(VIEW_CAMPAIGN);
+    let getDate = campaign && campaign.CreatedDate;
+    getDate = standardDate(getDate).standardDate;
+    console.log("test2", getDate)
+    const handlePageClick = (value) => {
+        setPage(value.selected + 1);
+        getCampaign({
+            variables: {
+                page: value.selected + 1,
+                limit: 10,
+                CampaignType: campaignType
+            }
+        }
+        ).then(res => {
+            setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+            setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+            // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+        })
+    }
+    useEffect(() => {
+        getCampaign({
+            variables: {
+                page: 1,
+                limit: 10,
+                CampaignType: ""
+            }
+        }).then(res => {
+            console.log("test", res)
+            setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+            setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+            // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+
+        })
+
+    }, [])
+   
+  
+    const typeHandler = (value) => {
+        switch (value) {
+            case "": {
+                setCampaignType(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: ""
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                })
+                return;
+            }
+            case "Support": {
+                setCampaignType(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "Support"
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                })
+                return;
+            }
+            case "Petition": {
+                setCampaignType(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "Petition"
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])   
+                })
+                return;
+            }
+            case "Pledge": {
+                setCampaignType(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "Pledge"
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : []           
+                })
+
+                return;
+            }
+        }
+    }
+
+
+
+
+
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
                 {/* header */}
                 <div className="header-of-viewAdministrator">
                     <h6 className="heading6-of-header fnt-poppins">Campaigns</h6>
-                   <button onClick={()=>history.push("/create-camapaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                    <button onClick={() => history.push("/create-camapaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                 </div>
                 {/* Table of Administrator  */}
                 <div className="Table-of-administrator">
@@ -51,11 +167,12 @@ const viewcompaign= (props) => {
                                 <option>Culture</option>
                                 <option>Political</option>
                             </select>
-                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
-                                <option>Select Compaign Type</option>
-                                <option>Support</option>
-                                <option>Petition</option>
-                                <option>Pledge</option>
+                            <select className="select-option-of-adminstrator fnt-poppins mrg-left-15"
+                                onChange={event => typeHandler(event.target.value)}>
+                                <option value="">All</option>
+                                <option value="Support">Support</option>
+                                <option value="Petition">Petition</option>
+                                <option value="Pledge">Pledge</option>
                             </select>
                             <select className="select-option-of-adminstrator fnt-poppins mrg-left-15">
                                 <option>Select Compaign Package</option>
@@ -117,56 +234,72 @@ const viewcompaign= (props) => {
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
-                                <tr className="table-row-data-of-body fnt-poppins">
-                                    <td>Excellence in Learning & Development Form</td>
-                                    <td>03-18-2019</td>
-                                    <td>09-03-2019</td>
-                                    <td>sub view</td>
-                                    <td>sub view</td>
-                                    <td>sub view</td>
-                                    <td>sub view</td>
-                                    <td>sub view</td>
-                                    <td>sub view</td>
-                                    <td>
-                                        <div className="switch-btn-of-tables">
-                                            <label className="switch">
-                                                <input type="checkbox" />
-                                                <span className="slider"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="switch-btn-of-tables">
-                                            <label className="switch">
-                                                <input type="checkbox" />
-                                                <span className="slider"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="switch-btn-of-tables">
-                                            <label className="switch">
-                                                <input type="checkbox" />
-                                                <span className="slider"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td className="btns-of-viewcompaign">
-                                        <div className="is-flex">
-                                            <img onClick={()=>history.push("/edit-campaign")} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
-                                            <img className="cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
-                                            <span className="cursor-pointer view-btn-of-table ">Verify</span>
-                                        </div>
-                                        <div className="mrg-top-10">
-                                        <span onClick={()=>history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
-                                        </div>
-                                        <div className="mrg-top-10">
-                                            <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {campaign && campaign.length !== 0 ? campaign.map(single =>
+                                    <tr className="table-row-data-of-body fnt-poppins">
+                                        <td>{single.Id}</td>
+                                        <td>{single.Name}</td>
+                                        <td>{single.CampaignType}</td>
+                                        <td>{single.CreatedBy}</td>
+                                        <td>{single.Verified}</td>
+                                        <td>{single.CategoryId}</td>
+                                        <td>{single.CreatedDate}</td>
+                                        <td>{single.supportCount}</td>
+                                        <td>{single.is_campaign_aws}</td>
+                                        <td>
+                                            <div className="switch-btn-of-tables">
+
+                                                <label className="switch">
+                                                    <input type="checkbox" checked={single && single.ShowOnList == 1 ? single.ShowOnList : ""} />
+                                                    <span className="slider"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="switch-btn-of-tables">
+                                                <label className="switch">
+                                                    <input type="checkbox" checked={single && single.Status == 1 ? single.Status : ""} />
+                                                    <span className="slider"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="switch-btn-of-tables">
+                                                <label className="switch">
+                                                    <input type="checkbox" checked={single && single.is_donation == 1 ? single.is_donation : ""} />
+                                                    <span className="slider"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td className="btns-of-viewcompaign">
+                                            <div className="is-flex">
+                                                <img onClick={() => history.push("/edit-campaign")} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
+                                                <img className="cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
+                                                <span className="cursor-pointer view-btn-of-table ">Verify</span>
+                                            </div>
+                                            <div className="mrg-top-10">
+                                                <span onClick={() => history.push("/Camapaign-details")} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
+                                            </div>
+                                            <div className="mrg-top-10">
+                                                <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ) : ""}
                             </tbody>
                         </table>
+                        <div className="has-margin-top-40">
+                            <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
+                                nextLabel={<span className="fa fa-chevron-right "> > </span>}
+                                breakLabel={". . ."}
+                                breakClassName={"break-me"}
+                                pageCount={totalPages}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageClick}
+                                containerClassName={"digit-icons main"}
+                                subContainerClassName={"container column"}
+                                activeClassName={"p-one"} />
+                        </div>
                     </div>
                 </div>
                 <Style />
@@ -175,4 +308,4 @@ const viewcompaign= (props) => {
     );
 }
 
-export default withRouter(viewcompaign);
+export default withRouter(ViewCompaign);
