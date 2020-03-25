@@ -20,7 +20,8 @@ export const CREATE_CAMPAIGN = gql`
     $Overlay: String,
     $Banner: String,
     $StorefrontId: Int,
-    $Logo:String
+    $Logo:String,
+    $CreatedIp:Long
     )
                        {
                         createCampaign(
@@ -42,7 +43,8 @@ export const CREATE_CAMPAIGN = gql`
                             Banner:$Banner,
                             Createduser:$Createduser,
                             StorefrontId:$StorefrontId,
-                            Logo:$Logo
+                            Logo:$Logo,
+                            CreatedIp:$CreatedIp
                             )
                 {
                         error

@@ -5,7 +5,7 @@ mutation createsettings(
     $fieldName: String,
     $Keytext: String,
     $value: String,
-    $createdIp: Int,
+    $createdIp: Long,
     $setting_type:String,
     $createdDate: DateTime
     ){

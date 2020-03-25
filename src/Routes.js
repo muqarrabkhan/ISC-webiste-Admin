@@ -17,6 +17,10 @@ import UserInformationCampaigns from './Components/User/UserInformation/Compaign
 import UserInformationActivities from './Components/User/UserInformation/UserActivity/userInformation'
 import ViewActivities from './Components/User/ViewActivities/viewActivities'
 import ViewUser from './Components/User/ViewUser/viewUser'
+// UserInterestType
+import AddUserInterest from './Components/UserInterestType/AddUserInterest/addUserInteres'
+import EditUserInterest from './Components/UserInterestType/EditUserInterest/editUserInteres'
+import ViewUserInterest from './Components/UserInterestType/ViewUserInterest/viewUserInterest'
 // Subscription
 import AddSubscriptionRecord from './Components/Subscription/AddSubscriptionRecord/addSubscriptionRecord'
 import EditSubscription from './Components/Subscription/EditSubscription/editSubscription'
@@ -131,6 +135,10 @@ const AllRouters = (props) => {
                         <Route path={"/add-newsletter"} component={AddNewsLetter} />
                         <Route path={"/edit-newsletter"} component={EditNewsLetter} />
                         <Route path={"/newsletter"} component={ViewNewsLetter} />
+                        {/* UserInterest Type */}
+                        <Route path={"/add-user-interest"} component={AddUserInterest} />
+                        <Route path={"/edit-user-interest/:id"} component={EditUserInterest} />
+                        <Route path={"/view-user-interest"} component={ViewUserInterest} />
                         {/* Pages */}
                         <Route path={"/add-pages"} component={AddPages} />
                         <Route path={"/edit-pages/:id"} component={EditPages} />
@@ -143,8 +151,10 @@ const AllRouters = (props) => {
                         <Route path={"/live-setting"} component={LiveSetting} />
                         <Route path={"/setting"} component={ViewSetting} />
                         {/* Campaigns */}
+                        <Route path={"/Camapaign-details/:id"} component={CampaignDetails} />
                         <Route path={"/Camapaign-details"} component={CampaignDetails} />
                         <Route path={"/create-camapaign"} component={CreateCamapaign} />
+                        <Route path={"/edit-campaign/:id"} component={EditCampaign} />
                         <Route path={"/edit-campaign"} component={EditCampaign} />
                         <Route path={"/campaign"} component={ViewCampaign} />
                         {/* Product */}

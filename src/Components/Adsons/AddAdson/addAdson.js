@@ -23,7 +23,6 @@ const AddAdson = (props) => {
     const [bgColor, setBgColor] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    // const [searchList]
 
     let cancel;
 
@@ -46,9 +45,6 @@ const AddAdson = (props) => {
              })
 
     }
-
-
-
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();

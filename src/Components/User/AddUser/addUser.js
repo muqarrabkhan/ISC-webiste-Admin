@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_USER } from '../../apollo/Mutations/createUser'
 import uuid from 'uuid'
+import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
 
 const AddUser = (props) => {
 
@@ -18,55 +20,12 @@ const AddUser = (props) => {
     const [data] = useMutation(CREATE_USER);
 
     let uid = uuid();
-    const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
 
-    const addUser = (event) => {
-        event.preventDefault();
-        let currentDate = new Date();
-        currentDate = currentDate.toISOString();
-            if (!name) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!email) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!password) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!confirmPassword) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (password !== confirmPassword) {
-                setBtnText("UPLOADING");
-                window.alert("Password not matching");
-                return 0;
-            }
-            if (!status) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-        else {
-            data({
-                variables: {
-                    Name: name,
-                    Email: email,
-                    Password: password ? password : uid.toString(),
-                    Status: "Enable",
-                    CreatedDate: currentDate,
-                    CreatedIp: parseInt(ipAddress)
-                }
-            }).then(res => {
-                history.push("/users")
-            })
-        }
-    }
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
 
     const hide = () => {
         if (select === false) {
@@ -79,6 +38,25 @@ const AddUser = (props) => {
         }
     }
 
+    const addUser = (event) => {
+        event.preventDefault();
+        let currentDate = new Date();
+        currentDate = currentDate.toISOString();
+            data({
+                variables: {
+                    Name: name,
+                    Email: email,
+                    Password: password ? password : uid.toString(),
+                    Status: "Enable",
+                    CreatedDate: currentDate,
+                    CreatedIp: ipInt(ipAddress).toInt()
+                }
+            }).then(res => {
+                history.push("/users")
+            })
+        }
+
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -87,7 +65,7 @@ const AddUser = (props) => {
                 <button onClick={() => history.push("/users")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form onSubmit={event=>addUser(event)}>
+            <form onSubmit={event => addUser(event)}>
                 <div className="Table-of-administrator">
                     <div className="background-of-table">
                         <div className="blanck-dev"></div>
@@ -102,7 +80,7 @@ const AddUser = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={name} required
-                                        onChange={event=>setName(event.target.value)}
+                                        onChange={event => setName(event.target.value)}
                                     />
                                 </div>
                             </div>
@@ -113,7 +91,7 @@ const AddUser = (props) => {
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" type="email" value={email} required
-                                        onChange={event=>setEmail(event.target.value)}/>
+                                        onChange={event => setEmail(event.target.value)} />
                                 </div>
                             </div>
                             {/* Select Password*/}
@@ -136,23 +114,23 @@ const AddUser = (props) => {
                                             <label>Password</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" required 
-                                            value={password} type="password"
-                                            onChange={event=>setPassword(event.target.value)}/>
+                                            <input className="inputs-of-admistrator" required
+                                                value={password} type="password"
+                                                onChange={event => setPassword(event.target.value)} />
                                         </div>
                                     </div>
                                     {/* Confirm Password*/}
-                                    <div className="mrg-left-60 mrg-top-20 fnt-poppins">
+                                    {/* <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                         <div>
                                             <label>Confirm Password</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <input className="inputs-of-admistrator" required
                                                 value={confirmPassword} type="password"
-                                                onChange={event=>setConfirmPassword(event.target.value)}
+                                                onChange={event => setConfirmPassword(event.target.value)}
                                             />
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             }
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">

@@ -16,12 +16,13 @@ mutation userActivity(
         Image
         CampaignId
         CreatedDate
+        CreatedIp
         CampaignName {
           Id
           Name
           error
         }
-
+        
     }
     totaluserActivity
     totalPages

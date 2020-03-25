@@ -7,7 +7,7 @@ mutation createUsers(
     $Password: String!,
     $Status: String,
     $CreatedDate: DateTime,
-    $CreatedIp: Int
+    $CreatedIp: Long
     ){
         createUsers(
             Name:$Name,

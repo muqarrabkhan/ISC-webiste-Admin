@@ -9,6 +9,7 @@ import {DELETE_USER} from '../../apollo/Mutations/deleteUser'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 
+
 const ViewUser = (props) => {
     let { history } = props;
     const [users, setUsers] = useState([]);
@@ -17,6 +18,7 @@ const ViewUser = (props) => {
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
+    const [ipAddress, setIpAddress] = useState();
 
     const pageHandler = (value) => {
         setPage(value.selected + 1);

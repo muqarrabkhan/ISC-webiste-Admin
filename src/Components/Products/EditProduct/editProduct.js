@@ -109,11 +109,11 @@ const EditProduct = (props) => {
                                     {renderData && renderData.image ?
                                         <div className="store-front-image"
                                             style={{
-                                                backgroundImage: `url(${renderData && renderData.image ? productImage_BaseUrl + renderData.image : "no-image"})`,
+                                                backgroundImage: `url(${renderData && renderData.image ? productImage_BaseUrl + renderData.image : ""})`,
                                                 height: "100px",
                                                 backgroundSize: "contain",
                                                 backgroundRepeat: "no-repeat",
-                                                marginLeft: "6%"
+                                                marginLeft: "7%"
                                             }}>
                                         </div>
                                         :

@@ -1,24 +1,20 @@
 import gql from 'graphql-tag'
 
-export const CREATE_NEWSLETTER =gql`
+export const CREATE_NEWSLETTER = gql`
 mutation createnewsletter(
     $name: String,
-    support_mailsettings_id: Int
-    datetime: String
+    $datetime: String
     $status: String
-    group: String
-    campaign_id: Int
-    is_thankyou: String
-    cron_status: String
-    date_created: DateTime
+    $group: String
+    $date_created: DateTime
     )
     {
-        createcategory(
-            Name:$Name,
-            description:$description,
-            CreatedIp:$CreatedIp,
-            CreatedBy:$CreatedBy,
-            Status:$Status
+        createnewsletter(
+            name:$name,
+            datetime:$datetime,
+            status:$status,
+            group:$group,
+            date_created:$date_created
             )
             {
                 error

@@ -4,6 +4,7 @@ export const SINGLE_CAMPAIGN = (Id) => gql`
 {
   getcampaignbyId(Id:${Id}){
     Name
+    Banner
     Id
     CategoryId
     supportCount
@@ -12,7 +13,17 @@ export const SINGLE_CAMPAIGN = (Id) => gql`
     ShowOnList
     CreatedBy
     CreatedDate
-    Status 
-}
+    Status
+    Tertiary_color
+    Secondary_color
+    Primary_color 
+    ShortDescription
+    Description
+    facebook_url
+    twitter_url
+    website_url
+    CampaignType
+    goal_support
+  }
   }
 `;

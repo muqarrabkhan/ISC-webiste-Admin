@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
@@ -6,6 +6,8 @@ import { campaignBanner_baseurl, campaignLogo_baseurl, apiPath } from '../../../
 import { CREATE_CAMPAIGN } from '../../apollo/Mutations/createCampaign'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
+import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
 
 const CreateCompaign = (props) => {
     let { history } = props;
@@ -22,7 +24,7 @@ const CreateCompaign = (props) => {
     const [bannerimage, setBannerImage] = useState("");
     const [overLayimage, setOverlayImage] = useState("");
     const [createCampaign] = useMutation(CREATE_CAMPAIGN);
-
+    const [ipAddress, setIpAddress] = useState();
     // create Campaign State
     const [name, setName] = useState("")
     const [campaignType, setCampaignType] = useState("")
@@ -43,7 +45,6 @@ const CreateCompaign = (props) => {
         setAddMoreImage(duplicateImage)
     }
 
-
     const uploadProductImage = (event) => {
         const file = event.target.files[0];
         getBase64(file).then(
@@ -58,7 +59,7 @@ const CreateCompaign = (props) => {
             });
     };
 
-    const uploadOverlayImage = (event,index) => {
+    const uploadOverlayImage = (event, index) => {
         const file = event.target.files[0];
         let duplicateImage = [...addMoreImage]
         getBase64(file).then(
@@ -67,7 +68,7 @@ const CreateCompaign = (props) => {
                     imageFile: data,
                 };
                 axios.post(apiPath + "/uploadLogo", final).then(res => {
-                    duplicateImage[index] =res.data.imageUrl; 
+                    duplicateImage[index] = res.data.imageUrl;
                     setAddMoreImage(duplicateImage);
                 });
             });
@@ -95,6 +96,11 @@ const CreateCompaign = (props) => {
         }
     }
 
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -108,23 +114,22 @@ const CreateCompaign = (props) => {
                 StartDate: new Date().toISOString(),
                 EndDate: new Date().toISOString(),
                 goal_support: parseInt(goalSupport),
-                facebook_url: facebook,
-                twitter_url: twitter,
-                website_url: website,
-                Primary_color: color.hex.toString(),
-                Secondary_color: secondaryColor.hex.toString(),
-                Tertiary_color: tertiary.hex.toString(),
-                Logo: addMoreImage[0],
-                Banner: bannerimage,
+                facebook_url: facebook ? facebook : "",
+                twitter_url: twitter ? twitter: "",
+                website_url: website ? website :"",
+                Primary_color: color.hex.toString() ? color.hex.toString() : "",
+                Secondary_color: secondaryColor.hex.toString() ? secondaryColor.hex.toString() : "",
+                Tertiary_color: tertiary.hex.toString() ? tertiary.hex.toString() : "",
+                Logo: addMoreImage[0] ? addMoreImage[0] : "",
+                Banner: bannerimage ? bannerimage : "",
                 Createduser: "Admin",
+                CreatedIp: ipInt(ipAddress).toInt(),
                 StorefrontId: 123
             }
         }).then(res => {
-            // history.push("/product")
+            history.push("/campaign")
         })
     }
-
-
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -143,7 +148,7 @@ const CreateCompaign = (props) => {
                             {/* choose file inputs start here */}
                             {/* Display Social Share Image */}
                             <div className="has-padding-top-20">
-                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Dispaly/Social Share Image</label>
+                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Banner Image</label>
                                 <div className="field mrg-top-20">
                                     <div className="Form-section2-uploading-image">
                                         <div className="has-padding-top-20">
@@ -154,7 +159,7 @@ const CreateCompaign = (props) => {
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "6%"
+                                                        marginLeft: "7%"
                                                     }}>
                                                 </div>
                                                 :
@@ -176,11 +181,11 @@ const CreateCompaign = (props) => {
                                                 type="file" name="resume"
                                                 accept="image/*"
                                                 onChange={event => uploadProductImage(event)} />
-                                            <span className="file-cta">
+                                            <span className="file-cta has-margin-top-5">
                                                 <span className="file-icon">
                                                     <i className="fas fa-upload"></i>
                                                 </span>
-                                                <span className="file-label">
+                                                <span className="file-label width-bt-80 ">
                                                     Choose file
                                                 </span>
                                             </span>
@@ -190,7 +195,7 @@ const CreateCompaign = (props) => {
                             </div>
                             {/* Overlays Image choose button start here */}
                             <div className="mrg-top-20">
-                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Overlays Image</label>
+                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Logo</label>
                             </div>
                             {/* Second choose file button */}
                             {addMoreImage && addMoreImage.map((single, index) =>
@@ -200,11 +205,11 @@ const CreateCompaign = (props) => {
                                             {single ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${campaignLogo_baseurl + single })`,
+                                                        backgroundImage: `url(${campaignLogo_baseurl + single})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "6%"
+                                                        marginLeft: "7%"
                                                     }}>
                                                 </div>
                                                 :
@@ -225,13 +230,13 @@ const CreateCompaign = (props) => {
                                             <input className="file-input fnt-poppins"
                                                 type="file" name="resume"
                                                 accept="image/*"
-                                                onChange={event => uploadOverlayImage(event,index)}
-                                                 />
-                                            <span className="file-cta">
+                                                onChange={event => uploadOverlayImage(event, index)}
+                                            />
+                                            <span className="file-cta has-margin-top-5">
                                                 <span className="file-icon">
                                                     <i className="fas fa-upload"></i>
                                                 </span>
-                                                <span className="file-label">
+                                                <span className="file-label width-bt-80">
                                                     Choose file
                                                 </span>
                                             </span>
@@ -319,7 +324,7 @@ const CreateCompaign = (props) => {
                                         </div>
                                     </div>
                                     {/* Category */}
-                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                    {/* <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
                                                 <label >Select Currency</label>
@@ -333,7 +338,7 @@ const CreateCompaign = (props) => {
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     {/* facebook url */}
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
@@ -380,6 +385,20 @@ const CreateCompaign = (props) => {
                                                 <input className="mrg-top-10 fnt-poppins" type="date"
                                                     value={startDate}
                                                     onChange={event => setStartDate(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* End date */}
+                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                        <div className="form-group">
+                                            <div>
+                                                <label >End Date</label>
+                                            </div>
+                                            <div>
+                                                <input className="mrg-top-10 fnt-poppins" type="date"
+                                                    value={endDate}
+                                                    onChange={event => setEndDate(event.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -459,20 +478,6 @@ const CreateCompaign = (props) => {
                                                 <input className="mrg-top-10 fnt-poppins"
                                                     value={website}
                                                     onChange={event => setwebsite_url(event.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* End date */}
-                                    <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
-                                        <div className="form-group">
-                                            <div>
-                                                <label >End Date</label>
-                                            </div>
-                                            <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="date"
-                                                    value={endDate}
-                                                    onChange={event => setEndDate(event.target.value)}
                                                 />
                                             </div>
                                         </div>

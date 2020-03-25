@@ -1,29 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_CATEGORY } from '../../apollo/Mutations/createCategory'
 import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
 
 const AddCategory = (props) => {
+    
     let { history } = props;
-
     const [addCategory] = useMutation(CREATE_CATEGORY);
     const [name, setName] = useState("");
     const [description, setDiscription] = useState("");
     const [ipAddress, setIpAddress] = useState("");
 
-    const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
-
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
     const createCategories = (event) => {
         event.preventDefault();
         addCategory({
             variables: {
                 Name: name,
                 description: description,
-                CreatedIp: parseInt(ipAddress),
+                CreatedIp: ipInt(ipAddress).toInt(),
                 CreatedBy: 1,
                 Status: "Enable"
             }

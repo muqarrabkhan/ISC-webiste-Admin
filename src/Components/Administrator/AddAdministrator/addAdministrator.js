@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_ADMIN } from '../../apollo/Mutations/createAdminMutation'
+import { CREATE_ADMIN } from '../../apollo/Mutations/createadminmutation'
 import uuid from 'uuid'
 import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
 
 const AddAdministrator = (props) => {
 
@@ -15,81 +16,101 @@ const AddAdministrator = (props) => {
     const [roleId, setRoleId] = useState([]);
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
+    const [passwordValidation, setPasswordValidation] = useState(false);
     const [btnText, setBtnText] = useState("Save");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
 
     let uid = uuid();
-    const publicIp = require('public-ip');
-    
-    useEffect(()=>{
-        publicIp.v4().then(ip=>{
+
+    useEffect(() => {
+        publicIp.v4().then(ip => {
             setIpAddress(ip);
         })
-    },[])
+    }, [])
 
-    console.log(ipAddress)
-    
-
-    const addAdmin = (event) => {
-        event.preventDefault();
-        let currentDate = new Date();
-        currentDate = currentDate.toISOString();
-        if (!name || !email || !password) {
-            if (!name) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!email) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!password) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (!confirmPassword) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-            if (password !== confirmPassword) {
-                // setBtnText("UPLOADING");
-                window.alert("Password not matching");
-                return 0;
-            }
-            if (!status) {
-                setBtnText("UPLOADING");
-                return 0;
-            }
-        }
-        else {
-            data({
-                variables: {
-                    Name: name,
-                    Email: email,
-                    Password: password ? password : uid.toString(),
-                    RoleId: parseInt(roleId),
-                    Status: "Enable",
-                    CreatedDate: currentDate,
-                    CreatedIp: parseInt(ipAddress),
-                    CreatedBy: 1
-                    // CreatedBy:parseInt(createdBy)
-                }
-            }).then(res => {
-                history.push("/administrator")
-            })
-        }
-    }
     const hide = () => {
         if (select === false) {
             setSelect(true);
         }
-        else{
+        else {
             setPassword(uid.toString());
             setConfirmPassword(setPassword);
             setSelect(false);
         }
     }
+
+    const addAdmin = (event) => {
+        event.preventDefault();
+        let currentDate = new Date();
+        currentDate = currentDate.toISOString();
+
+        // if (!name || !email || !password) {
+        // if (!name) {
+        //     setBtnText("UPLOADING");
+        //     return 0;
+        // }
+        // if (!email) {
+        //     setBtnText("UPLOADING");
+        //     return 0;
+        // }
+        // if (!password) {
+        //     setBtnText("UPLOADING");
+        //     return 0;
+        // }
+        // if (!confirmPassword) {
+        //     setBtnText("UPLOADING");
+        //     return 0;
+        // }
+        // if (password !== confirmPassword) {
+        //     // setBtnText("UPLOADING");
+        //     window.alert("Password not matching");
+        //     return 0;
+        // }
+        // if (!status) {
+        //     setBtnText("UPLOADING");
+        //     return 0;
+        // }
+        // }
+        if (select == false) {
+            data({
+                variables: {
+                    Name: name,
+                    Email: email,
+                    Password: uid.toString(),
+                    RoleId: parseInt(roleId),
+                    Status: "Enable",
+                    CreatedDate: currentDate,
+                    CreatedIp: ipInt(ipAddress).toInt(),
+                    CreatedBy: 1
+                }
+            }).then(res => {
+                history.push("/administrator")
+            })
+        }
+        else if (select === true) {
+            if (!password === confirmPassword) {
+                setBtnText("UPLOADING");
+            }
+            else if (password == confirmPassword) {
+                data({
+                    variables: {
+                        Name: name,
+                        Email: email,
+                        Password: password,
+                        RoleId: parseInt(roleId),
+                        Status: "Enable",
+                        CreatedDate: currentDate,
+                        CreatedIp: ipInt(ipAddress).toInt(),
+                        CreatedBy: 1
+                    }
+                }).then(res => {
+                    history.push("/administrator")
+                })
+            }
+        }
+    }
+
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -155,7 +176,6 @@ const AddAdministrator = (props) => {
                                         <option value="2">Moderator</option>
                                         <option value="3">Creater</option>
                                     </select>
-
                                 </div>
                             </div>
                             {/* Password*/}
@@ -168,15 +188,6 @@ const AddAdministrator = (props) => {
                                         <div className="mrg-top-10">
                                             <input type="password" className="inputs-of-admistrator" value={password} required
                                                 onChange={event => setPassword(event.target.value)} />
-                                        </div>
-                                    </div>
-                                    <div className="mrg-left-60 mrg-top-20 fnt-poppins">
-                                        <div>
-                                            <label>Confirm Password</label>
-                                        </div>
-                                        <div className="mrg-top-10">
-                                            <input type="password" className="inputs-of-admistrator" value={confirmPassword} required
-                                                onChange={event => setConfirmPassword(event.target.value)} />
                                         </div>
                                     </div>
                                 </>

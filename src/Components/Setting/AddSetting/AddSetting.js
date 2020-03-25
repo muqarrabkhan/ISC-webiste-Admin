@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_SETTING } from '../../apollo/Mutations/createSetting'
 import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
 
 const AddSetting = (props) => {
     let { history } = props;
@@ -14,10 +15,11 @@ const AddSetting = (props) => {
     const [settingType, setSettingType] = useState("");
     const [ipAddress, setIpAddress] = useState("");
 
-    const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
 
     const createSetting = (event) => {
         event.preventDefault();
@@ -27,7 +29,7 @@ const AddSetting = (props) => {
             variables: {
                 fieldName: fieldName,
                 Keytext: keyText,
-                CreatedIp: parseInt(ipAddress),
+                CreatedIp: ipInt(ipAddress).toInt(),
                 value: value,
                 setting_type: settingType,
                 createdDate: crntDate

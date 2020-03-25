@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import CKEditor from "react-ckeditor-component";
 import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_TEMPLATE } from '../../apollo/Mutations/createTemplate'
 import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
+
 
 const AddTemplate = (props) => {
     let { history } = props;
@@ -17,13 +19,14 @@ const AddTemplate = (props) => {
     const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
     const [type, setType] = useState("");
-    const [ipAddress, setIpAddress] = useState();
     const [category, setCategory] = useState("");
+    const [ipAddress, setIpAddress] = useState();
 
-    const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
@@ -40,7 +43,7 @@ const AddTemplate = (props) => {
                 Content: content,
                 Status: status,
                 Type: type,
-                CreatedIp: parseInt(ipAddress),
+                CreatedIp: ipInt(ipAddress).toInt(),
                 CreatedBy: 1,
                 CreatedDate: currentDate,
                 Category: category
@@ -154,7 +157,7 @@ const AddTemplate = (props) => {
                                             <option value="CreateCampaign">Create Campaign</option>
                                             <option value="forgetPassword">Forget Password</option>
                                             <option value="countCampaign">Campaign Count</option>
-                                            
+
                                         </select>
                                     </div>
                                 </div>

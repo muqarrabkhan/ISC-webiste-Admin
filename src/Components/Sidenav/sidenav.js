@@ -6,7 +6,7 @@ import Logout from '../../assets/Images/logout.png'
 import cookie from 'react-cookies'
 
 const Sidenav = (props) => {
-    let { location: routerLocation , history } = props;
+    let { location: routerLocation, history } = props;
     let location = routerLocation.pathname;
     const [show, setShow] = useState(false);
     const [showSetting, setShowSetting] = useState(false);
@@ -143,6 +143,15 @@ const Sidenav = (props) => {
                                 <span className="sidenav-link fnt-poppins">Newsletters</span>
                             </div>
                         </Link>
+                        {/* User Interest Type */}
+                        <Link to={"/view-user-interest"}>
+                            <div className={"sidenav-name-logo" + currentActive("view-user-interest")}>
+                                <img className="administrator_icon"
+                                    src={currentActive("view-user-interest") === "active" ? require('../../assets/Images/usersactive.png') : require('../../assets/Images/user.png')}
+                                    alt="Adson" />
+                                <span className="sidenav-link fnt-poppins">User Interest Type</span>
+                            </div>
+                        </Link>
                         {/* Pages */}
                         <Link to={"/pages"}>
                             <div className={"sidenav-name-logo" + currentActive("pages")}>
@@ -159,14 +168,14 @@ const Sidenav = (props) => {
                                     src={currentActive("setting") === "active" ? require('../../assets/Images/generalsettingactive.png') : require('../../assets/Images/Setting.png')}
                                     alt="General Setting" />
                                 <span className="sidenav-link fnt-poppins active" onClick={() => hideShowSetting(false)}>Setting</span>
-                                { showSetting ?
-                                        <img className="icon-width-admin has-margin-left-30"
-                                            src={require('../../assets/Images/upwardarrow.png')}
-                                            alt="Administrator" style={{ width: "15px", height: "10px" }} />
-                                        :
-                                        <img className="icon-width-admin has-margin-left-30"
-                                            src={require('../../assets/Images/downwardarrow.png')}
-                                            alt="Administrator" style={{ width: "15px", height: "10px" }} />
+                                {showSetting ?
+                                    <img className="icon-width-admin has-margin-left-30"
+                                        src={require('../../assets/Images/upwardarrow.png')}
+                                        alt="Administrator" style={{ width: "15px", height: "10px" }} />
+                                    :
+                                    <img className="icon-width-admin has-margin-left-30"
+                                        src={require('../../assets/Images/downwardarrow.png')}
+                                        alt="Administrator" style={{ width: "15px", height: "10px" }} />
                                 }
                             </div>
                         </Link>
@@ -239,7 +248,7 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Logout */}
-                        <Link to={"/signin"} onClick={()=>logout()}>
+                        <Link to={"/signin"} onClick={() => logout()}>
                             <div className="sidenav-name-logo">
                                 <img className="administrator_icon" alt="Logout" src={Logout} />
                                 <span className="sidenav-link fnt-poppins">Logout</span>

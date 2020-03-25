@@ -4,7 +4,7 @@ export const CREATE_CATEGORY =gql`
 mutation createcategory(
     $Name: String!,
     $description: String,
-    $CreatedIp: Int,
+    $CreatedIp: Long,
     $CreatedBy: Int,
     $Status:String
     )

@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import CKEditor from "react-ckeditor-component";
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_WEB_PAGE } from '../../apollo/Mutations/createWebPageMutation'
 import publicIp from 'public-ip'
+import ipInt from 'ip-to-int'
+
 const AddPage = (props) => {
     let { history } = props;
 
@@ -15,12 +17,14 @@ const AddPage = (props) => {
     const [btnText, setBtnText] = useState("Save");
     const [pageContent, setPageContent] = useState("");
     const [ipAddress, setIpAddress] = useState();
-
     const [data] = useMutation(CREATE_WEB_PAGE);
-    const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
+
+    useEffect(() => {
+        publicIp.v4().then(ip => {
+            setIpAddress(ip);
+        })
+    }, [])
+
     const addPage = (event) => {
         event.preventDefault();
         data({
@@ -31,7 +35,7 @@ const AddPage = (props) => {
                 MetaDescription: metaDescription,
                 pageContent: content,
                 createdBy: 1,
-                createdIp: parseInt(ipAddress),
+                createdIp: ipInt(ipAddress).toInt(),
             }
         }).then(res => {
             history.push("/pages")

@@ -9,7 +9,7 @@ mutation createTemplate(
     $FromText: String,
     $Content: String,
     $Status: String,
-    $CreatedIp: Int,
+    $CreatedIp: Long,
     $CreatedBy: Int,
     $CreatedDate: DateTime,
     $Type: String,

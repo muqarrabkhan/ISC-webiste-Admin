@@ -87,7 +87,7 @@ const ViewProduct = (props) => {
                                         <th>Image</th>
                                         <th>Price</th>
                                         <th>Created By</th>
-                                        <th>Embedded in Campaigns</th>
+                                        {/* <th>Embedded in Campaigns</th> */}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -106,7 +106,7 @@ const ViewProduct = (props) => {
                                                 : <div style={{ marginTop: "10px", marginLeft: "20px", height: '143px' }}>No-Image</div>}
                                             <td>{single.sale_price}</td>
                                             <td>{single.CreatedBy}</td>
-                                            <td>sub view</td>
+                                            {/* <td>sub view</td> */}
                                             <td>
                                                 <div className="applying-flex-products-btn">
                                                     <img onClick={() => history.push("/edit-product/" + single.Id)} className=" cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
@@ -118,7 +118,7 @@ const ViewProduct = (props) => {
                                         </tr>
                                     )}
                                     <tr className="table-footer">
-                                        <td colSpan={6}>Total</td>
+                                        <td colSpan={5}>Total</td>
                                         <td>{totalProducts}</td>
                                     </tr>
                                 </tbody>

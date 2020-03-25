@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { VIEW_MUTATION } from '../../apollo/Mutations/viewActivitiesMutation'
 import Loader from '../../commonComponents/Loader/loader'
 import {standardDate} from '../../functions/index'
+import ip from 'ip-to-int'
 
 const ViewActivities = () => {
     const [page, setPage] = useState(1);
@@ -84,7 +85,7 @@ const ViewActivities = () => {
                                             <td>{single.userName ? single.userName.Name : "-"}</td>
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).standardDate :"-"}</td>
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).time:"-"}</td>
-                                            <td>sub view</td>
+                                            <td>{single.CreatedIp ?  ip(single.CreatedIp).toInt() :""}</td>
                                         </tr>
                                     ) : ""}
                                     <tr className="table-footer">

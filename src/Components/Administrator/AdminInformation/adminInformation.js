@@ -107,7 +107,7 @@ const publicIp = require('public-ip');
                                             <td>{getDate}</td>
                                             <td>{ipAddress}</td>
                                         </tr>
-                                         ) : ""}
+                                         ) : "NO DATA"}
                                 </tbody>
                             </table>
                         </div>

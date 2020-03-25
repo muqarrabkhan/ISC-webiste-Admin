@@ -8,7 +8,7 @@ mutation createwebpages(
     $pageHeading:String,
     $MetaDescription:String,
     $pageContent:String,
-    $createdIp:Int,
+    $createdIp:Long,
     $createdBy:Int
   
 ){
