@@ -8,6 +8,7 @@ import { NEWSLETTERS } from '../../apollo/Mutations/newsletterMutation'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 import { standardDate } from '../../functions/index'
+import { DELETE_NEWSLETTER } from '../../apollo/Mutations/deleteNewsletter'
 
 const ViewNewsletter = (props) => {
 
@@ -17,6 +18,7 @@ const ViewNewsletter = (props) => {
     const [totalNewsletter, setTotalNewsletter] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
+    const [deleteNewsletter] = useMutation(DELETE_NEWSLETTER);
 
     const handlePageClick = (value) => {
         setPage(value.selected + 1);
@@ -46,7 +48,17 @@ const ViewNewsletter = (props) => {
         })
     }, []);
 
-    console.log(standardDate);
+    const deletePages = (id) => {
+        deleteNewsletter({
+            variables: {
+                Id: parseInt(id),
+            }
+        }).then(response => {
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/newsletter")
+
+        })
+    }
 
 
     return (
@@ -88,13 +100,16 @@ const ViewNewsletter = (props) => {
                                                 <td className="is-flex">
                                                     <span>{single.datetime ? standardDate(parseInt(single.datetime)).standardDate : "-"}</span>
                                                     <span className="has-margin-left-15">{single.datetime ? standardDate(parseInt(single.datetime)).time : "-"}</span>
-
                                                 </td>
                                                 <td>
-                                                    <div className="applying-flex">
-                                                        <img onClick={() => history.push("/edit-newsletter/"+single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                        <img className="delete-image-table" alt="delete-button" src={Deletelogo} />
-                                                    </div>
+                                                    {single && single.status == "Draft" ?
+                                                        <div className="applying-flex">
+                                                            <img onClick={() => history.push("/edit-newsletter/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                            <img className="delete-image-table has-cursor-pointer" alt="delete-button" src={Deletelogo}
+                                                                onClick={() => deletePages(single.Id)}
+                                                            />
+                                                        </div>
+                                                        : ""}
                                                 </td>
                                             </tr>
                                         )

@@ -6,6 +6,7 @@ mutation newsletters($page:Int,$limit:Int)
         newsletters(page:$page,limit:$limit)
         {
             newsletters {
+                Id
                 name
                 datetime
                 status 
@@ -13,7 +14,7 @@ mutation newsletters($page:Int,$limit:Int)
                 Title
                 Email
                 Id    
-            }
+                }
               }
               totalPages
               currentPage

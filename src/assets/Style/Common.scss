@@ -65,3 +65,16 @@ cursor: pointer;
 .width-bt-80{
         width: 80px;
 }
+
+.cancel-img{
+        margin-top: 8px;
+        width: 10px;
+}
+.back-color{
+        max-width: max-content;
+        margin-top: 10px;
+        justify-content: space-between;
+        height: 30px;
+        border-radius: 8px;
+        background: $Table-Background;
+}       

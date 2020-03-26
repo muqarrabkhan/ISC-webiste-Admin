@@ -48,6 +48,7 @@ const ViewPages = (props) => {
         })
       
     }, [])
+
     const deletePages=(id)=>{
     deletePage({
         variables:{
