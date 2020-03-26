@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
 import cancelImg from '../../../assets/Images/cancel.png'
 import { CREATE_NEWSLETTER } from '../../apollo/Mutations/createNewsletter'
@@ -85,7 +84,7 @@ const AddNewsletter = (props) => {
                 InterestedIds:[...interestIds]
             }
         }).then(res => {
-            // history.push("/")
+            history.push("/newsletter")
         })
     }
 

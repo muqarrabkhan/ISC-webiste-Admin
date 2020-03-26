@@ -16,7 +16,7 @@ const Signin = (props) => {
     const [passwordValidator, setPasswordValidator] = useState(false);
     const [remember, setRemember] = useState(false);
     const [error, setError] = useState("");
-    const [btnText,setBtnText]=useState("Signin");
+    const [btnText, setBtnText] = useState("Signin");
 
     const userAuthentication = e => {
         e.preventDefault();
@@ -44,7 +44,7 @@ const Signin = (props) => {
             })
                 .catch(err => {
                     if (err.message === "Request failed with status code 404") {
-                        setError("Invalid Password");
+                        setError("Invalid Email & Password");
                     }
                     else if (err.message === "Request failed with status code 500") {
                         setError("Email does not exist");
@@ -80,6 +80,10 @@ const Signin = (props) => {
                         />
                         {passwordValidator ?
                             <p className="help is-danger required-field-text">{password ? "Password length should be 8 characters" : "This field is required"}</p> : <p className="help is-danger required-field-text"></p>}
+
+                        <div style={{color:"red"}}>
+                            {error}
+                        </div>
                         <div className="custom-control checkbox-sigin-page custom-checkbox signin-checkbox">
                             <input id="checked" className="custom-control-input has-margin-top-5" type="checkbox"
                                 onChange={event => setRemember(event.target.checked)}
@@ -90,7 +94,7 @@ const Signin = (props) => {
                         </div>
                         <div className="btns-of-add has-margin-left-40 has-margin-top-30 fnt-poppins">
                             <button className="cancel-btn-of-sigin fnt-poppins">Cancel</button>
-                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins" type="submit">Signin</button>
+                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins has-cursor-pointer" type="submit">Signin</button>
                         </div>
                     </form>
                 </div>

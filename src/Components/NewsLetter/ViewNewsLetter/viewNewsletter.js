@@ -102,14 +102,14 @@ const ViewNewsletter = (props) => {
                                                     <span className="has-margin-left-15">{single.datetime ? standardDate(parseInt(single.datetime)).time : "-"}</span>
                                                 </td>
                                                 <td>
-                                                    {single && single.status == "Draft" ?
+                                                    {/* {single && single.status == "Draft" ? */}
                                                         <div className="applying-flex">
                                                             <img onClick={() => history.push("/edit-newsletter/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                             <img className="delete-image-table has-cursor-pointer" alt="delete-button" src={Deletelogo}
                                                                 onClick={() => deletePages(single.Id)}
                                                             />
                                                         </div>
-                                                        : ""}
+                                                        {/* : ""} */}
                                                 </td>
                                             </tr>
                                         )
