@@ -46,6 +46,7 @@ const AddAdson = (props) => {
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins"
+                                                    required
                                                     value={name}
                                                     onChange={event => setName(event.target.value)}
                                                 />

@@ -53,7 +53,8 @@ const CompaignDetails = (props) => {
         getBase64(file).then(
             data => {
                 let final = {
-                    imageFile: data
+                    imageFile: data,
+                    imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
                 };
                 axios.post(apiPath + '/bannerUpload', final).then(res => {
                     // setImage(res.data.imageUrl);
@@ -70,6 +71,7 @@ const CompaignDetails = (props) => {
             data => {
                 let final = {
                     imageFile: data,
+                    imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
                 };
                 axios.post(apiPath + "/uploadLogo", final).then(res => {
                     let duplicateImage = [ ...logo ]
@@ -213,7 +215,7 @@ const CompaignDetails = (props) => {
                                                     {single && single.logo ?
                                                         <div className="store-front-image"
                                                             style={{
-                                                                backgroundImage: `url(${single.logo ? campaignBanner_baseurl + single.logo : "no-image"})`,
+                                                                backgroundImage: `url(${single.logo ? campaignLogo_baseurl + single.logo : "no-image"})`,
                                                                 height: "100px",
                                                                 backgroundSize: "contain",
                                                                 backgroundRepeat: "no-repeat",

@@ -81,7 +81,6 @@ const Dashboard = () => {
         return;
       }
 
-
       case "Pledge": {
         setCompaignType(value);
         allCompagins({
@@ -247,7 +246,6 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-
                 {/* dashboard Campaign card end here */}
                 {/* dashboard lastweek Campaign card start here */}
                 <div className="container last-week-main-dev ">

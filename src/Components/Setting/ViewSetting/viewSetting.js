@@ -5,7 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { SETTING } from '../../apollo/Mutations/settingMutation'
-import {DELETE_SETTING} from '../../apollo/Mutations/deleteSetting'
+import { DELETE_SETTING } from '../../apollo/Mutations/deleteSetting'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 
@@ -13,23 +13,32 @@ const ViewSetting = (props) => {
     let { history } = props;
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(SETTING);
-    const [deleteSetting]=useMutation(DELETE_SETTING);
+    const [deleteSetting] = useMutation(DELETE_SETTING);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState([]);
+    const [settingType, setSettingType] = useState("")
+
+    const searchHandler = (value) => {
+        let resultData = users ? users.filter(sin => sin.fieldName.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
 
     const pageHandler = (value) => {
         setPage(value.selected + 1);
         allPages({
             variables: {
                 page: value.selected + 1,
-                limit: 10
+                limit: 10,
+                setting_type: ""
             }
         }
         ).then(response => {
             setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
             setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
             setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+            setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
         })
     }
 
@@ -37,24 +46,135 @@ const ViewSetting = (props) => {
         allPages({
             variables: {
                 page: 1,
-                limit: 10
+                limit: 10,
+                setting_type: ""
             }
         }
         ).then(response => {
             setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
             setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
             setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+            setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
         })
     }, [])
-    const deleteSettings=(id)=>{
+
+    const deleteSettings = (id) => {
         deleteSetting({
-            variables:{
-                id:parseInt(id),
+            variables: {
+                id: parseInt(id),
             }
-        }).then(response=>{
+        }).then(response => {
             if (window.confirm("Are you sure you want to delete Data"));
-            // window.location.replace("/setting")
+            window.location.replace("/setting")
         })
+    }
+
+
+    const typeHandler = (value) => {
+        switch (value) {
+            case "": {
+                setSettingType(value)
+                allPages({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        setting_type: ""
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                    setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
+                    setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+                    setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                })
+                return;
+            }
+            case "General": {
+                setSettingType(value)
+                allPages({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        setting_type: "General"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                    setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
+                    setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+                    setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                })
+                return;
+            }
+            case "Payment": {
+                setSettingType(value)
+                allPages({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        setting_type: "Payment"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                    setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
+                    setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+                    setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                })
+                return;
+            }
+            case "Social": {
+                setSettingType(value)
+                allPages({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        setting_type: "Social"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                    setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
+                    setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+                    setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                })
+                return;
+            }
+            case "Email": {
+                setSettingType(value)
+                allPages({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        setting_type: "Email"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                    setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
+                    setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+                    setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                })
+                return;
+            }
+            case "Apps": {
+                setSettingType(value)
+                allPages({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        setting_type: "Apps"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                    setTotalPage(response && response.data.setting ? response.data.setting.totalPages : [1]);
+                    setTotalCustomers(response && response.data.setting && response.data.setting.totalsettings);
+                    setSearch(response && response.data && response.data.setting ? response.data.setting.settings : []);
+                })
+                return;
+            }
+        }
     }
 
     return (
@@ -72,14 +192,22 @@ const ViewSetting = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Setting Records</h6>
-                            <select className="select-option-of-adminstrator fnt-poppins">
+                            <select className="select-option-of-adminstrator fnt-poppins"
+                                onChange={event => typeHandler(event.target.value)}
+                            >
                                 <option>Select Setting Type</option>
-                                <option>General</option>
-                                <option>Payment</option>
-                                <option>Email</option>
-                                <option>Apps</option>
+                                <option value="">All</option>
+                                <option value="General">General</option>
+                                <option value="Payment">Payment</option>
+                                <option value="Social">Social</option>
+                                <option value="Email">Email</option>
+                                <option value="Apps">Apps</option>
                             </select>
-                            <input className="input-for-search fnt-poppins" placeholder="Name" />
+                            <input className="input-for-search fnt-poppins" placeholder="Name"
+                                onChange={event => {
+                                    searchHandler(event.target.value)
+                                }}
+                            />
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
@@ -94,14 +222,14 @@ const ViewSetting = (props) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {users && users.length !== 0 && users.map((single, index) =>
+                                        {search && search.length !== 0 && search.map((single, index) =>
                                             <tr key={index} className="fnt-poppins background-white">
                                                 <td>{single.fieldName ? single.fieldName : "-"}</td>
                                                 <td>{single.Keytext ? single.Keytext : "-"}</td>
                                                 <td>{single.setting_type ? single.setting_type : "-"}</td>
                                                 <td>
-                                                    <img onClick={() => history.push("/edit-setting/"+single.ID)} className="cursor-pointer edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} />
-                                                    <img className="has-cursor-pointer delete-image-table setting-edit-btn" alt="edit-button" onClick={()=> deleteSettings(single.ID)}src={Deletelogo} />
+                                                    <img onClick={() => history.push("/edit-setting/" + single.ID)} className="cursor-pointer edit-image-table setting-edit-btn" alt="edit-button" src={Editlogo} />
+                                                    <img className="has-cursor-pointer delete-image-table setting-edit-btn" alt="edit-button" onClick={() => deleteSettings(single.ID)} src={Deletelogo} />
                                                 </td>
                                             </tr>
                                         )}

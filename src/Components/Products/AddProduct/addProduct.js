@@ -146,6 +146,7 @@ const AddProduct = (props) => {
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="name" placeholder="Enter Name" value={name}
+                                                    required
                                                     onChange={event => setName(event.target.value)}
                                                 />
                                             </div>
@@ -159,6 +160,7 @@ const AddProduct = (props) => {
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10" type="number" placeholder="Enter Short Description"
+                                                    required
                                                     value={salePrice}
                                                     onChange={event => setSalePrice(event.target.value)}
                                                 />

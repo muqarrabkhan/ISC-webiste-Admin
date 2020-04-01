@@ -19,7 +19,12 @@ const ViewProduct = (props) => {
     const [totalPages, setTotalPage] = useState(1);
     const [totalProducts, setTotalProducts] = useState([]);
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState([]);
 
+    const searchHandler = (value) => {
+        let resultData = data ? data.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
     const pageHandler = (value) => {
         setPage(value.selected + 1);
         products({
@@ -32,6 +37,7 @@ const ViewProduct = (props) => {
             setData(response && response.data && response.data.getAllProducts ? response.data.getAllProducts.products : []);
             setTotalPage(response && response.data.getAllProducts ? response.data.getAllProducts.totalPages : [1]);
             setTotalProducts(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
+            setSearch(response && response.data && response.data.getAllProducts ? response.data.getAllProducts.products : []);
         })
     }
 
@@ -47,8 +53,10 @@ const ViewProduct = (props) => {
             setData(response && response.data && response.data.getAllProducts ? response.data.getAllProducts.products : []);
             setTotalPage(response && response.data.getAllProducts ? response.data.getAllProducts.totalPages : [1]);
             setTotalProducts(response && response.data.getAllProducts && response.data.getAllProducts.totalProducts);
+            setSearch(response && response.data && response.data.getAllProducts ? response.data.getAllProducts.products : []);
         })
     }, [])
+
     const deleteProducts = (Id) => {
         deleteProduct({
             variables: {
@@ -75,7 +83,11 @@ const ViewProduct = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Products Records</h6>
-                            <input className="input-for-search fnt-poppins" placeholder="Name" />
+                            <input className="input-for-search fnt-poppins" placeholder="Name"
+                                onChange={event => {
+                                    searchHandler(event.target.value)
+                                }}
+                            />
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
@@ -87,12 +99,11 @@ const ViewProduct = (props) => {
                                         <th>Image</th>
                                         <th>Price</th>
                                         <th>Created By</th>
-                                        {/* <th>Embedded in Campaigns</th> */}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody className="table-of-data">
-                                    {data && data.length !== 0 && data.map((single, index) =>
+                                    {search && search.length !== 0 && search.map((single, index) =>
                                         <tr key={index} className="table-row-data-of-body fnt-poppins">
                                             <td>{single.Name ? single.Name : "-"}</td>
                                             <td>{single.CreatedBy ? single.CreatedBy : "-"}</td>
@@ -106,13 +117,12 @@ const ViewProduct = (props) => {
                                                 : <div style={{ marginTop: "10px", marginLeft: "20px", height: '143px' }}>No-Image</div>}
                                             <td>{single.sale_price}</td>
                                             <td>{single.CreatedBy}</td>
-                                            {/* <td>sub view</td> */}
                                             <td>
                                                 <div className="applying-flex-products-btn">
                                                     <img onClick={() => history.push("/edit-product/" + single.Id)} className=" cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />
                                                     <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={() => deleteProducts(single.Id)} src={Deletelogo} />
-                                                    <span className="cursor-pointer view-btn-of-table view-subscription-btn-products">Assign</span>
-                                                    <span onClick={() => history.push("/view-all-campaign/"+single.Id)} className="cursor-pointer view-btn-of-table view-subscription-btn-products">View</span>
+                                                    {/* <span className="cursor-pointer view-btn-of-table view-subscription-btn-products">Assign</span> */}
+                                                    <span onClick={() => history.push("/view-all-campaign/" + single.Id)} className="cursor-pointer view-btn-of-table view-subscription-btn-products">View</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -140,7 +150,7 @@ const ViewProduct = (props) => {
                     </div>
                     <Style />
                 </div>
-                : 
+                :
                 <Loader />}
         </>
     );

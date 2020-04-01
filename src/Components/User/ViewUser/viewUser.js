@@ -5,7 +5,7 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { ALL_USERS } from '../../apollo/Mutations/usersMutation'
 import { useMutation } from '@apollo/react-hooks';
-import {DELETE_USER} from '../../apollo/Mutations/deleteUser'
+import { DELETE_USER } from '../../apollo/Mutations/deleteUser'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 
@@ -14,24 +14,37 @@ const ViewUser = (props) => {
     let { history } = props;
     const [users, setUsers] = useState([]);
     const [allUsers] = useMutation(ALL_USERS);
-    const [deleteuser]=useMutation(DELETE_USER);
+    const [deleteuser] = useMutation(DELETE_USER);
     const [totalPages, setTotalPage] = useState(1);
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
-    const [ipAddress, setIpAddress] = useState();
+    const [userStatus, setUserStatus] = useState("");
+    const [search, setSearch] = useState([]);
+
+    const searchHandler = (value) => {
+        let resultData = users ? users.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
+
+    const searchEmailHandler = (value) => {
+        let resultData = users ? users.filter(sin => sin.Email.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
 
     const pageHandler = (value) => {
         setPage(value.selected + 1);
         allUsers({
             variables: {
                 page: value.selected + 1,
-                limit: 10
+                limit: 10,
+                Status: ""
             }
         }
         ).then(response => {
             setUsers(response && response.data && response.data.users ? response.data.users.users : []);
             setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
             setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+            setSearch(response && response.data && response.data.users ? response.data.users.users : []);
         })
     }
 
@@ -39,26 +52,84 @@ const ViewUser = (props) => {
         allUsers({
             variables: {
                 page: 1,
-                limit: 10
+                limit: 10,
+                Status: ""
             }
         }
         ).then(response => {
             setUsers(response && response.data && response.data.users ? response.data.users.users : []);
             setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
             setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+            setSearch(response && response.data && response.data.users ? response.data.users.users : []);
         })
     }, [])
-    const deleteUsers=(Id)=>{
+
+    const deleteUsers = (Id) => {
         deleteuser({
-            variables:{
-                Id:parseInt(Id),
+            variables: {
+                Id: parseInt(Id),
             }
-        }).then(response=>{
+        }).then(response => {
             if (window.confirm("Are you sure you want to delete Data"));
             window.location.replace("/users")
         })
     }
 
+    const typeHandler = (value) => {
+        switch (value) {
+            case "": {
+                setUserStatus(value)
+                allUsers({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        Status: ""
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.users ? response.data.users.users : []);
+                    setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
+                    setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+                    setSearch(response && response.data && response.data.users ? response.data.users.users : []);
+                })
+                return;
+            }
+            case "Enable": {
+                setUserStatus(value)
+                allUsers({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        Status: "Enable"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.users ? response.data.users.users : []);
+                    setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
+                    setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+                    setSearch(response && response.data && response.data.users ? response.data.users.users : []);
+                })
+                return;
+            }
+            case "Delete": {
+                setUserStatus(value)
+                allUsers({
+                    variables: {
+                        page: 1,
+                        limit: 10,
+                        Status: "Delete"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.users ? response.data.users.users : []);
+                    setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
+                    setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+                    setSearch(response && response.data && response.data.users ? response.data.users.users : []);
+                })
+                return;
+            }
+        }
+    }
 
     return (
         <>
@@ -76,10 +147,13 @@ const ViewUser = (props) => {
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All User Records</h6>
                             <div className="table-data-row">
-                                <select className="select-option-of-adminstrator fnt-poppins select-input-responsive">
+                                <select className="select-option-of-adminstrator fnt-poppins select-input-responsive"
+                                    onChange={event => typeHandler(event.target.value)}
+                                >
                                     <option>Select User Status</option>
-                                    <option>Active</option>
-                                    <option>In-Active</option>
+                                    <option value="">All</option>
+                                    <option value="Enable">Active</option>
+                                    <option value="Delete">In-Active</option>
                                 </select>
                                 <select className="select-option-of-adminstrator fnt-poppins select-option-of-affilated-user">
                                     <option>Select Affiliated Status</option>
@@ -88,8 +162,16 @@ const ViewUser = (props) => {
                                 </select>
                             </div>
                             <div className="table-data-row" >
-                                <input className="input-for-search fnt-poppins input-for-search-user-1" placeholder="Name" />
-                                <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Email" />
+                                <input className="input-for-search fnt-poppins input-for-search-user-1" placeholder="Name"
+                                    onChange={event => {
+                                        searchHandler(event.target.value)
+                                    }}
+                                />
+                                <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Email" 
+                                onChange={event => {
+                                    searchEmailHandler(event.target.value)
+                                }}
+                                />
                             </div>
                         </div>
                         {/* Table-Title */}
@@ -105,17 +187,17 @@ const ViewUser = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody className="table-of-data">
-                                    {users && users.length !== 0 && users.map((single, index) =>
+                                    {search && search.length !== 0 && search.map((single, index) =>
                                         <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                            <td>{single.Name ? single.Name :"-"}</td>
-                                            <td>{single.Email ? single.Email :"-"}</td>
-                                            <td>{single.Status ? single.Status :"-"}</td>
-                                            <td>{single.is_affiliated ? single.is_affiliated: "-"}</td>
+                                            <td>{single.Name ? single.Name : "-"}</td>
+                                            <td>{single.Email ? single.Email : "-"}</td>
+                                            <td>{single.Status ? single.Status : "-"}</td>
+                                            <td>{single.is_affiliated ? single.is_affiliated : "-"}</td>
                                             <td>
                                                 <div className="is-flex">
-                                                    <img onClick={() => history.push("/edit-user/"+single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                    <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={()=>deleteUsers(single.Id)}src={Deletelogo} />
-                                                    <span onClick={() => history.push("/user-information-activities/"+single.Id)} className="cursor-pointer view-btn-of-table">View Details</span>
+                                                    <img onClick={() => history.push("/edit-user/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                    <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={() => deleteUsers(single.Id)} src={Deletelogo} />
+                                                    <span onClick={() => history.push("/user-information-activities/" + single.Id)} className="cursor-pointer view-btn-of-table">View Details</span>
                                                     <span className="view-btn-of-table">Affiliate User</span>
                                                 </div>
                                             </td>

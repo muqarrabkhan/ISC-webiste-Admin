@@ -20,6 +20,7 @@ const AddAdministrator = (props) => {
     const [btnText, setBtnText] = useState("Save");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
+    const [RoleValidtion, setRoleValidation] = useState(false);
 
     let uid = uuid();
 
@@ -45,52 +46,32 @@ const AddAdministrator = (props) => {
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
 
-        // if (!name || !email || !password) {
-        // if (!name) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (!email) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (!password) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (!confirmPassword) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // if (password !== confirmPassword) {
-        //     // setBtnText("UPLOADING");
-        //     window.alert("Password not matching");
-        //     return 0;
-        // }
-        // if (!status) {
-        //     setBtnText("UPLOADING");
-        //     return 0;
-        // }
-        // }
+
+
         if (select == false) {
-            data({
-                variables: {
-                    Name: name,
-                    Email: email,
-                    Password: uid.toString(),
-                    RoleId: parseInt(roleId),
-                    Status: "Enable",
-                    CreatedDate: currentDate,
-                    CreatedIp: ipInt(ipAddress).toInt(),
-                    CreatedBy: 1
-                }
-            }).then(res => {
-                history.push("/administrator")
-            })
+            if (!roleId) {
+                setRoleValidation(true)
+            }
+            else {
+                data({
+                    variables: {
+                        Name: name,
+                        Email: email,
+                        Password: uid.toString(),
+                        RoleId: parseInt(roleId),
+                        Status: "Enable",
+                        CreatedDate: currentDate,
+                        CreatedIp: ipInt(ipAddress).toInt(),
+                        CreatedBy: 1
+                    }
+                }).then(res => {
+                    history.push("/administrator")
+                })
+            }
         }
         else if (select === true) {
-            if (!password === confirmPassword) {
-                setBtnText("UPLOADING");
+            if (!roleId) {
+                setRoleValidation(true)
             }
             else if (password == confirmPassword) {
                 data({
@@ -168,6 +149,7 @@ const AddAdministrator = (props) => {
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" required
                                         onChange={event => {
+                                            setRoleValidation(false)
                                             setRoleId(event.target.value)
                                         }
                                         }>
@@ -176,6 +158,7 @@ const AddAdministrator = (props) => {
                                         <option value="2">Moderator</option>
                                         <option value="3">Creater</option>
                                     </select>
+                                    
                                 </div>
                             </div>
                             {/* Password*/}

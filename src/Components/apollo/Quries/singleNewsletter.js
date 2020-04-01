@@ -12,7 +12,9 @@ export const SINGLE_NEWSLETTER = (Id) => gql`
       }
       status
       group
-      isInterests
+      interestedIds{
+        interestId
+      }
     }
     getAllIntersts {
         id

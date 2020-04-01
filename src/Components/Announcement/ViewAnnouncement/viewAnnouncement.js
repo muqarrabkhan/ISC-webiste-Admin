@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
@@ -12,7 +12,19 @@ const ViewAnnouncement = (props) => {
     let { history } = props;
     const { loading, data } = useQuery(SINGLE_CATEGORY);
     const [deleteannouncement] = useMutation(DELETE_ANNOUNCEMENT);
-    const [onOff, setOnOff] = useState(true);
+    const [announcement,setAnnouncemnt]=useState([])
+    const [search, setSearch] = useState([]);
+
+    useEffect(()=>{
+        setAnnouncemnt(data && data.getannouncements)
+        setSearch(data && data.getannouncements)
+    },[data])
+
+    const searchHandler = (value) => {
+        let resultData = announcement ? announcement.filter(sin => sin.title.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
+
     const deleteAnnouncements = (id) => {
         deleteannouncement({
             variables: {
@@ -40,7 +52,11 @@ const ViewAnnouncement = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Announcement Records</h6>
-                            <input className="input-for-search fnt-poppins" placeholder="Search" />
+                            <input className="input-for-search fnt-poppins" placeholder="Title"
+                                onChange={event => {
+                                    searchHandler(event.target.value)
+                                }}
+                            />
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
@@ -54,14 +70,14 @@ const ViewAnnouncement = (props) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data && data.length !== 0 && data.getannouncements.map((single, index) =>
+                                        {search && search.length !== 0 && search.map((single, index) =>
                                             <tr key={index} className="fnt-poppins background-white">
                                                 <td>{single.title}</td>
                                                 {single && single.flag == 1 ?
                                                     <td>
                                                         <div className="switch-btn-of-tables">
                                                             <label className="switch">
-                                                                <input type="checkbox" checked={single.flag}/>
+                                                                <input type="checkbox" checked={single.flag} />
                                                                 <span className="slider"></span>
                                                             </label>
                                                         </div>
@@ -70,7 +86,7 @@ const ViewAnnouncement = (props) => {
                                                     <td>
                                                         <div className="switch-btn-of-tables">
                                                             <label className="switch">
-                                                                <input type="checkbox"/>
+                                                                <input type="checkbox" />
                                                                 <span className="slider"></span>
                                                             </label>
                                                         </div>

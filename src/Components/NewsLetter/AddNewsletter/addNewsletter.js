@@ -22,7 +22,9 @@ const AddNewsletter = (props) => {
     const [hideShowDate, setHideShowDate] = useState(false);
     const [interestData, setInterestData] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
-
+    const [statusValidtion, setStatusValidation] = useState(false);
+    const [groupValidtion, setGroupValidation] = useState(false);
+    const [templateValidtion, setTemplateValidation] = useState(false);
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -51,6 +53,7 @@ const AddNewsletter = (props) => {
         }
     }
 
+
     const remove = (event) => {
         let duplicateData = [...selectedData]
         let obj = duplicateData.find(single => single.id == event)
@@ -66,28 +69,38 @@ const AddNewsletter = (props) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-        let interestIds=[]
-        if(selectedData){
-            selectedData.forEach(single=>{
-                interestIds.push(single.id)
+        if (!selectTemplate) {
+            setTemplateValidation(true);
+        }
+        if (!status) {
+            setStatusValidation(true);
+        }
+        if (!group) {
+            setGroupValidation(true);
+        }
+        else {
+            let interestIds = []
+            if (selectedData) {
+                selectedData.forEach(single => {
+                    interestIds.push(single.id)
+                })
+            }
+            addNewsletter({
+                variables: {
+                    name: name,
+                    support_mailsettings_id: parseInt(selectTemplate),
+                    datetime: dateTime,
+                    status: status,
+                    group: group,
+                    cron_status: "pending",
+                    date_created: currentDate,
+                    InterestedIds: [...interestIds]
+                }
+            }).then(res => {
+                history.push("/newsletter")
             })
         }
-        addNewsletter({
-            variables: {
-                name: name,
-                support_mailsettings_id: parseInt(selectTemplate),
-                datetime: dateTime,
-                status: status,
-                group: group,
-                cron_status: "pending",
-                date_created: currentDate,
-                InterestedIds:[...interestIds]
-            }
-        }).then(res => {
-            history.push("/newsletter")
-        })
     }
-
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -112,6 +125,7 @@ const AddNewsletter = (props) => {
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="name"
+                                                    required
                                                     value={name}
                                                     onChange={event => setName(event.target.value)}
                                                 />
@@ -128,13 +142,19 @@ const AddNewsletter = (props) => {
                                             </div>
                                             <div>
                                                 <select className="mrg-top-10 fnt-poppins"
-                                                    onChange={event => setSelecTemplate(event.target.value)}
+                                                    required
+                                                    onChange={event => {
+                                                        setTemplateValidation(false)
+                                                        setSelecTemplate(event.target.value)}}
                                                 >
                                                     <option>Select Template</option>
                                                     {templates && templates.length !== 0 && templates.map(single =>
                                                         <option value={single.Id}>{single.Title}</option>
                                                     )}
                                                 </select>
+                                                <div className="color-red-text ">
+                                                    {templateValidtion ? "Select Template" : ""}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,6 +167,7 @@ const AddNewsletter = (props) => {
                                     <input className="mrg-top-40" type="radio" id="radio1" name="radio"
                                         value="Schedule"
                                         onChange={event => {
+                                            setStatusValidation(false)
                                             setHideShowDate(true)
                                             setStatus(event.target.value)
                                         }}
@@ -162,6 +183,7 @@ const AddNewsletter = (props) => {
                                     <input type="radio" id="radio2" name="radio"
                                         value="Draft"
                                         onChange={event => {
+                                            setStatusValidation(false)
                                             setHideShowDate(false)
                                             setStatus(event.target.value)
                                         }}
@@ -171,6 +193,9 @@ const AddNewsletter = (props) => {
                                         <div>Save As Draft</div>
                                     </label>
                                 </div>
+                            </div>
+                            <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                {statusValidtion ? "Select Status" : ""}
                             </div>
                             {/* Set Newsletter Date And Time (MM/DD/YYYY HH:mm:ss)**/}
                             {hideShowDate &&
@@ -195,6 +220,7 @@ const AddNewsletter = (props) => {
                                     <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups"
                                         value="campaignusers"
                                         onChange={event => {
+                                            setGroupValidation(false)
                                             setHideShow(true)
                                             setGroup(event.target.value)
                                         }}
@@ -208,8 +234,10 @@ const AddNewsletter = (props) => {
                             <div className="radios-of-group mrg-left-50">
                                 <div className="radio-of-group">
                                     <input type="radio" id="radio4" name="radio-of-groups"
+
                                         value="campaigncreators"
                                         onChange={event => {
+                                            setGroupValidation(false)
                                             setHideShow(false)
                                             setGroup(event.target.value)
                                         }}
@@ -219,6 +247,9 @@ const AddNewsletter = (props) => {
                                         <div>Campaing Creators</div>
                                     </label>
                                 </div>
+                            </div>
+                            <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                {groupValidtion ? "Select Group" : ""}
                             </div>
                             {/* Select Campaigns***/}
                             {hideShow &&

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import CKEditor from "react-ckeditor-component";
 import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
@@ -21,6 +21,9 @@ const AddTemplate = (props) => {
     const [type, setType] = useState("");
     const [category, setCategory] = useState("");
     const [ipAddress, setIpAddress] = useState();
+    const [statusValidator, setStatusValidator] = useState(false);
+    const [typeValidator, setTypeValidator] = useState(false);
+    const [categoryValidator, setCategoryValidator] = useState(false);
 
     useEffect(() => {
         publicIp.v4().then(ip => {
@@ -33,24 +36,35 @@ const AddTemplate = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        addTemplate({
-            variables: {
-                Title: title,
-                Subject: subject,
-                Email: email,
-                Password: password,
-                FromText: fromText,
-                Content: content,
-                Status: status,
-                Type: type,
-                CreatedIp: ipInt(ipAddress).toInt(),
-                CreatedBy: 1,
-                CreatedDate: currentDate,
-                Category: category
-            }
-        }).then(res => {
-            history.push("/tamplates")
-        })
+        if (!status) {
+            setStatusValidator(true)
+        }
+        if (!type) {
+            setTypeValidator(true)
+        }
+        if(!category){
+            setCategoryValidator(true)
+        }
+        else {
+            addTemplate({
+                variables: {
+                    Title: title,
+                    Subject: subject,
+                    Email: email,
+                    Password: password,
+                    FromText: fromText,
+                    Content: content,
+                    Status: status,
+                    Type: type,
+                    CreatedIp: ipInt(ipAddress).toInt(),
+                    CreatedBy: 1,
+                    CreatedDate: currentDate,
+                    Category: category
+                }
+            }).then(res => {
+                history.push("/tamplates")
+            })
+        }
     }
 
     return (
@@ -148,8 +162,10 @@ const AddTemplate = (props) => {
                                     </div>
                                     <div>
                                         <select className="mrg-top-10 fnt-poppins" type="keyword"
-                                            onChange={event => setCategory(event.target.value)}
-                                            required
+                                            onChange={event => {
+                                                setCategoryValidator(false)
+                                                setCategory(event.target.value)
+                                            }}
                                         >
                                             <option>Select Category</option>
                                             <option value="signUp">SignUp Confirmation</option>
@@ -157,8 +173,10 @@ const AddTemplate = (props) => {
                                             <option value="CreateCampaign">Create Campaign</option>
                                             <option value="forgetPassword">Forget Password</option>
                                             <option value="countCampaign">Campaign Count</option>
-
                                         </select>
+                                        <div className="color-red-text ">
+                                            {categoryValidator ? "Select Category" : ""}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +186,10 @@ const AddTemplate = (props) => {
                                     <label>Select Type</label>
                                     <input className="mrg-top-40" type="radio" id="radio1" name="radio"
                                         value="Website"
-                                        onChange={event => setType(event.target.value)}
+                                        onChange={event => {
+                                            setTypeValidator(false)
+                                            setType(event.target.value)
+                                        }}
                                     />
                                     <label className="label-of-radio" for="radio1">
                                         <div className="checker"></div>
@@ -180,7 +201,10 @@ const AddTemplate = (props) => {
                                 <div className="radio">
                                     <input type="radio" id="radio2" name="radio"
                                         value="NewsLetter"
-                                        onChange={event => setType(event.target.value)}
+                                        onChange={event => {
+                                            setTypeValidator(false)
+                                            setType(event.target.value)
+                                        }}
                                     />
                                     <label className="label-of-radio" for="radio2">
                                         <div className="checker"></div>
@@ -188,13 +212,19 @@ const AddTemplate = (props) => {
                                     </label>
                                 </div>
                             </div>
+                            <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                {typeValidator ? "Select Type" : ""}
+                            </div>
                             {/* radioButtons second for Status*/}
                             <div className="radios-of-group mrg-top-20 mrg-left-50">
                                 <div className="radio-of-group">
                                     <label>Select Status</label>
                                     <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups"
                                         value="Enable"
-                                        onChange={event => setStatus(event.target.value)}
+                                        onChange={event => {
+                                            setStatusValidator(false)
+                                            setStatus(event.target.value)
+                                        }}
                                     />
                                     <label className="label-of-radio" for="radio3">
                                         <div className="checker"></div>
@@ -206,13 +236,19 @@ const AddTemplate = (props) => {
                                 <div className="radio-of-group">
                                     <input type="radio" id="radio4" name="radio-of-groups"
                                         value="Delete"
-                                        onChange={event => setStatus(event.target.value)}
+                                        onChange={event => {
+                                            setStatusValidator(false)
+                                            setStatus(event.target.value)
+                                        }}
                                     />
                                     <label className="label-of-radio" for="radio4">
                                         <div className="checker"></div>
                                         <div>Disable</div>
                                     </label>
                                 </div>
+                            </div>
+                            <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                {statusValidator ? "Select Status" : ""}
                             </div>
                             {/*Templates Variable* */}
                             <div className=" mrg-top-20 mrg-left-50 fnt-poppins">

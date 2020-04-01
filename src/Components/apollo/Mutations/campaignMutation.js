@@ -4,12 +4,16 @@ export const VIEW_CAMPAIGN= gql`
 mutation allCampaignFilters(
     $CampaignType:String,
       $page:Int,
-      $limit:Int
+      $limit:Int,
+      $sort: String,
+      $Createduser: String
     ){ allCampaignFilters(
         CampaignType:$CampaignType,
         page:$page,
-        limit:$limit  
-      ){
+        limit:$limit,
+        sort:$sort,
+        Createduser:$Createduser  
+        ){
       campaigns{
         Id
        Name
@@ -23,8 +27,6 @@ mutation allCampaignFilters(
         Status
         ShowOnList
         is_donation
-        
-        
       }
       totalPages
       totalCampaigns

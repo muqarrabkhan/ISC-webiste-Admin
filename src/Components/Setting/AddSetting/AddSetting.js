@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_SETTING } from '../../apollo/Mutations/createSetting'
@@ -14,6 +14,7 @@ const AddSetting = (props) => {
     const [value, setvalue] = useState("");
     const [settingType, setSettingType] = useState("");
     const [ipAddress, setIpAddress] = useState("");
+    const [settingTypeValidator, setSettingTypeValidator] = useState(false);
 
     useEffect(() => {
         publicIp.v4().then(ip => {
@@ -25,20 +26,25 @@ const AddSetting = (props) => {
         event.preventDefault();
         let crntDate = new Date();
         crntDate = crntDate.toISOString();
-        addSetting({
-            variables: {
-                fieldName: fieldName,
-                Keytext: keyText,
-                CreatedIp: ipInt(ipAddress).toInt(),
-                value: value,
-                setting_type: settingType,
-                createdDate: crntDate
-            }
-        }).then(res => {
-            history.push("/setting")
-        })
-    }
 
+        if (!settingType) {
+            setSettingTypeValidator(true)
+        }
+        else {
+            addSetting({
+                variables: {
+                    fieldName: fieldName,
+                    Keytext: keyText,
+                    CreatedIp: ipInt(ipAddress).toInt(),
+                    value: value,
+                    setting_type: settingType,
+                    createdDate: crntDate
+                }
+            }).then(res => {
+                history.push("/setting")
+            })
+        }
+    }
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -100,7 +106,11 @@ const AddSetting = (props) => {
                                     <label>Setting type*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <select required onChange={event => setSettingType(event.target.value)} className="inputs-of-admistrator fnt-poppins">
+                                    <select onChange={event => {
+                                        setSettingTypeValidator(false)
+                                        setSettingType(event.target.value)
+                                    }}
+                                        className="inputs-of-admistrator fnt-poppins">
                                         <option>Select Type</option>
                                         <option value="General">General</option>
                                         <option value="Payment">Payment</option>
@@ -109,6 +119,9 @@ const AddSetting = (props) => {
                                         <option value="Apps">Apps</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                {settingTypeValidator ? "Select Setting Type" : ""}
                             </div>
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">

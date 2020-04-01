@@ -5,20 +5,26 @@ import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CATEGORIES } from '../../apollo/Mutations/categoriesMutation'
-import { DELETE_CATEGORY} from '../../apollo/Mutations/deleteCategory'
+import { DELETE_CATEGORY } from '../../apollo/Mutations/deleteCategory'
 import ReactPaginate from "react-paginate";
 import Loader from '../../commonComponents/Loader/loader'
 
 const ViewCategories = (props) => {
-    let { history  } = props;
+    let { history } = props;
 
     const [categories] = useMutation(CATEGORIES);
-    const [deleteCategory]=useMutation( DELETE_CATEGORY);
+    const [deleteCategory] = useMutation(DELETE_CATEGORY);
     const [data, setData] = useState([]);
     const [totalCategories, setTotalCategories] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
     const [show, setShow] = useState("");
+    const [search, setSearch] = useState([]);
+
+    const searchHandler = (value) => {
+        let resultData = data ? data.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
 
     const handlePageClick = (value) => {
         setPage(value.selected + 1);
@@ -32,6 +38,7 @@ const ViewCategories = (props) => {
                 setData(res && res.data.getCategories && res.data.getCategories.Categories ? res.data.getCategories.Categories : []);
                 setTotalPages(res && res.data.getCategories.totalPages ? res.data.getCategories.totalPages : [1])
                 setTotalCategories(res && res.data.getCategories && res.data.getCategories.totalCategories);
+                setSearch(res && res.data.getCategories && res.data.getCategories.Categories ? res.data.getCategories.Categories : []);
             })
     }
 
@@ -45,14 +52,16 @@ const ViewCategories = (props) => {
             setData(res && res.data.getCategories && res.data.getCategories.Categories ? res.data.getCategories.Categories : []);
             setTotalPages(res && res.data.getCategories.totalPages ? res.data.getCategories.totalPages : [1])
             setTotalCategories(res && res.data.getCategories && res.data.getCategories.totalCategories);
+            setSearch(res && res.data.getCategories && res.data.getCategories.Categories ? res.data.getCategories.Categories : []);
         })
     }, []);
-    const deleteCategories=(id)=>{
+
+    const deleteCategories = (id) => {
         deleteCategory({
-            variables:{
-                id:parseInt(id),
+            variables: {
+                id: parseInt(id),
             }
-        }).then(response=>{
+        }).then(response => {
             if (window.confirm("Are you sure you want to delete Data"));
             window.location.replace("/category")
         })
@@ -74,7 +83,11 @@ const ViewCategories = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Category Records</h6>
-                            <input className="input-for-search fnt-poppins" placeholder="Search" />
+                            <input className="input-for-search fnt-poppins" placeholder="Search"
+                                onChange={event => {
+                                    searchHandler(event.target.value)
+                                }}
+                            />
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
@@ -88,14 +101,14 @@ const ViewCategories = (props) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data && data.length !== 0 && data.map((single, index) =>
+                                        {search && search.length !== 0 && search.map((single, index) =>
                                             <tr key={index} className="fnt-poppins background-white">
                                                 <td>{single.Name ? single.Name : "-"}</td>
                                                 <td>{single && single.Status ? single.Status : "-"}</td>
                                                 <td>
                                                     <div className="appling-flex-btns">
-                                                        <img onClick={() => history.push("/edit-category/"+ single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
-                                                        <img className="delete-image-table" alt="delete-button" onClick={()=>deleteCategories(single.Id)}src={Deletelogo} />
+                                                        <img onClick={() => history.push("/edit-category/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
+                                                        <img className="delete-image-table" alt="delete-button" onClick={() => deleteCategories(single.Id)} src={Deletelogo} />
                                                         <span onClick={() => history.push("/category-details/" + single.Id)} className="cursor-pointer view-btn-of-table ">View Details</span>
                                                     </div>
                                                 </td>

@@ -104,6 +104,8 @@ const CreateCompaign = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        let stDate = new Date(startDate)
+        let edDate = new Date(endDate)
         createCampaign({
             variables: {
                 Name: name,
@@ -111,12 +113,12 @@ const CreateCompaign = (props) => {
                 ShortDescription: shortDescription,
                 CategoryId: parseInt(categoryId),
                 Description: description,
-                StartDate: new Date().toISOString(),
-                EndDate: new Date().toISOString(),
+                StartDate: stDate.toISOString(),
+                EndDate: edDate.toISOString(),
                 goal_support: parseInt(goalSupport),
                 facebook_url: facebook ? facebook : "",
-                twitter_url: twitter ? twitter: "",
-                website_url: website ? website :"",
+                twitter_url: twitter ? twitter : "",
+                website_url: website ? website : "",
                 Primary_color: color.hex.toString() ? color.hex.toString() : "",
                 Secondary_color: secondaryColor.hex.toString() ? secondaryColor.hex.toString() : "",
                 Tertiary_color: tertiary.hex.toString() ? tertiary.hex.toString() : "",
@@ -303,6 +305,7 @@ const CreateCompaign = (props) => {
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins " type="name" placeholder="Enter Name"
+                                                    required
                                                     value={name}
                                                     onChange={event => setName(event.target.value)}
                                                 />
@@ -432,6 +435,7 @@ const CreateCompaign = (props) => {
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"
+                                                    required
                                                     value={description}
                                                     onChange={event => setDescription(event.target.value)}
 

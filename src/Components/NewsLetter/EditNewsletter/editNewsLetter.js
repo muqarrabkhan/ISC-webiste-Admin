@@ -22,11 +22,6 @@ const EditNewsletter = (props) => {
     const [selectedData, setSelectedData] = useState([]);
     const [selectTemplate, setSelectTemplate] = useState("")
 
-    useEffect(() => {
-        setRenderData(data && data.singlenewsletter ? { ...data.singlenewsletter } : {})
-        setInterestData(data && data.getAllIntersts)
-        setSelectTemplate(data && data.singlenewsletter && data.singlenewsletter.Template);
-    }, [data])
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -34,7 +29,19 @@ const EditNewsletter = (props) => {
         })
     }, [])
 
-    console.log("selectTemplate", selectTemplate)
+    useEffect(() => {
+        let duplicateSelectedIntrestedIds = data && data.singlenewsletter && data.singlenewsletter.interestedIds
+        let duplicateAllIntrestedData = data && data.getAllIntersts
+        duplicateSelectedIntrestedIds = duplicateSelectedIntrestedIds && duplicateSelectedIntrestedIds.map(single => {
+            let obj = duplicateAllIntrestedData.find(sin => sin.id == single.interestId)
+            duplicateAllIntrestedData = duplicateAllIntrestedData.filter(sin => sin.id != single.interestId)
+            return obj
+        })
+        setSelectedData(duplicateSelectedIntrestedIds)
+        setInterestData(duplicateAllIntrestedData)
+        setRenderData(data && data.singlenewsletter ? { ...data.singlenewsletter } : {})
+        setSelectTemplate(data && data.singlenewsletter && data.singlenewsletter.Template);
+    }, [data])
 
     const selectData = (event) => {
         if (event === "selectAll") {
@@ -53,6 +60,8 @@ const EditNewsletter = (props) => {
         }
     }
 
+    // console.log(template)
+
     const remove = (event) => {
         let duplicateData = [...selectedData]
         let obj = duplicateData.find(single => single.id == event)
@@ -62,6 +71,8 @@ const EditNewsletter = (props) => {
         setSelectedData([...duplicateData])
         setInterestData([...duplicateSelected]);
     }
+
+
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -86,7 +97,7 @@ const EditNewsletter = (props) => {
                 InterestedIds: [...interestIds]
             }
         }).then(res => {
-            // history.push("/newsletter")
+            history.push("/newsletter")
         })
     }
 
@@ -137,9 +148,9 @@ const EditNewsletter = (props) => {
                                                     <div>
                                                         <select className="mrg-top-10 fnt-poppins"
                                                             value={renderData && renderData.Template && renderData.Template.Id}
-                                                            onChange={event => {
-                                                                let duplicateData = { ...renderData }
-                                                                duplicateData.Template.Id = event.target.value
+                                                            onChange={event => {  
+                                                                let duplicateData = { ...renderData.Template }
+                                                                duplicateData.Id = event.target.value
                                                                 setRenderData(duplicateData)
                                                             }}>
                                                             <option>Select Template</option>
@@ -253,7 +264,6 @@ const EditNewsletter = (props) => {
                                     </div>
                                     {/* Select Campaigns***/}
                                     {renderData && renderData.group == "campaignusers" ?
-                                        // {/* {hideShow && */ }
                                         < div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                             <div className="form-group">
                                                 <div>
@@ -261,7 +271,7 @@ const EditNewsletter = (props) => {
                                                 </div>
                                                 <div>
                                                     <select className="mrg-top-10 fnt-poppins" type="name"
-                                                        value={renderData && renderData.isInterests}
+                                                        // value={renderData && renderData.interestedIds && renderData.interestedIds.interestId}
                                                         onChange={event =>
                                                             selectData(event.target.value)}>
                                                         <option>select User Interest</option>
@@ -274,7 +284,7 @@ const EditNewsletter = (props) => {
                                                 <div>
                                                     {selectedData && selectedData.length !== 0 && selectedData.map(single =>
                                                         <ul className=" is-flex back-color back-color">
-                                                            <li className="has-padding-left-10" value={single.id}>{single.name}</li>
+                                                            <li className="has-padding-left-10">{single.name}</li>
                                                             <li className="has-padding-right-10"><img src={cancelImg} onClick={() => remove(single.id)}
                                                                 className="has-cursor-pointer has-margin-left-15 cancel-img" /></li>
                                                         </ul>
@@ -282,7 +292,6 @@ const EditNewsletter = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        // }
                                         : ""}
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">

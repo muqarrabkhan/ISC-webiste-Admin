@@ -21,19 +21,21 @@ const Signin = (props) => {
     const userAuthentication = e => {
         e.preventDefault();
         if (!email || !validateEmail(email) || !password || password.length < 8) {
-
             if (!email) {
                 setEmailValidator(true)
+                // setBtnText("Signing")
             }
             if (!validateEmail(email)) {
                 setEmailValidator(true)
+                // setBtnText("Signing")
             }
             if (!password || password.length < 8) {
                 setPasswordValidator(true)
+                // setBtnText("Signing")
             }
         }
         else {
-            setBtnText("Loading");
+            setBtnText("Signing");
             let payLoad = { Email: email, Password: password };
             axios.post(apiPath + "/adminLogin", payLoad).then(response => {
                 localStorage.setItem("age", remember ? 1296000 : 86400);
@@ -45,9 +47,11 @@ const Signin = (props) => {
                 .catch(err => {
                     if (err.message === "Request failed with status code 404") {
                         setError("Invalid Email & Password");
+                        setBtnText("Signin");
                     }
                     else if (err.message === "Request failed with status code 500") {
                         setError("Email does not exist");
+                        setBtnText("Signin");
                     }
                 });
         }
@@ -94,7 +98,7 @@ const Signin = (props) => {
                         </div>
                         <div className="btns-of-add has-margin-left-40 has-margin-top-30 fnt-poppins">
                             <button className="cancel-btn-of-sigin fnt-poppins">Cancel</button>
-                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins has-cursor-pointer" type="submit">Signin</button>
+                            <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins has-cursor-pointer" type="submit">{btnText}</button>
                         </div>
                     </form>
                 </div>

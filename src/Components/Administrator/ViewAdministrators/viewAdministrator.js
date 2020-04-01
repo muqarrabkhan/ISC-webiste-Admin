@@ -17,19 +17,28 @@ const ViewAdministrator = (props) => {
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
     const [deleteAdmin] = useMutation(DELETE_ADMIN);
+    const [adminStatus, setAdminStatus] = useState("")
+    const [search, setSearch] = useState([]);
+
+    const searchHandler = (value) => {
+        let resultData = users ? users.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
+        setSearch(resultData)
+    }
 
     const pageHandler = (value) => {
         setPage(value.selected + 1);
         allPages({
             variables: {
                 page: value.selected + 1,
-                limit: 10
+                limit: 10,
+                Status: adminStatus
             }
         }
         ).then(response => {
             setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
             setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
             setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+            setSearch(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
         })
     }
 
@@ -37,13 +46,15 @@ const ViewAdministrator = (props) => {
         allPages({
             variables: {
                 page: 1,
-                limit: 10
+                limit: 10,
+                Status: adminStatus
             }
         }
         ).then(response => {
             setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
             setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
             setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+            setSearch(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
         })
     }, [])
 
@@ -58,6 +69,61 @@ const ViewAdministrator = (props) => {
         })
     }
 
+    const typeHandler = (value) => {
+        switch (value) {
+            case "": {
+                setAdminStatus(value)
+                allPages({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        Status: ""
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+                    setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
+                    setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+                    setSearch(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+                })
+                return;
+            }
+            case "Enable": {
+                setAdminStatus(value)
+                allPages({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        Status: "Enable"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+                    setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
+                    setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+                    setSearch(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+                })
+                return;
+            }
+            case "Delete": {
+                setAdminStatus(value)
+                allPages({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        Status: "Delete"
+                    }
+                }
+                ).then(response => {
+                    setUsers(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+                    setTotalPage(response && response.data.adminspagination ? response.data.adminspagination.totalPages : [1]);
+                    setTotalCustomers(response && response.data.adminspagination && response.data.adminspagination.totaladmins);
+                    setSearch(response && response.data && response.data.adminspagination ? response.data.adminspagination.admins : []);
+                })
+                return;
+            }
+        }
+    }
 
 
     return (
@@ -75,12 +141,20 @@ const ViewAdministrator = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Admins Record</h6>
-                            <select className="select-option-of-adminstrator fnt-poppins">
+                            <select className="select-option-of-adminstrator fnt-poppins"
+                                onChange={event => typeHandler(event.target.value)}
+                            >
                                 <option>Select Admin Status</option>
-                                <option>Active</option>
-                                <option>In-Active</option>
+                                <option value="">All</option>
+                                <option value="Enable">Active</option>
+                                <option value="Delete">In-Active</option>
                             </select>
-                            <input className="input-for-search fnt-poppins" placeholder="Search" />
+                            <input className="input-for-search fnt-poppins" placeholder="Search Name"
+                                onChange={event => {
+                                    searchHandler(event.target.value)
+                                }}
+                                type="text"
+                            />
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
@@ -95,7 +169,7 @@ const ViewAdministrator = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody className="table-of-data">
-                                    {users && users.length !== 0 && users.map((single, index) =>
+                                    {search && search.length !== 0 && search.map((single, index) =>
                                         <tr key={index} className="table-row-data-of-body fnt-poppins">
                                             <td>{single.Name ? single.Name : "-"}</td>
                                             <td>{single.Email ? single.Email : "-"}</td>
