@@ -192,10 +192,10 @@ const ViewUser = (props) => {
                                             <td>{single.Name ? single.Name : "-"}</td>
                                             <td>{single.Email ? single.Email : "-"}</td>
                                             <td>{single.Status ? single.Status : "-"}</td>
-                                            <td className="pad-0">{single.is_affiliated ?
+                                            <td style={{padding:"0px"}}>{single.is_affiliated ?
                                                 <>
                                                     <td>{single.is_affiliated == "0" ? "Normal User" : ""}</td>
-                                                    <td>{single.is_affiliated == "1" ? "Affiliated User" : ""}</td>
+                                                    <td style={{padding:"0px"}}>{single.is_affiliated == "1" ? "Affiliated User" : ""}</td>
                                                 </>
                                                 : "-"}
                                             </td>
@@ -204,7 +204,7 @@ const ViewUser = (props) => {
                                                     <img onClick={() => history.push("/edit-user/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                     <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={() => deleteUsers(single.Id)} src={Deletelogo} />
                                                     <span onClick={() => history.push("/user-information-activities/" + single.Id)} className="cursor-pointer view-btn-of-table">View Details</span>
-                                                    <span className="view-btn-of-table">Affiliate User</span>
+                                                    {/* <span className="view-btn-of-table">Affiliate User</span> */}
                                                 </div>
                                             </td>
                                         </tr>

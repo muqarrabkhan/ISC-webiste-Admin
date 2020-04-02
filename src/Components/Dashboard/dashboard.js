@@ -142,12 +142,12 @@ const Dashboard = () => {
                     <div className="card-inner-main-div d-flex flex-row">
                       <div className="card-left-text  ">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data ">Today</h1>
-                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalSupportToday}</p>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalSupportToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
                       <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalSupportLastWeek}</p>
+                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalSupportLastWeek}</p>
                       </div>
                     </div>
                   </div>
@@ -160,12 +160,12 @@ const Dashboard = () => {
                     <div className="card-inner-main div d-flex flex-row">
                       <div className="card-left-text  ">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewCampaignToday}</p>
+                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewCampaignToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
                       <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewCampaignLastWeek}</p>
+                        <p className=" mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewCampaignLastWeek}</p>
                       </div>
                     </div>
                   </div>
@@ -178,12 +178,12 @@ const Dashboard = () => {
                     <div className="card-inner-main div d-flex flex-row">
                       <div className="card-left-text  ">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                        <p className="mrg-left-70 mrg-top-20 0 fnt-poppins card-number-styling number-data-responsive">{data.TotalNewUsersToday}</p>
+                        <p className="mrg-left-70 mrg-top-20 0 fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewUsersToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
                       <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewUsersLastWeek}</p>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewUsersLastWeek}</p>
                       </div>
                     </div>
                   </div>
@@ -199,12 +199,12 @@ const Dashboard = () => {
                     <div className="card-inner-main div d-flex flex-row">
                       <div className="card-left-text  ">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewSupportCampaignToday}</p>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewSupportCampaignToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
                       <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewSupportCampaignLastWeek}</p>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewSupportCampaignLastWeek}</p>
                       </div>
                     </div>
                   </div>
@@ -218,12 +218,12 @@ const Dashboard = () => {
                     <div className="card-inner-main div d-flex flex-row">
                       <div className="card-left-text  ">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewpetitionsCampaignToday}</p>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewpetitionsCampaignToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
                       <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data.TotalNewpetitionsCampaignLastWeek}</p>
+                        <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewpetitionsCampaignLastWeek}</p>
                       </div>
                     </div>
                   </div>
@@ -236,12 +236,12 @@ const Dashboard = () => {
                     <div className="card-inner-main div d-flex flex-row">
                       <div className="card-left-text  ">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Today</h1>
-                        <p className="mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">{data.TotalNewpledgesCampaignToday}</p>
+                        <p className="mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">{data && data.TotalNewpledgesCampaignToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
                       <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
-                        <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">{data.TotalNewpledgesCampaignLastWeek}</p>
+                        <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">{data && data.TotalNewpledgesCampaignLastWeek}</p>
                       </div>
                     </div>
                   </div>
