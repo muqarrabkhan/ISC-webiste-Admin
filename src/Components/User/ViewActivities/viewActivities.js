@@ -65,7 +65,7 @@ const ViewActivities = () => {
                                     <tr className="table-row-of-head fnt-poppins">
                                         <th>Campaign Image</th>
                                         <th>Campaign Name</th>
-                                        <th>User Name</th>
+                                        {/* <th>User Name</th> */}
                                         <th>Date</th>
                                         <th>Time</th>
                                         <th>IP Address</th>
@@ -81,14 +81,14 @@ const ViewActivities = () => {
                                                 backgroundRepeat: 'no-repeat'
                                             }}></td>
                                             <td>{single.CampaignName.Name}</td>
-                                            <td>{single.userName ? single.userName.Name : "-"}</td>
+                                            {/* <td>{single.userName ? single.userName.Name : "-"}</td> */}
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).standardDate : "-"}</td>
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).time : "-"}</td>
                                             <td>{single.CreatedIp ? ip(single.CreatedIp).toIP() : ""}</td>
                                         </tr>
                                     ) : ""}
                                     <tr className="table-footer">
-                                        <td colSpan={5}>Total</td>
+                                        <td colSpan={4}>Total</td>
                                         <td>{totalCustomers}</td>
                                     </tr>
                                 </tbody>
