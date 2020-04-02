@@ -8,7 +8,7 @@ import ipInt from 'ip-to-int'
 
 const AddAdministrator = (props) => {
 
-    let { history } = props;
+    let { history , user} = props;
     const [name, setName] = useState([]);
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState("");
@@ -16,79 +16,66 @@ const AddAdministrator = (props) => {
     const [roleId, setRoleId] = useState([]);
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
-    const [passwordValidation, setPasswordValidation] = useState(false);
     const [btnText, setBtnText] = useState("Save");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
-    const [RoleValidtion, setRoleValidation] = useState(false);
+    const [roleValidtion, setRoleValidation] = useState(false);
+    const [passwordValidation, setPasswordValidation] = useState(false);
 
     let uid = uuid();
-
+    console.log("user" , user && user)
     useEffect(() => {
         publicIp.v4().then(ip => {
             setIpAddress(ip);
         })
     }, [])
 
-    const hide = () => {
-        if (select === false) {
-            setSelect(true);
-        }
-        else {
-            setPassword(uid.toString());
-            setConfirmPassword(setPassword);
-            setSelect(false);
-        }
-    }
-
     const addAdmin = (event) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
 
-
-
-        if (select == false) {
-            if (!roleId) {
-                setRoleValidation(true)
-            }
-            else {
-                data({
-                    variables: {
-                        Name: name,
-                        Email: email,
-                        Password: uid.toString(),
-                        RoleId: parseInt(roleId),
-                        Status: "Enable",
-                        CreatedDate: currentDate,
-                        CreatedIp: ipInt(ipAddress).toInt(),
-                        CreatedBy: 1
-                    }
-                }).then(res => {
-                    history.push("/administrator")
-                })
-            }
+        if (confirmPassword !== password) {
+            setBtnText("Save");
+            setPasswordValidation(true);
         }
-        else if (select === true) {
-            if (!roleId) {
-                setRoleValidation(true)
-            }
-            else if (password == confirmPassword) {
-                data({
-                    variables: {
-                        Name: name,
-                        Email: email,
-                        Password: password,
-                        RoleId: parseInt(roleId),
-                        Status: "Enable",
-                        CreatedDate: currentDate,
-                        CreatedIp: ipInt(ipAddress).toInt(),
-                        CreatedBy: 1
-                    }
-                }).then(res => {
-                    history.push("/administrator")
-                })
-            }
+        if (!roleId || roleId == "") {
+            setBtnText("Save");
+            setRoleValidation(true);
+        }
+        else if (password === "" || confirmPassword === "") {
+            setBtnText("Saving...")
+            data({
+                variables: {
+                    Name: name,
+                    Email: email,
+                    Password: uid.toString(),
+                    RoleId: parseInt(roleId),
+                    Status: "Enable",
+                    CreatedDate: currentDate,
+                    CreatedIp: ipInt(ipAddress).toInt(),
+                    CreatedBy: 1
+                }
+            }).then(res => {
+                history.push("/administrator")
+            })
+        }
+        else if (password === confirmPassword) {
+            setBtnText("Saving...")
+            data({
+                variables: {
+                    Name: name,
+                    Email: email,
+                    Password: password,
+                    RoleId: parseInt(roleId),
+                    Status: "Enable",
+                    CreatedDate: currentDate,
+                    CreatedIp: ipInt(ipAddress).toInt(),
+                    CreatedBy: 1
+                }
+            }).then(res => {
+                history.push("/administrator")
+            })
         }
     }
 
@@ -135,7 +122,16 @@ const AddAdministrator = (props) => {
                                     <label>Select Password</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <select className="inputs-of-admistrator fnt-poppins" onChange={() => hide(false)}>
+                                    <select className="inputs-of-admistrator fnt-poppins" onChange={event => {
+                                        if (select === false) {
+                                            setSelect(true);
+                                        }
+                                        else if (select === true) {
+                                            setPassword(uid.toString());
+                                            setConfirmPassword(uid.toString());
+                                            setSelect(false);
+                                        }
+                                    }}>
                                         <option>Random Password</option>
                                         <option>Custom Password</option>
                                     </select>
@@ -153,12 +149,14 @@ const AddAdministrator = (props) => {
                                             setRoleId(event.target.value)
                                         }
                                         }>
-                                        <option >Select Role</option>
+                                        <option value="">Select Role</option>
                                         <option value="1">Super Admin</option>
                                         <option value="2">Moderator</option>
                                         <option value="3">Creater</option>
                                     </select>
-                                    
+                                    <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                        {roleValidtion ? "Select Role" : ""}
+                                    </div>
                                 </div>
                             </div>
                             {/* Password*/}
@@ -170,8 +168,26 @@ const AddAdministrator = (props) => {
                                         </div>
                                         <div className="mrg-top-10">
                                             <input type="password" className="inputs-of-admistrator" value={password} required
-                                                onChange={event => setPassword(event.target.value)} />
+                                                onChange={event => {
+                                                    setPasswordValidation(false)
+                                                    setPassword(event.target.value)
+                                                }} />
                                         </div>
+                                    </div>
+                                    <div className="mrg-left-60 mrg-top-20 fnt-poppins">
+                                        <div>
+                                            <label>Confirm Password</label>
+                                        </div>
+                                        <div className="mrg-top-10">
+                                            <input type="password" className="inputs-of-admistrator" value={confirmPassword} required
+                                                onChange={event => {
+                                                    setPasswordValidation(false)
+                                                    setConfirmPassword(event.target.value)
+                                                }} />
+                                        </div>
+                                    </div>
+                                    <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                        {passwordValidation ? "Password not matched" : ""}
                                     </div>
                                 </>
                             }

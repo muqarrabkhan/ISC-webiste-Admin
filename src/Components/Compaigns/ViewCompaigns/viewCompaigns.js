@@ -21,16 +21,16 @@ const ViewCompaign = (props) => {
     const [getCampaign] = useMutation(VIEW_CAMPAIGN);
     const [campaignCategories, setCampaignCategories] = useState()
 
-
     useEffect(() => {
         setCampaignCategories(data && data.campaignCategories)
     }, [data])
-    console.log("data", campaignCategories)
+
     // states for filter method
     const [createdUser, setCreatedUser] = useState("")
     const [sort, setSort] = useState("")
     const [search, setSearch] = useState([]);
-
+    const [categoryId, setCategoryId] = useState();
+    const [boosted, setBoosted] = useState("")
 
     const handlePageClick = (value) => {
         setPage(value.selected + 1);
@@ -40,7 +40,9 @@ const ViewCompaign = (props) => {
                 limit: 10,
                 CampaignType: campaignType,
                 sort: sort,
-                Createduser: createdUser
+                Createduser: createdUser,
+                CategoryId: parseInt(categoryId),
+                Boosted: ""
             }
         }
         ).then(res => {
@@ -50,6 +52,7 @@ const ViewCompaign = (props) => {
             setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
         })
     }
+
     useEffect(() => {
         getCampaign({
             variables: {
@@ -57,7 +60,9 @@ const ViewCompaign = (props) => {
                 limit: 10,
                 CampaignType: "",
                 sort: sort,
-                Createduser: createdUser
+                Createduser: createdUser,
+                CategoryId: parseInt(categoryId),
+                Boosted: ""
             }
         }).then(res => {
             setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
@@ -68,6 +73,91 @@ const ViewCompaign = (props) => {
 
     }, [])
 
+    // campaignPackage
+    const campaignPackage = (value) => {
+        switch (value) {
+            case "": {
+                setBoosted(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "",
+                        sort: sort,
+                        Createduser: "",
+                        Boosted: ""
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                })
+                return;
+            }
+            case "0": {
+                setBoosted(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "",
+                        sort: sort,
+                        Createduser: "",
+                        Boosted: "0"
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                })
+                return;
+            }
+            case "1": {
+                setBoosted(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "",
+                        sort: sort,
+                        Createduser: "",
+                        Boosted: "1"
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])   
+                    setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                })
+                return;
+            }
+        }
+    }
+
+
+
+    // categoryType filter through Id
+    const categoryHandler = (value) => {
+        setCategoryId(value);
+        getCampaign({
+            variables: {
+                page: value.selected + 1,
+                limit: 10,
+                CampaignType: campaignType,
+                sort: sort,
+                Createduser: createdUser,
+                CategoryId: parseInt(categoryId)
+            }
+        }
+        ).then(res => {
+            setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+            setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+            // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+            setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+        })
+    }
 
     const typeHandler = (value) => {
         switch (value) {
@@ -317,7 +407,9 @@ const ViewCompaign = (props) => {
                                     <option value="User">User</option>
                                     <option value="Admin">Admin</option>
                                 </select>
-                                <select className="select-option-of-adminstrator fnt-poppins mrg-left-50">
+                                <select className="select-option-of-adminstrator fnt-poppins mrg-left-50"
+                                    onChange={event => categoryHandler(event.target.value)}
+                                >
                                     <option>Select Category</option>
                                     {
                                         campaignCategories && campaignCategories.length !== 0 && campaignCategories.map(single =>
@@ -332,10 +424,12 @@ const ViewCompaign = (props) => {
                                     <option value="Petition">Petition</option>
                                     <option value="Pledge">Pledge</option>
                                 </select>
-                                <select className="select-option-of-adminstrator fnt-poppins mrg-left-50">
-                                    <option>Select Compaign Package</option>
-                                    <option>Free Compaign</option>
-                                    <option>Premium Compaign</option>
+                                <select className="select-option-of-adminstrator fnt-poppins mrg-left-50"
+                                    onChange={event => campaignPackage(event.target.value)}
+                                >
+                                    <option value="">Select Compaign Package</option>
+                                    <option value="0">Free Compaign</option>
+                                    <option value="1">Premium Compaign</option>
                                 </select>
                                 <select className="select-option-of-adminstrator fnt-poppins mrg-left-50"
                                     onChange={event => sortHandler(event.target.value)}

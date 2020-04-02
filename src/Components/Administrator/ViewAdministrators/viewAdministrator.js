@@ -65,7 +65,7 @@ const ViewAdministrator = (props) => {
             }
         }).then(res => {
             if (window.confirm("Are you sure you want to delete Data"));
-            window.location.replace("/admin")
+            window.location.replace("/administrator")
         })
     }
 

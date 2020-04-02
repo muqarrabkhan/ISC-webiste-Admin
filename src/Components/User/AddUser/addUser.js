@@ -18,6 +18,7 @@ const AddUser = (props) => {
     const [ipAddress, setIpAddress] = useState();
     const [btnText, setBtnText] = useState("Save");
     const [data] = useMutation(CREATE_USER);
+    const [passwordValidation, setPasswordValidation] = useState(false);
 
     let uid = uuid();
 
@@ -27,26 +28,22 @@ const AddUser = (props) => {
         })
     }, [])
 
-    const hide = () => {
-        if (select === false) {
-            setSelect(true);
-        }
-        else {
-            setSelect(false);
-            setPassword(uid.toString());
-            setConfirmPassword(uid.toString());
-        }
-    }
 
     const addUser = (event) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
+        if (confirmPassword !== password) {
+            setBtnText("Save");
+            setPasswordValidation(true);
+        }
+        else if (password === "" || confirmPassword === "") {
+            setBtnText("Saving...")
             data({
                 variables: {
                     Name: name,
                     Email: email,
-                    Password: password ? password : uid.toString(),
+                    Password: uid.toString(),
                     Status: "Enable",
                     CreatedDate: currentDate,
                     CreatedIp: ipInt(ipAddress).toInt()
@@ -55,6 +52,22 @@ const AddUser = (props) => {
                 history.push("/users")
             })
         }
+        else if (password === confirmPassword) {
+            setBtnText("Saving...")
+            data({
+                variables: {
+                    Name: name,
+                    Email: email,
+                    Password: password,
+                    Status: "Enable",
+                    CreatedDate: currentDate,
+                    CreatedIp: ipInt(ipAddress).toInt()
+                }
+            }).then(res => {
+                history.push("/users")
+            })
+        }
+    }
 
 
     return (
@@ -100,7 +113,16 @@ const AddUser = (props) => {
                                     <label>Select Password</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <select className="inputs-of-admistrator fnt-poppins" onChange={() => hide(false)}>
+                                    <select className="inputs-of-admistrator fnt-poppins" onChange={event => {
+                                        if (select === false) {
+                                            setSelect(true);
+                                        }
+                                        else {
+                                            setSelect(false);
+                                            setPassword(uid.toString());
+                                            setConfirmPassword(uid.toString());
+                                        }
+                                    }}>
                                         <option>Random Password</option>
                                         <option>Custom Password</option>
                                     </select>
@@ -116,21 +138,30 @@ const AddUser = (props) => {
                                         <div className="mrg-top-10">
                                             <input className="inputs-of-admistrator" required
                                                 value={password} type="password"
-                                                onChange={event => setPassword(event.target.value)} />
+                                                onChange={event => {
+                                                    setPasswordValidation(false)
+                                                    setPassword(event.target.value)
+                                                }} />
                                         </div>
                                     </div>
                                     {/* Confirm Password*/}
-                                    {/* <div className="mrg-left-60 mrg-top-20 fnt-poppins">
+                                    <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                         <div>
                                             <label>Confirm Password</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <input className="inputs-of-admistrator" required
                                                 value={confirmPassword} type="password"
-                                                onChange={event => setConfirmPassword(event.target.value)}
-                                            />
+                                                onChange={event => {
+                                                    setPasswordValidation(false)
+                                                    setConfirmPassword(event.target.value)
+                                                }
+                                                } />
                                         </div>
-                                    </div> */}
+                                    </div>
+                                    <div className="color-red-text has-margin-left-60 has-margin-top-20">
+                                        {passwordValidation ? "Password not matched" : ""}
+                                    </div>
                                 </div>
                             }
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">

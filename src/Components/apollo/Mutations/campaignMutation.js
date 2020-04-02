@@ -2,17 +2,21 @@ import gql from 'graphql-tag'
 
 export const VIEW_CAMPAIGN= gql`
 mutation allCampaignFilters(
-    $CampaignType:String,
+     $CampaignType:String,
       $page:Int,
       $limit:Int,
       $sort: String,
-      $Createduser: String
-    ){ allCampaignFilters(
+      $Createduser: String,
+      $CategoryId: Int,
+      $Boosted:String
+      ){ allCampaignFilters(
         CampaignType:$CampaignType,
         page:$page,
         limit:$limit,
         sort:$sort,
-        Createduser:$Createduser  
+        Createduser:$Createduser,  
+        CategoryId:$CategoryId,
+        Boosted:$Boosted
         ){
       campaigns{
         Id
