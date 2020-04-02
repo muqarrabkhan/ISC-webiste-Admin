@@ -9,8 +9,13 @@ export default()=>{
       margin: auto;
     }
     
-    .setting-table-main td, th {
+    .setting-table-main th {
       border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      
+    }
+    .setting-table-main td {
       text-align: left;
       padding: 8px;
       

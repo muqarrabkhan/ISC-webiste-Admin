@@ -1,16 +1,21 @@
 import React from 'react'
 
-export default()=>{
-    return(
-        <style>
-            {`
+export default () => {
+  return (
+    <style>
+      {`
               .viewAnnouncement-Table{
                 width: 97%;
                 margin: auto;
               }
               
-              .viewAnnouncement-Table td, th {
+              .viewAnnouncement-Table th {
                 border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+           
+              }
+              .viewAnnouncement-Table td {
                 text-align: left;
                 padding: 8px;
            
@@ -22,6 +27,6 @@ export default()=>{
                   display:flex;
               }
             `}
-        </style>
-    );
+    </style>
+  );
 }

@@ -46,7 +46,7 @@ const Signin = (props) => {
             })
                 .catch(err => {
                     if (err.message === "Request failed with status code 404") {
-                        setError("Invalid Email & Password");
+                        setError("Invalid Email or Password");
                         setBtnText("Signin");
                     }
                     else if (err.message === "Request failed with status code 500") {

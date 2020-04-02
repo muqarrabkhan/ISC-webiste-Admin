@@ -167,10 +167,10 @@ const ViewUser = (props) => {
                                         searchHandler(event.target.value)
                                     }}
                                 />
-                                <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Email" 
-                                onChange={event => {
-                                    searchEmailHandler(event.target.value)
-                                }}
+                                <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Email"
+                                    onChange={event => {
+                                        searchEmailHandler(event.target.value)
+                                    }}
                                 />
                             </div>
                         </div>
@@ -192,7 +192,13 @@ const ViewUser = (props) => {
                                             <td>{single.Name ? single.Name : "-"}</td>
                                             <td>{single.Email ? single.Email : "-"}</td>
                                             <td>{single.Status ? single.Status : "-"}</td>
-                                            <td>{single.is_affiliated ? single.is_affiliated : "-"}</td>
+                                            <td className="pad-0">{single.is_affiliated ?
+                                                <>
+                                                    <td>{single.is_affiliated == "0" ? "Normal User" : ""}</td>
+                                                    <td>{single.is_affiliated == "1" ? "Affiliated User" : ""}</td>
+                                                </>
+                                                : "-"}
+                                            </td>
                                             <td>
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-user/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

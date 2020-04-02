@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-export default()=>{
-    return(
+export default () => {
+    return (
         <style>
-        {`
+            {`
              .dashboard-main-dev {
                 background: #4379E9;
                 width: 330px;
@@ -61,8 +61,8 @@ export default()=>{
             .icon-width-admin{
                 width: 19px
             }
-
             .sidenav-name-logo {
+                width: 194px;
                 margin-left: 20%!important;
                 margin-top: 10%!important;
             }

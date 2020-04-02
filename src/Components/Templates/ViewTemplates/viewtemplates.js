@@ -64,7 +64,7 @@ const ViewTemplate = (props) => {
                 <div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
-                        <h6 className="heading6-of-header fnt-poppins">Templates</h6>
+                        <h6 className="heading6-of-header fnt-poppins">Tempelates</h6>
                         <button onClick={() => history.push("/add-tamplates")} className="header-btn-of-table fnt-poppins">Create</button>
                     </div>
                     {/* Table of Administrator  */}

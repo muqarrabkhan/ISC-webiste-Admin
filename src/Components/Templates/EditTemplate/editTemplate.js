@@ -46,7 +46,7 @@ const EditTemplate = (props) => {
                 <div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
-                        <h6 className="heading6-of-header fnt-poppins">Edit Templates</h6>
+                        <h6 className="heading6-of-header fnt-poppins">Edit Tempelates</h6>
                         <button onClick={() => history.push("/tamplates")} className=" cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
@@ -179,7 +179,7 @@ const EditTemplate = (props) => {
                                             <label className="label-of-radio" for="radio1">
                                                 <div className="checker"></div>
                                                 Websiter
-                                </label>
+                                            </label>
                                         </div>
                                     </div>
                                     <div className="radios mrg-left-50">
@@ -236,7 +236,7 @@ const EditTemplate = (props) => {
                                     <div className=" mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label >Templates Variable </label>
+                                                <label>Tempelates Variable </label>
                                             </div>
                                             <div>
                                                 <input disabled className="redonly-input mrg-top-10  fnt-poppins"
@@ -272,7 +272,8 @@ const EditTemplate = (props) => {
                         </div>
                     </form>
                 </div>
-                : <Loader />}
+                : <Loader />
+            }
         </>
     );
 }

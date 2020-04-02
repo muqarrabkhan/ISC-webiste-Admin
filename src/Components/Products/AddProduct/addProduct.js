@@ -220,7 +220,7 @@ const AddProduct = (props) => {
                                     <div className="Form-Inputs-Fields has-margin-top-20">
                                         <div className="form-group">
                                             <div>
-                                                <label className="mrg-top-20 fnt-poppins">width</label>
+                                                <label className="mrg-top-20 fnt-poppins">Width</label>
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="name" placeholder="Enter Name"

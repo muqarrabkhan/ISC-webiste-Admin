@@ -62,7 +62,7 @@ const Sidenav = (props) => {
                                 <img className="dashboard_icon"
                                     src={currentActive("/") === "active" ? require('../../assets/Images/dashboardactive.png') : require('../../assets/Images/dashboard.png')}
                                     alt="dashboard" />
-                                <span className="dashboard-link fnt-poppins">DashBoard</span>
+                                <span className="dashboard-link fnt-poppins">Dashboard</span>
                             </div>
                         </Link>
                         {/* Administrator */}
@@ -122,7 +122,7 @@ const Sidenav = (props) => {
                                 <img className="administrator_icon"
                                     src={currentActive("announcement") === "active" ? require('../../assets/Images/announcementactive.png') : require('../../assets/Images/announcement.png')}
                                     alt="Announcement" />
-                                <span className="sidenav-link fnt-poppins">Announcement</span>
+                                <span className="sidenav-link fnt-poppins">Announcements</span>
                             </div>
                         </Link>
                         {/* Categories */}
@@ -134,6 +134,16 @@ const Sidenav = (props) => {
                                 <span className="sidenav-link fnt-poppins">Categories</span>
                             </div>
                         </Link>
+                        {/* Template */}
+                        <Link to={"/tamplates"}>
+                            <div className={"sidenav-name-logo" + currentActive("tamplates")}>
+                                <img className="administrator_icon"
+                                    src={currentActive("tamplates") === "active" ? require('../../assets/Images/templateactive.png') : require('../../assets/Images/template.png')}
+                                    alt="Coupan" />
+                                <span className="sidenav-link fnt-poppins">Tempelates</span>
+                            </div>
+                        </Link>
+
                         {/* Newsletters */}
                         <Link to={"/newsletter"}>
                             <div className={"sidenav-name-logo" + currentActive("newsletter")}>
@@ -167,7 +177,7 @@ const Sidenav = (props) => {
                                 <img className="administrator_icon"
                                     src={currentActive("setting") === "active" ? require('../../assets/Images/generalsettingactive.png') : require('../../assets/Images/Setting.png')}
                                     alt="General Setting" />
-                                <span className="sidenav-link fnt-poppins active" onClick={() => hideShowSetting(false)}>Setting</span>
+                                <span className="sidenav-link fnt-poppins active" onClick={() => hideShowSetting(false)}>Settings</span>
                                 {showSetting ?
                                     <img className="icon-width-admin has-margin-left-30"
                                         src={require('../../assets/Images/upwardarrow.png')}
@@ -183,7 +193,7 @@ const Sidenav = (props) => {
                             <div className="has-margin-left-30">
                                 <Link to={"/setting"}>
                                     <div className={"sidenav-name-logo" + currentActive("setting")}>
-                                        <span className="sidenav-link fnt-poppins active">Setting</span>
+                                        <span className="sidenav-link fnt-poppins active">Settings</span>
                                     </div>
                                 </Link>
                                 <Link to={"/live-setting"}>
@@ -199,7 +209,7 @@ const Sidenav = (props) => {
                                 <img className="administrator_icon"
                                     src={currentActive("campaign") === "active" ? require('../../assets/Images/compaignactive.png') : require('../../assets/Images/compaign.png')}
                                     alt="Compaign" />
-                                <span className="sidenav-link fnt-poppins">Compaigns</span>
+                                <span className="sidenav-link fnt-poppins">Campaigns</span>
                             </div>
                         </Link>
                         {/* Products */}
@@ -226,16 +236,7 @@ const Sidenav = (props) => {
                                 <img className="administrator_icon"
                                     src={currentActive("coupans") === "active" ? require('../../assets/Images/coupanactive.png') : require('../../assets/Images/coupan.png')}
                                     alt="Coupan" />
-                                <span className="sidenav-link fnt-poppins">Coupan</span>
-                            </div>
-                        </Link>
-                        {/* Template */}
-                        <Link to={"/tamplates"}>
-                            <div className={"sidenav-name-logo" + currentActive("tamplates")}>
-                                <img className="administrator_icon"
-                                    src={currentActive("tamplates") === "active" ? require('../../assets/Images/templateactive.png') : require('../../assets/Images/template.png')}
-                                    alt="Coupan" />
-                                <span className="sidenav-link fnt-poppins">Templates</span>
+                                <span className="sidenav-link fnt-poppins">Coupons</span>
                             </div>
                         </Link>
                         {/* Files */}

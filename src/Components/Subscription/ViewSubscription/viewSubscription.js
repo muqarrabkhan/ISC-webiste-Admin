@@ -31,10 +31,10 @@ const ViewSubscription = (props) => {
                                 <thead className="heading-of-table background-color-head">
                                     <tr className="table-row-of-head fnt-poppins">
                                         <th>Name</th>
-                                        <th>StorefrontLimit</th>
-                                        <th>CampaignLimit</th>
-                                        <th>ChargePercentage</th>
-                                        <th>SubscriptionCharges</th>
+                                        <th>Storefront Limit</th>
+                                        <th>Campaign Limit</th>
+                                        <th>Charge Percentage</th>
+                                        <th>Subscription Charges</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
