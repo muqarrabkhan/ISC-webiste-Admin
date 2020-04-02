@@ -22,6 +22,9 @@ mutation userActivity(
           Name
           error
         }
+        userName {
+          Name
+        }
         
     }
     totaluserActivity
