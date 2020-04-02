@@ -7,7 +7,7 @@ import { standardDate } from '../../../functions'
 import { viewActivities_img } from '../../../../config'
 import ipInt from 'ip-to-int'
 import Loader from '../../../commonComponents/Loader/loader'
-import loader from '../../../commonComponents/Loader/loader'
+
 
 const UserInformation = (props) => {
     let { history, match } = props;
@@ -130,7 +130,7 @@ const UserInformation = (props) => {
                     <Style />
                 </div>
 
-                : <loader />
+                : <Loader />
             }
         </>
     );
