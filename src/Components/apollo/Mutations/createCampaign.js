@@ -17,10 +17,8 @@ export const CREATE_CAMPAIGN = gql`
     $Secondary_color: String,
     $Tertiary_color: String,
     $Createduser: String,
-    $Overlay: String,
     $Banner: String,
-    $StorefrontId: Int,
-    $Logo:String,
+    $Overlay:String,
     $CreatedIp:Long
     )
                        {
@@ -42,8 +40,6 @@ export const CREATE_CAMPAIGN = gql`
                             Overlay:$Overlay,
                             Banner:$Banner,
                             Createduser:$Createduser,
-                            StorefrontId:$StorefrontId,
-                            Logo:$Logo,
                             CreatedIp:$CreatedIp
                             )
                 {

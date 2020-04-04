@@ -2,27 +2,27 @@ import React, { useState, useEffect } from 'react'
 import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { campaignBanner_baseurl, campaignLogo_baseurl, apiPath } from '../../../config'
+import { campaignBanner_baseurl, overlays, apiPath } from '../../../config'
 import { CREATE_CAMPAIGN } from '../../apollo/Mutations/createCampaign'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
+import ImageLoader from '../../../assets/Images/loader.gif'
 
 const CreateCompaign = (props) => {
     let { history } = props;
     const { loading, data } = useQuery(CAMPAIGN_CATEGORIES, { context: { clientName: "second" } });
 
     // states for colors
-    const [initial] = useState('#5e72e4');
-    const [Secondary] = useState('#EC2027');
-    const [Tertiary] = useState('#000000');
+    const [initial] = useState("#5e72e4")
+    const [secondary] = useState("#EC2027")
+    const [tertiaryC] = useState("#000000")
     const [color, setColor] = useState("");
     const [secondaryColor, setSecondaryColor] = useState("");
     const [tertiary, setTertiaryColor] = useState("");
     const [addMoreImage, setAddMoreImage] = useState("");
     const [bannerimage, setBannerImage] = useState("");
-    const [overLayimage, setOverlayImage] = useState("");
     const [createCampaign] = useMutation(CREATE_CAMPAIGN);
     const [ipAddress, setIpAddress] = useState();
     // create Campaign State
@@ -37,7 +37,9 @@ const CreateCompaign = (props) => {
     const [facebook, setfacebook_url] = useState("")
     const [twitter, settwitter_url] = useState("")
     const [website, setwebsite_url] = useState("")
-
+    const [buttonText, setButtonText] = useState("")
+    const [selectOverlay, setSelectOverlay] = useState("")
+    const [imageLoader,setImageLoader]=useState(false)
 
     const addImage = () => {
         let duplicateImage = [...addMoreImage]
@@ -47,6 +49,7 @@ const CreateCompaign = (props) => {
 
     const uploadProductImage = (event) => {
         const file = event.target.files[0];
+        setImageLoader(true)
         getBase64(file).then(
             data => {
                 let final = {
@@ -55,24 +58,41 @@ const CreateCompaign = (props) => {
                 };
                 axios.post(apiPath + "/bannerUpload", final).then(res => {
                     setBannerImage(res.data.imageUrl);
+                    setImageLoader(false)
                 });
             });
     };
 
-    const uploadOverlayImage = (event, index) => {
+
+
+    const uploadOverlayImage = (event) => {
         const file = event.target.files[0];
-        let duplicateImage = [...addMoreImage]
         getBase64(file).then(
             data => {
                 let final = {
                     imageFile: data,
                 };
-                axios.post(apiPath + "/uploadLogo", final).then(res => {
-                    duplicateImage[index] = res.data.imageUrl;
-                    setAddMoreImage(duplicateImage);
-                });
+                axios.post(apiPath + "/uploadOverlay", final).then(res => {
+                    setSelectOverlay(res.data.imageUrl)
+                })
             });
     };
+
+    // method for adding more than one overlay
+    // const uploadOverlayImage = (event, index) => {
+    //     const file = event.target.files[0];
+    //     let duplicateImage = [...addMoreImage]
+    //     getBase64(file).then(
+    //         data => {
+    //             let final = {
+    //                 imageFile: data,
+    //             };
+    //             axios.post(apiPath + "/uploadLogo", final).then(res => {
+    //                 duplicateImage[index] = res.data.imageUrl;
+    //                 setAddMoreImage(duplicateImage);
+    //             });
+    //         });
+    // };
 
     const getBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -93,6 +113,9 @@ const CreateCompaign = (props) => {
 
             case "Pledge":
                 return setCampaignType("Pledge")
+
+            case "":
+                return setCampaignType("")
         }
     }
 
@@ -106,31 +129,49 @@ const CreateCompaign = (props) => {
         event.preventDefault();
         let stDate = new Date(startDate)
         let edDate = new Date(endDate)
-        createCampaign({
-            variables: {
-                Name: name,
-                CampaignType: campaignType,
-                ShortDescription: shortDescription,
-                CategoryId: parseInt(categoryId),
-                Description: description,
-                StartDate: stDate.toISOString(),
-                EndDate: edDate.toISOString(),
-                goal_support: parseInt(goalSupport),
-                facebook_url: facebook ? facebook : "",
-                twitter_url: twitter ? twitter : "",
-                website_url: website ? website : "",
-                Primary_color: color.hex.toString() ? color.hex.toString() : "",
-                Secondary_color: secondaryColor.hex.toString() ? secondaryColor.hex.toString() : "",
-                Tertiary_color: tertiary.hex.toString() ? tertiary.hex.toString() : "",
-                Logo: addMoreImage[0] ? addMoreImage[0] : "",
-                Banner: bannerimage ? bannerimage : "",
-                Createduser: "Admin",
-                CreatedIp: ipInt(ipAddress).toInt(),
-                StorefrontId: 123
-            }
-        }).then(res => {
-            history.push("/campaign")
-        })
+
+        if (!categoryId) {
+            setButtonText("Save")
+        }
+        if (!campaignType) {
+            setButtonText("Save")
+        }
+        if (!shortDescription) {
+            setButtonText("Save")
+        }
+        if (!description) {
+            setButtonText("Save")
+        }
+        if (!goalSupport) {
+            setButtonText("Save")
+        }
+        else {
+            setButtonText("Save")
+            createCampaign({
+                variables: {
+                    Name: name,
+                    CampaignType: campaignType,
+                    ShortDescription: shortDescription,
+                    CategoryId: parseInt(categoryId),
+                    Description: description,
+                    StartDate: stDate.toISOString() ? stDate.toISOString() : "",
+                    EndDate: edDate.toISOString() ? edDate.toISOString() : "",
+                    goal_support: parseInt(goalSupport),
+                    facebook_url: facebook ? facebook : "",
+                    twitter_url: twitter ? twitter : "",
+                    website_url: website ? website : "",
+                    Primary_color: color.hex.toString() !== initial ? color.hex.toString() : "",
+                    Secondary_color: secondaryColor.hex.toString() !== secondary ? secondaryColor.hex.toString() : "",
+                    Tertiary_color: tertiary.hex.toString() !== tertiaryC ? tertiary.hex.toString() : "",
+                    Overlay: selectOverlay ? selectOverlay : "",
+                    Banner: bannerimage ? bannerimage : "",
+                    Createduser: "Admin",
+                    CreatedIp: ipInt(ipAddress).toInt()
+                }
+            }).then(res => {
+                history.push("/campaign")
+            })
+        }
     }
 
     return (
@@ -157,11 +198,12 @@ const CreateCompaign = (props) => {
                                             {bannerimage ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${bannerimage ? campaignBanner_baseurl + bannerimage : "no-image"})`,
+                                                        backgroundImage: `url(${bannerimage  ? campaignBanner_baseurl + bannerimage : <img src={ImageLoader}/>})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
+                                                        marginLeft: "7%",
+                                                        width: "100px"
                                                     }}>
                                                 </div>
                                                 :
@@ -197,10 +239,47 @@ const CreateCompaign = (props) => {
                             </div>
                             {/* Overlays Image choose button start here */}
                             <div className="mrg-top-20">
-                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Logo</label>
+                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Overlay</label>
                             </div>
                             {/* Second choose file button */}
-                            {addMoreImage && addMoreImage.map((single, index) =>
+                            {selectOverlay ?
+                                <div className="store-front-image has-margin-top-10"
+                                    style={{
+                                        backgroundImage: `url(${selectOverlay ? overlays + selectOverlay : ""})`,
+                                        height: "100px",
+                                        backgroundSize: "contain",
+                                        backgroundRepeat: "no-repeat",
+                                        marginLeft: "7%"
+                                    }}>
+                                </div>
+                                :
+                                <img className="dashboard_icon"
+                                    src={require('../../../assets/Images/admin.png')}
+                                    style={{
+                                        height: "100px",
+                                        width: "95px",
+                                        backgroundRepeat: "no-repeat",
+                                        marginLeft: "7%"
+                                    }}
+                                />
+                            }
+                            <div className="file is-small has-name has-margin-left-60 has-padding-left-20">
+                                <label className="file-label">
+                                    <input className="file-input fnt-poppins"
+                                        type="file" name="resume"
+                                        accept="image/*"
+                                        onChange={event => uploadOverlayImage(event)} />
+                                    <span className="file-cta has-margin-top-5">
+                                        <span className="file-icon">
+                                            <i className="fas fa-upload"></i>
+                                        </span>
+                                        <span className="file-label width-bt-80 ">
+                                            Choose file
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            {/* {addMoreImage && addMoreImage.map((single, index) =>
                                 <div key={index}>
                                     <div className="Form-section2-uploading-image">
                                         <div className="has-padding-top-20">
@@ -245,12 +324,12 @@ const CreateCompaign = (props) => {
                                         </label>
                                     </div>
                                 </div>
-                            )}
-                            <div className="has-margin-top-10">
+                            )} */}
+                            {/* <div className="has-margin-top-10 mrg-left-40">
                                 <span className="Save-btn-of-form has-padding-5  mrg-left-50 has-margin-top-10 fnt-poppins"
                                     onClick={() => addImage()}
                                 >Add Image</span>
-                            </div>
+                            </div> */}
                             {/* hashtag back color */}
                             <div className="is-flex">
                                 <div className="mrg-left-50 mrg-top-30">
@@ -260,7 +339,8 @@ const CreateCompaign = (props) => {
                                             width: 80,
                                             height: 50,
                                             marginBottom: 20,
-                                            backgroundColor: color.hex
+                                            backgroundColor: color.hex,
+                                            initialHexColor: initial
                                         }}>
                                         {color.hex}
                                     </div>
@@ -273,11 +353,12 @@ const CreateCompaign = (props) => {
                                             width: 80,
                                             height: 50,
                                             marginBottom: 20,
-                                            backgroundColor: secondaryColor.hex
+                                            backgroundColor: secondaryColor.hex,
+                                            initialHexColor: secondary
                                         }}>
                                         {secondaryColor.hex}
                                     </div>
-                                    <InputColor initialHexColor={Secondary} onChange={setSecondaryColor} />
+                                    <InputColor initialHexColor={secondary} onChange={setSecondaryColor} />
                                 </div>
                                 <div className="mrg-left-50 mrg-top-30">
                                     <label className="fnt-poppins ">Tertiary Color</label>
@@ -286,13 +367,12 @@ const CreateCompaign = (props) => {
                                             width: 80,
                                             height: 50,
                                             marginBottom: 20,
-                                            backgroundColor: tertiary.hex
-
+                                            backgroundColor: tertiary.hex,
+                                            initialHexColor: tertiaryC
                                         }}>
                                         {tertiary.hex}
                                     </div>
-
-                                    <InputColor initialHexColor={Tertiary} onChange={setTertiaryColor} />
+                                    <InputColor initialHexColor={tertiaryC} onChange={setTertiaryColor} />
                                 </div>
                             </div>
                             <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
@@ -326,22 +406,6 @@ const CreateCompaign = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* Category */}
-                                    {/* <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
-                                        <div className="form-group">
-                                            <div>
-                                                <label >Select Currency</label>
-                                            </div>
-                                            <div>
-                                                <select className="mrg-top-10 fnt-poppins" type="slug" placeholder="Enter Slug">
-                                                    <option>Choose Currency</option>
-                                                    <option>UND</option>
-                                                    <option>INR</option>
-                                                    <option>Euro</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div> */}
                                     {/* facebook url */}
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
@@ -351,12 +415,12 @@ const CreateCompaign = (props) => {
                                             <div>
                                                 <select className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"
                                                     onChange={(event) => handeler(event.target.value)}
+                                                    required
                                                 >
-                                                    <option>Select Campaign Type</option>
+                                                    <option value="">Select Campaign Type</option>
                                                     <option value="Fundraiser">Fundraiser</option>
                                                     <option value="Petition">Petition</option>
-                                                    <option value="Pledge">Petition</option>
-
+                                                    <option value="Pledge">Pledge</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -369,10 +433,11 @@ const CreateCompaign = (props) => {
                                                     {campaignType === "Fundraiser" ? "Monetary Goal" : ""}
                                                     {campaignType === "Petition" ? "Petition Goal" : ""}
                                                     {campaignType === "Pledge" ? "No of Pledges Aiming For" : ""}
+                                                    {campaignType === "" ? "Select Campaign Type First" : ""}
                                                 </label>
                                                 : "Select Campaign Type First"}
                                             <div>
-                                                <input className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"
+                                                <input className="mrg-top-10 fnt-poppins" type="number" placeholder="Enter Hash Tag" required
                                                     onChange={(event) => setgoal_support(event.target.value)}
                                                 />
                                             </div>
@@ -387,6 +452,7 @@ const CreateCompaign = (props) => {
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="date"
                                                     value={startDate}
+                                                    required
                                                     onChange={event => setStartDate(event.target.value)}
                                                 />
                                             </div>
@@ -401,6 +467,7 @@ const CreateCompaign = (props) => {
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="date"
                                                     value={endDate}
+                                                    required
                                                     onChange={event => setEndDate(event.target.value)}
                                                 />
                                             </div>
@@ -417,8 +484,8 @@ const CreateCompaign = (props) => {
                                             </div>
                                             <div>
                                                 <select className="has-margin-top-10 fnt-poppins"
-                                                    onChange={event => setCategoryId(event.target.value)}>
-                                                    <option>Select Category</option>
+                                                    onChange={event => setCategoryId(event.target.value)} required>
+                                                    <option value="">Select Category</option>
                                                     {data && data.campaignCategories && data.campaignCategories.map((single, index) =>
                                                         <option value={single.Id}>{single.Name}</option>
                                                     )}

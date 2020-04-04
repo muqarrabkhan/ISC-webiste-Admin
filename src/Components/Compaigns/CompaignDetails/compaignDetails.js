@@ -3,7 +3,7 @@ import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import { SINGLE_CAMPAIGN } from '../../apollo/Quries/singleCampaign'
 import { useQuery } from '@apollo/react-hooks';
-import { campaignBanner_baseurl, campaignLogo_baseurl } from '../../../config'
+import { campaignBanner_baseurl, overlays } from '../../../config'
 import { standardDate } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
 
@@ -12,13 +12,18 @@ const CompaignDetails = (props) => {
     let id = match.params && match.params.id ? match.params.id : "";
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
-    const { loading, data } = useQuery(SINGLE_CAMPAIGN(id));
-
-    let startDate = data && data.getcampaignbyId && data.getcampaignbyId.StartDate;
+    const { loading, data } = useQuery(SINGLE_CAMPAIGN(id), { context: { clientName: "second" } });
+    const [getSingleCampaign, setGetSingleCampaign] = useState()
+    const [renderData, setRenderData] = useState("");
+    let startDate = data && data.SingleCampaign && data.SingleCampaign.StartDate;
     startDate = standardDate(startDate).standardDate;
 
-    let endDate = data && data.getcampaignbyId && data.getcampaignbyId.EndDate;
+    let endDate = data && data.SingleCampaign && data.SingleCampaign.EndDate;
     endDate = standardDate(endDate).standardDate;
+
+    useEffect(() => {
+        setGetSingleCampaign(data && data.SingleCampaign);
+    }, [data])
 
     return (
         <>
@@ -39,57 +44,67 @@ const CompaignDetails = (props) => {
                                     {/* choose file inputs start here */}
                                     {/* Display Social Share Image */}
                                     <div className="has-padding-top-20">
-                                        <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Banner Image</label>
-                                        <div class="field mrg-top-20 mrg-left-50">
-                                            <div className="file is-small has-name ">
-                                                {data && data.getcampaignbyId &&
-                                                    <div className="store-front-image"
-                                                        style={{
-                                                            backgroundImage: `url(${data.getcampaignbyId.Banner ? campaignBanner_baseurl + data.getcampaignbyId.Banner : "no-image"})`,
-                                                            height: "100px",
-                                                            backgroundSize: "contain",
-                                                            backgroundRepeat: "no-repeat",
-                                                            marginLeft: "6%"
-                                                        }}>
+                                        {getSingleCampaign && getSingleCampaign.Banner ?
+                                            <div>
+                                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Banner Image</label>
+                                                <div class="field mrg-top-20 mrg-left-50">
+                                                    <div className="file is-small has-name ">
+                                                        <div className="store-front-image"
+                                                            style={{
+                                                                backgroundImage: `url(${getSingleCampaign && getSingleCampaign.Banner ? campaignBanner_baseurl + getSingleCampaign.Banner : "no-image"})`,
+                                                                height: "100px",
+                                                                backgroundSize: "contain",
+                                                                backgroundRepeat: "no-repeat",
+                                                                marginLeft: "7%",
+                                                                width:"100px"
+                                                            }}>
+                                                        </div>
+
                                                     </div>
-                                                }
+                                                </div>
                                             </div>
-                                        </div>
+                                            : ""}
                                     </div>
                                     {/* Overlays Image choose button start here */}
-                                    {data && data.getcampaignbyId && data.getcampaignbyId.Logo && data.getcampaignbyId.Logo ?
+                                    {getSingleCampaign && getSingleCampaign.Overlay ?
                                         <div className="mrg-top-20">
-                                            <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Logo</label>
+                                            <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Overlay</label>
                                         </div>
                                         : ""}
                                     {/* First choose file button */}
                                     <div className="field mrg-top-20  mrg-left-50">
                                         <div className="file is-small has-name ">
-                                            {data && data.getcampaignbyId && data.getcampaignbyId.Logo && data.getcampaignbyId.Logo.map(single =>
+                                            {getSingleCampaign && getSingleCampaign.Overlay &&
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${single.Logo ? campaignBanner_baseurl + single.Logo : "no-image"})`,
+                                                        backgroundImage: `url(${getSingleCampaign && getSingleCampaign.Overlay ? overlays + getSingleCampaign.Overlay : "no-image"})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "6%"
+                                                        marginLeft: "7%",
+                                                        width: "100px"
                                                     }}>
                                                 </div>
-                                            )}
+                                            }
                                         </div>
                                     </div>
                                     {/* hashtag back color */}
                                     {/* <label className="fnt-poppins mrg-left-50">Hash Tag Back Color</label> */}
+                                    {getSingleCampaign && getSingleCampaign.Secondary_color || getSingleCampaign && getSingleCampaign.Tertiary_color || getSingleCampaign && getSingleCampaign.Primary_color ?
+                                        <div className="mrg-top-20">
+                                            <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Hash Tag Colors</label>
+                                        </div>
+                                        : ""}
                                     <div className="is-flex">
                                         <div className="mrg-left-50 mrghas-margin-top-30">
-                                            {data && data.getcampaignbyId && data.getcampaignbyId.Secondary_color ?
+                                            {getSingleCampaign && getSingleCampaign.Secondary_color ?
                                                 <div>
                                                     <div className="react-input-color mrg-top-20"
                                                         style={{
                                                             width: 80,
                                                             height: 50,
                                                             marginBottom: 20,
-                                                            backgroundColor: data && data.getcampaignbyId && data.getcampaignbyId.Secondary_color
+                                                            backgroundColor: getSingleCampaign && getSingleCampaign.Secondary_color
                                                         }}>
                                                         {/* {color.hex} */}
                                                     </div>
@@ -98,14 +113,14 @@ const CompaignDetails = (props) => {
                                                 : ""}
                                         </div>
                                         <div className="mrg-left-50 mrghas-margin-top-30">
-                                            {data && data.getcampaignbyId && data.getcampaignbyId.Tertiary_color ?
+                                            {getSingleCampaign && getSingleCampaign.Tertiary_color ?
                                                 <div>
                                                     <div className="react-input-color mrg-top-20"
                                                         style={{
                                                             width: 80,
                                                             height: 50,
                                                             marginBottom: 20,
-                                                            backgroundColor: data && data.getcampaignbyId && data.getcampaignbyId.Tertiary_color
+                                                            backgroundColor: getSingleCampaign && getSingleCampaign.Tertiary_color
                                                         }}>
                                                         {/* {color.hex} */}
                                                     </div>
@@ -114,14 +129,14 @@ const CompaignDetails = (props) => {
                                                 : ""}
                                         </div>
                                         <div className="mrg-left-50 mrghas-margin-top-30">
-                                            {data && data.getcampaignbyId && data.getcampaignbyId.Primary_color ?
+                                            {getSingleCampaign && getSingleCampaign.Primary_color ?
                                                 <div>
                                                     <div className="react-input-color mrg-top-20"
                                                         style={{
                                                             width: 80,
                                                             height: 50,
                                                             marginBottom: 20,
-                                                            backgroundColor: data && data.getcampaignbyId && data.getcampaignbyId.Primary_color
+                                                            backgroundColor: getSingleCampaign && getSingleCampaign.Primary_color
                                                         }}>
                                                         {/* {color.hex} */}
                                                     </div>
@@ -141,7 +156,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins" type="name"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.Name : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.Name ? getSingleCampaign.Name : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -155,7 +170,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.ShortDescription : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.ShortDescription ? getSingleCampaign.ShortDescription : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -163,17 +178,17 @@ const CompaignDetails = (props) => {
                                             {/* Category */}
                                             <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                                 <div className="form-group">
-                                                        <label className="">
-                                                            {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Fundraiser" ? "Monetary Goal" : ""}
-                                                            {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Petition" ? "Petition Goal" : ""}
-                                                            {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Pledge" ? "No of Pledges Aiming For" : ""}
-                                                            {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Support" ? "Support" : ""}
-                                                        </label>
-                                                   
+                                                    <label className="">
+                                                        {getSingleCampaign && getSingleCampaign.CampaignType === "Fundraiser" ? "Monetary Goal" : ""}
+                                                        {getSingleCampaign && getSingleCampaign.CampaignType === "Petition" ? "Petition Goal" : ""}
+                                                        {getSingleCampaign && getSingleCampaign.CampaignType === "Pledge" ? "No of Pledges Aiming For" : ""}
+                                                        {getSingleCampaign && getSingleCampaign.CampaignType === "Support" ? "Support" : ""}
+                                                    </label>
+
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins" type="Hash-Tag"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.goal_support : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.goal_support ? getSingleCampaign.goal_support : "-"}
                                                         />
 
                                                     </div>
@@ -188,7 +203,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.facebook_url : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.facebook_url ? getSingleCampaign.facebook_url : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -235,7 +250,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins" type="slug"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.CampaignType : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.CampaignType ? getSingleCampaign.CampaignType : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -249,7 +264,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins" type="keyword"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.Description : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.Description ? data.SingleCampaign.Description : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -264,7 +279,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins" type="keyword"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.CategoryId : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.CategoryId ? getSingleCampaign.CategoryId : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -278,7 +293,7 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.website_url : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.website_url ? getSingleCampaign.website_url : "-"}
                                                         />
                                                     </div>
                                                 </div>
@@ -292,13 +307,13 @@ const CompaignDetails = (props) => {
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins"
                                                             disabled
-                                                            value={data && data.getcampaignbyId ? data.getcampaignbyId.twitter_url : "-"}
+                                                            value={getSingleCampaign && getSingleCampaign.twitter_url ? getSingleCampaign.twitter_url : "-"}
                                                         />
                                                     </div>
                                                 </div>
                                             </div>
                                             {/* End date */}
-                                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">                                                
+                                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                             </div>
                                         </div>
                                     </div>

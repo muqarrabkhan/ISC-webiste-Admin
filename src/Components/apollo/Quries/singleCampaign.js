@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const SINGLE_CAMPAIGN = (Id) => gql`
+export const SINGLE_CAMPAIGN = (Slug) => gql`
 {
-  getcampaignbyId(Id:${Id}){
+  SingleCampaign(Slug:"${Slug}"){
     Name
     Banner
     Id
@@ -24,6 +24,16 @@ export const SINGLE_CAMPAIGN = (Id) => gql`
     website_url
     CampaignType
     goal_support
+    Overlay
+    StartDate
+    EndDate
   }
+
+  campaignCategories
+  {
+      Id
+      Name
+  }
+
   }
 `;

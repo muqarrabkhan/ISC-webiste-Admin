@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Style from './style'
 import Deletelogo from '../../../../assets/Images/delete.svg'
 import Editlogo from '../../../../assets/Images/edit.svg'
@@ -11,6 +11,14 @@ const Campaign = (props) => {
     const { loading, data } = useQuery(SINGLE_CAMPAIGN(id))
     let date = data && data.getcampaignbyId && data.getcampaignbyId.CreatedDate;
     date = standardDate(date).standardDate;
+    const [singleCampaignstData, setSingleCampaignstData] = useState()
+
+    useEffect(() => {
+        setSingleCampaignstData(data && data.getcampaignbyId ? data.getcampaignbyId.Name:"-");
+    }, [data])
+
+    console.log("singleCampaignstData",singleCampaignstData && singleCampaignstData)
+
     return (
         <>
             <div className="container-fluid Table-for-administrator-main-div">
@@ -32,11 +40,10 @@ const Campaign = (props) => {
                                 <th className="bodr-of-none">Action</th>
                             </tr>
                         </thead>
-
                         <tbody className="table-of-data">
                             <tr className="table-row-data-of-body fnt-poppins">
-                                <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Id :"-" }</td> 
-                                <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Name :"-"}</td> 
+                                <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Id : "-"}</td>
+                                <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Name : "-"}</td>
                                 <td>{data && data.getcampaignbyId ? data.getcampaignbyId.CreatedBy : "-"}</td>
                                 <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Verified : "-"}</td>
                                 <td>{data && data.getcampaignbyId ? data.getcampaignbyId.supportCount : "-"}</td>
@@ -44,7 +51,7 @@ const Campaign = (props) => {
                                 <td>{date ? date : "-"}</td>
                                 <td>{data && data.getcampaignbyId ? data.getcampaignbyId.is_campaign_aws : "-"}</td>
                                 <td>{data && data.getcampaignbyId ? data.getcampaignbyId.ShowOnList : "-"}</td>
-                                <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Status : "-"}</td> 
+                                <td>{data && data.getcampaignbyId ? data.getcampaignbyId.Status : "-"}</td>
                                 <td>
                                     <div className="appling-width-btns ">
                                         <div className=" is-flex image-btn-edit-delete-user-compaign">
@@ -61,7 +68,11 @@ const Campaign = (props) => {
                                 </td>
                             </tr>
                         </tbody>
-
+                        {/* <tfoot>
+                                <tr>
+                                    <td colSpan={5} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
+                                </tr>
+                            </tfoot> */}
                     </table>
                 </div>
             </div>

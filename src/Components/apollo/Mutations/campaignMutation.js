@@ -26,7 +26,7 @@ mutation allCampaignFilters(
         Verified
         CategoryId
         CreatedDate
-        supportCount
+
         is_campaign_aws
         Status
         ShowOnList
@@ -39,3 +39,5 @@ mutation allCampaignFilters(
 
   
 `;
+
+// supportCount

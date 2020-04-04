@@ -158,6 +158,7 @@ const EditTemplate = (props) => {
                                                         <option value="CreateCampaign">Create Campaign</option >
                                                         <option value="forgetPassword">Forget Password</option>
                                                         <option value="countCampaign">Campaign Count</option>
+                                                        <option value="notPremium">Premium Subscription 2 Days</option>
                                                     </select>
                                                 </div>
 

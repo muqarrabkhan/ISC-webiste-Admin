@@ -3,41 +3,92 @@ import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import { SINGLE_CAMPAIGN } from '../../apollo/Quries/singleCampaign'
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { campaignBanner_baseurl, campaignLogo_baseurl } from '../../../config'
+import { campaignBanner_baseurl, overlays } from '../../../config'
 import { standardDate } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
 import { EDIT_CAMPAIGN } from '../../apollo/Mutations/updateCampaign'
 import axios from 'axios'
 import { apiPath } from '../../../config'
+import ImageLoader from '../../../assets/Images/loader.gif'
 
 const CompaignDetails = (props) => {
     let { history, match } = props;
     let id = match.params && match.params.id ? match.params.id : "";
-    const { loading, data } = useQuery(SINGLE_CAMPAIGN(id));
-
+    const { loading, data } = useQuery(SINGLE_CAMPAIGN(id), { context: { clientName: "second" } });
+    const [getAllCampaignsType, setGetAllCampaigns] = useState();
     // colors
-    const [initial] = useState('#5e72e4');
-    const [Secondary] = useState('#EC2027');
-    const [Tertiary] = useState('#000000');
+    const [initial] = useState("#5e72e4")
+    const [secondary] = useState("#EC2027")
+    const [tertiaryC] = useState("#000000")
     const [color, setColor] = useState("");
     const [secondaryColor, setSecondaryColor] = useState("");
     const [tertiary, setTertiaryColor] = useState("");
 
-    let startDate = data && data.getcampaignbyId && data.getcampaignbyId.StartDate;
-    startDate = standardDate(startDate).standardDate;
-
-    let endDate = data && data.getcampaignbyId && data.getcampaignbyId.EndDate;
-    endDate = standardDate(endDate).standardDate;
-
-    let selectedCampaign = data && data.getcampaignbyId && data.getcampaignbyId.CampaignType;
+    let selectedCampaign = data && data.SingleCampaign && data.SingleCampaign.CampaignType;
 
     const [editData] = useMutation(EDIT_CAMPAIGN);
     const [renderData, setRenderData] = useState("");
-    const [logo, setLogo] = useState("")
+    const [hideShowColors, setHideShowColors] = useState(false)
+    const [hideShowButtonText, setHideShowButtonText] = useState("Edit Hash Tag Colors")
+
+    // let dataSecondary = renderData && renderData.Secondary_color;
+    // let dataTertiary = renderData && renderData.Tertiary_color;
+    // let dataPrimary = renderData && renderData.Primary_color;
 
     useEffect(() => {
-        setRenderData(data && data.getcampaignbyId ? { ...data.getcampaignbyId } : {});
-    }, [data, data && data.getcampaignbyId])
+        setRenderData(data && data.SingleCampaign ? { ...data.SingleCampaign } : {});
+        setGetAllCampaigns(data && data.campaignCategories)
+    }, [data])
+
+    const uploadProductImage = (event, index) => {
+        const file = event.target.files[0];
+        getBase64(file).then(
+            data => {
+                let final = {
+                    imageFile: data,
+                };
+                axios.post(apiPath + "/bannerUpload", final).then(res => {
+                    let duplicateProducts = { ...renderData };
+                    duplicateProducts.Banner = res.data.imageUrl;
+                    setRenderData({ ...duplicateProducts })
+                });
+            });
+    };
+
+    const uploadOverlayImage = (event) => {
+        const file = event.target.files[0];
+        getBase64(file).then(
+            data => {
+                let final = {
+                    imageFile: data,
+                };
+                axios.post(apiPath + "/uploadOverlay", final).then(res => {
+                    let duplicateProducts = { ...renderData };
+                    duplicateProducts.Overlay = res.data.imageUrl;
+                    setRenderData({ ...duplicateProducts })
+                })
+            });
+    };
+
+    // const uploadOverlayImage = (event, index) => {
+    //     const file = event.target.files[0];
+    //     getBase64(file).then(
+    //         data => {
+    //             let final = {
+    //                 imageFile: data,
+    //             };
+    //             axios.post(apiPath + "/uploadLogo", final).then(res => {
+    //                 let duplicateImage = [...logo]
+    //                 duplicateImage[index] = res.data.imageUrl;
+    //                 setRenderData(duplicateImage);
+    //             });
+    //         });
+    // };
+    // const addVariation = () => {
+    //     let duplicateVariation = [...logo]
+    //     duplicateVariation.push("")
+    //     setLogo(duplicateVariation);
+    // }
 
     const getBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -48,68 +99,68 @@ const CompaignDetails = (props) => {
         });
     };
 
-    const uploadProductImage = (event, index) => {
-        const file = event.target.files[0];
-        getBase64(file).then(
-            data => {
-                let final = {
-                    imageFile: data,
-                    imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
-                };
-                axios.post(apiPath + '/bannerUpload', final).then(res => {
-                    // setImage(res.data.imageUrl);
-                    let duplicateProducts = { ...renderData };
-                    duplicateProducts.Banner = res.data.imageUrl;
-                    setRenderData({ ...duplicateProducts })
-                });
-            });
-    };
-
-    const uploadOverlayImage = (event, index) => {
-        const file = event.target.files[0];
-        getBase64(file).then(
-            data => {
-                let final = {
-                    imageFile: data,
-                    imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
-                };
-                axios.post(apiPath + "/uploadLogo", final).then(res => {
-                    let duplicateImage = [ ...logo ]
-                    duplicateImage[index] = res.data.imageUrl;
-                    setRenderData(duplicateImage);
-                });
-            });
-    };
-
-    const addVariation = () => {
-        let duplicateVariation = [...logo]
-        duplicateVariation.push("")
-        setLogo(duplicateVariation);
+    const displayHide = () => {
+        if (hideShowColors === true) {
+            setHideShowColors(false)
+            setHideShowButtonText("Edit Hash Tag Colors")
+        }
+        else if (hideShowColors === false) {
+            setHideShowColors(true)
+            setHideShowButtonText("Back")
+        }
     }
 
     const updateCampaign = (event) => {
         event.preventDefault();
-        editData({
-            variables: {
-                Name: renderData.Name,
-                facebook_url: renderData.facebook_url,
-                twitter_url: renderData.twitter_url,
-                CampaignType: selectedCampaign,
-                goal_support: parseInt(renderData.goal_support),
-                website_url: renderData.website_url,
-                ShortDescription: renderData.ShortDescription,
-                Description: renderData.Description,
-                Banner: renderData.Banner ? renderData.Banner : "",
-                Primary_color: color.hex.toString(),
-                Secondary_color: secondaryColor.hex.toString(),
-                Tertiary_color: tertiary.hex.toString(),
-                Logo: logo[0] ? logo[0] : ""
-            }
-        }).then(res => {
-            // window.location.replace("/tamplates");
-        })
+        let stDate = new Date(renderData && renderData.StartDate)
+        let edDate = new Date(renderData && renderData.EndDate)
+        if (hideShowColors === false) {
+            editData({
+                variables: {
+                    Name: renderData.Name ? renderData.Name:"",
+                    facebook_url: renderData.facebook_url ? renderData.facebook_url:"",
+                    twitter_url: renderData.twitter_url ? renderData.twitter_url:"",
+                    CampaignType: selectedCampaign ? selectedCampaign :"",
+                    goal_support: parseInt(renderData.goal_support),
+                    website_url: renderData.website_url ? renderData.website_url : "",
+                    ShortDescription: renderData.ShortDescription ? renderData.ShortDescription : "",
+                    Description: renderData.Description ?renderData.Description :"",
+                    Banner: renderData.Banner ? renderData.Banner : "",
+                    Primary_color: renderData && renderData.Primary_color,
+                    Secondary_color: renderData && renderData.Secondary_color, 
+                    Tertiary_color: renderData && renderData.Tertiary_color ,
+                    StartDate: stDate.toISOString() ? stDate.toISOString() :"",
+                    EndDate: edDate.toISOString() ? edDate.toISOString() : "",
+                    Overlay: renderData.Overlay ? renderData.Overlay : ""
+                }
+            }).then(res => {
+                // window.location.replace("/tamplates");
+            })
+        }
+        else if (hideShowColors === true) {
+            editData({
+                variables: {
+                    Name: renderData.Name ? renderData.Name : "",
+                    facebook_url: renderData.facebook_url ? renderData.facebook_url : "",
+                    twitter_url: renderData.twitter_url ? renderData.twitter_url : "",
+                    CampaignType: selectedCampaign,
+                    goal_support: parseInt(renderData.goal_support),
+                    website_url: renderData.website_url ? renderData.website_url : "",
+                    ShortDescription: renderData.ShortDescription ? renderData.ShortDescription : "",
+                    Description: renderData.Description ? renderData.Description : "",
+                    Banner: renderData.Banner ? renderData.Banner : "",
+                    Primary_color: color.hex.toString(),
+                    Secondary_color: secondaryColor.hex.toString(),
+                    Tertiary_color: tertiary.hex.toString(),
+                    StartDate: stDate.toISOString() ? stDate.toISOString() : "",
+                    EndDate: edDate.toISOString() ? edDate.toISOString() : "",
+                    Overlay: renderData.Overlay
+                }
+            }).then(res => {
+                // window.location.replace("/tamplates");
+            })
+        }
     }
-
     return (
         <>
             {!loading ?
@@ -135,11 +186,23 @@ const CompaignDetails = (props) => {
                                                 {renderData && renderData.Banner ?
                                                     <div className="store-front-image"
                                                         style={{
-                                                            backgroundImage: `url(${renderData && renderData.Banner ? campaignBanner_baseurl + renderData.Banner : ""})`,
+                                                            backgroundImage: `url(${renderData && renderData.Banner ? campaignBanner_baseurl + renderData.Banner :
+                                                                <img className="dashboard_icon"
+                                                                    src={require('../../../assets/Images/admin.png')}
+                                                                    style={{
+                                                                        height: "100px",
+                                                                        width: "95px",
+                                                                        backgroundRepeat: "no-repeat",
+                                                                        marginLeft: "7%",
+                                                                        width: "101px"
+                                                                    }}
+                                                                />
+                                                                })`,
                                                             height: "100px",
                                                             backgroundSize: "contain",
                                                             backgroundRepeat: "no-repeat",
-                                                            marginLeft: "7%"
+                                                            marginLeft: "7%",
+                                                            width: "101px"
                                                         }}>
                                                     </div>
                                                     :
@@ -175,40 +238,54 @@ const CompaignDetails = (props) => {
                                     </div>
                                     {/* Overlays Image choose button start here */}
                                     <div className="mrg-top-20">
-                                        <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Logo</label>
+                                        <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Overlay</label>
                                     </div>
                                     {/* First choose file button */}
                                     <div className="field mrg-top-20  mrg-left-50">
                                         <div className="file is-small has-name ">
-                                            {renderData && renderData.Logo && renderData.Logo.map((single, index) =>
-                                                <div key={index}>
-                                                    {single && single.Logo ?
-                                                        <div className="store-front-image"
-                                                            style={{
-                                                                backgroundImage: `url(${single && single.Logo ? campaignLogo_baseurl + single.Logo : "no-image"})`,
-                                                                height: "100px",
-                                                                backgroundSize: "contain",
-                                                                backgroundRepeat: "no-repeat",
-                                                                marginLeft: "6%"
-                                                            }}>
-                                                        </div>
-                                                        :
-                                                        <img className="dashboard_icon"
-                                                            src={require('../../../assets/Images/admin.png')}
-                                                            style={{
-                                                                height: "100px",
-                                                                width: "95px",
-                                                                backgroundRepeat: "no-repeat",
-                                                                marginLeft: "7%"
-                                                            }}
-                                                        />
-                                                    }
+                                            {renderData && renderData.Overlay ?
+                                                <div className="store-front-image"
+                                                    style={{
+                                                        backgroundImage: `url(${renderData && renderData.Overlay ? overlays + renderData.Overlay : "no-image"})`,
+                                                        height: "100px",
+                                                        backgroundSize: "contain",
+                                                        backgroundRepeat: "no-repeat",
+                                                        marginLeft: "7%",
+                                                        width: "100px"
+                                                    }}>
                                                 </div>
-                                            )}
+                                                :
+                                                <img className="dashboard_icon"
+                                                    src={require('../../../assets/Images/admin.png')}
+                                                    style={{
+                                                        height: "100px",
+                                                        width: "95px",
+                                                        backgroundRepeat: "no-repeat",
+                                                        marginLeft: "7%"
+                                                    }}
+                                                />
+                                            }
+                                        </div>
+                                        <div className="file is-small has-name has-margin-left-60 has-padding-left-20">
+                                            <label className="file-label">
+                                                <input className="file-input fnt-poppins"
+                                                    type="file" name="resume"
+                                                    accept="image/*"
+                                                    onChange={event => uploadOverlayImage(event)}
+                                                />
+                                                <span className="file-cta has-margin-top-5">
+                                                    <span className="file-icon">
+                                                        <i className="fas fa-upload"></i>
+                                                    </span>
+                                                    <span className="file-label width-bt-80 ">
+                                                        Choose file
+                                                        </span>
+                                                </span>
+                                            </label>
                                         </div>
                                     </div>
                                     {/* add more images */}
-                                    <div className="field mrg-top-20  mrg-left-50">
+                                    {/* <div className="field mrg-top-20  mrg-left-50">
                                         {logo && logo.map((single, index) =>
                                             <div key={index} className="file is-small has-name " >
                                                 <div style={{ flexDirection: "column" }}>
@@ -253,67 +330,134 @@ const CompaignDetails = (props) => {
                                                 </div>
                                             </div>
                                         )}
-                                    </div>
-                                    <div className="has-margin-bottom-20 has-margin-left-80">
+                                    </div> */}
+                                    {/* <div className="has-margin-bottom-20 has-margin-left-80">
                                         <div className="btns-of-add mrg-top-10 has-margin-left-60 fnt-poppins">
                                             <span className="has-padding-5 Save-btn-of-form fnt-poppins"
                                                 onClick={() => addVariation()}
                                             >Add Logo</span>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     {/* hashtag back color */}
                                     <label className="fnt-poppins mrg-left-50">Hash Tag Back Color</label>
-                                    <div className="is-flex">
-                                        <div className="mrg-left-50 mrg">
+                                    {/* <div className="mrg-left-50 mrg-top-20">
+                                        {!dataSecondary && !dataPrimary && !dataTertiary ?
                                             <div>
-                                                <div className="react-input-color mrg-top-20"
-                                                    style={{
-                                                        width: 80,
-                                                        height: 50,
-                                                        marginBottom: 20,
-                                                        backgroundColor: data && data.getcampaignbyId && data.getcampaignbyId.Secondary_color
-                                                    }}>
-                                                    {/* {color.hex} */}
-                                                </div>
-                                                <div>
-                                                    <InputColor initialHexColor={Secondary} onChange={setSecondaryColor} />
-                                                </div>
-                                                <label>Select Secondary Color</label>
+                                                <h5>No Records Found</h5>
+                                            </div>
+                                            : ""}
+                                    </div> */}
+                                    {!hideShowColors ?
+                                        <div className="is-flex">
+                                            <div className="mrg-left-50 mrg">
+                                                {renderData && renderData.Secondary_color ?
+                                                    <div>
+                                                        <div className="react-input-color mrg-top-20"
+                                                            style={{
+                                                                width: 80,
+                                                                height: 50,
+                                                                marginBottom: 20,
+                                                                backgroundColor: renderData && renderData.Secondary_color
+                                                            }}>
+                                                        </div>
+                                                        <label>Secondary Color</label>
+                                                    </div>
+                                                    : ""}
+                                            </div>
+                                            <div className="mrg-left-50 mrghas-margin-top-30">
+                                                {renderData && renderData.Tertiary_color ?
+                                                    <div>
+                                                        <div className="react-input-color mrg-top-20"
+                                                            style={{
+                                                                width: 80,
+                                                                height: 50,
+                                                                marginBottom: 20,
+                                                                backgroundColor: renderData && renderData.Tertiary_color
+                                                            }}>
+                                                        </div>
+                                                        <label>Tertiary Color</label>
+                                                    </div>
+                                                    : ""}
+                                            </div>
+                                            <div className="mrg-left-50 mrghas-margin-top-30">
+                                                {renderData && renderData.Primary_color ?
+                                                    <div>
+                                                        <div className="react-input-color mrg-top-20"
+                                                            style={{
+                                                                width: 80,
+                                                                height: 50,
+                                                                marginBottom: 20,
+                                                                backgroundColor: renderData && renderData.Primary_color
+                                                            }}>
+                                                        </div>
+                                                        <label>Primary Color</label>
+                                                    </div>
+                                                    : ""}
                                             </div>
                                         </div>
-                                        <div className="mrg-left-50 mrghas-margin-top-30">
-                                            <div>
-                                                <div className="react-input-color mrg-top-20"
-                                                    style={{
-                                                        width: 80,
-                                                        height: 50,
-                                                        marginBottom: 20,
-                                                        backgroundColor: data && data.getcampaignbyId && data.getcampaignbyId.Tertiary_color
-                                                    }}>
-                                                    {/* {color.hex} */}
-                                                </div>
+                                        : ""}
+                                    {hideShowColors ?
+                                        <div className="is-flex">
+                                            <div className="mrg-left-50 mrg">
                                                 <div>
-                                                    <InputColor initialHexColor={Tertiary} onChange={setTertiaryColor} />
+                                                    <div className="react-input-color mrg-top-20"
+                                                        style={{
+                                                            width: 80,
+                                                            height: 50,
+                                                            marginBottom: 20,
+                                                            backgroundColor: secondaryColor.hex,
+                                                            initialHexColor: secondary
+                                                        }}>
+                                                        {secondaryColor.hex}
+                                                    </div>
+                                                    <div>
+                                                        <InputColor initialHexColor={secondary} onChange={setSecondaryColor} />
+                                                    </div>
+                                                    <label>Select Secondary Color</label>
                                                 </div>
-                                                <label>Select Tertiary Color</label>
+                                            </div>
+                                            <div className="mrg-left-50 mrghas-margin-top-30">
+                                                <div>
+                                                    <div className="react-input-color mrg-top-20"
+                                                        style={{
+                                                            width: 80,
+                                                            height: 50,
+                                                            marginBottom: 20,
+                                                            backgroundColor: tertiary.hex,
+                                                            initialHexColor: tertiaryC
+                                                        }}>
+                                                        {tertiary.hex}
+                                                    </div>
+                                                    <div>
+                                                        <InputColor initialHexColor={tertiaryC} onChange={setTertiaryColor} />
+                                                    </div>
+                                                    <label>Select Tertiary Color</label>
+                                                </div>
+                                            </div>
+                                            <div className="mrg-left-50 mrghas-margin-top-30">
+                                                <div>
+                                                    <div className="react-input-color mrg-top-20"
+                                                        style={{
+                                                            width: 80,
+                                                            height: 50,
+                                                            marginBottom: 20,
+                                                            backgroundColor: color.hex,
+                                                            initialHexColor: initial
+                                                        }}>
+                                                        {color.hex}                                                    </div>
+                                                    <div>
+                                                        <InputColor initialHexColor={initial} onChange={setColor} />
+                                                    </div>
+                                                    <label>Select Primary Color</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="mrg-left-50 mrghas-margin-top-30">
-                                            <div>
-                                                <div className="react-input-color mrg-top-20"
-                                                    style={{
-                                                        width: 80,
-                                                        height: 50,
-                                                        marginBottom: 20,
-                                                        backgroundColor: data && data.getcampaignbyId && data.getcampaignbyId.Primary_color
-                                                    }}>
-                                                    {/* {color.hex} */}
-                                                </div>
-                                                <div>
-                                                    <InputColor initialHexColor={initial} onChange={setColor} />
-                                                </div>
-                                                <label>Select Primary Color</label>
-                                            </div>
+                                        : ""}
+                                    <div className="has-margin-bottom-20">
+                                        <div className="btns-of-add mrg-top-10 has-margin-left-50 fnt-poppins">
+                                            <span className="has-padding-5 Save-btn-of-form fnt-poppins"
+                                                onClick={() => displayHide(false)}
+                                            >{hideShowButtonText}</span>
                                         </div>
                                     </div>
                                     <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
@@ -354,28 +498,6 @@ const CompaignDetails = (props) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* Category */}
-                                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
-                                                <div className="form-group">
-                                                    <label className="">
-                                                        {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Fundraiser" ? "Monetary Goal" : ""}
-                                                        {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Petition" ? "Petition Goal" : ""}
-                                                        {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Pledge" ? "No of Pledges Aiming For" : ""}
-                                                        {data && data.getcampaignbyId && data.getcampaignbyId.CampaignType === "Support" ? "Support" : ""}
-                                                    </label>
-                                                    <div>
-                                                        <input className="mrg-top-10 fnt-poppins" type="Hash-Tag"
-
-                                                            value={renderData && renderData.goal_support}
-                                                            onChange={event => {
-                                                                let duplicateData = { ...renderData }
-                                                                duplicateData.goal_support = event.target.value
-                                                                setRenderData(duplicateData);
-                                                            }}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
                                             {/* facebook url */}
                                             <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                                 <div className="form-group">
@@ -403,12 +525,14 @@ const CompaignDetails = (props) => {
                                                         </div>
                                                         <div>
                                                             <input className="mrg-top-10 fnt-poppins"
-                                                            // value={endDate ? endDate : "-"}
-                                                            // onChange={event => {
-                                                            //     let duplicateData = { ...renderData }
-                                                            //     duplicateData.endDate = event.target.value
-                                                            //     setRenderData(duplicateData);
-                                                            // }}
+                                                                value={renderData && renderData.EndDate}
+                                                                required
+                                                                onChange={event => {
+                                                                    let duplicateData = { ...renderData }
+                                                                    duplicateData.EndDate = event.target.value
+                                                                    setRenderData(duplicateData);
+                                                                }}
+                                                                type="date"
                                                             />
                                                         </div>
                                                     </div>
@@ -422,12 +546,14 @@ const CompaignDetails = (props) => {
                                                     </div>
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins"
-                                                        // value={startDate ? startDate : "-"}
-                                                        // onChange={event => {
-                                                        //     let duplicateData = { ...renderData }
-                                                        //     duplicateData.startDate = event.target.value
-                                                        //     setRenderData(duplicateData);
-                                                        // }}
+                                                            value={renderData && renderData.StartDate}
+                                                            required
+                                                            onChange={event => {
+                                                                let duplicateData = { ...renderData }
+                                                                duplicateData.StartDate = event.target.value
+                                                                setRenderData(duplicateData);
+                                                            }}
+                                                            type="date"
                                                         />
                                                     </div>
                                                 </div>
@@ -436,21 +562,27 @@ const CompaignDetails = (props) => {
                                         {/* Form section2 dv start here */}
                                         <div className="Form-section2-main-div-of-inputs mrg-top-10">
                                             {/* slug */}
+                                            {/* Category */}
                                             <div className="Form-Inputs-Fields mrg-top-20 mrg-left-50 fnt-poppins">
                                                 <div className="form-group">
+                                                    {data && data.SingleCampaign && data.SingleCampaign.CampaignType ?
+                                                        <label className="">
+                                                            {data && data.SingleCampaign && data.SingleCampaign.CampaignType === "Fundraiser" ? "Monetary Goal" : ""}
+                                                            {data && data.SingleCampaign && data.SingleCampaign.CampaignType === "Petition" ? "Petition Goal" : ""}
+                                                            {data && data.SingleCampaign && data.SingleCampaign.CampaignType === "Pledge" ? "No of Pledges Aiming For" : ""}
+                                                        </label>
+                                                        : ""}
                                                     <div>
-                                                        <label>Campaign Type</label>
-                                                    </div>
-                                                    <div>
-                                                        <input className="mrg-top-10 fnt-poppins" type="slug"
-                                                            disabled
-                                                            value={renderData && renderData.CampaignType}
-                                                            onChange={event => {
-                                                                let duplicateData = { ...renderData }
-                                                                duplicateData.CampaignType = event.target.value
-                                                                setRenderData(duplicateData);
-                                                            }}
-                                                        />
+                                                        {data && data.SingleCampaign && data.SingleCampaign.CampaignType ?
+                                                            <input className="mrg-top-10 fnt-poppins" type="Hash-Tag"
+                                                                value={renderData && renderData.goal_support}
+                                                                onChange={event => {
+                                                                    let duplicateData = { ...renderData }
+                                                                    duplicateData.goal_support = event.target.value
+                                                                    setRenderData(duplicateData);
+                                                                }}
+                                                            />
+                                                            : ""}
                                                     </div>
                                                 </div>
                                             </div>
@@ -479,14 +611,19 @@ const CompaignDetails = (props) => {
                                                         <label >Category</label>
                                                     </div>
                                                     <div>
-                                                        <input className="mrg-top-10 fnt-poppins" type="keyword"
-                                                            value={renderData && renderData.CategoryId}
+                                                        <select className="mrg-top-10 fnt-poppins" type="keyword"
+                                                            value={renderData && renderData.CategoryId ? renderData.CategoryId : ""}
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.CategoryId = event.target.value
                                                                 setRenderData(duplicateData);
                                                             }}
-                                                        />
+                                                        >
+                                                            <option>Select Category</option>
+                                                            {getAllCampaignsType && getAllCampaignsType.length !== 0 && getAllCampaignsType.map(single =>
+                                                                <option value={single.Id}>{single.Name}</option>
+                                                            )}
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -498,7 +635,6 @@ const CompaignDetails = (props) => {
                                                     </div>
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins"
-
                                                             value={renderData && renderData.website_url}
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }

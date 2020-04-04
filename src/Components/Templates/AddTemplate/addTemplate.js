@@ -42,7 +42,7 @@ const AddTemplate = (props) => {
         if (!type) {
             setTypeValidator(true)
         }
-        if(!category){
+        if (!category) {
             setCategoryValidator(true)
         }
         else {
@@ -173,6 +173,7 @@ const AddTemplate = (props) => {
                                             <option value="CreateCampaign">Create Campaign</option>
                                             <option value="forgetPassword">Forget Password</option>
                                             <option value="countCampaign">Campaign Count</option>
+                                            <option value="notPremium">Premium Subscription 2 Days</option>
                                         </select>
                                         <div className="color-red-text ">
                                             {categoryValidator ? "Select Category" : ""}

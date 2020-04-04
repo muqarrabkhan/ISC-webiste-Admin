@@ -14,7 +14,7 @@ const UserInformation = (props) => {
     const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
-
+    const [userActivityData, setUserActivityData] = useState()
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
     let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
@@ -27,6 +27,11 @@ const UserInformation = (props) => {
             setIpAddress(ip);
         })
     }, [])
+
+    useEffect(() => {
+        setUserActivityData(data && data.getuserbyId && data.getuserbyId.useractivity);
+    }, [data])
+
 
     return (
         <>
@@ -104,8 +109,8 @@ const UserInformation = (props) => {
                                         <th className="bodr-of-none">IP Address</th>
                                     </tr>
                                 </thead>
-                                <tbody className="table-of-data">
-                                    {data && data.getuserbyId && data.getuserbyId.useractivity ? data.getuserbyId.useractivity.map(single =>
+                                {userActivityData && userActivityData.length !== 0 ? userActivityData.map(single =>
+                                    <tbody className="table-of-data">
                                         <tr className="table-row-data-of-body fnt-poppins">
                                             {single && single.Image ?
                                                 <td className="has-margin-top-15" style={{
@@ -114,14 +119,22 @@ const UserInformation = (props) => {
                                                     height: '143px',
                                                     backgroundRepeat: 'no-repeat'
                                                 }}></td>
-                                                : <div style={{ marginTop: "10px", marginLeft: "20px", height: '143px' }}>No-Image</div>}
+                                                :
+                                                <div style={{ marginTop: "10px", marginLeft: "20px", height: '143px' }}>No-Image</div>}
                                             <td>{single.Type ? single.Type : "--"}</td>
                                             <td>{single.CampaignName && single.CampaignName.Name ? single.CampaignName.Name : "--"}</td>
                                             <td>{getDate ? getDate : "--"}</td>
                                             <td>{single.CreatedIp ? ipInt(single.CreatedIp).toIP() : ""}</td>
                                         </tr>
-                                    ) : ""}
-                                </tbody>
+
+                                    </tbody>
+                                ) :
+                                    <tfoot>
+                                        <tr>
+                                            <td colSpan={5} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{textAlign:"center"}}>No Record Found</td>
+                                        </tr>
+                                    </tfoot>
+                                }
                             </table>
                         </div>
 
