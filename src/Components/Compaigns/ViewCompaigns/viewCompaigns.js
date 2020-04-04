@@ -9,7 +9,8 @@ import ReactPaginate from "react-paginate";
 import { VIEW_CAMPAIGN } from '../../apollo/Mutations/campaignMutation'
 import Loader from '../../commonComponents/Loader/loader'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
-
+import { DELETE_CAMPAIGN } from '../../apollo/Mutations/deleteCampaign'
+import cookie from 'react-cookies'
 const ViewCompaign = (props) => {
     let { history } = props;
     const { loading, data } = useQuery(CAMPAIGN_CATEGORIES, { context: { clientName: "second" } });
@@ -20,6 +21,7 @@ const ViewCompaign = (props) => {
     // const [totalCampaigns,setTotalCampaigns]=useState([]);
     const [getCampaign] = useMutation(VIEW_CAMPAIGN);
     const [campaignCategories, setCampaignCategories] = useState()
+    const [deleteCampaign] = useMutation(DELETE_CAMPAIGN)
 
     useEffect(() => {
         setCampaignCategories(data && data.campaignCategories)
@@ -368,6 +370,19 @@ const ViewCompaign = (props) => {
         setSearch(resultData)
     }
 
+    let token = cookie.load("token")
+    const deleteSingleCampaign = (id) => {
+        deleteCampaign({
+            variables: {
+                Id: parseInt(id),
+                token: token
+            }
+        }).then(response => {
+            if (window.confirm("Are you sure you want to delete Data"));
+            window.location.replace("/campaign")
+        })
+    }
+
     return (
         <>
             {campaign && campaign.length !== 0 ?
@@ -527,7 +542,9 @@ const ViewCompaign = (props) => {
                                             <td className="btns-of-viewcompaign">
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-campaign/" + single.Id)} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
-                                                    <img className="cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button" src={Deletelogo} />
+                                                    <img className="has-margin-left-5 has-cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button"
+                                                        onClick={() => deleteSingleCampaign(single.Id)}
+                                                        src={Deletelogo} />
                                                     {/* <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span> */}
                                                 </div>
                                                 <div className="mrg-top-10">

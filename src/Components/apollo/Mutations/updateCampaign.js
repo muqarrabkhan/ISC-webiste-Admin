@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 export const EDIT_CAMPAIGN = gql`
 mutation updateCampaign(
+    $Id: Int
     $Name: String,
     $CampaignType: String,
     $ShortDescription: String,
@@ -20,6 +21,7 @@ mutation updateCampaign(
     )
     {
         updateCampaign(
+            Id:$Id,
             Name: $Name,
             CampaignType:$CampaignType,
             ShortDescription:$ShortDescription,

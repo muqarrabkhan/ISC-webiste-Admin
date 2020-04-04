@@ -9,6 +9,7 @@ import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
 import ImageLoader from '../../../assets/Images/loader.gif'
+import cookie from 'react-cookies'
 
 const CreateCompaign = (props) => {
     let { history } = props;
@@ -39,7 +40,7 @@ const CreateCompaign = (props) => {
     const [website, setwebsite_url] = useState("")
     const [buttonText, setButtonText] = useState("")
     const [selectOverlay, setSelectOverlay] = useState("")
-    const [imageLoader,setImageLoader]=useState(false)
+    const [imageLoader, setImageLoader] = useState(false)
 
     const addImage = () => {
         let duplicateImage = [...addMoreImage]
@@ -78,22 +79,6 @@ const CreateCompaign = (props) => {
             });
     };
 
-    // method for adding more than one overlay
-    // const uploadOverlayImage = (event, index) => {
-    //     const file = event.target.files[0];
-    //     let duplicateImage = [...addMoreImage]
-    //     getBase64(file).then(
-    //         data => {
-    //             let final = {
-    //                 imageFile: data,
-    //             };
-    //             axios.post(apiPath + "/uploadLogo", final).then(res => {
-    //                 duplicateImage[index] = res.data.imageUrl;
-    //                 setAddMoreImage(duplicateImage);
-    //             });
-    //         });
-    // };
-
     const getBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -129,7 +114,7 @@ const CreateCompaign = (props) => {
         event.preventDefault();
         let stDate = new Date(startDate)
         let edDate = new Date(endDate)
-
+        let token = cookie.load("token")
         if (!categoryId) {
             setButtonText("Save")
         }
@@ -166,7 +151,8 @@ const CreateCompaign = (props) => {
                     Overlay: selectOverlay ? selectOverlay : "",
                     Banner: bannerimage ? bannerimage : "",
                     Createduser: "Admin",
-                    CreatedIp: ipInt(ipAddress).toInt()
+                    CreatedIp: ipInt(ipAddress).toInt(),
+                    token: token
                 }
             }).then(res => {
                 history.push("/campaign")
@@ -198,7 +184,7 @@ const CreateCompaign = (props) => {
                                             {bannerimage ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${bannerimage  ? campaignBanner_baseurl + bannerimage : <img src={ImageLoader}/>})`,
+                                                        backgroundImage: `url(${bannerimage ? campaignBanner_baseurl + bannerimage : <img src={ImageLoader} />})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",

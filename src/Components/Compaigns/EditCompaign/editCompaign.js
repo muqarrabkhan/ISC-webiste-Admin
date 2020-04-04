@@ -10,6 +10,7 @@ import { EDIT_CAMPAIGN } from '../../apollo/Mutations/updateCampaign'
 import axios from 'axios'
 import { apiPath } from '../../../config'
 import ImageLoader from '../../../assets/Images/loader.gif'
+import cookie from 'react-cookies'
 
 const CompaignDetails = (props) => {
     let { history, match } = props;
@@ -114,32 +115,35 @@ const CompaignDetails = (props) => {
         event.preventDefault();
         let stDate = new Date(renderData && renderData.StartDate)
         let edDate = new Date(renderData && renderData.EndDate)
+        let token = cookie.load("token")
         if (hideShowColors === false) {
             editData({
                 variables: {
-                    Name: renderData.Name ? renderData.Name:"",
-                    facebook_url: renderData.facebook_url ? renderData.facebook_url:"",
-                    twitter_url: renderData.twitter_url ? renderData.twitter_url:"",
-                    CampaignType: selectedCampaign ? selectedCampaign :"",
+                    Id:parseInt(id),
+                    Name: renderData.Name ? renderData.Name : "",
+                    facebook_url: renderData.facebook_url ? renderData.facebook_url : "",
+                    twitter_url: renderData.twitter_url ? renderData.twitter_url : "",
+                    CampaignType: selectedCampaign ? selectedCampaign : "",
                     goal_support: parseInt(renderData.goal_support),
                     website_url: renderData.website_url ? renderData.website_url : "",
                     ShortDescription: renderData.ShortDescription ? renderData.ShortDescription : "",
-                    Description: renderData.Description ?renderData.Description :"",
+                    Description: renderData.Description ? renderData.Description : "",
                     Banner: renderData.Banner ? renderData.Banner : "",
                     Primary_color: renderData && renderData.Primary_color,
-                    Secondary_color: renderData && renderData.Secondary_color, 
-                    Tertiary_color: renderData && renderData.Tertiary_color ,
-                    StartDate: stDate.toISOString() ? stDate.toISOString() :"",
+                    Secondary_color: renderData && renderData.Secondary_color,
+                    Tertiary_color: renderData && renderData.Tertiary_color,
+                    StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
                     Overlay: renderData.Overlay ? renderData.Overlay : ""
                 }
             }).then(res => {
-                // window.location.replace("/tamplates");
+                window.location.replace("/campaign");
             })
         }
         else if (hideShowColors === true) {
             editData({
                 variables: {
+                    Id:parseInt(id),
                     Name: renderData.Name ? renderData.Name : "",
                     facebook_url: renderData.facebook_url ? renderData.facebook_url : "",
                     twitter_url: renderData.twitter_url ? renderData.twitter_url : "",
@@ -149,15 +153,15 @@ const CompaignDetails = (props) => {
                     ShortDescription: renderData.ShortDescription ? renderData.ShortDescription : "",
                     Description: renderData.Description ? renderData.Description : "",
                     Banner: renderData.Banner ? renderData.Banner : "",
-                    Primary_color: color.hex.toString(),
-                    Secondary_color: secondaryColor.hex.toString(),
-                    Tertiary_color: tertiary.hex.toString(),
+                    Primary_color: color.hex,
+                    Secondary_color: secondaryColor.hex,
+                    Tertiary_color: tertiary.hex,
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
                     Overlay: renderData.Overlay
                 }
             }).then(res => {
-                // window.location.replace("/tamplates");
+                window.location.replace("/campaign");
             })
         }
     }
@@ -406,7 +410,6 @@ const CompaignDetails = (props) => {
                                                             height: 50,
                                                             marginBottom: 20,
                                                             backgroundColor: secondaryColor.hex,
-                                                            initialHexColor: secondary
                                                         }}>
                                                         {secondaryColor.hex}
                                                     </div>
@@ -424,7 +427,6 @@ const CompaignDetails = (props) => {
                                                             height: 50,
                                                             marginBottom: 20,
                                                             backgroundColor: tertiary.hex,
-                                                            initialHexColor: tertiaryC
                                                         }}>
                                                         {tertiary.hex}
                                                     </div>
@@ -442,7 +444,6 @@ const CompaignDetails = (props) => {
                                                             height: 50,
                                                             marginBottom: 20,
                                                             backgroundColor: color.hex,
-                                                            initialHexColor: initial
                                                         }}>
                                                         {color.hex}                                                    </div>
                                                     <div>
@@ -673,7 +674,7 @@ const CompaignDetails = (props) => {
                                     {/* Cancel and Save button */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Update</button>
                                     </div>
                                 </div>
                             </div>
