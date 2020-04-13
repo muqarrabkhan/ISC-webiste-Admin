@@ -24,6 +24,7 @@ const ViewCompaign = (props) => {
                         <h6 className="heading6-of-header fnt-poppins">All Reports</h6>
                         <button onClick={() => history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
+                    
                     {/* Table of Administrator  */}
                     <div className="Table-of-administrator">
                         <div className="background-of-table">
