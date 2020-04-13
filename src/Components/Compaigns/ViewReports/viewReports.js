@@ -22,7 +22,7 @@ const ViewCompaign = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">All Reports</h6>
-                        <button onClick={() => history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Create</button>
+                        <button onClick={() => history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <div className="Table-of-administrator">
