@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import CKEditor from "react-ckeditor-component";
-import Image from '../../../assets/Images/admin.png'
+import JoditEditor from "jodit-react";
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_TEMPLATE } from '../../apollo/Mutations/createTemplate'
@@ -16,7 +16,6 @@ const AddTemplate = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fromText, setFromText] = useState("");
-    const [content, setContent] = useState("");
     const [status, setStatus] = useState("");
     const [type, setType] = useState("");
     const [category, setCategory] = useState("");
@@ -24,6 +23,14 @@ const AddTemplate = (props) => {
     const [statusValidator, setStatusValidator] = useState(false);
     const [typeValidator, setTypeValidator] = useState(false);
     const [categoryValidator, setCategoryValidator] = useState(false);
+    const [btnText, setBtnText] = useState("Create");
+    const [templateVariables, setTemplatevariables] = useState([]);
+
+    const editor = useRef(null)
+    const config = {
+        readonly: false
+    }
+    const [content, setContent] = useState("");
 
     useEffect(() => {
         publicIp.v4().then(ip => {
@@ -33,19 +40,23 @@ const AddTemplate = (props) => {
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
-
     const onSubmit = (event) => {
         event.preventDefault();
+        setBtnText("Creating...");
         if (!status) {
             setStatusValidator(true)
+            setBtnText("Create");
         }
         if (!type) {
             setTypeValidator(true)
+            setBtnText("Create");
         }
         if (!category) {
             setCategoryValidator(true)
+            setBtnText("Create");
         }
         else {
+            setBtnText("Creating...");
             addTemplate({
                 variables: {
                     Title: title,
@@ -62,10 +73,72 @@ const AddTemplate = (props) => {
                     Category: category
                 }
             }).then(res => {
-                history.push("/tamplates")
+                setBtnText("Created");
+                history.push("/edit-tamplates/" + res.data.createTemplate.Id)
+            }).catch(error => {
+                setBtnText("Create");
             })
+
         }
     }
+
+    const variablesHandler = (obj) => {
+        switch (obj) {
+            case "": {
+                setTemplatevariables("")
+                return;
+            }
+            case "signUp": {
+                setTemplatevariables("[user_name][userId][uid]")
+                return;
+            }
+            case "welcome": {
+                setTemplatevariables("[user_name]")
+                return;
+            }
+            case "CreateCampaign": {
+                setTemplatevariables("[creator_name][creator_email][campaign_name][campaign_link]")
+                return;
+            }
+            case "campaignSupported": {
+                setTemplatevariables("[supporters][campaign_name][campaign_link][supporters_percentage][user_name]")
+                return;
+            }
+            case "forgetPassword": {
+                setTemplatevariables("[userId][uid][user_name]")
+                return;
+            }
+            case "notPremium": {
+                setTemplatevariables("[user_name][campaign_name][campaign_link]")
+                return;
+            }
+            case "sellerRecive": {
+                setTemplatevariables("[buyer_email][buyer_name][charge_amount][order_id][shipment_charges][total_products][buyer_country][tax][address][phone][state][postal_code][application_fee][recived_amount][seller_name]")
+                return;
+            }
+            case "buyerRecive": {
+                setTemplatevariables("[seller_email][seller_name][charge_amount][order_id][shipment_charges][total_products][seller_country][tax][buyer_name]")
+                return;
+            }
+            case "fundriser": {
+                setTemplatevariables("[buyer_name][seller_email][seller_name][charge_amount][seller_country]")
+                return;
+            }
+            case "fundriseReciver": {
+                setTemplatevariables("[seller_name][buyer_email][buyer_name][charge_amount][application_fee][recived_amount]")
+                return;
+            }
+            case "succesfullySubscribed": {
+                setTemplatevariables("[membership_name][membership_charges][storefront_limit][campaign_limit]")
+                return;
+            }
+            case "resetSucessfully": {
+                setTemplatevariables("[user_name]")
+                return;
+            }
+        }
+    }
+
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -162,18 +235,26 @@ const AddTemplate = (props) => {
                                     </div>
                                     <div>
                                         <select className="mrg-top-10 fnt-poppins" type="keyword"
+                                            required
                                             onChange={event => {
                                                 setCategoryValidator(false)
+                                                variablesHandler(event.target.value)
                                                 setCategory(event.target.value)
                                             }}
                                         >
-                                            <option>Select Category</option>
+                                            <option value="">Select Category</option>
                                             <option value="signUp">SignUp Confirmation</option>
                                             <option value="welcome">Welcome</option >
                                             <option value="CreateCampaign">Create Campaign</option>
                                             <option value="forgetPassword">Forget Password</option>
-                                            <option value="countCampaign">Campaign Count</option>
                                             <option value="notPremium">Premium Subscription 2 Days</option>
+                                            <option value="campaignSupported">Supported Campaign</option>
+                                            <option value="sellerRecive">Seller Reciver</option>
+                                            <option value="buyerRecive">Buyer Reciver</option>
+                                            <option value="fundriser">Fundriser</option>
+                                            <option value="fundriseReciver">Fundrise Reciver</option>
+                                            <option value="succesfullySubscribed">Succesfully Subscribed</option>
+                                            <option value="resetSucessfully">Reset Sucessfully</option>
                                         </select>
                                         <div className="color-red-text ">
                                             {categoryValidator ? "Select Category" : ""}
@@ -259,8 +340,11 @@ const AddTemplate = (props) => {
                                     </div>
                                     <div>
                                         <input disabled className="redonly-input mrg-top-10  fnt-poppins"
+                                            value={templateVariables}
+                                            type="keyword" readonly />
+                                        {/* <input disabled className="redonly-input mrg-top-10  fnt-poppins"
                                             value="[campaign_name] [campaign_link] [creator_name] [creator_email] [supporters] [unsub_newsletter_link] [campaign_premium_link]"
-                                            type="keyword" placeholder="Enter Keyword" readonly />
+                                            type="keyword" placeholder="Enter Keyword" readonly /> */}
                                     </div>
                                 </div>
                             </div>
@@ -271,18 +355,19 @@ const AddTemplate = (props) => {
                                         <label>Mail Content*</label>
                                     </div>
                                     <div className="ck-editor-of-compaign-border mrg-top-10">
-                                        <CKEditor
-                                            content={content ? content : ""}
-                                            events={{
-                                                "change": (event) => setContent(event.editor.getData())
-                                            }}
-                                            className="form-control" placeholder="Enter Description" rows="5" />
+                                        <JoditEditor className="form-control" placeholder="Enter Description" rows="5"
+                                            ref={editor}
+                                            value={content ? content : ""}
+                                            config={config}
+                                            tabIndex={1}
+                                            onBlur={newContent => { setContent(newContent) }}
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit" >Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit" >{btnText}</button>
                             </div>
                         </div>
                     </div>
@@ -291,5 +376,4 @@ const AddTemplate = (props) => {
         </div>
     );
 }
-
 export default withRouter(AddTemplate);

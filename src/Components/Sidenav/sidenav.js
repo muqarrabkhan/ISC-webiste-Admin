@@ -36,6 +36,7 @@ const Sidenav = (props) => {
             return location.indexOf(value) === 1 ? "active" : ""
         }
     }
+    
     // logout function
     const logout = () => {
         let age = localStorage.getItem("age");
@@ -46,6 +47,7 @@ const Sidenav = (props) => {
         localStorage.removeItem("age");
         history.push("/");
     };
+
     return (
         <>
             <div className="container-fluid dashboard-main-dev">
@@ -219,6 +221,14 @@ const Sidenav = (props) => {
                                     src={currentActive("product") === "active" ? require('../../assets/Images/productactive.png') : require('../../assets/Images/product.png')}
                                     alt="Products" />
                                 <span className="sidenav-link fnt-poppins">Products</span>
+                            </div>
+                        </Link>
+                        <Link to={"/storefront"}>
+                            <div className={"sidenav-name-logo" + currentActive("storefront")}>
+                                <img className="administrator_icon"
+                                    src={currentActive("storefront") === "active" ? require('../../assets/Images/activeStorefront.png') : require('../../assets/Images/storefront.png')}
+                                    alt="storefront" />
+                                <span className="sidenav-link fnt-poppins">StoreFront</span>
                             </div>
                         </Link>
                         {/* Adsons*/}

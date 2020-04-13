@@ -12,14 +12,17 @@ const AddCategory = (props) => {
     const [name, setName] = useState("");
     const [description, setDiscription] = useState("");
     const [ipAddress, setIpAddress] = useState("");
+    const [buttonText,setButtonText]=useState("Create");
 
     useEffect(() => {
         publicIp.v4().then(ip => {
             setIpAddress(ip);
         })
     }, [])
+
     const createCategories = (event) => {
         event.preventDefault();
+        setButtonText("Creating...")
         addCategory({
             variables: {
                 Name: name,
@@ -29,10 +32,11 @@ const AddCategory = (props) => {
                 Status: "Enable"
             }
         }).then(res => {
-            history.push("/category")
+            history.push("/edit-category/" + res.data.createcategory.Id)
+        }).catch(error=>{
+            setButtonText("Create")
         })
     }
-
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -77,7 +81,7 @@ const AddCategory = (props) => {
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>
                     </div>

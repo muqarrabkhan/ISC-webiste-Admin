@@ -18,7 +18,7 @@ const ViewCompaign = (props) => {
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
     const [campaignType, setCampaignType] = useState("");
-    // const [totalCampaigns,setTotalCampaigns]=useState([]);
+    const [totalCampaigns, setTotalCampaigns] = useState([]);
     const [getCampaign] = useMutation(VIEW_CAMPAIGN);
     const [campaignCategories, setCampaignCategories] = useState()
     const [deleteCampaign] = useMutation(DELETE_CAMPAIGN)
@@ -50,7 +50,7 @@ const ViewCompaign = (props) => {
         ).then(res => {
             setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
             setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-            // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+            setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
             setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
         })
     }
@@ -69,7 +69,7 @@ const ViewCompaign = (props) => {
         }).then(res => {
             setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
             setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-            // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+            setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
             setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
         })
 
@@ -92,7 +92,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -111,7 +111,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -130,7 +130,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])   
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -156,7 +156,7 @@ const ViewCompaign = (props) => {
         ).then(res => {
             setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
             setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-            // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+            setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
             setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
         })
     }
@@ -176,7 +176,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -194,7 +194,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -212,7 +212,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])   
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -230,7 +230,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : []           
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -254,7 +254,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -272,7 +272,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -290,7 +290,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])   
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -314,7 +314,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -332,7 +332,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -350,7 +350,7 @@ const ViewCompaign = (props) => {
                 }).then(res => {
                     setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                     setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
-                    // setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters. totalCampaigns ? res.data.allCampaignFilters. totalCampaigns : [])   
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
                     setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
                 })
                 return;
@@ -492,14 +492,9 @@ const ViewCompaign = (props) => {
                                         <th>Compaign Name</th>
                                         <th>Compaign Type</th>
                                         <th>Created By</th>
-                                        <th>Verified</th>
-                                        <th>Category</th>
                                         <th>Date Created</th>
-                                        <th>total Support</th>
-                                        <th>Is Premium</th>
-                                        <th>Show On Category</th>
-                                        <th>Status</th>
-                                        <th>Is Donation</th>
+                                        <th>Total Support</th>
+                                        <th>Report Count</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -510,45 +505,20 @@ const ViewCompaign = (props) => {
                                             <td>{single.Name}</td>
                                             <td>{single.CampaignType}</td>
                                             <td>{single.CreatedBy}</td>
-                                            <td>{single.Verified}</td>
-                                            <td>{single.CategoryId}</td>
                                             <td>{standardDate(single.CreatedDate).standardDate}</td>
-                                            <td>{single.supportCount}</td>
-                                            <td>{single.is_campaign_aws}</td>
-                                            <td>
-                                                <div className="switch-btn-of-tables">
-                                                    <label className="switch">
-                                                        <input type="checkbox" checked={single && single.ShowOnList == 1 ? single.ShowOnList : ""} />
-                                                        <span className="slider"></span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="switch-btn-of-tables">
-                                                    <label className="switch">
-                                                        <input type="checkbox" checked={single && single.Status == 1 ? single.Status : ""} />
-                                                        <span className="slider"></span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="switch-btn-of-tables">
-                                                    <label className="switch">
-                                                        <input type="checkbox" checked={single && single.is_donation == 1 ? single.is_donation : ""} />
-                                                        <span className="slider"></span>
-                                                    </label>
-                                                </div>
-                                            </td>
+                                            <td>{single.support_count}</td>
+                                            <td>{single.reportCount}</td>
                                             <td className="btns-of-viewcompaign">
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-campaign/" + single.Id)} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
                                                     <img className="has-margin-left-5 has-cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button"
                                                         onClick={() => deleteSingleCampaign(single.Id)}
                                                         src={Deletelogo} />
-                                                    {/* <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span> */}
+                                                    <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
                                                 </div>
                                                 <div className="mrg-top-10">
-                                                    <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
+                                                    <span onClick={() => history.push("/view-reports/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Reports</span>
+                                                    {/* <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span> */}
                                                     {/* <span className="cursor-pointer view-btn-of-table ">Verify</span> */}
                                                 </div>
                                                 {/* <div className="mrg-top-10">
@@ -557,6 +527,10 @@ const ViewCompaign = (props) => {
                                             </td>
                                         </tr>
                                     ) : ""}
+                                    <tr className="table-footer">
+                                        <td colSpan={7}>Total</td>
+                                        <td>{totalCampaigns}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <div className="has-margin-top-40">

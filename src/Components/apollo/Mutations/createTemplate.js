@@ -31,6 +31,7 @@ mutation createTemplate(
         Type:$Type
     )
     {
+        Id
         error
     }
 

@@ -9,7 +9,9 @@ mutation allCampaignFilters(
       $Createduser: String,
       $CategoryId: Int,
       $Boosted:String
-      ){ allCampaignFilters(
+      )
+      { 
+        allCampaignFilters(
         CampaignType:$CampaignType,
         page:$page,
         limit:$limit,
@@ -17,7 +19,8 @@ mutation allCampaignFilters(
         Createduser:$Createduser,  
         CategoryId:$CategoryId,
         Boosted:$Boosted
-        ){
+        )
+        {
       campaigns{
         Id
        Name
@@ -26,11 +29,12 @@ mutation allCampaignFilters(
         Verified
         CategoryId
         CreatedDate
-
         is_campaign_aws
         Status
         ShowOnList
         is_donation
+        support_count
+        reportCount
       }
       totalPages
       totalCampaigns
@@ -39,5 +43,3 @@ mutation allCampaignFilters(
 
   
 `;
-
-// supportCount

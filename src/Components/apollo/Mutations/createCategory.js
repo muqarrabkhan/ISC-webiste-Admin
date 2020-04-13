@@ -17,6 +17,7 @@ mutation createcategory(
             Status:$Status
             )
             {
+                Id
                 error
             }
     }

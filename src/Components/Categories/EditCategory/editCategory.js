@@ -11,9 +11,11 @@ const EidtCategory = (props) => {
     const { loading, data } = useQuery(SINGLE_CATEGORY(id))
     const [editCategory] = useMutation(EDIT_CATEGORY);
     const [renderData, setRenderData] = useState();
+    const [buttonText,setButtonText]=useState("Update");
 
     const editData = (event) => {
         event.preventDefault();
+        setButtonText("Updating...")
         editCategory({
             variables: {
                 Id: parseInt(id),
@@ -21,7 +23,7 @@ const EidtCategory = (props) => {
                 description: renderData.description
             }
         }).then(res => {
-            window.location.replace("/category");
+            setButtonText("Updated")
         })
     }
 
@@ -83,7 +85,7 @@ const EidtCategory = (props) => {
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Update</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

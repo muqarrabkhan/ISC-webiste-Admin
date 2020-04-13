@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const CREATE_ADMIN = gql`
-  mutation createAdmin(
+  mutation createAdmin(        
                         $Email:String,
                         $Password:String,
                         $RoleId:Int,
@@ -21,6 +21,7 @@ export const CREATE_ADMIN = gql`
                 CreatedIp:$CreatedIp,
                 CreatedBy:$CreatedBy)
                 {
+                   Id     
                    error
                 }
         }

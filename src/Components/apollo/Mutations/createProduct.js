@@ -30,6 +30,7 @@ mutation createProduct(
             variation:$variation
             )
             {
+                Id
                 error
             }
     }

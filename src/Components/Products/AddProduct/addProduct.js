@@ -20,6 +20,7 @@ const AddProduct = (props) => {
     const [height, setHeight] = useState("");
     const [width, setWidth] = useState("");
     const [variation, setVariation] = useState([])
+    const [buttonText,setButtonText]=useState("Creating")
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
@@ -54,6 +55,7 @@ const AddProduct = (props) => {
     }
     const onSubmit = (event) => {
         event.preventDefault();
+        setButtonText("Creating...");
         let duplicateVariation=[...variation]
         duplicateVariation.forEach(sin => {
             sin.value = sin.value.split(",");
@@ -73,7 +75,9 @@ const AddProduct = (props) => {
                 variation: duplicateVariation ? JSON.stringify(duplicateVariation) : JSON.stringify([])
             }
         }).then(res => {
-            history.push("/product")
+            history.push("/edit-product/"+ res.data.createProduct.Id)
+        }).catch(error=>{
+            setButtonText("Create")
         })
     }
 
@@ -309,7 +313,7 @@ const AddProduct = (props) => {
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>
                     </div>

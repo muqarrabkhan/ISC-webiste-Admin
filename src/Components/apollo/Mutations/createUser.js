@@ -18,6 +18,7 @@ mutation createUsers(
             CreatedIp:$CreatedIp
             )
     {
+        Id
         error
     }
 

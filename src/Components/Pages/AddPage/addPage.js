@@ -1,20 +1,23 @@
-import React, { useState , useEffect } from 'react'
-import CKEditor from "react-ckeditor-component";
+import React, { useState, useEffect, useRef } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_WEB_PAGE } from '../../apollo/Mutations/createWebPageMutation'
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
+import JoditEditor from "jodit-react";
 
 const AddPage = (props) => {
     let { history } = props;
-
+    const editor = useRef(null)
+    const config = {
+        readonly: false
+    }
     const [content, setContent] = useState("");
     const [metaKeywords, setMetaKeyWord] = useState("");
     const [pageTitle, setPageTitle] = useState("");
     const [pageHeading, setPageHeading] = useState("");
     const [metaDescription, setMetaDescription] = useState("");
-    const [btnText, setBtnText] = useState("Save");
+    const [btnText, setBtnText] = useState("Create");
     const [pageContent, setPageContent] = useState("");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_WEB_PAGE);
@@ -27,6 +30,7 @@ const AddPage = (props) => {
 
     const addPage = (event) => {
         event.preventDefault();
+        setBtnText("Creating...");
         data({
             variables: {
                 MetaKeywords: metaKeywords,
@@ -38,15 +42,13 @@ const AddPage = (props) => {
                 createdIp: ipInt(ipAddress).toInt(),
             }
         }).then(res => {
-            history.push("/pages")
+            setBtnText("Created");
+            history.push("/edit-pages/" + res.data.createwebpages.id)
+        }).catch(error => {
+            setBtnText("Create");
         })
     }
-
-
-
-
     return (
-
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
@@ -108,17 +110,13 @@ const AddPage = (props) => {
                                     <label>Page Content</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <CKEditor 
-                                        value={content}
-                                        content={content ? content : ""}
-                                        events={{
-                                            "change": (event) => setContent(event.editor.getData())
-                                        }}
-                                        className="form-control" placeholder="Enter Description" rows="5" required value={pageContent}
-                                        onChange={event => {
-                                            setContent(event.target.value)
-                                        }
-                                        } />
+                                    <JoditEditor className="form-control" placeholder="Enter Description" rows="5"
+                                        ref={editor}
+                                        value={content ? content : ""}
+                                        config={config}
+                                        tabIndex={1}
+                                        onBlur={newContent => { setContent(newContent) }}
+                                    />
                                 </div>
                             </div>
                             {/*buttons*/}

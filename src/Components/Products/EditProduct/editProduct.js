@@ -14,11 +14,10 @@ const EditProduct = (props) => {
     let { history, match } = props;
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_PRODUCT(id))
-
     const [renderData, setRenderData] = useState("");
     const [addProduct] = useMutation(UPDATE_PRODUCT);
     const [variation, setVariation] = useState([])
-
+    const [buttonText, setButtonText] = useState("Update")
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
 
@@ -68,6 +67,7 @@ const EditProduct = (props) => {
 
     const editData = (event) => {
         event.preventDefault();
+        setButtonText("Updating...")
         let duplicateVariation = [...variation]
         duplicateVariation.forEach(sin => {
             sin.value = sin.value.split(",");
@@ -87,7 +87,9 @@ const EditProduct = (props) => {
                 variation: duplicateVariation ? JSON.stringify(duplicateVariation) : JSON.stringify([])
             }
         }).then(res => {
-            history.push("/product")
+            setButtonText("Updated")
+        }).catch(error => {
+            setButtonText("Update")
         })
     }
 
@@ -351,7 +353,7 @@ const EditProduct = (props) => {
                                     </div>
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

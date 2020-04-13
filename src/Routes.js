@@ -6,7 +6,7 @@ import Sidenav from './Components/Sidenav/sidenav'
 // Dashboard
 import Dashboard from './Components/Dashboard/dashboard'
 // Administration
-import AddAdministrator from './Components/Administrator/AddAdministrator/Container'
+import AddAdministrator from './Components/Administrator/AddAdministrator/container'
 import AdminInformation from './Components/Administrator/AdminInformation/adminInformation'
 import EditAdministrator from './Components/Administrator/EditAdministrator/editAdministrator'
 import ViewAdministrator from './Components/Administrator/ViewAdministrators/viewAdministrator'
@@ -55,12 +55,17 @@ import CampaignDetails from './Components/Compaigns/CompaignDetails/compaignDeta
 import CreateCamapaign from './Components/Compaigns/CreateCompaigns/createCompaigns'
 import EditCampaign from './Components/Compaigns/EditCompaign/editCompaign'
 import ViewCampaign from './Components/Compaigns/ViewCompaigns/viewCompaigns'
+import ViewReports from './Components/Compaigns/ViewReports/viewReports'
 // Product
 import AddProduct from './Components/Products/AddProduct/addProduct'
 import AddProductInCampaign from './Components/Products/AddProduct-InCompaign/addProduct-inCompaign'
 import EditProduct from './Components/Products/EditProduct/editProduct'
 import ViewAllCampaign from './Components/Products/ViewAllCompaigns/viewAllCompaigns'
 import ViewProduct from './Components/Products/ViewProducts/viewProducts'
+// StoreFront
+import AddStoreFront from './Components/StoreFront/AddStoreFront/addStoreFront'
+import EditStoreFront from './Components/StoreFront/EditStoreFront/editStoreFront'
+import ViewStoreFront from './Components/StoreFront/ViewStoreFront/viewStoreFront'
 // Adsons
 import AddAdson from './Components/Adsons/AddAdson/addAdson'
 import EditAdson from './Components/Adsons/EditAdson/editAdson'
@@ -146,13 +151,17 @@ const AllRouters = (props) => {
                         <Route path={"/create-camapaign"} component={CreateCamapaign} />
                         <Route path={"/edit-campaign/:id"} component={EditCampaign} />
                         <Route path={"/campaign"} component={ViewCampaign} />
+                        <Route path={"/view-reports/:id"} component={ViewReports} />
                         {/* Product */}
                         <Route path={"/add-product"} component={AddProduct} />
                         <Route path={"/add-product-incamapaign"} component={AddProductInCampaign} />
                         <Route path={"/edit-product/:id"} component={EditProduct} />
                         <Route path={"/view-all-campaign/:id"} component={ViewAllCampaign} />
-                        <Route path={"/view-all-campaign"} component={ViewAllCampaign} />
                         <Route path={"/product"} component={ViewProduct} />
+                        {/* StoreFront */}
+                        <Route path={"/add-storefront"} component={AddStoreFront} />
+                        <Route path={"/edit-storefront/:id"} component={EditStoreFront} />
+                        <Route path={"/storefront"} component={ViewStoreFront} />
                         {/* Adsons */}
                         <Route path={"/add-adson"} component={AddAdson} />
                         <Route path={"/edit-adson/:id"} component={EditAdson} />

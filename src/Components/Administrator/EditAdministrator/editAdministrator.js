@@ -18,6 +18,8 @@ const EditAdministrator = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [password, setPassword] = useState("");
     const [editData] = useMutation(UPDATE_ADMIN);
+    const [buttonText, setButtonText] = useState("Update")
+
 
     let uid = uuid();
 
@@ -39,8 +41,8 @@ const EditAdministrator = (props) => {
 
     const updateUser = (event) => {
         event.preventDefault();
-
         if (hideShow == true && hidePassword == false) {
+            setButtonText("Updating...")
             editData({
                 variables: {
                     Id: parseInt(id),
@@ -50,18 +52,21 @@ const EditAdministrator = (props) => {
                     Password: password ? password : uid.toString()
                 }
             }).then(res => {
-                window.location.replace("/administrator");
+                setButtonText("Updated")
             })
         }
 
         else if (hideShow == true && hidePassword == true) {
             if (!password && !confirmPassword) {
+                setButtonText("Update")
                 window.alert("Enter Password");
             }
             else if (password !== confirmPassword) {
                 window.alert("Password not matching");
+                setButtonText("Update")
             }
             else {
+                setButtonText("Updating...")
                 editData({
                     variables: {
                         Id: parseInt(id),
@@ -71,12 +76,15 @@ const EditAdministrator = (props) => {
                         Password: password
                     }
                 }).then(res => {
-                    window.location.replace("/administrator");
+                    setButtonText("Updated")
+                }).catch(error => {
+                    setButtonText("Update")
                 })
             }
         }
 
         else if (hideShow == false && hidePassword == false) {
+            setButtonText("Updating...")
             editData({
                 variables: {
                     Id: parseInt(id),
@@ -86,8 +94,11 @@ const EditAdministrator = (props) => {
                     Password: password ? password : ""
                 }
             }).then(res => {
-                window.location.replace("/administrator");
+                setButtonText("Updated")
             })
+                .catch(error => {
+                    setButtonText("Update")
+                })
         }
     }
 
@@ -239,7 +250,7 @@ const EditAdministrator = (props) => {
                                     }
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_USER_INTEREST } from '../../apollo/Mutations/createUserInterestType'
@@ -8,15 +7,20 @@ const AddAdson = (props) => {
     let { history } = props;
     const [addUserInterest] = useMutation(CREATE_USER_INTEREST);
     const [name, setName] = useState("")
+    const [buttonText,setButtonText]=useState("Create")
 
     const onSubmit = (event) => {
         event.preventDefault();
+        setButtonText("Creating...")
         addUserInterest({
             variables: {
                 name: name
             }
         }).then(res => {
-            history.push("/view-user-interest")
+            setButtonText("Created")
+            history.push("/edit-user-interest/"+res.data.createInterests.id)
+        }).catch(error=>{
+            setButtonText("Create")
         })
     }
 
@@ -57,7 +61,7 @@ const AddAdson = (props) => {
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>
                     </div>

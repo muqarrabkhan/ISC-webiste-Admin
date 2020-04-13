@@ -9,7 +9,8 @@ import { apiPath } from '../../config'
 import { validateEmail } from '../commonComponents/utils'
 
 const Signin = (props) => {
-    let { history } = props;
+
+    let { history, user, dispatch } = props;
     const [email, setEmail] = useState("");
     const [emailValidator, setEmailValidator] = useState(false);
     const [password, setPassword] = useState("");
@@ -85,7 +86,7 @@ const Signin = (props) => {
                         {passwordValidator ?
                             <p className="help is-danger required-field-text">{password ? "Password length should be 8 characters" : "This field is required"}</p> : <p className="help is-danger required-field-text"></p>}
 
-                        <div style={{color:"red"}}>
+                        <div style={{ color: "red" }}>
                             {error}
                         </div>
                         <div className="custom-control checkbox-sigin-page custom-checkbox signin-checkbox">

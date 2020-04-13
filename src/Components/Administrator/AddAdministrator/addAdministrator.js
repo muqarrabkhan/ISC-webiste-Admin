@@ -8,7 +8,7 @@ import ipInt from 'ip-to-int'
 
 const AddAdministrator = (props) => {
 
-    let { history , user} = props;
+    let { history, user } = props;
     const [name, setName] = useState([]);
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState("");
@@ -16,14 +16,14 @@ const AddAdministrator = (props) => {
     const [roleId, setRoleId] = useState([]);
     const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
-    const [btnText, setBtnText] = useState("Save");
+    const [btnText, setBtnText] = useState("Create");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_ADMIN);
     const [roleValidtion, setRoleValidation] = useState(false);
     const [passwordValidation, setPasswordValidation] = useState(false);
 
     let uid = uuid();
-    console.log("user" , user && user)
+    console.log("user", user && user)
     useEffect(() => {
         publicIp.v4().then(ip => {
             setIpAddress(ip);
@@ -34,17 +34,16 @@ const AddAdministrator = (props) => {
         event.preventDefault();
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-
         if (confirmPassword !== password) {
-            setBtnText("Save");
+            setBtnText("Create");
             setPasswordValidation(true);
         }
         if (!roleId || roleId == "") {
-            setBtnText("Save");
+            setBtnText("Create");
             setRoleValidation(true);
         }
         else if (password === "" || confirmPassword === "") {
-            setBtnText("Saving...")
+            setBtnText("Creating...")
             data({
                 variables: {
                     Name: name,
@@ -57,11 +56,19 @@ const AddAdministrator = (props) => {
                     CreatedBy: 1
                 }
             }).then(res => {
-                history.push("/administrator")
+                    if (res.data.createAdmin.error) {
+                    window.alert(res.data.createAdmin.error)
+                    setBtnText("Create")
+                }
+                else {
+                    history.push("/edit-administrator/" + res.data.createAdmin.Id)
+                }
+            }).catch(error => {
+                setBtnText("Create")
             })
         }
         else if (password === confirmPassword) {
-            setBtnText("Saving...")
+            setBtnText("Creating...")
             data({
                 variables: {
                     Name: name,
@@ -74,7 +81,15 @@ const AddAdministrator = (props) => {
                     CreatedBy: 1
                 }
             }).then(res => {
-                history.push("/administrator")
+                if (res.data.createAdmin.error) {
+                    window.alert(res.data.createAdmin.error)
+                    setBtnText("Create")
+                }
+                else {
+                    history.push("/edit-administrator/" + res.data.createAdmin.Id)
+                }
+            }).catch(error => {
+                setBtnText("Create")
             })
         }
     }

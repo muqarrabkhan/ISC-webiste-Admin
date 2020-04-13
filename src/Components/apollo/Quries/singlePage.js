@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const SINGLE_PAGE = (Id) => gql`
+export const SINGLE_PAGE = (Slug) => gql`
 {
-    singlewebpages(id:${Id}){
+    singlewebpages(Slug:"${Slug}"){
         id
         MetaKeywords
         MetaDescription
@@ -10,6 +10,7 @@ export const SINGLE_PAGE = (Id) => gql`
         pageHeading
         pageContent
         status
+        slug
         createdIp
     }
   }

@@ -15,6 +15,7 @@ const AddSetting = (props) => {
     const [settingType, setSettingType] = useState("");
     const [ipAddress, setIpAddress] = useState("");
     const [settingTypeValidator, setSettingTypeValidator] = useState(false);
+    const [buttonText,setButtonText]=useState("Create");
 
     useEffect(() => {
         publicIp.v4().then(ip => {
@@ -24,9 +25,9 @@ const AddSetting = (props) => {
 
     const createSetting = (event) => {
         event.preventDefault();
+        setButtonText("Creating...");
         let crntDate = new Date();
         crntDate = crntDate.toISOString();
-
         if (!settingType) {
             setSettingTypeValidator(true)
         }
@@ -41,7 +42,10 @@ const AddSetting = (props) => {
                     createdDate: crntDate
                 }
             }).then(res => {
-                history.push("/setting")
+                history.push("/edit-setting/" + res.data.createsettings.ID)
+            })
+            .catch(error=>{
+                setButtonText("Create")
             })
         }
     }
@@ -126,7 +130,7 @@ const AddSetting = (props) => {
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>
                     </div>

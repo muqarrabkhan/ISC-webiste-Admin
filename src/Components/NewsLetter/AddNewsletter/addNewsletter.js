@@ -25,6 +25,7 @@ const AddNewsletter = (props) => {
     const [statusValidtion, setStatusValidation] = useState(false);
     const [groupValidtion, setGroupValidation] = useState(false);
     const [templateValidtion, setTemplateValidation] = useState(false);
+    const [buttonText,setButtonText]=useState("Create");
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -67,6 +68,7 @@ const AddNewsletter = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        setButtonText("Creating...")
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
         if (!selectTemplate) {
@@ -97,7 +99,9 @@ const AddNewsletter = (props) => {
                     InterestedIds: [...interestIds]
                 }
             }).then(res => {
-                history.push("/newsletter")
+                history.push("/edit-newsletter/"+res.data.createnewsletter.Id)
+            }).catch(error=>{
+                setButtonText("Create")
             })
         }
     }
@@ -284,7 +288,7 @@ const AddNewsletter = (props) => {
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins">{buttonText}</button>
                                 {/* <button className="Save-btn-of0-form mrg-left-20 fnt-poppins">Export</button> */}
                             </div>
                         </div>

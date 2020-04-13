@@ -9,6 +9,6 @@ export const MEMBERSHIP = gql`
       CampaignLimit
       ChargePercentage
       SubscriptionCharges
-      
+      totalSubscripton
     }
 }`;

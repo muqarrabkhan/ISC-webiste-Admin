@@ -31,10 +31,7 @@ const CompaignDetails = (props) => {
     const [renderData, setRenderData] = useState("");
     const [hideShowColors, setHideShowColors] = useState(false)
     const [hideShowButtonText, setHideShowButtonText] = useState("Edit Hash Tag Colors")
-
-    // let dataSecondary = renderData && renderData.Secondary_color;
-    // let dataTertiary = renderData && renderData.Tertiary_color;
-    // let dataPrimary = renderData && renderData.Primary_color;
+    const [updateButtonText,setUpdateButtonText]=useState("Update")
 
     useEffect(() => {
         setRenderData(data && data.SingleCampaign ? { ...data.SingleCampaign } : {});
@@ -117,6 +114,7 @@ const CompaignDetails = (props) => {
         let edDate = new Date(renderData && renderData.EndDate)
         let token = cookie.load("token")
         if (hideShowColors === false) {
+            setUpdateButtonText("Updating...")
             editData({
                 variables: {
                     Id:parseInt(id),
@@ -137,10 +135,13 @@ const CompaignDetails = (props) => {
                     Overlay: renderData.Overlay ? renderData.Overlay : ""
                 }
             }).then(res => {
-                window.location.replace("/campaign");
+                setUpdateButtonText("Updated")
+            }).catch(error=>{
+                setUpdateButtonText("Update")
             })
         }
-        else if (hideShowColors === true) {
+        else if (hideShowColors === true){
+            setUpdateButtonText("Updating...")
             editData({
                 variables: {
                     Id:parseInt(id),
@@ -161,7 +162,9 @@ const CompaignDetails = (props) => {
                     Overlay: renderData.Overlay
                 }
             }).then(res => {
-                window.location.replace("/campaign");
+                setUpdateButtonText("Updated")
+            }).catch(error=>{
+                setUpdateButtonText("Update")
             })
         }
     }
@@ -674,7 +677,7 @@ const CompaignDetails = (props) => {
                                     {/* Cancel and Save button */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Update</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{updateButtonText}</button>
                                     </div>
                                 </div>
                             </div>

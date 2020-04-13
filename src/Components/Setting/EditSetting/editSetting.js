@@ -12,9 +12,11 @@ const EditSetting = (props) => {
     const { loading, data } = useQuery(SINGLE_SETTING(ID));
     const [editData] = useMutation(UPDATE_SETTING);
     const [renderData, setRenderData] = useState("");
+    const [buttonText,setButtonText]=useState("Update")
 
     const updateUser = (event) => {
         event.preventDefault();
+        setButtonText("Updating...")
         editData({
             variables: {
                 ID: parseInt(ID),
@@ -24,7 +26,9 @@ const EditSetting = (props) => {
                 setting_type: renderData.setting_type
             }
         }).then(res => {
-            window.location.replace("/setting");
+            setButtonText("Updated")
+        }).catch(error=>{
+            setButtonText("Update")
         })
     }
 
@@ -124,7 +128,7 @@ const EditSetting = (props) => {
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Update</button>
+                                            <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

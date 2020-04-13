@@ -16,7 +16,7 @@ const AddUser = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [status, setStatus] = useState([]);
     const [ipAddress, setIpAddress] = useState();
-    const [btnText, setBtnText] = useState("Save");
+    const [btnText, setBtnText] = useState("Create");
     const [data] = useMutation(CREATE_USER);
     const [passwordValidation, setPasswordValidation] = useState(false);
 
@@ -34,11 +34,11 @@ const AddUser = (props) => {
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
         if (confirmPassword !== password) {
-            setBtnText("Save");
+            setBtnText("Create");
             setPasswordValidation(true);
         }
         else if (password === "" || confirmPassword === "") {
-            setBtnText("Saving...")
+            setBtnText("Creating...")
             data({
                 variables: {
                     Name: name,
@@ -49,11 +49,17 @@ const AddUser = (props) => {
                     CreatedIp: ipInt(ipAddress).toInt()
                 }
             }).then(res => {
-                history.push("/users")
+                if (res.data.createUsers.error) {
+                    window.alert(res.data.createUsers.error)
+                    setBtnText("Create")
+                }
+                else {
+                    history.push("/edit-user/"+ res.data.createUsers.Id)
+                }
             })
         }
         else if (password === confirmPassword) {
-            setBtnText("Saving...")
+            setBtnText("Creating...")
             data({
                 variables: {
                     Name: name,
@@ -64,7 +70,15 @@ const AddUser = (props) => {
                     CreatedIp: ipInt(ipAddress).toInt()
                 }
             }).then(res => {
-                history.push("/users")
+                if (res.data.createUsers.error) {
+                    window.alert(res.data.createUsers.error)
+                    setBtnText("Create")
+                }
+                else {
+                    history.push("/edit-user/"+ res.data.createUsers.Id)
+                }
+            }).catch(error => {
+                setBtnText("Create")
             })
         }
     }
@@ -166,9 +180,8 @@ const AddUser = (props) => {
                             }
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                             </div>
-
                         </div>
                     </div>
                 </div>

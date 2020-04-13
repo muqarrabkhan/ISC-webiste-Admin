@@ -9,12 +9,14 @@ const AddAnnouncement = (props) => {
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
     const [link, setLink] = useState("");
+    const [buttonText,setButtonText]=useState("Create");
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
 
     const onSubmit = (event) => {
         event.preventDefault();
+        setButtonText("Creating...");
         addAnnouncement({
             variables: {
                 title: title,
@@ -23,7 +25,10 @@ const AddAnnouncement = (props) => {
                 CreatedDate: currentDate
             }
         }).then(res => {
-            history.push("/announcement")
+            setButtonText("Created");
+            history.push("/edit-announcement/" + res.data.createannouncements.id)
+        }).catch(error=>{
+            setButtonText("Create")
         })
     }
 
@@ -83,7 +88,7 @@ const AddAnnouncement = (props) => {
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>
                     </div>

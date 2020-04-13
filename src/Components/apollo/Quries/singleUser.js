@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const SINGLE_USER = (Id) => gql`
+export const SINGLE_USER = (token) => gql`
 {
-    getuserbyId(Id:${Id}){
+    getuserbyId(token:"${token}"){
         Id
         Name
         Email
@@ -15,7 +15,7 @@ export const SINGLE_USER = (Id) => gql`
            Type
         CampaignName {
          Name
-  }
+        }
       is_activity_aws
         CreatedDate
         CreatedIp

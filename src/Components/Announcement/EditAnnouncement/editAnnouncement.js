@@ -13,12 +13,14 @@ const EditAnnouncement = (props) => {
 
     const [editAnnouncement] = useMutation(UPDATE_ANNOUNCEMENT);
     const [renderData, setRenderData] = useState("");
+    const [buttonText,setButtonText]=useState("Update");
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
 
     const editData = (event) => {
         event.preventDefault();
+        setButtonText("Updating...")
         editAnnouncement({
             variables: {
                 id: parseInt(id),
@@ -28,14 +30,15 @@ const EditAnnouncement = (props) => {
                 date_updated: currentDate
             }
         }).then(res => {
-            window.location.replace("/announcement");
+            setButtonText("Updated")
+        }).catch(error=>{
+            setButtonText("Update")
         })
     }
 
     useEffect(() => {
         setRenderData(data && data.singleannouncements);
     }, [data])
-
 
     return (
         <>
@@ -105,7 +108,7 @@ const EditAnnouncement = (props) => {
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Update</button>
+                                            <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

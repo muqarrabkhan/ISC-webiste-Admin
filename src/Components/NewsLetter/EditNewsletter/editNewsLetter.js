@@ -21,7 +21,7 @@ const EditNewsletter = (props) => {
     const [interestData, setInterestData] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
     const [selectTemplate, setSelectTemplate] = useState("")
-
+    const [buttonText,setButtonText]=useState("Update")
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -60,8 +60,6 @@ const EditNewsletter = (props) => {
         }
     }
 
-    // console.log(template)
-
     const remove = (event) => {
         let duplicateData = [...selectedData]
         let obj = duplicateData.find(single => single.id == event)
@@ -72,10 +70,9 @@ const EditNewsletter = (props) => {
         setInterestData([...duplicateSelected]);
     }
 
-
-
     const onSubmit = (event) => {
         event.preventDefault();
+        setButtonText("Upating...")
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
         let interestIds = []
@@ -97,7 +94,9 @@ const EditNewsletter = (props) => {
                 InterestedIds: [...interestIds]
             }
         }).then(res => {
-            history.push("/newsletter")
+            setButtonText("Updated")
+        }).catch(error=>{
+            setButtonText("Update")
         })
     }
 
@@ -296,7 +295,7 @@ const EditNewsletter = (props) => {
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

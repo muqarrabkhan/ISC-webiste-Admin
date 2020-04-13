@@ -8,6 +8,7 @@ import AllRoutes from './Routes'
 import Signin from './Components/Signin/signin'
 import WrapRootElement from './Components/apollo/wrap-root-element'
 import cookie from 'react-cookies'
+import { Provider } from './Store/index';
 
 const App = (props) => {
 
@@ -21,12 +22,16 @@ const App = (props) => {
         }, 1000);
     }, [location.pathname])
     return (
+
         <WrapRootElement>
-            <Switch>
-                <Route path={"/signin"} exact component={Signin} />
-                <Route path={"/"} component={AllRoutes} />
-            </Switch>
+            <Provider>
+                <Switch>
+                    <Route path={"/signin"} exact component={Signin} />
+                    <Route path={"/"} component={AllRoutes} />
+                </Switch>
+            </Provider>
         </WrapRootElement>
+
     );
 }
 export default withRouter(App);

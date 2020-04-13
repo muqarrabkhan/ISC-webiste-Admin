@@ -10,6 +10,7 @@ import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
 import ImageLoader from '../../../assets/Images/loader.gif'
 import cookie from 'react-cookies'
+import {SELECT_STOREFRONT} from '../../apollo/Quries/userStoreFronts'
 
 const CreateCompaign = (props) => {
     let { history } = props;
@@ -30,17 +31,17 @@ const CreateCompaign = (props) => {
     const [name, setName] = useState("")
     const [campaignType, setCampaignType] = useState("")
     const [shortDescription, setShortDescription] = useState("")
-    const [categoryId, setCategoryId] = useState("")
-    const [description, setDescription] = useState("")
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
-    const [goalSupport, setgoal_support] = useState("")
-    const [facebook, setfacebook_url] = useState("")
-    const [twitter, settwitter_url] = useState("")
-    const [website, setwebsite_url] = useState("")
-    const [buttonText, setButtonText] = useState("")
-    const [selectOverlay, setSelectOverlay] = useState("")
-    const [imageLoader, setImageLoader] = useState(false)
+    const [categoryId , setCategoryId] = useState("")
+    const [description , setDescription] = useState("")
+    const [startDate , setStartDate] = useState("")
+    const [endDate , setEndDate] = useState("")
+    const [goalSupport , setgoal_support] = useState("")
+    const [facebook , setfacebook_url] = useState("")
+    const [twitter , settwitter_url] = useState("")
+    const [website , setwebsite_url] = useState("")
+    const [buttonText , setButtonText] = useState("Create")
+    const [selectOverlay , setSelectOverlay] = useState("")
+    const [imageLoader , setImageLoader] = useState(false)
 
     const addImage = () => {
         let duplicateImage = [...addMoreImage]
@@ -112,26 +113,27 @@ const CreateCompaign = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        setButtonText("Creating...")
         let stDate = new Date(startDate)
         let edDate = new Date(endDate)
         let token = cookie.load("token")
         if (!categoryId) {
-            setButtonText("Save")
+            setButtonText("Create")
         }
         if (!campaignType) {
-            setButtonText("Save")
+            setButtonText("Create")
         }
         if (!shortDescription) {
-            setButtonText("Save")
+            setButtonText("Create")
         }
         if (!description) {
-            setButtonText("Save")
+            setButtonText("Create")
         }
         if (!goalSupport) {
-            setButtonText("Save")
+            setButtonText("Create")
         }
         else {
-            setButtonText("Save")
+            setButtonText("Creating...")
             createCampaign({
                 variables: {
                     Name: name,
@@ -155,7 +157,9 @@ const CreateCompaign = (props) => {
                     token: token
                 }
             }).then(res => {
-                history.push("/campaign")
+                history.push("/edit-campaign/"+res.data.createCampaign.Id)
+            }).catch(error=>{
+                setButtonText("Create")
             })
         }
     }
@@ -265,57 +269,6 @@ const CreateCompaign = (props) => {
                                     </span>
                                 </label>
                             </div>
-                            {/* {addMoreImage && addMoreImage.map((single, index) =>
-                                <div key={index}>
-                                    <div className="Form-section2-uploading-image">
-                                        <div className="has-padding-top-20">
-                                            {single ?
-                                                <div className="store-front-image"
-                                                    style={{
-                                                        backgroundImage: `url(${campaignLogo_baseurl + single})`,
-                                                        height: "100px",
-                                                        backgroundSize: "contain",
-                                                        backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
-                                                    }}>
-                                                </div>
-                                                :
-                                                <img className="dashboard_icon"
-                                                    src={require('../../../assets/Images/admin.png')}
-                                                    style={{
-                                                        height: "100px",
-                                                        width: "95px",
-                                                        backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
-                                                    }}
-                                                />
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className="file is-small has-name has-margin-left-60 has-padding-left-20">
-                                        <label className="file-label">
-                                            <input className="file-input fnt-poppins"
-                                                type="file" name="resume"
-                                                accept="image/*"
-                                                onChange={event => uploadOverlayImage(event, index)}
-                                            />
-                                            <span className="file-cta has-margin-top-5">
-                                                <span className="file-icon">
-                                                    <i className="fas fa-upload"></i>
-                                                </span>
-                                                <span className="file-label width-bt-80">
-                                                    Choose file
-                                                </span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
-                            )} */}
-                            {/* <div className="has-margin-top-10 mrg-left-40">
-                                <span className="Save-btn-of-form has-padding-5  mrg-left-50 has-margin-top-10 fnt-poppins"
-                                    onClick={() => addImage()}
-                                >Add Image</span>
-                            </div> */}
                             {/* hashtag back color */}
                             <div className="is-flex">
                                 <div className="mrg-left-50 mrg-top-30">
@@ -545,7 +498,7 @@ const CreateCompaign = (props) => {
                             {/* Cancel and Save button */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
+                                <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>
                     </div>

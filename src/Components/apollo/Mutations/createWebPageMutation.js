@@ -10,7 +10,7 @@ mutation createwebpages(
     $pageContent:String,
     $createdIp:Long,
     $createdBy:Int
-  
+    
 ){
     createwebpages(
         MetaKeywords:$MetaKeywords,
@@ -22,7 +22,7 @@ mutation createwebpages(
         pageContent:$pageContent
     )
     {
-   
+        id
         error
     }
 

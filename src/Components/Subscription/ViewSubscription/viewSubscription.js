@@ -35,6 +35,7 @@ const ViewSubscription = (props) => {
                                         <th>Campaign Limit</th>
                                         <th>Charge Percentage</th>
                                         <th>Subscription Charges</th>
+                                        <th>Total Subscripton</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -46,6 +47,7 @@ const ViewSubscription = (props) => {
                                             <td>{single && single.CampaignLimit ? single.CampaignLimit : "-"}</td>
                                             <td>{single && single.ChargePercentage ? single.ChargePercentage : "-"}</td>
                                             <td>{single && single.SubscriptionCharges ? single.SubscriptionCharges : "-"}</td>
+                                            <td>{single && single.totalSubscripton ? single.totalSubscripton : "-"}</td>
                                             <td>
                                                 <div className="is-flex">
                                                     <img onClick={() => history.push("/edit-subscription/"+single.id)} className="cursor-pointer edit-image-table view-subscription-btn-edit" alt="edit-button" src={Editlogo} />

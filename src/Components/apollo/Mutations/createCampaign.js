@@ -45,6 +45,7 @@ export const CREATE_CAMPAIGN = gql`
                             token:$token
                             )
                 {
+                        Id
                         error
                 }
         }

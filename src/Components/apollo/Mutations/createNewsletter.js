@@ -23,6 +23,7 @@ mutation createnewsletter(
             InterestedIds:$InterestedIds
             )
             {
+                Id
                 error
             }
     }

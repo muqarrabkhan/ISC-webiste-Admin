@@ -15,6 +15,7 @@ mutation createannouncements(
             date_created:$date_created
             )
     {
+        id
         error
     }
 
