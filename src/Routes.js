@@ -6,7 +6,7 @@ import Sidenav from './Components/Sidenav/sidenav'
 // Dashboard
 import Dashboard from './Components/Dashboard/dashboard'
 // Administration
-import AddAdministrator from './Components/Administrator/AddAdministrator/container'
+import AddAdministrator from './Components/Administrator/AddAdministrator/Container'
 import AdminInformation from './Components/Administrator/AdminInformation/adminInformation'
 import EditAdministrator from './Components/Administrator/EditAdministrator/editAdministrator'
 import ViewAdministrator from './Components/Administrator/ViewAdministrators/viewAdministrator'
