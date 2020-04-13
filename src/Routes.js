@@ -18,7 +18,7 @@ import UserInformationActivities from './Components/User/UserInformation/UserAct
 import ViewActivities from './Components/User/ViewActivities/viewActivities'
 import ViewUser from './Components/User/ViewUser/viewUser'
 // UserInterestType
-import AddUserInterest from './Components/UserInterestType/AddUserInterest/addUserInteres'
+import AddUserInterest  from './Components/UserInterestType/AddUserInterest/addUserInteres'
 import EditUserInterest from './Components/UserInterestType/EditUserInterest/editUserInteres'
 import ViewUserInterest from './Components/UserInterestType/ViewUserInterest/viewUserInterest'
 // Subscription
