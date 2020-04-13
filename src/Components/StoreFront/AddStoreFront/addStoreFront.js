@@ -31,42 +31,22 @@ const AddStoreFront = (props) => {
         event.preventDefault();
         setButtonText("Creating...")
         let token = cookie.load("token")
-        if (country && country !== "CA" || country !== "US") {
-            addStorefront({
-                variables: {
-                    Name: name,
-                    OriginPostalCode: parseInt(originPostalCode),
-                    Status: "Enable",
-                    Createduser: "Admin",
-                    CreatedIp: ipInt(ipAddress).toInt(),
-                    OriginCountry: country,
-                    OriginState: "",
-                    token: token
-                }
-            }).then(res => {
-                history.push("/edit-storefront/" + res.data.createStorefront.Id)
-            }).catch(error => {
-                setButtonText("Create")
-            })
-        }
-        else if (country && country === "CA" || country === "US") {
-            addStorefront({
-                variables: {
-                    Name: name,
-                    OriginPostalCode: parseInt(originPostalCode),
-                    Status: "Enable",
-                    Createduser: "Admin",
-                    CreatedIp: ipInt(ipAddress).toInt(),
-                    OriginCountry: country,
-                    OriginState: state,
-                    token: token
-                }
-            }).then(res => {
-                history.push("/edit-storefront/" + res.data.createStorefront.Id)
-            }).catch(error => {
-                setButtonText("Create")
-            })
-        }
+        addStorefront({
+            variables: {
+                Name: name,
+                OriginPostalCode: parseInt(originPostalCode),
+                Status: "Enable",
+                Createduser: "Admin",
+                CreatedIp: ipInt(ipAddress).toInt(),
+                OriginCountry: country,
+                OriginState: country && country === "CA" || country === "US" ? state : "",
+                token: token
+            }
+        }).then(res => {
+            history.push("/edit-storefront/" + res.data.createStorefront.Id)
+        }).catch(error => {
+            setButtonText("Create")
+        })
     }
 
     return (
@@ -159,6 +139,7 @@ const AddStoreFront = (props) => {
                                             <div>
                                                 <select required
                                                     className="fnt-poppins"
+                                                    value={state}
                                                     onChange={event => {
                                                         setState(event.target.value)
                                                     }}

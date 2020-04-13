@@ -105,7 +105,48 @@ const EditTemplate = (props) => {
         }
     }
 
-    
+    // const variablesHandler = () => {
+    //         if (renderData && renderData.Category == ""){
+    //             setTemplatevariables("")
+    //         }
+    //         if (renderData && renderData.Category == "signUp"){
+    //             setTemplatevariables("[user_name][userId][uid]")
+    //         }
+    //         if (renderData && renderData.Category == "welcome"){{
+    //             setTemplatevariables("[user_name]")
+    //         }
+    //         if (renderData && renderData.Category == "CreateCampaign"){
+    //             setTemplatevariables("[creator_name][creator_email][campaign_name][campaign_link]")
+    //         }
+    //         if (renderData && renderData.Category == "campaignSupported"){
+    //             setTemplatevariables("[supporters][campaign_name][campaign_link][supporters_percentage][user_name]")
+    //         }
+    //         if (renderData && renderData.Category == "forgetPassword"){
+    //             setTemplatevariables("[userId][uid][user_name]")
+    //         }
+    //         if (renderData && renderData.Category == "notPremium"){
+    //             setTemplatevariables("[user_name][campaign_name][campaign_link]")
+    //         }
+    //         if (renderData && renderData.Category == "sellerRecive"){
+    //             setTemplatevariables("[buyer_email][buyer_name][charge_amount][order_id][shipment_charges][total_products][buyer_country][tax][address][phone][state][postal_code][application_fee][recived_amount][seller_name]")
+    //         }
+    //         if (renderData && renderData.Category == "buyerRecive"){
+    //             setTemplatevariables("[seller_email][seller_name][charge_amount][order_id][shipment_charges][total_products][seller_country][tax][buyer_name]")
+    //         }
+    //         if (renderData && renderData.Category == "fundriser"){
+    //             setTemplatevariables("[buyer_name][seller_email][seller_name][charge_amount][seller_country]")
+    //         }
+    //         if (renderData && renderData.Category == "fundriseReciver"){
+    //             setTemplatevariables("[seller_name][buyer_email][buyer_name][charge_amount][application_fee][recived_amount]")
+    //         }
+    //         if (renderData && renderData.Category == "succesfullySubscribed"){
+    //             setTemplatevariables("[membership_name][membership_charges][storefront_limit][campaign_limit]")
+    //         }
+    //         if (renderData && renderData.Category == "resetSucessfully"){
+    //             setTemplatevariables("[user_name]")
+    //         }
+    //     }
+    // }
 
     return (
         <>
