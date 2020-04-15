@@ -3,7 +3,7 @@ import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import { SINGLE_CAMPAIGN } from '../../apollo/Quries/singleCampaign'
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { campaignBanner_baseurl, overlays } from '../../../config'
+import { campaignBanner_baseurl, campaignLogo_baseurl } from '../../../config'
 import { standardDate } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
 import { EDIT_CAMPAIGN } from '../../apollo/Mutations/updateCampaign'
@@ -60,9 +60,9 @@ const CompaignDetails = (props) => {
                 let final = {
                     imageFile: data,
                 };
-                axios.post(apiPath + "/uploadOverlay", final).then(res => {
+                axios.post(apiPath + "/uploadLogo", final).then(res => {
                     let duplicateProducts = { ...renderData };
-                    duplicateProducts.Overlay = res.data.imageUrl;
+                    duplicateProducts.Logo = res.data.imageUrl;
                     setRenderData({ ...duplicateProducts })
                 })
             });
@@ -132,7 +132,7 @@ const CompaignDetails = (props) => {
                     Tertiary_color: renderData && renderData.Tertiary_color,
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
-                    Overlay: renderData.Overlay ? renderData.Overlay : ""
+                    Logo: renderData.Logo ? renderData.Logo : ""
                 }
             }).then(res => {
                 setUpdateButtonText("Updated")
@@ -159,7 +159,7 @@ const CompaignDetails = (props) => {
                     Tertiary_color: tertiary.hex,
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
-                    Overlay: renderData.Overlay
+                    Logo: renderData.Logo
                 }
             }).then(res => {
                 setUpdateButtonText("Updated")
@@ -245,15 +245,15 @@ const CompaignDetails = (props) => {
                                     </div>
                                     {/* Overlays Image choose button start here */}
                                     <div className="mrg-top-20">
-                                        <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins" >Overlay</label>
+                                        <label className="overlay-responsive-social-img mrg-left-60 fnt-poppins">Logo</label>
                                     </div>
                                     {/* First choose file button */}
                                     <div className="field mrg-top-20  mrg-left-50">
                                         <div className="file is-small has-name ">
-                                            {renderData && renderData.Overlay ?
+                                            {renderData && renderData.Logo ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${renderData && renderData.Overlay ? overlays + renderData.Overlay : "no-image"})`,
+                                                        backgroundImage: `url(${renderData && renderData.Logo ? campaignLogo_baseurl + renderData.Logo : "no-image"})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",

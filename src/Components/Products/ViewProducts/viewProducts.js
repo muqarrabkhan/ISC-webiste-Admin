@@ -115,7 +115,7 @@ const ViewProduct = (props) => {
                                                     backgroundRepeat: 'no-repeat'
                                                 }}></td>
                                                 : <div style={{ marginTop: "10px", marginLeft: "20px", height: '143px' }}>No-Image</div>}
-                                            <td>{single.sale_price}</td>
+                                            <td>{"$"+" "+single.sale_price}</td>
                                             <td>{single.CreatedBy}</td>
                                             <td>
                                                 <div className="applying-flex-products-btn">

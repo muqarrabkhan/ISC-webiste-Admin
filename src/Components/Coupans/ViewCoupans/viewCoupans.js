@@ -101,7 +101,7 @@ const ViewCoupan = (props) => {
                                     <tbody className="table-of-data">
                                         <tr className="table-row-data-of-body fnt-poppins">
                                             <td>{single.Coupon_code ? single.Coupon_code : "-"}</td>
-                                            <td>{single.Discount_percentage ? single.Discount_percentage : "-"}</td>
+                                            <td>{single.Discount_percentage ? single.Discount_percentage +" "+"%": "-"}</td>
                                             <td>{single.Page_link ? single.Page_link : "-"}</td>
                                             <td>{single.Status_coupon ? single.Status_coupon : "-"}</td>
                                             <td>

@@ -24,7 +24,7 @@ export const SINGLE_CAMPAIGN = (Slug) => gql`
     website_url
     CampaignType
     goal_support
-    Overlay
+    Logo
     StartDate
     EndDate
   }

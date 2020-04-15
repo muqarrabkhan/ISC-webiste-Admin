@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { campaignBanner_baseurl, overlays, apiPath } from '../../../config'
+import { campaignBanner_baseurl, campaignLogo_baseurl , apiPath } from '../../../config'
 import { CREATE_CAMPAIGN } from '../../apollo/Mutations/createCampaign'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
@@ -74,7 +74,7 @@ const CreateCompaign = (props) => {
                 let final = {
                     imageFile: data,
                 };
-                axios.post(apiPath + "/uploadOverlay", final).then(res => {
+                axios.post(apiPath + "/uploadLogo", final).then(res => {
                     setSelectOverlay(res.data.imageUrl)
                 })
             });
@@ -150,7 +150,7 @@ const CreateCompaign = (props) => {
                     Primary_color: color.hex.toString() !== initial ? color.hex.toString() : "",
                     Secondary_color: secondaryColor.hex.toString() !== secondary ? secondaryColor.hex.toString() : "",
                     Tertiary_color: tertiary.hex.toString() !== tertiaryC ? tertiary.hex.toString() : "",
-                    Overlay: selectOverlay ? selectOverlay : "",
+                    Logo: selectOverlay ? selectOverlay : "",
                     Banner: bannerimage ? bannerimage : "",
                     Createduser: "Admin",
                     CreatedIp: ipInt(ipAddress).toInt(),
@@ -229,13 +229,13 @@ const CreateCompaign = (props) => {
                             </div>
                             {/* Overlays Image choose button start here */}
                             <div className="mrg-top-20">
-                                <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Overlay</label>
+                                <label className="overlay-responsive-social-img mrg-left-60 fnt-poppins">Logo</label>
                             </div>
                             {/* Second choose file button */}
                             {selectOverlay ?
                                 <div className="store-front-image has-margin-top-10"
                                     style={{
-                                        backgroundImage: `url(${selectOverlay ? overlays + selectOverlay : ""})`,
+                                        backgroundImage: `url(${selectOverlay ? campaignLogo_baseurl + selectOverlay : ""})`,
                                         height: "100px",
                                         backgroundSize: "contain",
                                         backgroundRepeat: "no-repeat",
