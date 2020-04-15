@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import cancelImg from '../../../assets/Images/cancel.png'
+import axios, { CancelToken } from "axios";
+import { apiPath } from '../../../config'
 import { CREATE_NEWSLETTER } from '../../apollo/Mutations/createNewsletter'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { NEWSLETTERS_TEMPLATES } from '../../apollo/Mutations/getAllNewsletterTemplates'
@@ -20,12 +22,15 @@ const AddNewsletter = (props) => {
     const [group, setGroup] = useState("");
     const [hideShow, setHideShow] = useState(false);
     const [hideShowDate, setHideShowDate] = useState(false);
+    const [searchHide, setSearchHide] = useState(false)
     const [interestData, setInterestData] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
     const [statusValidtion, setStatusValidation] = useState(false);
     const [groupValidtion, setGroupValidation] = useState(false);
     const [templateValidtion, setTemplateValidation] = useState(false);
-    const [buttonText,setButtonText]=useState("Create");
+    const [buttonText, setButtonText] = useState("Create");
+    const [selectData, setSelectData] = useState();
+    const [searchData, setSearchData] = useState([]);
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -37,34 +42,56 @@ const AddNewsletter = (props) => {
         setInterestData(data && data.getAllIntersts)
     }, [data])
 
-    const selectData = (event) => {
-        if (event === "selectAll") {
-            let duplicateData = [...interestData]
-            setSelectedData([...duplicateData])
-            setInterestData([])
-        }
-        else {
-            let duplicateData = [...interestData]
-            let obj = duplicateData.find(single => single.id == event)
-            let duplicateSelected = [...selectedData]
-            duplicateSelected.push(obj)
-            duplicateData = duplicateData.filter(single => single.id != event)
-            setInterestData([...duplicateData]);
-            setSelectedData([...duplicateSelected])
-        }
+    // const selectData = (event) => {
+    //     if (event === "selectAll") {
+    //         let duplicateData = [...interestData]
+    //         setSelectedData([...duplicateData])
+    //         setInterestData([])
+    //     }
+    //     else {
+    //         let duplicateData = [...interestData]
+    //         let obj = duplicateData.find(single => single.id == event)
+    //         let duplicateSelected = [...selectedData]
+    //         duplicateSelected.push(obj)
+    //         duplicateData = duplicateData.filter(single => single.id != event)
+    //         setInterestData([...duplicateData]);
+    //         setSelectedData([...duplicateSelected])
+    //     }
+    // }
+
+
+    // const remove = (event) => {
+    //     let duplicateData = [...selectedData]
+    //     let obj = duplicateData.find(single => single.id == event)
+    //     let duplicateSelected = [...interestData]
+    //     duplicateSelected.push(obj)
+    //     duplicateData = duplicateData.filter(single => single.id != event)
+    //     setSelectedData([...duplicateData])
+    //     setInterestData([...duplicateSelected]);
+    // }
+
+    let cancel;
+    const onChageKeyword = (value) => {
+        cancel && cancel();
+        axios.post(
+            apiPath + "/campainNameSearch",
+            {
+                Name: value
+            },
+            {
+                cancelToken: new CancelToken(function executor(c) {
+                    // An executor function receives a cancel function as a parameter
+                    cancel = c;
+                })
+            }
+        )
+            .then(res => {
+                console.log(res && res.data && res.data.name);
+                setSearchData(res && res.data && res.data.name)
+            })
     }
 
-
-    const remove = (event) => {
-        let duplicateData = [...selectedData]
-        let obj = duplicateData.find(single => single.id == event)
-        let duplicateSelected = [...interestData]
-        duplicateSelected.push(obj)
-        duplicateData = duplicateData.filter(single => single.id != event)
-        setSelectedData([...duplicateData])
-        setInterestData([...duplicateSelected]);
-    }
-
+    console.log("searchData", searchData )
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -81,30 +108,32 @@ const AddNewsletter = (props) => {
             setGroupValidation(true);
         }
         else {
-            let interestIds = []
-            if (selectedData) {
-                selectedData.forEach(single => {
-                    interestIds.push(single.id)
-                })
-            }
+            // let interestIds = []
+            // if (selectedData) {
+            //     selectedData.forEach(single => {
+            //         interestIds.push(single.id)
+            //     })
+            // }
             addNewsletter({
                 variables: {
                     name: name,
                     support_mailsettings_id: parseInt(selectTemplate),
-                    datetime: dateTime,
+                    datetime: dateTime ? dateTime : "",
                     status: status,
                     group: group,
                     cron_status: "pending",
                     date_created: currentDate,
-                    InterestedIds: [...interestIds]
+                    interestId: parseInt(selectData),
+                    campaign_id: parseInt(searchData)
                 }
             }).then(res => {
-                history.push("/edit-newsletter/"+res.data.createnewsletter.Id)
-            }).catch(error=>{
+                // history.push("/edit-newsletter/" + res.data.createnewsletter.Id)
+            }).catch(error => {
                 setButtonText("Create")
             })
         }
     }
+
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
@@ -149,7 +178,8 @@ const AddNewsletter = (props) => {
                                                     required
                                                     onChange={event => {
                                                         setTemplateValidation(false)
-                                                        setSelecTemplate(event.target.value)}}
+                                                        setSelecTemplate(event.target.value)
+                                                    }}
                                                 >
                                                     <option>Select Template</option>
                                                     {templates && templates.length !== 0 && templates.map(single =>
@@ -224,9 +254,16 @@ const AddNewsletter = (props) => {
                                     <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups"
                                         value="campaignusers"
                                         onChange={event => {
-                                            setGroupValidation(false)
-                                            setHideShow(true)
-                                            setGroup(event.target.value)
+                                            if (searchHide == true) {
+                                                setSearchHide(false)
+                                                setHideShow(false)
+                                            }
+                                            else if (searchHide == false) {
+                                                setSearchHide(true)
+                                                setHideShow(false)
+                                                setGroupValidation(false)
+                                                setGroup(event.target.value)
+                                            }
                                         }}
                                     />
                                     <label className="label-of-radio" for="radio3">
@@ -238,17 +275,34 @@ const AddNewsletter = (props) => {
                             <div className="radios-of-group mrg-left-50">
                                 <div className="radio-of-group">
                                     <input type="radio" id="radio4" name="radio-of-groups"
-
                                         value="campaigncreators"
                                         onChange={event => {
                                             setGroupValidation(false)
                                             setHideShow(false)
+                                            setSearchHide(false)
                                             setGroup(event.target.value)
                                         }}
                                     />
                                     <label className="label-of-radio" for="radio4">
                                         <div className="checker"></div>
                                         <div>Campaing Creators</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="radios-of-group mrg-left-50">
+                                <div className="radio-of-group">
+                                    <input type="radio" id="radio5" name="radio-of-groups"
+                                        value="interestedusers"
+                                        onChange={event => {
+                                            setGroupValidation(false)
+                                            setHideShow(true)
+                                            setSearchHide(false)
+                                            setGroup(event.target.value)
+                                        }}
+                                    />
+                                    <label className="label-of-radio" for="radio5">
+                                        <div className="checker"></div>
+                                        <div>Interested Users</div>
                                     </label>
                                 </div>
                             </div>
@@ -264,16 +318,15 @@ const AddNewsletter = (props) => {
                                         </div>
                                         <div>
                                             <select className="mrg-top-10 fnt-poppins" type="name"
-                                                onChange={event => selectData(event.target.value)}
+                                                onChange={event => setSelectData(event.target.value)}
                                             >
-                                                <option>select User Interest</option>
-                                                <option value="selectAll">Select All</option>
+                                                <option>Select User Interest</option>
                                                 {interestData && interestData.map(single =>
                                                     <option value={single.id}>{single.name}</option>
                                                 )}
                                             </select>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             {selectedData && selectedData.length !== 0 && selectedData.map(single =>
                                                 <ul className=" is-flex back-color back-color">
                                                     <li className="has-padding-left-10" value={single.id}>{single.name}</li>
@@ -281,10 +334,31 @@ const AddNewsletter = (props) => {
                                                         className="has-cursor-pointer has-margin-left-15 cancel-img" /></li>
                                                 </ul>
                                             )}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             }
+                            {searchHide ?
+                                <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
+                                    <div className="form-group">
+                                        <div>
+                                            <label className="mrg-top-20 fnt-poppins">Search Campaign</label>
+                                        </div>
+                                        <div>
+                                            <input className="mrg-top-10 fnt-poppins" type="name"
+                                                onChange={event => onChageKeyword(event.target.value)}
+                                            />
+                                            <div>
+                                                {searchData && searchData.length !== 0 ? searchData.map((single, index) =>
+                                                    <ul key={index}>
+                                                        <li className="has-padding-left-10" value={single.Id}>{single.Name}</li>
+                                                    </ul>
+                                                ) : ""}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                : ""}
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <button className="cancel-btn-of-form fnt-poppins">Cancel</button>

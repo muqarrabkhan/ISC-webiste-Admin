@@ -36,7 +36,7 @@ const Sidenav = (props) => {
             return location.indexOf(value) === 1 ? "active" : ""
         }
     }
-    
+
     // logout function
     const logout = () => {
         let age = localStorage.getItem("age");
@@ -212,6 +212,15 @@ const Sidenav = (props) => {
                                     src={currentActive("campaign") === "active" ? require('../../assets/Images/compaignactive.png') : require('../../assets/Images/compaign.png')}
                                     alt="Compaign" />
                                 <span className="sidenav-link fnt-poppins">Campaigns</span>
+                            </div>
+                        </Link>
+                        {/* Reported Campaigns */}
+                        <Link to={"/all-reported-campaigns"}>
+                            <div className={"sidenav-name-logo" + currentActive("all-reported-campaigns")}>
+                                <img className="administrator_icon"
+                                    src={currentActive("all-reported-campaigns") === "active" ? require('../../assets/Images/compaignactive.png') : require('../../assets/Images/compaign.png')}
+                                    alt="Compaign" />
+                                <span className="sidenav-link fnt-poppins">Reported Campaigns</span>
                             </div>
                         </Link>
                         {/* Products */}

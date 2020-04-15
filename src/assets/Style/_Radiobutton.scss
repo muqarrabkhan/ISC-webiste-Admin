@@ -116,3 +116,62 @@
     transition: box-shadow .3s ease;
   }
 }
+
+// -----------------------------------------------
+// 3rd Radio btn
+.radios-btn-third {
+  width: 100%;
+  height: 100%;    
+  @media(max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.radios-btn-third {  
+  input {
+    position: absolute;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  
+  input:focus + label {     
+    background: transparent;
+    
+    .checker {
+      border-color: $Table-title;
+    }
+  }
+  
+  input:checked + label {    
+    .checker {
+      box-shadow: inset 0 0 0 6px $Table-title;
+    }
+  }
+  
+  .label-of-radio {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    border-radius: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    
+    &:hover {
+      background: transparent;
+      
+      .checker {
+        box-shadow: inset 0 0 0 2px $Table-title;
+      }
+    }
+  }
+  
+  .checker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: inset 0 0 0 1px $radio-color;
+    transition: box-shadow .3s ease;
+  }
+}

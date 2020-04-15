@@ -9,7 +9,8 @@ mutation createnewsletter(
     $group: String,
     $cron_status: String,
     $date_created: DateTime,
-    $InterestedIds: [ID]
+    $interestId: Int,
+    $campaign_id: Int
     )
     {
         createnewsletter(
@@ -20,7 +21,8 @@ mutation createnewsletter(
             group:$group,
             cron_status:$cron_status,
             date_created:$date_created,
-            InterestedIds:$InterestedIds
+            interestId:$interestId,
+            campaign_id: $campaign_id
             )
             {
                 Id

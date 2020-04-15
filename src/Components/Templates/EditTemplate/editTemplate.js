@@ -214,7 +214,7 @@ const EditTemplate = (props) => {
                                                             let dupilcateName = { ...renderData }
                                                             dupilcateName.Category = event.target.value
                                                             setRenderData({ ...dupilcateName })
-                                                            variablesHandler(event.target.value);
+                                                            variablesHandler({...dupilcateName});
                                                         }}
                                                     >
                                                         <option value="">Select Category</option>

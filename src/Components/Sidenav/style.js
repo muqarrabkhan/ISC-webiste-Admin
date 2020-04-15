@@ -7,7 +7,7 @@ export default () => {
             {`
              .dashboard-main-dev {
                 background: #4379E9;
-                width: 330px;
+                width: 350px;
                 min-height: 160vh;
             }
             .dashboard-main-dev .logo-dashboard{
@@ -45,6 +45,7 @@ export default () => {
                 margin-top: 10%!important;
                 margin-left: 20%!important;
                 color: #fff;
+                width: 215px;
             }
             // ends here
             .dashboard-name-logo .dashboard-link {
@@ -62,7 +63,7 @@ export default () => {
                 width: 19px
             }
             .sidenav-name-logo {
-                width: 194px;
+                width: 215px;
                 margin-left: 20%!important;
                 margin-top: 10%!important;
             }

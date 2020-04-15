@@ -15,7 +15,7 @@ const EditUser = (props) => {
     let id = match.params && match.params.id ? match.params.id : "";
     const [renderData, setRenderData] = useState("");
     let token = cookie.load("token")
-    const { loading, data } = useQuery(SINGLE_USER(token));
+    const { loading, data } = useQuery(SINGLE_USER(token,id));
     const [editData] = useMutation(UPDATE_USER);
     const [hideShow, setHideShow] = useState(false);
     const [hidePassword, setHidePassword] = useState(false);

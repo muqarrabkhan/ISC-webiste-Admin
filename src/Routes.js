@@ -18,7 +18,7 @@ import UserInformationActivities from './Components/User/UserInformation/UserAct
 import ViewActivities from './Components/User/ViewActivities/viewActivities'
 import ViewUser from './Components/User/ViewUser/viewUser'
 // UserInterestType
-import AddUserInterest  from './Components/UserInterestType/AddUserInterest/addUserInteres'
+import AddUserInterest from './Components/UserInterestType/AddUserInterest/addUserInteres'
 import EditUserInterest from './Components/UserInterestType/EditUserInterest/editUserInteres'
 import ViewUserInterest from './Components/UserInterestType/ViewUserInterest/viewUserInterest'
 // Subscription
@@ -56,6 +56,9 @@ import CreateCamapaign from './Components/Compaigns/CreateCompaigns/createCompai
 import EditCampaign from './Components/Compaigns/EditCompaign/editCompaign'
 import ViewCampaign from './Components/Compaigns/ViewCompaigns/viewCompaigns'
 import ViewReports from './Components/Compaigns/ViewReports/viewReports'
+// Reported Campaigns
+import ReportedCampaigns from './Components/ReportedCampaigns/ViewReports/viewReport'
+import ReportedCountData from './Components/ReportedCampaigns/ViewReportCountsData/viewReportCountsData'
 // Product
 import AddProduct from './Components/Products/AddProduct/addProduct'
 import AddProductInCampaign from './Components/Products/AddProduct-InCompaign/addProduct-inCompaign'
@@ -152,6 +155,9 @@ const AllRouters = (props) => {
                         <Route path={"/edit-campaign/:id"} component={EditCampaign} />
                         <Route path={"/campaign"} component={ViewCampaign} />
                         <Route path={"/view-reports/:id"} component={ViewReports} />
+                        {/* Reported Campaigns */}
+                        <Route path={"/all-reported-campaigns"} component={ReportedCampaigns} />
+                        <Route path={"/count-reports/:id"} component={ReportedCountData} />
                         {/* Product */}
                         <Route path={"/add-product"} component={AddProduct} />
                         <Route path={"/add-product-incamapaign"} component={AddProductInCampaign} />
@@ -170,7 +176,7 @@ const AllRouters = (props) => {
                         <Route path={"/view-details"} component={ViewDetails} />
                         {/* Coupans */}
                         <Route path={"/add-coupans"} component={AddCoupans} />
-                        <Route path={"/edit-coupans"} component={EditCoupans} />
+                        <Route path={"/edit-coupans/:id"} component={EditCoupans} />
                         <Route path={"/coupans"} component={ViewCoupans} />
                         {/* Templates */}
                         <Route path={"/add-tamplates"} component={AddTamplates} />
