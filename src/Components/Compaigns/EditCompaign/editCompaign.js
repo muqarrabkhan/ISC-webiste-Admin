@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { SINGLE_CAMPAIGN } from '../../apollo/Quries/singleCampaign'
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { campaignBanner_baseurl, campaignLogo_baseurl } from '../../../config'
-import { standardDate } from '../../functions'
+import { standardDate , getParams} from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
 import { EDIT_CAMPAIGN } from '../../apollo/Mutations/updateCampaign'
 import axios from 'axios'
@@ -13,7 +13,8 @@ import ImageLoader from '../../../assets/Images/loader.gif'
 import cookie from 'react-cookies'
 
 const CompaignDetails = (props) => {
-    let { history, match } = props;
+    let { history, match , location} = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_CAMPAIGN(id), { context: { clientName: "second" } });
     const [getAllCampaignsType, setGetAllCampaigns] = useState();
@@ -168,6 +169,8 @@ const CompaignDetails = (props) => {
             })
         }
     }
+
+
     return (
         <>
             {!loading ?
@@ -175,7 +178,7 @@ const CompaignDetails = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Campaign Details</h6>
-                        <button onClick={() => history.push("/campaign")} className="cursor-pointer cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() =>window.history.back("/campaign?page="+ path)} className="cursor-pointer cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => updateCampaign(event)}>

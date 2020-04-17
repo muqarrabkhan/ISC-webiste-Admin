@@ -4,24 +4,30 @@ import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
 import { withRouter } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { standardDate } from '../../functions/index'
+import { standardDate, getParams } from '../../functions/index'
 import ReactPaginate from "react-paginate";
 import { VIEW_CAMPAIGN } from '../../apollo/Mutations/campaignMutation'
 import Loader from '../../commonComponents/Loader/loader'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
 import { DELETE_CAMPAIGN } from '../../apollo/Mutations/deleteCampaign'
 import cookie from 'react-cookies'
+
+
 const ViewCompaign = (props) => {
-    let { history } = props;
+
+    let { history, location } = props;
+    let path = getParams(location.search);
+    console.log("data", path);
     const { loading, data } = useQuery(CAMPAIGN_CATEGORIES, { context: { clientName: "second" } });
-    const [campaign, setCampaign] = useState([])
+    const [campaign, setCampaign] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
     const [campaignType, setCampaignType] = useState("");
     const [totalCampaigns, setTotalCampaigns] = useState([]);
     const [getCampaign] = useMutation(VIEW_CAMPAIGN);
-    const [campaignCategories, setCampaignCategories] = useState()
-    const [deleteCampaign] = useMutation(DELETE_CAMPAIGN)
+    const [campaignCategories, setCampaignCategories] = useState();
+    const [deleteCampaign] = useMutation(DELETE_CAMPAIGN);
+    const [selectedPage, setSelectedPage] = useState(0);
 
     useEffect(() => {
         setCampaignCategories(data && data.campaignCategories)
@@ -36,6 +42,8 @@ const ViewCompaign = (props) => {
 
     const handlePageClick = (value) => {
         setPage(value.selected + 1);
+        history.push("/campaign?page=" + value.selected);
+        setSelectedPage(value.selected + 1);
         getCampaign({
             variables: {
                 page: value.selected + 1,
@@ -55,25 +63,45 @@ const ViewCompaign = (props) => {
         })
     }
 
+
     useEffect(() => {
         getCampaign({
             variables: {
-                page: 1,
+                page: path && parseInt(path.page) ? parseInt(path.page) : page,
                 limit: 10,
-                CampaignType: "",
+                CampaignType: campaignType,
                 sort: sort,
                 Createduser: createdUser,
                 CategoryId: parseInt(categoryId),
                 Boosted: ""
             }
-        }).then(res => {
+        }
+        ).then(res => {
             setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
             setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
             setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
             setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
         })
-
     }, [])
+
+    // useEffect(() => {
+    //     getCampaign({
+    //         variables: {
+    //             page: 1,
+    //             limit: 10,
+    //             CampaignType: "",
+    //             sort: sort,
+    //             Createduser: createdUser,
+    //             CategoryId: parseInt(categoryId),
+    //             Boosted: ""
+    //         }
+    //     }).then(res => {
+    //         setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+    //         setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+    //         setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
+    //         setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+    //     })
+    // }, [])
 
     // campaignPackage
     const campaignPackage = (value) => {
@@ -239,6 +267,7 @@ const ViewCompaign = (props) => {
     }
 
 
+
     const sortHandler = (value) => {
         switch (value) {
             case "": {
@@ -364,12 +393,6 @@ const ViewCompaign = (props) => {
         setSearch(resultData)
     }
 
-    // search from Date
-    const searchStartDate = (value) => {
-        let resultData = campaign ? campaign.filter(sin => sin.CreatedDate.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
-        setSearch(resultData)
-    }
-
     let token = cookie.load("token")
     const deleteSingleCampaign = (id) => {
         deleteCampaign({
@@ -398,12 +421,12 @@ const ViewCompaign = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Campaigns Record</h6>
-                            <div className="input-styling-0f-compaigns">
-                                <input placeholder="From Date" type="date"
+                            {/* <div className="input-styling-0f-compaigns"> */}
+                            {/* <input placeholder="From Date" type="date"
                                     onChange={event => searchStartDate(event.target.value)}
                                 />
-                                <input placeholder="To Date" type="date" />
-                            </div>
+                                <input placeholder="To Date" type="date" /> */}
+                            {/* </div> */}
                             <div>
                                 <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Name"
                                     onChange={event => {
@@ -518,12 +541,7 @@ const ViewCompaign = (props) => {
                                                 </div>
                                                 <div className="mrg-top-10">
                                                     <span onClick={() => history.push("/view-reports/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Reports</span>
-                                                    {/* <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span> */}
-                                                    {/* <span className="cursor-pointer view-btn-of-table ">Verify</span> */}
                                                 </div>
-                                                {/* <div className="mrg-top-10">
-                                                    <button className="view-btn-of-table fnt-poppins">Premium Compaign</button>
-                                                </div> */}
                                             </td>
                                         </tr>
                                     ) : ""}
@@ -544,7 +562,10 @@ const ViewCompaign = (props) => {
                                     onPageChange={handlePageClick}
                                     containerClassName={"digit-icons main"}
                                     subContainerClassName={"container column"}
-                                    activeClassName={"p-one"} />
+                                    activeClassName={"p-one"}
+                                    // forcePage={path &&  parseInt(path.selectedPage) ?   parseInt(path.selectedPage) : page}
+                                    forcePage={path && parseInt(path.page) ? parseInt(path.page) : page}
+                                />
                             </div>
                         </div>
                     </div>

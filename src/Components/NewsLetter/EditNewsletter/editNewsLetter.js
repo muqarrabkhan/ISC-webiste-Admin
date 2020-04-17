@@ -6,6 +6,10 @@ import { NEWSLETTERS_TEMPLATES } from '../../apollo/Mutations/getAllNewsletterTe
 import { SINGLE_NEWSLETTER } from '../../apollo/Quries/singleNewsletter'
 import Loader from '../../commonComponents/Loader/loader'
 import { UPDATE_NEWSLETTER } from '../../apollo/Mutations/updateNewsletter'
+import axios, { CancelToken } from "axios";
+import { apiPath } from '../../../config'
+import Style from '../AddNewsletter/style'
+import { standardDate } from '../../functions/index'
 
 const EditNewsletter = (props) => {
 
@@ -13,6 +17,7 @@ const EditNewsletter = (props) => {
     let id = match.params && match.params.id ? match.params.id : "";
     const [hideShow, setHideShow] = useState(false);
     const [hideShowDate, setHideShowDate] = useState(false);
+    const [searchHide, setSearchHide] = useState(false)
     const { loading, data } = useQuery(SINGLE_NEWSLETTER(id));
     const [getTemplates] = useMutation(NEWSLETTERS_TEMPLATES);
     const [updateNewsletter] = useMutation(UPDATE_NEWSLETTER);
@@ -21,7 +26,10 @@ const EditNewsletter = (props) => {
     const [interestData, setInterestData] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
     const [selectTemplate, setSelectTemplate] = useState("")
-    const [buttonText,setButtonText]=useState("Update")
+    const [buttonText, setButtonText] = useState("Update")
+    const [searchData, setSearchData] = useState();
+    const [searchName, setSearchName] = useState();
+    const [selectedCampaign, setSelectedCampaign] = useState();
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -30,44 +38,39 @@ const EditNewsletter = (props) => {
     }, [])
 
     useEffect(() => {
-        let duplicateSelectedIntrestedIds = data && data.singlenewsletter && data.singlenewsletter.interestedIds
-        let duplicateAllIntrestedData = data && data.getAllIntersts
-        duplicateSelectedIntrestedIds = duplicateSelectedIntrestedIds && duplicateSelectedIntrestedIds.map(single => {
-            let obj = duplicateAllIntrestedData.find(sin => sin.id == single.interestId)
-            duplicateAllIntrestedData = duplicateAllIntrestedData.filter(sin => sin.id != single.interestId)
-            return obj
-        })
-        setSelectedData(duplicateSelectedIntrestedIds)
-        setInterestData(duplicateAllIntrestedData)
+        // let duplicateSelectedIntrestedIds = data && data.singlenewsletter && data.singlenewsletter.interestedIds
+        // let duplicateAllIntrestedData = data && data.getAllIntersts
+        // duplicateSelectedIntrestedIds = duplicateSelectedIntrestedIds && duplicateSelectedIntrestedIds.map(single => {
+        //     let obj = duplicateAllIntrestedData.find(sin => sin.id == single.interestId)
+        //     duplicateAllIntrestedData = duplicateAllIntrestedData.filter(sin => sin.id != single.interestId)
+        //     return obj
+        // })
+        // setSelectedData(duplicateSelectedIntrestedIds)
+        setInterestData(data && data.getAllIntersts);
         setRenderData(data && data.singlenewsletter ? { ...data.singlenewsletter } : {})
         setSelectTemplate(data && data.singlenewsletter && data.singlenewsletter.Template);
+
     }, [data])
 
-    const selectData = (event) => {
-        if (event === "selectAll") {
-            let duplicateData = [...interestData]
-            setSelectedData([...duplicateData])
-            setInterestData([])
-        }
-        else {
-            let duplicateData = [...interestData]
-            let obj = duplicateData.find(single => single.id == event)
-            let duplicateSelected = [...selectedData]
-            duplicateSelected.push(obj)
-            duplicateData = duplicateData.filter(single => single.id != event)
-            setInterestData([...duplicateData]);
-            setSelectedData([...duplicateSelected])
-        }
-    }
-
-    const remove = (event) => {
-        let duplicateData = [...selectedData]
-        let obj = duplicateData.find(single => single.id == event)
-        let duplicateSelected = [...interestData]
-        duplicateSelected.push(obj)
-        duplicateData = duplicateData.filter(single => single.id != event)
-        setSelectedData([...duplicateData])
-        setInterestData([...duplicateSelected]);
+    let cancel;
+    const onChageKeyword = (value) => {
+        setSelectedCampaign(value.Id);
+        setSearchName(value.Name);
+        cancel && cancel();
+        axios.post(
+            apiPath + "/campainNameSearch",
+            {
+                Name: value
+            },
+            {
+                cancelToken: new CancelToken(function executor(c) {
+                    // An executor function receives a cancel function as a parameter
+                    cancel = c;
+                })
+            }
+        ).then(res => {
+            setSearchData(res && res.data && res.data.name)
+        })
     }
 
     const onSubmit = (event) => {
@@ -75,30 +78,35 @@ const EditNewsletter = (props) => {
         setButtonText("Upating...")
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
-        let interestIds = []
-        if (selectedData) {
-            selectedData.forEach(single => {
-                interestIds.push(single.id)
-            })
-        }
+        // let interestIds = []
+        // if (selectedData) {
+        //     selectedData.forEach(single => {
+        //         interestIds.push(single.id)
+        //     })
+        // }
         updateNewsletter({
             variables: {
                 Id: parseInt(id),
                 name: renderData.name,
                 support_mailsettings_id: parseInt(renderData.Template.Id),
-                datetime: renderData.datetime,
                 status: renderData.status,
+                datetime: renderData && renderData.status == "Schedule" ? renderData.datetime : null,
                 group: renderData.group,
                 cron_status: "pending",
                 date_updated: currentDate,
-                InterestedIds: [...interestIds]
+                interestId: renderData && renderData.group == "interestedusers" ? parseInt(renderData.interestId) : null,
+                campaign_id: renderData && renderData.group == "campaignusers" ? renderData.campaign_id : null
             }
         }).then(res => {
             setButtonText("Updated")
-        }).catch(error=>{
+        }).catch(error => {
             setButtonText("Update")
         })
     }
+
+    let date = renderData && renderData.datetime;
+    date = standardDate(date).standardDate
+
 
     return (
         <>
@@ -147,10 +155,10 @@ const EditNewsletter = (props) => {
                                                     <div>
                                                         <select className="mrg-top-10 fnt-poppins"
                                                             value={renderData && renderData.Template && renderData.Template.Id}
-                                                            onChange={event => {  
+                                                            onChange={event => {
                                                                 let duplicateData = { ...renderData.Template }
                                                                 duplicateData.Id = event.target.value
-                                                                setRenderData(duplicateData)
+                                                                setRenderData({ ...duplicateData })
                                                             }}>
                                                             <option>Select Template</option>
                                                             {templates && templates.length !== 0 && templates.map(single =>
@@ -174,7 +182,7 @@ const EditNewsletter = (props) => {
                                                     }
                                                     let duplicateData = { ...renderData }
                                                     duplicateData.status = "Schedule"
-                                                    setRenderData(duplicateData)
+                                                    setRenderData({ ...duplicateData })
                                                 }}
                                             />
                                             <label className="label-of-radio" for="radio1">
@@ -191,7 +199,7 @@ const EditNewsletter = (props) => {
                                                     setHideShowDate(false)
                                                     let duplicateData = { ...renderData }
                                                     duplicateData.status = "Draft"
-                                                    setRenderData(duplicateData)
+                                                    setRenderData({ ...duplicateData })
                                                 }}
                                             />
                                             <label className="label-of-radio" for="radio2">
@@ -211,12 +219,11 @@ const EditNewsletter = (props) => {
                                                     </div>
                                                     <div>
                                                         <input className="mrg-top-10 fnt-poppins" type="date" placeholder="Enter Short Description"
-                                                            value={renderData && renderData.datetime}
+                                                            value={standardDate(renderData && renderData.datetime).standardDate}
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.datetime = event.target.value
-                                                                setRenderData(duplicateData)
-
+                                                                setRenderData({ ...duplicateData })
                                                             }}
                                                         />
                                                     </div>
@@ -232,15 +239,22 @@ const EditNewsletter = (props) => {
                                             <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups"
                                                 checked={renderData && renderData.group == "campaignusers"}
                                                 onChange={event => {
-                                                    setHideShow(true)
-                                                    let duplicateData = { ...renderData }
-                                                    duplicateData.group = "campaignusers"
-                                                    setRenderData(duplicateData)
+                                                    if (searchHide == true) {
+                                                        setSearchHide(false)
+                                                        setHideShow(false)
+                                                    }
+                                                    else if (searchHide == false) {
+                                                        setSearchHide(true)
+                                                        setHideShow(false)
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.group = "campaignusers"
+                                                        setRenderData({ ...duplicateData })
+                                                    }
                                                 }}
                                             />
                                             <label className="label-of-radio" for="radio3">
                                                 <div className="checker"></div>
-                                                Campaing Users
+                                                    Campaing Users
                                             </label>
                                         </div>
                                     </div>
@@ -252,7 +266,7 @@ const EditNewsletter = (props) => {
                                                     setHideShow(false)
                                                     let duplicateData = { ...renderData }
                                                     duplicateData.group = "campaigncreators"
-                                                    setRenderData(duplicateData)
+                                                    setRenderData({ ...duplicateData })
                                                 }}
                                             />
                                             <label className="label-of-radio" for="radio4">
@@ -261,8 +275,27 @@ const EditNewsletter = (props) => {
                                             </label>
                                         </div>
                                     </div>
+                                    <div className="radios-of-group mrg-left-50">
+                                        <div className="radio-of-group">
+                                            <input type="radio" id="radio5" name="radio-of-groups"
+                                                checked={renderData && renderData.group == "interestedusers"}
+                                                onChange={event => {
+                                                    setHideShow(true)
+                                                    setSearchHide(false)
+                                                    let duplicateData = { ...renderData }
+                                                    duplicateData.group = "interestedusers"
+                                                    setRenderData({ ...duplicateData })
+                                                }}
+                                            />
+                                            <label className="label-of-radio" for="radio5">
+                                                <div className="checker"></div>
+                                                <div>Interested Users</div>
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     {/* Select Campaigns***/}
-                                    {renderData && renderData.group == "campaignusers" ?
+                                    {renderData && renderData.group == "interestedusers" ?
                                         < div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                             <div className="form-group">
                                                 <div>
@@ -270,17 +303,20 @@ const EditNewsletter = (props) => {
                                                 </div>
                                                 <div>
                                                     <select className="mrg-top-10 fnt-poppins" type="name"
-                                                        // value={renderData && renderData.interestedIds && renderData.interestedIds.interestId}
-                                                        onChange={event =>
-                                                            selectData(event.target.value)}>
-                                                        <option>select User Interest</option>
-                                                        <option value="selectAll">Select All</option>
+                                                        value={renderData && renderData.interestId}
+                                                        onChange={event => {
+                                                            let duplicateData = { ...renderData }
+                                                            duplicateData.interestId = event.target.value
+                                                            setRenderData({ ...duplicateData })
+                                                        }}
+                                                    >
+                                                        <option value="">select User Interest</option>
                                                         {interestData && interestData.map(single =>
                                                             <option value={single.id}>{single.name}</option>
                                                         )}
                                                     </select>
                                                 </div>
-                                                <div>
+                                                {/* <div>
                                                     {selectedData && selectedData.length !== 0 && selectedData.map(single =>
                                                         <ul className=" is-flex back-color back-color">
                                                             <li className="has-padding-left-10">{single.name}</li>
@@ -288,10 +324,43 @@ const EditNewsletter = (props) => {
                                                                 className="has-cursor-pointer has-margin-left-15 cancel-img" /></li>
                                                         </ul>
                                                     )}
+                                                </div> */}
+                                            </div>
+                                        </div>
+                                        : ""}
+                                    {/* search input field */}
+                                    {renderData && renderData.group == "campaignusers" ?
+                                        <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
+                                            <div className="form-group">
+                                                <div>
+                                                    <label className="mrg-top-20 fnt-poppins">Search Campaign</label>
+                                                </div>
+                                                <div>
+                                                    <input className="mrg-top-10 fnt-poppins" type="name"                                                                           
+                                                        value={renderData && renderData.campaign_id ? renderData && renderData.campaignName : ""}
+                                                        onChange={event => {
+                                                            let duplicateData = {...renderData}
+                                                            duplicateData.campaignName = event.target.value;
+                                                            setRenderData({...duplicateData})
+                                                            onChageKeyword(event.target.value);
+                                                        }}
+                                                    />
+                                                    <div>
+                                                        {searchData && searchData.length !== 0 ? searchData.map(single =>
+                                                            <ul className="has-cursor-pointer seaarch-list" onClick={() => {
+                                                                onChageKeyword(single);
+                                                                // onChageKeyword(single.Id);
+                                                                // selectSearchData(single.Name);
+                                                            }}>
+                                                                <li className="has-padding-left-10" value={single.Id}>{single.Name}</li>
+                                                            </ul>
+                                                        ) : ""}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         : ""}
+
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                         <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
@@ -301,6 +370,7 @@ const EditNewsletter = (props) => {
                             </div>
                         </div>
                     </form>
+                    <Style />
                 </div>
                 : <Loader />}
         </>

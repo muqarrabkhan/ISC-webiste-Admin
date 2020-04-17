@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Editlogo from '../../../assets/Images/edit.svg'
 import Deletelogo from '../../../assets/Images/delete.svg'
 import Style from './style'
+import { getParams } from '../../functions/index'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { PAGES } from '../../apollo/Mutations/pagesMutation'
@@ -10,7 +11,8 @@ import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
 
 const ViewPages = (props) => {
-    let { history } = props;
+    let { history, location } = props;
+    let path = getParams(location.search);
 
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(PAGES);
@@ -19,6 +21,7 @@ const ViewPages = (props) => {
     const [totalCustomers, setTotalCustomers] = useState([]);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState([]);
+    const [selected ,setSelected]=useState(0)
 
     const searchHandler = (value) => {
         let resultData = users ? users.filter(sin => sin.slug.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
@@ -27,6 +30,7 @@ const ViewPages = (props) => {
 
     const pageHandler = (value) => {
         setPage(value.selected + 1);
+
         allPages({
             variables: {
                 page: value.selected + 1,

@@ -6,6 +6,8 @@ import { CREATE_PRODUCT } from '../../apollo/Mutations/createProduct'
 import { productImages, campaignLogo_baseurl, productImage_BaseUrl } from '../../../config'
 import axios from 'axios'
 import { apiPath } from '../../../config'
+import ImgLoader from '../../../assets/Images/main-loader.gif'
+import Loader from '../../commonComponents/Loader/loader'
 
 const AddProduct = (props) => {
     let { history } = props
@@ -20,13 +22,16 @@ const AddProduct = (props) => {
     const [height, setHeight] = useState("");
     const [width, setWidth] = useState("");
     const [variation, setVariation] = useState([])
-    const [buttonText,setButtonText]=useState("Creating")
+    const [buttonText, setButtonText] = useState("Creating")
+    const [loader,setLoader]=useState(true)
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
 
     const uploadProductImage = (event) => {
+        setLoader(true);
         const file = event.target.files[0];
+        console.log("loader",loader)
         getBase64(file).then(
             data => {
                 let final = {
@@ -34,6 +39,7 @@ const AddProduct = (props) => {
                     imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
                 };
                 axios.post(apiPath + '/uploadProductMedia', final).then(res => {
+                    setLoader(false);
                     setImage(res.data.imageUrl);
                 });
             });
@@ -56,7 +62,7 @@ const AddProduct = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         setButtonText("Creating...");
-        let duplicateVariation=[...variation]
+        let duplicateVariation = [...variation]
         duplicateVariation.forEach(sin => {
             sin.value = sin.value.split(",");
         })
@@ -75,8 +81,8 @@ const AddProduct = (props) => {
                 variation: duplicateVariation ? JSON.stringify(duplicateVariation) : JSON.stringify([])
             }
         }).then(res => {
-            history.push("/edit-product/"+ res.data.createProduct.Id)
-        }).catch(error=>{
+            history.push("/edit-product/" + res.data.createProduct.Id)
+        }).catch(error => {
             setButtonText("Create")
         })
     }
@@ -102,10 +108,10 @@ const AddProduct = (props) => {
                                     {image ?
                                         <div className="store-front-image"
                                             style={{
-                                                backgroundImage: `url(${image ? productImage_BaseUrl + image : "no-image"})`,
+                                                backgroundImage: `url(${loader  ? productImage_BaseUrl + image : <img src={Loader} />})`,
                                                 height: "100px",
                                                 backgroundSize: "contain",
-                                                backgroundRepeat: "no-repeat",
+                                                width: "95px",
                                                 marginLeft: "6%"
                                             }}>
                                         </div>
@@ -277,7 +283,7 @@ const AddProduct = (props) => {
                                             <div>
                                                 <input className="mrg-top-10" type="slug"
                                                     value={single.name}
-                                                    onChange={event =>{
+                                                    onChange={event => {
                                                         let duplicateVariation = [...variation]
                                                         duplicateVariation[index].name = event.target.value
                                                         setVariation(duplicateVariation)

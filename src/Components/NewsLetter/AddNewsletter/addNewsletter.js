@@ -7,10 +7,10 @@ import { CREATE_NEWSLETTER } from '../../apollo/Mutations/createNewsletter'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { NEWSLETTERS_TEMPLATES } from '../../apollo/Mutations/getAllNewsletterTemplates'
 import { USER_INTEREST } from '../../apollo/Quries/userInterestType'
+import Style from './style'
 
 const AddNewsletter = (props) => {
     let { history } = props;
-
     const [addNewsletter] = useMutation(CREATE_NEWSLETTER);
     const [getTemplates] = useMutation(NEWSLETTERS_TEMPLATES);
     const { data } = useQuery(USER_INTEREST);
@@ -30,7 +30,8 @@ const AddNewsletter = (props) => {
     const [templateValidtion, setTemplateValidation] = useState(false);
     const [buttonText, setButtonText] = useState("Create");
     const [selectData, setSelectData] = useState();
-    const [searchData, setSearchData] = useState([]);
+    const [searchData, setSearchData] = useState();
+    const [searchName, setSearchName] = useState();
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -72,6 +73,8 @@ const AddNewsletter = (props) => {
 
     let cancel;
     const onChageKeyword = (value) => {
+        setSelectedData(value.Id);
+        setSearchName(value.Name);
         cancel && cancel();
         axios.post(
             apiPath + "/campainNameSearch",
@@ -91,11 +94,10 @@ const AddNewsletter = (props) => {
             })
     }
 
-    console.log("searchData", searchData )
-
     const onSubmit = (event) => {
         event.preventDefault();
         setButtonText("Creating...")
+        // let stDate = new Date(dateTime)
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
         if (!selectTemplate) {
@@ -109,9 +111,9 @@ const AddNewsletter = (props) => {
         }
         else {
             // let interestIds = []
-            // if (selectedData) {
-            //     selectedData.forEach(single => {
-            //         interestIds.push(single.id)
+            // if (searchData) {
+            //     searchData.forEach(single => {
+            //         interestIds.push(single.Id)
             //     })
             // }
             addNewsletter({
@@ -124,15 +126,18 @@ const AddNewsletter = (props) => {
                     cron_status: "pending",
                     date_created: currentDate,
                     interestId: parseInt(selectData),
-                    campaign_id: parseInt(searchData)
+                    campaign_id: parseInt(selectedData)
                 }
             }).then(res => {
-                // history.push("/edit-newsletter/" + res.data.createnewsletter.Id)
+                console.log("res",res.data.createnewsletter);
+                history.push("/edit-newsletter/" + res.data.createnewsletter.Id)
             }).catch(error => {
                 setButtonText("Create")
             })
         }
     }
+
+    console.log("date",dateTime)
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
@@ -346,11 +351,16 @@ const AddNewsletter = (props) => {
                                         </div>
                                         <div>
                                             <input className="mrg-top-10 fnt-poppins" type="name"
-                                                onChange={event => onChageKeyword(event.target.value)}
+                                                value={searchName}
+                                                onChange={event => {
+                                                    onChageKeyword(event.target.value);
+                                                }}
                                             />
                                             <div>
-                                                {searchData && searchData.length !== 0 ? searchData.map((single, index) =>
-                                                    <ul key={index}>
+                                                {searchData && searchData.length !== 0 ? searchData.map(single =>
+                                                    <ul className="has-cursor-pointer seaarch-list" onClick={() => {
+                                                        onChageKeyword(single);
+                                                    }}>
                                                         <li className="has-padding-left-10" value={single.Id}>{single.Name}</li>
                                                     </ul>
                                                 ) : ""}
@@ -369,6 +379,7 @@ const AddNewsletter = (props) => {
                     </div>
                 </div>
             </form>
+            <Style />
         </div>
     );
 }

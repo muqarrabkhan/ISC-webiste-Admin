@@ -42,6 +42,7 @@ const CreateCompaign = (props) => {
     const [buttonText , setButtonText] = useState("Create")
     const [selectOverlay , setSelectOverlay] = useState("")
     const [imageLoader , setImageLoader] = useState(false)
+    const [loader,setLoader]=useState(false)
 
     const addImage = () => {
         let duplicateImage = [...addMoreImage]
@@ -56,7 +57,6 @@ const CreateCompaign = (props) => {
             data => {
                 let final = {
                     imageFile: data,
-
                 };
                 axios.post(apiPath + "/bannerUpload", final).then(res => {
                     setBannerImage(res.data.imageUrl);
@@ -68,6 +68,7 @@ const CreateCompaign = (props) => {
 
 
     const uploadOverlayImage = (event) => {
+        setLoader(true);       
         const file = event.target.files[0];
         getBase64(file).then(
             data => {
@@ -235,9 +236,10 @@ const CreateCompaign = (props) => {
                             {selectOverlay ?
                                 <div className="store-front-image has-margin-top-10"
                                     style={{
-                                        backgroundImage: `url(${selectOverlay ? campaignLogo_baseurl + selectOverlay : ""})`,
+                                        backgroundImage: `url(${!loader ? campaignLogo_baseurl + selectOverlay : <p style={{color:"red"}}>Loading...</p>})`,
                                         height: "100px",
                                         backgroundSize: "contain",
+                                        width:"100px",
                                         backgroundRepeat: "no-repeat",
                                         marginLeft: "7%"
                                     }}>

@@ -10,7 +10,8 @@ mutation updatenewsletter(
     $group: String,
     $cron_status: String,
     $date_updated: DateTime,
-    $InterestedIds: [ID]
+    $interestId: Int,
+    $campaign_id: Int
     )
     {
         updatenewsletter(
@@ -22,7 +23,8 @@ mutation updatenewsletter(
             group:$group,
             cron_status:$cron_status,
             date_updated:$date_updated,
-            InterestedIds:$InterestedIds
+            interestId:$interestId,
+            campaign_id:$campaign_id
             )
             {
                 error
