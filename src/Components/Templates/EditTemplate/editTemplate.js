@@ -8,6 +8,7 @@ import { UPDATE_TEMPLATE } from '../../apollo/Mutations/updateTemplate'
 import Loader from '../../commonComponents/Loader/loader'
 import JoditEditor from "jodit-react";
 import { getParams } from '../../functions'
+import ContentLoader from 'react-content-loader'
 
 const EditTemplate = (props) => {
     let { history, match, location } = props;
@@ -24,7 +25,7 @@ const EditTemplate = (props) => {
     const [buttonText, setButtontext] = useState("Update");
     const [templateVariables, setTemplatevariables] = useState([]);
     const [category, setCategory] = useState("");
-    const [joditvalue,setJoditValue]=useState("");
+    const [joditvalue, setJoditValue] = useState("");
 
     const updateUser = (event) => {
         event.preventDefault();
@@ -398,7 +399,30 @@ const EditTemplate = (props) => {
                         </div>
                     </form>
                 </div>
-                : <Loader />
+                :
+                <ContentLoader
+                    speed={2}
+                    viewBox="100 -30 750 1000"
+                    backgroundColor="#f3f3f3"
+                    foregroundColor="#ecebeb"
+                >
+                    <rect x="207" y="11" rx="0" ry="0" width="499" height="19" />
+                    <rect x="243" y="63" rx="5" ry="5" width="205" height="21" />
+                    <rect x="483" y="63" rx="5" ry="5" width="204" height="21" />
+                    <rect x="244" y="114" rx="5" ry="5" width="203" height="21" />
+                    <rect x="243" y="168" rx="5" ry="5" width="205" height="21" />
+                    <rect x="484" y="168" rx="5" ry="5" width="204" height="21" />
+                    <rect x="246" y="286" rx="5" ry="5" width="443" height="82" />
+                    <circle cx="261" cy="220" r="13" />
+                    <circle cx="261" cy="261" r="13" />
+                    <rect x="286" y="216" rx="0" ry="0" width="45" height="7" />
+                    <rect x="286" y="258" rx="0" ry="0" width="45" height="6" />
+                    <rect x="206" y="13" rx="0" ry="0" width="21" height="438" />
+                    <rect x="207" y="432" rx="0" ry="0" width="517" height="24" />
+                    <rect x="703" y="11" rx="0" ry="0" width="22" height="429" />
+                    <rect x="248" y="388" rx="6" ry="6" width="82" height="25" />
+                    <rect x="341" y="388" rx="6" ry="6" width="82" height="25" />
+                </ContentLoader>
             }
         </>
     );

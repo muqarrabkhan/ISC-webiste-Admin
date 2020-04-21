@@ -4,8 +4,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { SINGLE_COUPON } from '../../apollo/Quries/singleCoupan'
 import { couponUrl } from '../../../config'
 import { EDIT_COUPON } from '../../apollo/Mutations/updateCoupon'
-import Loader from '../../commonComponents/Loader/loader'
 import { getParams } from '../../functions'
+import ContentLoader from 'react-content-loader'
 
 const EditCoupan = (props) => {
     let { history, match, location } = props;
@@ -15,11 +15,21 @@ const EditCoupan = (props) => {
     const [renderData, setRenderData] = useState("")
     const [updateCoupan] = useMutation(EDIT_COUPON)
     const [btnText, setBtnText] = useState("Update");
-
+    const [code, setCode] = useState("");
 
     useEffect(() => {
         setRenderData(data && data.singleCouponById ? { ...data.singleCouponById } : {})
+        setCode(data && data.singleCouponById && data.singleCouponById.Coupon_code ? data.singleCouponById.Coupon_code : "");
     }, [data])
+
+    const coupanCodeData = (value) => {
+        setCode(value);
+        let duplicateData = { ...renderData }
+        duplicateData.Coupon_code = value
+        setRenderData({ ...duplicateData });
+    }
+
+    console.log("data",code.replace(/ /g, ''))
 
     const update = (event) => {
         event.preventDefault();
@@ -27,7 +37,7 @@ const EditCoupan = (props) => {
         updateCoupan({
             variables: {
                 Id: parseInt(id),
-                Coupon_code: renderData.Coupon_code,
+                Coupon_code: code.replace(/ /g, ''),
                 Status_coupon: renderData.Status_coupon,
                 Discount_percentage: parseInt(renderData.Discount_percentage)
             }
@@ -38,7 +48,7 @@ const EditCoupan = (props) => {
         })
     }
 
-    let removeSpace = renderData && renderData.Coupon_code;
+    // let removeSpace = renderData && renderData.Coupon_code;
 
     return (
         <>
@@ -66,11 +76,9 @@ const EditCoupan = (props) => {
                                         <div className="mrg-top-10">
                                             <input className="inputs-of-admistrator"
                                                 required
-                                                value={renderData.Coupon_code}
+                                                value={code ? code : ""}
                                                 onChange={event => {
-                                                    let duplicateData = { ...renderData }
-                                                    duplicateData.Coupon_code = event.target.value
-                                                    setRenderData({ ...duplicateData });
+                                                    coupanCodeData(event.target.value);
                                                 }}
                                             />
                                         </div>
@@ -119,7 +127,7 @@ const EditCoupan = (props) => {
                                             <label>Page Url Link With Coupon*</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" value={couponUrl + removeSpace} disabled />
+                                            <input className="inputs-of-admistrator" value={couponUrl + code.replace(/ /g, '')} disabled />
                                         </div>
                                         {/* <button className="Save-btn-of-form Save-btns-of-forms-responsive mrg-top-10 fnt-poppins">Link Copy</button> */}
                                     </div>
@@ -134,7 +142,30 @@ const EditCoupan = (props) => {
                         </div>
                     </form>
                 </div>
-                : <Loader />
+                :
+                <ContentLoader
+                    speed={2}
+                    viewBox="100 -30 750 1000"
+                    backgroundColor="#f3f3f3"
+                    foregroundColor="#ecebeb"
+                >
+                    <rect x="207" y="11" rx="0" ry="0" width="499" height="19" />
+                    <rect x="243" y="63" rx="5" ry="5" width="205" height="21" />
+                    <rect x="483" y="63" rx="5" ry="5" width="204" height="21" />
+                    <rect x="244" y="114" rx="5" ry="5" width="203" height="21" />
+                    <rect x="243" y="168" rx="5" ry="5" width="205" height="21" />
+                    <rect x="484" y="168" rx="5" ry="5" width="204" height="21" />
+                    <rect x="246" y="286" rx="5" ry="5" width="443" height="82" />
+                    <circle cx="261" cy="220" r="13" />
+                    <circle cx="261" cy="261" r="13" />
+                    <rect x="286" y="216" rx="0" ry="0" width="45" height="7" />
+                    <rect x="286" y="258" rx="0" ry="0" width="45" height="6" />
+                    <rect x="206" y="13" rx="0" ry="0" width="21" height="438" />
+                    <rect x="207" y="432" rx="0" ry="0" width="517" height="24" />
+                    <rect x="703" y="11" rx="0" ry="0" width="22" height="429" />
+                    <rect x="248" y="388" rx="6" ry="6" width="82" height="25" />
+                    <rect x="341" y="388" rx="6" ry="6" width="82" height="25" />
+                </ContentLoader>
             }
         </>
     );

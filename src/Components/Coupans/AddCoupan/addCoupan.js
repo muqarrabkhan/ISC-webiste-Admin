@@ -18,7 +18,7 @@ const AddCoupan = (props) => {
         setBtnText("Creating...")
         createCoupan({
             variables: {
-                Coupon_code: couponCode,
+                Coupon_code: couponCode.replace(/ /g, ''),
                 Status_coupon: "Enable",
                 Discount_percentage: parseInt(discount),
                 User_id: 614799

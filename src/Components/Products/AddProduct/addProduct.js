@@ -107,15 +107,7 @@ const AddProduct = (props) => {
                                     {image ?
                                         <div className=""
                                             style={{
-                                                backgroundImage: `url(${image !== "Loading" ? productImage_BaseUrl + image : <img
-                                                    src={require('../../../assets/Images/main-loader.gif')}
-                                                    style={{
-                                                        height: "100px",
-                                                        width: "130px",
-                                                        backgroundRepeat: "no-repeat",
-                                                        marginLeft: "5%"
-                                                    }}
-                                                />})`,
+                                                backgroundImage: `url(${image !== "Loading" ? productImage_BaseUrl + image : require('../../../assets/Images/main-loader.gif')})`,
                                                 height: "100px",
                                                 backgroundSize: "contain",
                                                 width: "95px",

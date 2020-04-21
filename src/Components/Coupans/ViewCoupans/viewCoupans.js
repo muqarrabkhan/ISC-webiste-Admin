@@ -10,6 +10,7 @@ import Loader from '../../commonComponents/Loader/loader'
 import { DELETE_COUPON } from '../../apollo/Mutations/deleteCoupon'
 import { getParams } from '../../functions/index'
 import ContentLoader from 'react-content-loader'
+import { couponUrl } from '../../../config'
 
 const ViewCoupan = (props) => {
     let { history, location } = props;
@@ -108,7 +109,7 @@ const ViewCoupan = (props) => {
                                         <tr className="table-row-data-of-body fnt-poppins">
                                             <td>{single.Coupon_code ? single.Coupon_code : "-"}</td>
                                             <td>{single.Discount_percentage ? single.Discount_percentage + " " + "%" : "-"}</td>
-                                            <td>{single.Page_link ? single.Page_link : "-"}</td>
+                                            <td>{single.Page_link ? single.Page_link : couponUrl + single.Coupon_code}</td>
                                             <td>{single.Status_coupon ? single.Status_coupon : "-"}</td>
                                             <td>{single.TotalMonthlySubscriptions}</td>
                                             <td>{single.TotalAnnuallySubscriptions}</td>
