@@ -5,7 +5,7 @@ mutation updatenewsletter(
     $Id: Int,
     $name: String,
     $support_mailsettings_id: Int,
-    $datetime: String,
+    $datetime: DateTime,
     $status: String,
     $group: String,
     $cron_status: String,

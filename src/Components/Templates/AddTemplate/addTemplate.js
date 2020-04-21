@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
-import CKEditor from "react-ckeditor-component";
 import JoditEditor from "jodit-react";
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_TEMPLATE } from '../../apollo/Mutations/createTemplate'
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
-
+import { getParams } from '../../functions'
 
 const AddTemplate = (props) => {
-    let { history } = props;
+    let { history, location } = props;
+    let path = getParams(location.search);
     const [addTemplate] = useMutation(CREATE_TEMPLATE);
     const [title, setTitle] = useState("");
     const [subject, setSubject] = useState("");
@@ -26,10 +26,6 @@ const AddTemplate = (props) => {
     const [btnText, setBtnText] = useState("Create");
     const [templateVariables, setTemplatevariables] = useState([]);
 
-    const editor = useRef(null)
-    const config = {
-        readonly: false
-    }
     const [content, setContent] = useState("");
 
     useEffect(() => {
@@ -74,7 +70,7 @@ const AddTemplate = (props) => {
                 }
             }).then(res => {
                 setBtnText("Created");
-                history.push("/edit-tamplates/" + res.data.createTemplate.Id)
+                history.push("/edit-tempelates/" + res.data.createTemplate.Id)
             }).catch(error => {
                 setBtnText("Create");
             })
@@ -145,7 +141,7 @@ const AddTemplate = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Templates</h6>
-                <button onClick={() => history.push("/tamplates")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/tempelates?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={event => onSubmit(event)}>
@@ -231,7 +227,7 @@ const AddTemplate = (props) => {
                                 </div>
                                 <div className="form-group has-margin-left-50">
                                     <div>
-                                        <label>Select Category</label>
+                                        <label>Select Category*</label>
                                     </div>
                                     <div>
                                         <select className="mrg-top-10 fnt-poppins" type="keyword"
@@ -265,7 +261,7 @@ const AddTemplate = (props) => {
                             {/* radioButtons */}
                             <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
-                                    <label>Select Type</label>
+                                    <label>Select Type*</label>
                                     <input className="mrg-top-40" type="radio" id="radio1" name="radio"
                                         value="Website"
                                         onChange={event => {
@@ -342,9 +338,6 @@ const AddTemplate = (props) => {
                                         <input disabled className="redonly-input mrg-top-10  fnt-poppins"
                                             value={templateVariables}
                                             type="keyword" readonly />
-                                        {/* <input disabled className="redonly-input mrg-top-10  fnt-poppins"
-                                            value="[campaign_name] [campaign_link] [creator_name] [creator_email] [supporters] [unsub_newsletter_link] [campaign_premium_link]"
-                                            type="keyword" placeholder="Enter Keyword" readonly /> */}
                                     </div>
                                 </div>
                             </div>
@@ -352,21 +345,22 @@ const AddTemplate = (props) => {
                             <div className=" ck-editor-of-compaign mrg-left-50 mrg-top-20">
                                 <div className="form-group">
                                     <div>
-                                        <label>Mail Content*</label>
+                                        <label>Mail Content</label>
                                     </div>
                                     <div className="ck-editor-of-compaign-border mrg-top-10">
-                                        <JoditEditor className="form-control" placeholder="Enter Description" rows="5"
-                                            ref={editor}
-                                            value={content ? content : ""}
-                                            config={config}
-                                            tabIndex={1}
-                                            onBlur={newContent => { setContent(newContent) }}
+                                        <JoditEditor className="form-control" placeholder="Enter Description" rows="5"                                            
+                                            toolbarClassName="toolbarClassName"
+                                            wrapperClassName="wrapperClassName"
+                                            editorClassName="editorClassName"
+                                            onChange={setContent}
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/tempelates?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit" >{btnText}</button>
                             </div>
                         </div>

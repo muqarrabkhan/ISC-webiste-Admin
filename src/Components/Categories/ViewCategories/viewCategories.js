@@ -7,18 +7,19 @@ import { useMutation } from '@apollo/react-hooks';
 import { CATEGORIES } from '../../apollo/Mutations/categoriesMutation'
 import { DELETE_CATEGORY } from '../../apollo/Mutations/deleteCategory'
 import ReactPaginate from "react-paginate";
-import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions/index'
+import ContentLoader from 'react-content-loader'
 
 const ViewCategories = (props) => {
-    let { history } = props;
-
+    let { history, location } = props;
+    let path = getParams(location.search);
     const [categories] = useMutation(CATEGORIES);
     const [deleteCategory] = useMutation(DELETE_CATEGORY);
     const [data, setData] = useState([]);
     const [totalCategories, setTotalCategories] = useState("");
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
-    const [show, setShow] = useState("");
+    // const [show, setShow] = useState("");
     const [search, setSearch] = useState([]);
 
     const searchHandler = (value) => {
@@ -27,11 +28,12 @@ const ViewCategories = (props) => {
     }
 
     const handlePageClick = (value) => {
-        setPage(value.selected + 1);
+        setPage(parseInt(value.selected) + 1);
+        history.push("/category?page=" + (parseInt(value.selected) + 1));
         categories({
             variables: {
                 limit: 10,
-                page: value.selected + 1
+                page: parseInt(value.selected) + 1,
             }
         })
             .then(res => {
@@ -46,7 +48,7 @@ const ViewCategories = (props) => {
         categories({
             variables: {
                 limit: 10,
-                page: 1
+                page: path && parseInt(path.page) ? parseInt(path.page) : page,
             }
         }).then(res => {
             setData(res && res.data.getCategories && res.data.getCategories.Categories ? res.data.getCategories.Categories : []);
@@ -114,6 +116,10 @@ const ViewCategories = (props) => {
                                                 </td>
                                             </tr>
                                         )}
+                                        <tr className="table-footer">
+                                            <td colSpan={2}>Total</td>
+                                            <td>{totalCategories}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -129,12 +135,74 @@ const ViewCategories = (props) => {
                                 onPageChange={handlePageClick}
                                 containerClassName={"digit-icons main"}
                                 subContainerClassName={"container column"}
-                                activeClassName={"p-one"} />
+                                activeClassName={"p-one"}
+                                forcePage={path && parseInt(path.page) ? (parseInt(path.page) - 1) : 0}
+                            />
                         </div>
                     </div>
                     <Style />
                 </div>
-                : <Loader />}
+                :
+                <ContentLoader
+                    speed={2}
+                    viewBox="0 0 1000 550"
+                    backgroundColor="#eaeced"
+                    foregroundColor="#ffffff"
+                    {...props}
+                >
+                    <rect x="51" y="45" rx="3" ry="3" width="906" height="17" />
+                    <circle cx="879" cy="123" r="11" />
+                    <circle cx="914" cy="123" r="11" />
+                    <rect x="104" y="115" rx="3" ry="3" width="141" height="15" />
+                    <rect x="305" y="114" rx="3" ry="3" width="299" height="15" />
+                    <rect x="661" y="114" rx="3" ry="3" width="141" height="15" />
+                    <rect x="55" y="155" rx="3" ry="3" width="897" height="2" />
+                    <circle cx="880" cy="184" r="11" />
+                    <circle cx="915" cy="184" r="11" />
+                    <rect x="105" y="176" rx="3" ry="3" width="141" height="15" />
+                    <rect x="306" y="175" rx="3" ry="3" width="299" height="15" />
+                    <rect x="662" y="175" rx="3" ry="3" width="141" height="15" />
+                    <rect x="56" y="216" rx="3" ry="3" width="897" height="2" />
+                    <circle cx="881" cy="242" r="11" />
+                    <circle cx="916" cy="242" r="11" />
+                    <rect x="106" y="234" rx="3" ry="3" width="141" height="15" />
+                    <rect x="307" y="233" rx="3" ry="3" width="299" height="15" />
+                    <rect x="663" y="233" rx="3" ry="3" width="141" height="15" />
+                    <rect x="57" y="274" rx="3" ry="3" width="897" height="2" />
+                    <circle cx="882" cy="303" r="11" />
+                    <circle cx="917" cy="303" r="11" />
+                    <rect x="107" y="295" rx="3" ry="3" width="141" height="15" />
+                    <rect x="308" y="294" rx="3" ry="3" width="299" height="15" />
+                    <rect x="664" y="294" rx="3" ry="3" width="141" height="15" />
+                    <rect x="58" y="335" rx="3" ry="3" width="897" height="2" />
+                    <circle cx="881" cy="363" r="11" />
+                    <circle cx="916" cy="363" r="11" />
+                    <rect x="106" y="355" rx="3" ry="3" width="141" height="15" />
+                    <rect x="307" y="354" rx="3" ry="3" width="299" height="15" />
+                    <rect x="663" y="354" rx="3" ry="3" width="141" height="15" />
+                    <rect x="57" y="395" rx="3" ry="3" width="897" height="2" />
+                    <circle cx="882" cy="424" r="11" />
+                    <circle cx="917" cy="424" r="11" />
+                    <rect x="107" y="416" rx="3" ry="3" width="141" height="15" />
+                    <rect x="308" y="415" rx="3" ry="3" width="299" height="15" />
+                    <rect x="664" y="415" rx="3" ry="3" width="141" height="15" />
+                    <rect x="55" y="453" rx="3" ry="3" width="897" height="2" />
+                    <rect x="51" y="49" rx="3" ry="3" width="2" height="465" />
+                    <rect x="955" y="49" rx="3" ry="3" width="2" height="465" />
+                    <circle cx="882" cy="484" r="11" />
+                    <circle cx="917" cy="484" r="11" />
+                    <rect x="107" y="476" rx="3" ry="3" width="141" height="15" />
+                    <rect x="308" y="475" rx="3" ry="3" width="299" height="15" />
+                    <rect x="664" y="475" rx="3" ry="3" width="141" height="15" />
+                    <rect x="55" y="513" rx="3" ry="3" width="897" height="2" />
+                    <rect x="52" y="80" rx="3" ry="3" width="906" height="17" />
+                    <rect x="53" y="57" rx="3" ry="3" width="68" height="33" />
+                    <rect x="222" y="54" rx="3" ry="3" width="149" height="33" />
+                    <rect x="544" y="55" rx="3" ry="3" width="137" height="33" />
+                    <rect x="782" y="56" rx="3" ry="3" width="72" height="33" />
+                    <rect x="933" y="54" rx="3" ry="3" width="24" height="33" />
+                </ContentLoader>
+            }
         </>
     );
 }

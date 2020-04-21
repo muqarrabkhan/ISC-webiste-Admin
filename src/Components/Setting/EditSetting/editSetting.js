@@ -4,15 +4,16 @@ import { SINGLE_SETTING } from '../../apollo/Quries/singleSetting'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_SETTING } from '../../apollo/Mutations/updateSetting'
 import Loader from '../../commonComponents/Loader/loader'
-import loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const EditSetting = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
     let ID = match.params && match.params.id ? match.params.id : "";
+    let path = getParams(location.search);
     const { loading, data } = useQuery(SINGLE_SETTING(ID));
     const [editData] = useMutation(UPDATE_SETTING);
     const [renderData, setRenderData] = useState("");
-    const [buttonText,setButtonText]=useState("Update")
+    const [buttonText, setButtonText] = useState("Update")
 
     const updateUser = (event) => {
         event.preventDefault();
@@ -27,7 +28,7 @@ const EditSetting = (props) => {
             }
         }).then(res => {
             setButtonText("Updated")
-        }).catch(error=>{
+        }).catch(error => {
             setButtonText("Update")
         })
     }
@@ -43,7 +44,7 @@ const EditSetting = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Update General Setting</h6>
-                        <button onClick={() => history.push("/setting")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/setting?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => updateUser(event)}>
@@ -127,8 +128,10 @@ const EditSetting = (props) => {
                                     </div>
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                            <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/setting?page=" + path)}
+                                        >Cancel</span>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>
@@ -136,8 +139,8 @@ const EditSetting = (props) => {
                     </form>
                 </div>
                 : <Loader />
-                }
-                </>
-            );
-        }
+            }
+        </>
+    );
+}
 export default withRouter(EditSetting);

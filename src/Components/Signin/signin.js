@@ -10,7 +10,7 @@ import { validateEmail } from '../commonComponents/utils'
 
 const Signin = (props) => {
 
-    let { history, user, dispatch } = props;
+    let { history } = props;
     const [email, setEmail] = useState("");
     const [emailValidator, setEmailValidator] = useState(false);
     const [password, setPassword] = useState("");
@@ -98,7 +98,7 @@ const Signin = (props) => {
                             <div className="checkbox-data fnt-poppins has-margin-left-10">Remember me</div>
                         </div>
                         <div className="btns-of-add has-margin-left-40 has-margin-top-30 fnt-poppins">
-                            <button className="cancel-btn-of-sigin fnt-poppins">Cancel</button>
+                            <span className="cancel-btn-of-sigin span-btn-style fnt-poppins has-cursor-pointer">Cancel</span>
                             <button className="Save-btn-of-signin has-margin-left-20 fnt-poppins has-cursor-pointer" type="submit">{btnText}</button>
                         </div>
                     </form>

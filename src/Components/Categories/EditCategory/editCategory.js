@@ -4,14 +4,16 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import { EDIT_CATEGORY } from '../../apollo/Mutations/updateCategory'
 import { SINGLE_CATEGORY } from '../../apollo/Quries/singleCategoryQurie'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const EidtCategory = (props) => {
-    let { history, match } = props;
+    let { history, match , location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_CATEGORY(id))
     const [editCategory] = useMutation(EDIT_CATEGORY);
     const [renderData, setRenderData] = useState();
-    const [buttonText,setButtonText]=useState("Update");
+    const [buttonText, setButtonText] = useState("Update");
 
     const editData = (event) => {
         event.preventDefault();
@@ -38,7 +40,7 @@ const EidtCategory = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit Category</h6>
-                        <button onClick={() => history.push("/category")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/category?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => editData(event)}>
@@ -84,7 +86,9 @@ const EidtCategory = (props) => {
                                     </div>
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/category?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

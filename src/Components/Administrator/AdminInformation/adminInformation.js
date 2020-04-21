@@ -1,25 +1,27 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Style from './style'
 import { withRouter } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks'
 import { SINGLE_ADMIN } from '../../apollo/Quries/singleAdmin'
 import { standardDate } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
-import publicIp from 'public-ip'
+import { getParams } from '../../functions'
+
 const AdminInformation = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_ADMIN(id))
     const [ipAddress, setIpAddress] = useState("");
     console.log(data && data)
     let date = data && data.singleadminbyId && data.singleadminbyId.CreatedDate;
     date = standardDate(date).standardDate;
-    let getDate = data && data.singleadminbyId && data.singleadminbyId.Activity&& data.singleadminbyId.Activity.ModifiedDate;
-getDate = standardDate(date).standardDate;
-const publicIp = require('public-ip');
-(async () => {
-    setIpAddress(await publicIp.v4());
-})();
+    let getDate = data && data.singleadminbyId && data.singleadminbyId.Activity && data.singleadminbyId.Activity.ModifiedDate;
+    getDate = standardDate(date).standardDate;
+    const publicIp = require('public-ip');
+    (async () => {
+        setIpAddress(await publicIp.v4());
+    })();
     return (
         <>
             {!loading ?
@@ -27,7 +29,7 @@ const publicIp = require('public-ip');
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Administrator</h6>
-                        <button onClick={() => history.push("/administrator")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/administrator?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <div className="container Table-of-administrator">
@@ -96,7 +98,7 @@ const publicIp = require('public-ip');
                                     <tr className="table-row-of-head fnt-poppins">
                                         <th>Modified By</th>
                                         <th>Date</th>
-                                       
+
                                         <th className="bodr-of-none">IP Address</th>
                                     </tr>
                                 </thead>
@@ -107,7 +109,7 @@ const publicIp = require('public-ip');
                                             <td>{getDate}</td>
                                             <td>{ipAddress}</td>
                                         </tr>
-                                         ) : "NO DATA"}
+                                    ) : "NO DATA"}
                                 </tbody>
                             </table>
                         </div>

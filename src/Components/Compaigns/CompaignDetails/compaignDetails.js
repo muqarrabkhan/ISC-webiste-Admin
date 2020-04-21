@@ -6,9 +6,11 @@ import { useQuery } from '@apollo/react-hooks';
 import { campaignBanner_baseurl, overlays } from '../../../config'
 import { standardDate } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const CompaignDetails = (props) => {
-    let { history, match } = props;
+    let { history, match , location} = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
@@ -32,7 +34,7 @@ const CompaignDetails = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Campaign Details</h6>
-                        <button onClick={() => history.push("/campaign")} className="cursor-pointer cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/campaign?page=" + path)} className="cursor-pointer cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form>
@@ -56,7 +58,7 @@ const CompaignDetails = (props) => {
                                                                 backgroundSize: "contain",
                                                                 backgroundRepeat: "no-repeat",
                                                                 marginLeft: "7%",
-                                                                width:"100px"
+                                                                width: "100px"
                                                             }}>
                                                         </div>
 
@@ -321,7 +323,9 @@ const CompaignDetails = (props) => {
                                     {/* file chosen button end here */}
                                     {/* Cancel and Save button */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <button className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/campaign?page=" + path)}
+                                        >Cancel</button>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins">Save</button>
                                     </div>
                                 </div>

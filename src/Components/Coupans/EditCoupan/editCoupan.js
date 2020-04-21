@@ -5,14 +5,17 @@ import { SINGLE_COUPON } from '../../apollo/Quries/singleCoupan'
 import { couponUrl } from '../../../config'
 import { EDIT_COUPON } from '../../apollo/Mutations/updateCoupon'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const EditCoupan = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_COUPON(id))
     const [renderData, setRenderData] = useState("")
     const [updateCoupan] = useMutation(EDIT_COUPON)
-    const [btnText, setBtnText] = useState("Update")
+    const [btnText, setBtnText] = useState("Update");
+
 
     useEffect(() => {
         setRenderData(data && data.singleCouponById ? { ...data.singleCouponById } : {})
@@ -35,6 +38,8 @@ const EditCoupan = (props) => {
         })
     }
 
+    let removeSpace = renderData && renderData.Coupon_code;
+
     return (
         <>
             {!loading ?
@@ -42,7 +47,7 @@ const EditCoupan = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Update Coupon</h6>
-                        <button onClick={() => history.push("/coupans")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/coupans?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => update(event)}>
@@ -114,12 +119,14 @@ const EditCoupan = (props) => {
                                             <label>Page Url Link With Coupon*</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" value={couponUrl + renderData.Coupon_code} disabled />
+                                            <input className="inputs-of-admistrator" value={couponUrl + removeSpace} disabled />
                                         </div>
                                         {/* <button className="Save-btn-of-form Save-btns-of-forms-responsive mrg-top-10 fnt-poppins">Link Copy</button> */}
                                     </div>
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/coupans?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                                     </div>
                                 </div>

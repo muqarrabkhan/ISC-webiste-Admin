@@ -5,9 +5,11 @@ import { CREATE_WEB_PAGE } from '../../apollo/Mutations/createWebPageMutation'
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
 import JoditEditor from "jodit-react";
+import { getParams } from '../../functions/index'
 
 const AddPage = (props) => {
-    let { history } = props;
+    let { history, location } = props;
+    let path = getParams(location.search);
     const editor = useRef(null)
     const config = {
         readonly: false
@@ -53,7 +55,7 @@ const AddPage = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Page</h6>
-                <button onClick={() => history.push("/pages")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/pages?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={(event) => addPage(event)}>
@@ -107,21 +109,22 @@ const AddPage = (props) => {
                             {/*Page Content**/}
                             <div className="mrg-left-60 mrg-top-20 fnt-poppins ck-Editor">
                                 <div>
-                                    <label>Page Content</label>
+                                    <label>Page Content*</label>
                                 </div>
                                 <div className="mrg-top-10">
                                     <JoditEditor className="form-control" placeholder="Enter Description" rows="5"
-                                        ref={editor}
-                                        value={content ? content : ""}
-                                        config={config}
-                                        tabIndex={1}
-                                        onBlur={newContent => { setContent(newContent) }}
+                                        toolbarClassName="toolbarClassName"
+                                        wrapperClassName="wrapperClassName"
+                                        editorClassName="editorClassName"
+                                        onChange={setContent}
                                     />
                                 </div>
                             </div>
                             {/*buttons*/}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/pages?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                             </div>
                         </div>

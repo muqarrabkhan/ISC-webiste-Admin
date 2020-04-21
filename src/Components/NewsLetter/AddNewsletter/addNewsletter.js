@@ -8,9 +8,11 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import { NEWSLETTERS_TEMPLATES } from '../../apollo/Mutations/getAllNewsletterTemplates'
 import { USER_INTEREST } from '../../apollo/Quries/userInterestType'
 import Style from './style'
+import { getParams } from '../../functions/index'
 
 const AddNewsletter = (props) => {
-    let { history } = props;
+    let { history, location } = props;
+    let path = getParams(location.search);
     const [addNewsletter] = useMutation(CREATE_NEWSLETTER);
     const [getTemplates] = useMutation(NEWSLETTERS_TEMPLATES);
     const { data } = useQuery(USER_INTEREST);
@@ -129,7 +131,7 @@ const AddNewsletter = (props) => {
                     campaign_id: parseInt(selectedData)
                 }
             }).then(res => {
-                console.log("res",res.data.createnewsletter);
+                console.log("res", res.data.createnewsletter);
                 history.push("/edit-newsletter/" + res.data.createnewsletter.Id)
             }).catch(error => {
                 setButtonText("Create")
@@ -137,14 +139,14 @@ const AddNewsletter = (props) => {
         }
     }
 
-    console.log("date",dateTime)
+    console.log("date", dateTime)
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add NewsLetter</h6>
-                <button onClick={() => history.push("/newsletter")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/newsletter?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={event => onSubmit(event)}>
@@ -202,7 +204,7 @@ const AddNewsletter = (props) => {
                             {/* radioButtons */}
                             <div className="radios mrg-top-20 mrg-left-50">
                                 <div className="radio">
-                                    <label>Select</label>
+                                    <label>Select*</label>
                                     <input className="mrg-top-40" type="radio" id="radio1" name="radio"
                                         value="Schedule"
                                         onChange={event => {
@@ -241,7 +243,7 @@ const AddNewsletter = (props) => {
                                 <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 mrg-top-20 fnt-poppins">
                                     <div className="form-group fnt-poppins">
                                         <div>
-                                            <label>Set Newsletter Date And Time (MM/DD/YYYY HH:mm:ss)</label>
+                                            <label>Set Newsletter Date And Time (MM/DD/YYYY HH:mm:ss)*</label>
                                         </div>
                                         <div>
                                             <input className="mrg-top-10 fnt-poppins" type="date"
@@ -319,7 +321,7 @@ const AddNewsletter = (props) => {
                                 <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                     <div className="form-group">
                                         <div>
-                                            <label className="mrg-top-20 fnt-poppins">Select User Interest</label>
+                                            <label className="mrg-top-20 fnt-poppins">Select User Interest*</label>
                                         </div>
                                         <div>
                                             <select className="mrg-top-10 fnt-poppins" type="name"
@@ -347,7 +349,7 @@ const AddNewsletter = (props) => {
                                 <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                     <div className="form-group">
                                         <div>
-                                            <label className="mrg-top-20 fnt-poppins">Search Campaign</label>
+                                            <label className="mrg-top-20 fnt-poppins">Search Campaign*</label>
                                         </div>
                                         <div>
                                             <input className="mrg-top-10 fnt-poppins" type="name"
@@ -371,7 +373,9 @@ const AddNewsletter = (props) => {
                                 : ""}
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/newsletter?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins">{buttonText}</button>
                                 {/* <button className="Save-btn-of0-form mrg-left-20 fnt-poppins">Export</button> */}
                             </div>

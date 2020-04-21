@@ -1,5 +1,5 @@
 import React from 'react'
-export default()=>(
+export default () => (
     <style js="true">{`
      
     .login-background-color {
@@ -119,6 +119,9 @@ form.input-form {
     justify-content: flex-end;
     flex: 2;
     display: flex;
+}
+.span-btn-style{
+    padding: 6px 27px 10px 27px;
 }
     `}
 

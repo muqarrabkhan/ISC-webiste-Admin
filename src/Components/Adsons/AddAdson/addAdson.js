@@ -5,10 +5,11 @@ import { useMutation } from '@apollo/react-hooks'
 import { CREATE_ADSON } from '../../apollo/Mutations/createAdson'
 import axios, { CancelToken } from "axios";
 import { apiPath } from '../../../config'
+import { getParams } from '../../functions'
 
 const AddAdson = (props) => {
-    let { history } = props;
-
+    let { history , location } = props;
+    let path = getParams(location.search);
     const [initial] = useState('#5e72e4');
     const [showHide, setShowHide] = useState(false);
     const [color, setColor] = useState("");
@@ -40,9 +41,9 @@ const AddAdson = (props) => {
                 })
             }
         )
-            .then(res =>{
+            .then(res => {
                 console.log(res.data);
-             })
+            })
 
     }
 
@@ -75,7 +76,7 @@ const AddAdson = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Adson</h6>
-                <button onClick={() => history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/adson?page="+path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={event => onSubmit(event)}>
@@ -180,8 +181,8 @@ const AddAdson = (props) => {
                                                     <label className="mrg-top-20 fnt-poppins">Compaign**</label>
                                                 </div>
                                                 <div>
-                                                    <input className="mrg-top-10 fnt-poppins" 
-                                                    onChange={event=>onChageKeyword(event.target.value)}
+                                                    <input className="mrg-top-10 fnt-poppins"
+                                                        onChange={event => onChageKeyword(event.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -282,7 +283,9 @@ const AddAdson = (props) => {
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/adson?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>

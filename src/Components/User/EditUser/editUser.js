@@ -9,13 +9,16 @@ import { SINGLE_USER } from '../../apollo/Quries/singleUser'
 import Loader from '../../commonComponents/Loader/loader'
 import uuid from 'uuid'
 import cookie from 'react-cookies'
+import { getParams } from '../../functions/index'
+import ContentLoader from "react-content-loader"
 
 const EditUser = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const [renderData, setRenderData] = useState("");
     let token = cookie.load("token")
-    const { loading, data } = useQuery(SINGLE_USER(token,id));
+    const { loading, data } = useQuery(SINGLE_USER(token, id));
     const [editData] = useMutation(UPDATE_USER);
     const [hideShow, setHideShow] = useState(false);
     const [hidePassword, setHidePassword] = useState(false);
@@ -38,7 +41,6 @@ const EditUser = (props) => {
         let duplicateData = data && data.getuserbyId ? { ...data.getuserbyId } : {}
         setRenderData(duplicateData);
     }, [data, data && data.getuserbyId])
-
 
     const updateUser = (event) => {
         event.preventDefault();
@@ -104,7 +106,7 @@ const EditUser = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit User</h6>
-                        <button onClick={() => history.push("/users")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/users?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => updateUser(event)}>
@@ -222,7 +224,9 @@ const EditUser = (props) => {
                                         </div>
                                     }
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/users?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                                     </div>
                                 </div>
@@ -231,8 +235,10 @@ const EditUser = (props) => {
                     </form>
                     {/* <Style/> */}
                 </div>
-                : <Loader />
+                :
+                <Loader />
             }
+
         </>
     );
 }

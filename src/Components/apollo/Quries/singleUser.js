@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const SINGLE_USER = (token) => gql`
+export const SINGLE_USER = (token,userId) => gql`
 {
-    getuserbyId( token:"${token}"){
+    getuserbyId( token:"${token}",userId:${userId}){
         Id
         Name
         Email

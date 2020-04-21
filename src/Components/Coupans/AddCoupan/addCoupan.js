@@ -3,9 +3,11 @@ import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_COUPON } from '../../apollo/Mutations/createCoupan'
 import { couponUrl } from '../../../config'
+import { getParams } from '../../functions/index'
 
 const AddCoupan = (props) => {
-    let { history } = props;
+    let { history , location } = props;
+    let path = getParams(location.search);
     const [createCoupan] = useMutation(CREATE_COUPON);
     const [couponCode, setCouponCode] = useState("");
     const [discount, setDiscount] = useState("");
@@ -22,12 +24,12 @@ const AddCoupan = (props) => {
                 User_id: 614799
             }
         }).then(res => {
-            if (res.data.createCoupons.error){
+            if (res.data.createCoupons.error) {
                 window.alert(res.data.createCoupons.error)
                 setBtnText("Create")
             }
             else {
-                window.location.replace("/edit-coupans")
+                window.location.replace("/edit-coupans/" + res.data.createCoupons.Id)
             }
         }).catch(error => {
             setBtnText("Create")
@@ -39,7 +41,7 @@ const AddCoupan = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Coupon</h6>
-                <button onClick={() => history.push("/coupans")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/coupans?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={(event) => onSubmit(event)}>
@@ -82,12 +84,14 @@ const AddCoupan = (props) => {
                                     <label>Page Url Link With Coupon*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={couponUrl + couponCode} disabled />
+                                    <input className="inputs-of-admistrator" value={couponUrl + couponCode.replace(/ /g, '')} disabled />
                                 </div>
                                 {/* <button className="Save-btn-of-form Save-btns-of-forms-responsive mrg-top-10 fnt-poppins">Link Copy</button> */}
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/coupans?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                             </div>
                         </div>

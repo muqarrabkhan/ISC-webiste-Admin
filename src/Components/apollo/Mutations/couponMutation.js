@@ -11,7 +11,9 @@ mutation getAllCoupons($page:Int,$limit:Int)
                 Discount_percentage
                 Status_coupon
                 Page_link
-              }
+                TotalMonthlySubscriptions
+                TotalAnnuallySubscriptions
+            }
               totalPages
               currentPage
               totalCoupons

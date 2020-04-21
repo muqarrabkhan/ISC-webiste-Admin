@@ -4,16 +4,16 @@ import { withRouter } from 'react-router-dom'
 import { SINGLE_CAMPAIGN } from '../../apollo/Quries/singleCampaign'
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { campaignBanner_baseurl, campaignLogo_baseurl } from '../../../config'
-import { standardDate , getParams} from '../../functions'
+import { getParams } from '../../functions'
 import Loader from '../../commonComponents/Loader/loader'
 import { EDIT_CAMPAIGN } from '../../apollo/Mutations/updateCampaign'
 import axios from 'axios'
 import { apiPath } from '../../../config'
-import ImageLoader from '../../../assets/Images/loader.gif'
+// import ImageLoader from '../../../assets/Images/loader.gif'
 import cookie from 'react-cookies'
 
 const CompaignDetails = (props) => {
-    let { history, match , location} = props;
+    let { history, match, location } = props;
     let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_CAMPAIGN(id), { context: { clientName: "second" } });
@@ -32,7 +32,7 @@ const CompaignDetails = (props) => {
     const [renderData, setRenderData] = useState("");
     const [hideShowColors, setHideShowColors] = useState(false)
     const [hideShowButtonText, setHideShowButtonText] = useState("Edit Hash Tag Colors")
-    const [updateButtonText,setUpdateButtonText]=useState("Update")
+    const [updateButtonText, setUpdateButtonText] = useState("Update")
 
     useEffect(() => {
         setRenderData(data && data.SingleCampaign ? { ...data.SingleCampaign } : {});
@@ -113,12 +113,11 @@ const CompaignDetails = (props) => {
         event.preventDefault();
         let stDate = new Date(renderData && renderData.StartDate)
         let edDate = new Date(renderData && renderData.EndDate)
-        let token = cookie.load("token")
         if (hideShowColors === false) {
             setUpdateButtonText("Updating...")
             editData({
                 variables: {
-                    Id:parseInt(id),
+                    Id: parseInt(id),
                     Name: renderData.Name ? renderData.Name : "",
                     facebook_url: renderData.facebook_url ? renderData.facebook_url : "",
                     twitter_url: renderData.twitter_url ? renderData.twitter_url : "",
@@ -137,15 +136,15 @@ const CompaignDetails = (props) => {
                 }
             }).then(res => {
                 setUpdateButtonText("Updated")
-            }).catch(error=>{
+            }).catch(error => {
                 setUpdateButtonText("Update")
             })
         }
-        else if (hideShowColors === true){
+        else if (hideShowColors === true) {
             setUpdateButtonText("Updating...")
             editData({
                 variables: {
-                    Id:parseInt(id),
+                    Id: parseInt(id),
                     Name: renderData.Name ? renderData.Name : "",
                     facebook_url: renderData.facebook_url ? renderData.facebook_url : "",
                     twitter_url: renderData.twitter_url ? renderData.twitter_url : "",
@@ -164,7 +163,7 @@ const CompaignDetails = (props) => {
                 }
             }).then(res => {
                 setUpdateButtonText("Updated")
-            }).catch(error=>{
+            }).catch(error => {
                 setUpdateButtonText("Update")
             })
         }
@@ -178,7 +177,7 @@ const CompaignDetails = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Campaign Details</h6>
-                        <button onClick={() =>window.history.back("/campaign?page="+ path)} className="cursor-pointer cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/campaign?page=" + path)} className="cursor-pointer cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => updateCampaign(event)}>
@@ -197,7 +196,7 @@ const CompaignDetails = (props) => {
                                                     <div className="store-front-image"
                                                         style={{
                                                             backgroundImage: `url(${renderData && renderData.Banner ? campaignBanner_baseurl + renderData.Banner :
-                                                                <img className="dashboard_icon"
+                                                                <img className="dashboard_icon" alt="edit-campaign"
                                                                     src={require('../../../assets/Images/admin.png')}
                                                                     style={{
                                                                         height: "100px",
@@ -260,18 +259,18 @@ const CompaignDetails = (props) => {
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%",
+                                                        marginLeft: "91px",
                                                         width: "100px"
                                                     }}>
                                                 </div>
                                                 :
-                                                <img className="dashboard_icon"
+                                                <img className="dashboard_icon" alt="edit-campaign"
                                                     src={require('../../../assets/Images/admin.png')}
                                                     style={{
                                                         height: "100px",
                                                         width: "95px",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
+                                                        marginLeft: "91px"
                                                     }}
                                                 />
                                             }
@@ -679,7 +678,9 @@ const CompaignDetails = (props) => {
                                     {/* file chosen button end here */}
                                     {/* Cancel and Save button */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() =>history.goBack("/campaign?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{updateButtonText}</button>
                                     </div>
                                 </div>

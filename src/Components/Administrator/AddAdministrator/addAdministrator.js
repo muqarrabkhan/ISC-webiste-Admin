@@ -5,16 +5,17 @@ import { CREATE_ADMIN } from '../../apollo/Mutations/createadminmutation'
 import uuid from 'uuid'
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
+import { getParams } from '../../functions'
 
 const AddAdministrator = (props) => {
 
-    let { history, user } = props;
+    let { history , location } = props;
+    let path = getParams(location.search);
     const [name, setName] = useState([]);
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [roleId, setRoleId] = useState([]);
-    const [status, setStatus] = useState([]);
     const [select, setSelect] = useState(false);
     const [btnText, setBtnText] = useState("Create");
     const [ipAddress, setIpAddress] = useState();
@@ -23,7 +24,6 @@ const AddAdministrator = (props) => {
     const [passwordValidation, setPasswordValidation] = useState(false);
 
     let uid = uuid();
-    console.log("user", user && user)
     useEffect(() => {
         publicIp.v4().then(ip => {
             setIpAddress(ip);
@@ -38,7 +38,7 @@ const AddAdministrator = (props) => {
             setBtnText("Create");
             setPasswordValidation(true);
         }
-        if (!roleId || roleId == "") {
+        if (!roleId || roleId === "") {
             setBtnText("Create");
             setRoleValidation(true);
         }
@@ -56,7 +56,7 @@ const AddAdministrator = (props) => {
                     CreatedBy: 1
                 }
             }).then(res => {
-                    if (res.data.createAdmin.error) {
+                if (res.data.createAdmin.error) {
                     window.alert(res.data.createAdmin.error)
                     setBtnText("Create")
                 }
@@ -100,7 +100,7 @@ const AddAdministrator = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Administrator</h6>
-                <button onClick={() => history.push("/administrator")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/administrator?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={(event) => addAdmin(event)}>
@@ -114,7 +114,7 @@ const AddAdministrator = (props) => {
                             {/* Name*/}
                             <div className="mrg-left-60 fnt-poppins">
                                 <div>
-                                    <label>Name</label>
+                                    <label>Name*</label>
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" value={name} required
@@ -124,7 +124,7 @@ const AddAdministrator = (props) => {
                             {/* Email*/}
                             <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                 <div>
-                                    <label>Email</label>
+                                    <label>Email*</label>
                                 </div>
                                 <div className="mrg-top-10">
                                     <input className="inputs-of-admistrator" type="email" value={email} required
@@ -134,7 +134,7 @@ const AddAdministrator = (props) => {
                             {/* Select Password*/}
                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
-                                    <label>Select Password</label>
+                                    <label>Select Password*</label>
                                 </div>
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" onChange={event => {
@@ -155,7 +155,7 @@ const AddAdministrator = (props) => {
                             {/* Select Role*/}
                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                 <div>
-                                    <label>Select Role</label>
+                                    <label>Select Role*</label>
                                 </div>
                                 <div className="mrg-top-10">
                                     <select className="inputs-of-admistrator fnt-poppins" required
@@ -179,7 +179,7 @@ const AddAdministrator = (props) => {
                                 <>
                                     <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                         <div>
-                                            <label>Password</label>
+                                            <label>Password*</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <input type="password" className="inputs-of-admistrator" value={password} required
@@ -191,7 +191,7 @@ const AddAdministrator = (props) => {
                                     </div>
                                     <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                         <div>
-                                            <label>Confirm Password</label>
+                                            <label>Confirm Password*</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <input type="password" className="inputs-of-admistrator" value={confirmPassword} required
@@ -208,7 +208,9 @@ const AddAdministrator = (props) => {
                             }
                             {/* extra data */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cursor-pointer cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cursor-pointer cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/administrator?page=" + path)}
+                                >Cancel</span>
                                 <button className="cursor-pointer Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{btnText}</button>
                             </div>
                         </div>

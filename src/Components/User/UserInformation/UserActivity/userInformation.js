@@ -7,11 +7,12 @@ import { standardDate } from '../../../functions'
 import { viewActivities_img } from '../../../../config'
 import ipInt from 'ip-to-int'
 import Loader from '../../../commonComponents/Loader/loader'
-
+import { getParams } from '../../../functions/index'
 
 const UserInformation = (props) => {
-    let { history, match } = props;
-    const [ipAddress, setIpAddress] = useState("");
+    let { history, match , location} = props;
+    let path = getParams(location.search);
+    // const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
     const [userActivityData, setUserActivityData] = useState()
@@ -20,13 +21,13 @@ const UserInformation = (props) => {
     let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     getDate = standardDate(getDate).time;
 
-    const publicIp = require('public-ip');
+    // const publicIp = require('public-ip');
 
-    useEffect(() => {
-        publicIp.v4().then(ip => {
-            setIpAddress(ip);
-        })
-    }, [])
+    // useEffect(() => {
+    //     publicIp.v4().then(ip => {
+    //         setIpAddress(ip);
+    //     })
+    // }, [])
 
     useEffect(() => {
         setUserActivityData(data && data.getuserbyId && data.getuserbyId.useractivity);
@@ -40,7 +41,7 @@ const UserInformation = (props) => {
                     {/* header */}
                     <div className="has-margin header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">User</h6>
-                        <button onClick={() => history.push("/users")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/users?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <div className="Table-of-administrator">

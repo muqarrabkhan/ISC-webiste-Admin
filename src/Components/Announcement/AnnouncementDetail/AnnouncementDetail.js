@@ -3,11 +3,13 @@ import { withRouter } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { SINGLE_ANNOUNCEMENT } from '../../apollo/Quries/singleAnnouncement'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const AnnouncementDetails = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_ANNOUNCEMENT(id));
+    let path = getParams(location.search);
 
     return (
         <>
@@ -16,7 +18,7 @@ const AnnouncementDetails = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins"> Announcement Details</h6>
-                        <button onClick={() => history.push("/announcement")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/announcement?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form>
@@ -59,9 +61,11 @@ const AnnouncementDetails = (props) => {
                                     </div>
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <button className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() =>history.goBack("/announcement?page=" + path)}
+                                        >Cancel</button>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins"
-                                        onClick={() => history.push("/edit-announcement/"+id)}
+                                            onClick={() => history.push("/edit-announcement/" + id)}
                                         >Edit</button>
                                     </div>
                                 </div>

@@ -7,9 +7,11 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_TEMPLATE } from '../../apollo/Mutations/updateTemplate'
 import Loader from '../../commonComponents/Loader/loader'
 import JoditEditor from "jodit-react";
+import { getParams } from '../../functions'
 
 const EditTemplate = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     const editor = useRef(null)
     const config = {
         readonly: false
@@ -21,6 +23,8 @@ const EditTemplate = (props) => {
     const [renderData, setRenderData] = useState("");
     const [buttonText, setButtontext] = useState("Update");
     const [templateVariables, setTemplatevariables] = useState([]);
+    const [category, setCategory] = useState("");
+    const [joditvalue,setJoditValue]=useState("");
 
     const updateUser = (event) => {
         event.preventDefault();
@@ -40,15 +44,60 @@ const EditTemplate = (props) => {
         }).then(res => {
             setButtontext("Updated")
         }).catch(error => {
-            setButtontext("Updated")
+            setButtontext("Update")
         })
     }
 
     useEffect(() => {
         setRenderData(data && data.singletemplate ? { ...data.singletemplate } : {});
+        setCategory(data && data.singletemplate && data.singletemplate.Category);
+        setJoditValue(data && data.singletemplate.Content ? data.singletemplate.Content : "");
+        // template variables
+        if (data && data.singletemplate && data.singletemplate.Category === "") {
+            setTemplatevariables("");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "signUp") {
+            setTemplatevariables("[user_name][userId][uid]");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "welcome") {
+            setTemplatevariables("[user_name]");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "CreateCampaign") {
+            setTemplatevariables("[creator_name][creator_email][campaign_name][campaign_link]");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "campaignSupported") {
+            setTemplatevariables("[supporters][campaign_name][campaign_link][supporters_percentage][user_name]");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "forgetPassword") {
+            setTemplatevariables("[userId][uid][user_name]");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "notPremium") {
+            setTemplatevariables("[user_name][campaign_name][campaign_link]");
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "sellerRecive") {
+            setTemplatevariables("[buyer_email][buyer_name][charge_amount][order_id][shipment_charges][total_products][buyer_country][tax][address][phone][state][postal_code][application_fee][recived_amount][seller_name]")
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "buyerRecive") {
+            setTemplatevariables("[seller_email][seller_name][charge_amount][order_id][shipment_charges][total_products][seller_country][tax][buyer_name]")
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "fundriser") {
+            setTemplatevariables("[buyer_name][seller_email][seller_name][charge_amount][seller_country]")
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "fundriseReciver") {
+            setTemplatevariables("[seller_name][buyer_email][buyer_name][charge_amount][application_fee][recived_amount]")
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "succesfullySubscribed") {
+            setTemplatevariables("[membership_name][membership_charges][storefront_limit][campaign_limit]")
+        }
+        if (data && data.singletemplate && data.singletemplate.Category === "resetSucessfully") {
+            setTemplatevariables("[user_name]")
+        }
     }, [data, data && data.singletemplate])
 
+
+
     const variablesHandler = (obj) => {
+        setCategory(obj);
         switch (obj) {
             case "": {
                 setTemplatevariables("")
@@ -105,6 +154,11 @@ const EditTemplate = (props) => {
         }
     }
 
+    const onChangeEditor = (value) => {
+        let dupilcateName = { ...renderData }
+        dupilcateName.Content = value
+        setRenderData({ ...dupilcateName })
+    }
 
     return (
         <>
@@ -113,7 +167,7 @@ const EditTemplate = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit Tempelates</h6>
-                        <button onClick={() => history.push("/tamplates")} className=" cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/tempelates?page=" + path)} className=" cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={(event) => updateUser(event)}>
@@ -209,12 +263,12 @@ const EditTemplate = (props) => {
                                                 </div>
                                                 <div>
                                                     <select className="mrg-top-10 fnt-poppins" type="keyword"
-                                                        value={renderData && renderData.Category}
+                                                        value={category}
                                                         onChange={event => {
-                                                            let dupilcateName = { ...renderData }
-                                                            dupilcateName.Category = event.target.value
-                                                            setRenderData({ ...dupilcateName })
-                                                            variablesHandler({...dupilcateName});
+                                                            // let dupilcateName = { ...renderData }
+                                                            // dupilcateName.Category = event.target.value
+                                                            // setRenderData({ ...dupilcateName })
+                                                            variablesHandler(event.target.value);
                                                         }}
                                                     >
                                                         <option value="">Select Category</option>
@@ -324,21 +378,19 @@ const EditTemplate = (props) => {
                                             </div>
                                             <div className="ck-editor-of-compaign-border mrg-top-10">
                                                 <JoditEditor className="form-control" placeholder="Enter Description" rows="5"
-                                                    ref={editor}
-                                                    value={renderData && renderData.Content ? renderData.Content : ""}
-                                                    config={config}
-                                                    tabIndex={1}
-                                                    onBlur={newContent => {
-                                                        let dupilcateName = { ...renderData }
-                                                        dupilcateName.Content = newContent
-                                                        setRenderData({ ...dupilcateName })
-                                                    }}
+                                                    value={joditvalue ? joditvalue : ""}
+                                                    toolbarClassName="toolbarClassName"
+                                                    wrapperClassName="wrapperClassName"
+                                                    editorClassName="editorClassName"
+                                                    onChange={onChangeEditor}
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/tempelates?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

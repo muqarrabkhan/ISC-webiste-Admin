@@ -4,16 +4,17 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { SINGLE_ANNOUNCEMENT } from '../../apollo/Quries/singleAnnouncement'
 import Loader from '../../commonComponents/Loader/loader'
 import { UPDATE_ANNOUNCEMENT } from '../../apollo/Mutations/updateAnnouncement'
+import { getParams } from '../../functions'
 
 const EditAnnouncement = (props) => {
 
-    let { history, match } = props;
+    let { history, match  ,location} = props;
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_ANNOUNCEMENT(id));
-
+    let path = getParams(location.search);
     const [editAnnouncement] = useMutation(UPDATE_ANNOUNCEMENT);
     const [renderData, setRenderData] = useState("");
-    const [buttonText,setButtonText]=useState("Update");
+    const [buttonText, setButtonText] = useState("Update");
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
@@ -31,7 +32,7 @@ const EditAnnouncement = (props) => {
             }
         }).then(res => {
             setButtonText("Updated")
-        }).catch(error=>{
+        }).catch(error => {
             setButtonText("Update")
         })
     }
@@ -47,7 +48,7 @@ const EditAnnouncement = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit Announcement</h6>
-                        <button onClick={() => history.push("/announcement")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/announcement?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => editData(event)}>
@@ -107,8 +108,10 @@ const EditAnnouncement = (props) => {
                                     </div>
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
-                                            <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/announcement?page=" + path)}
+                                        >Cancel</span>
+                                        <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>
                             </div>

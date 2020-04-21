@@ -7,9 +7,11 @@ import cookie from 'react-cookies'
 import { getData, getCode, getName } from "country-list";
 import { UsaStates } from "usa-states";
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const UpdateStoreFront = (props) => {
-    let { history, match } = props
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     let names = new UsaStates();
     const { loading, data } = useQuery(SINGLE_STOREFRONT(id))
@@ -17,7 +19,7 @@ const UpdateStoreFront = (props) => {
     const [renderData, setRenderData] = useState("");
     const [buttonText, setButtonText] = useState("Update")
     const [state, setState] = useState("")
-  
+
     useEffect(() => {
         setRenderData(data && data.singleStorefrontBySlug ? { ...data.singleStorefrontBySlug } : "")
     }, [data])
@@ -26,21 +28,21 @@ const UpdateStoreFront = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         setButtonText("Updating...")
-            updateStoreFront({
-                variables: {
-                    Id: parseInt(id),
-                    Name: renderData && renderData.Name,
-                    OriginCountry: renderData && renderData.OriginCountry,
-                    OriginState: renderData && renderData.OriginCountry === "CA" || renderData.OriginCountry === "US" ? renderData.OriginState : "" ,
-                    OriginPostalCode: parseInt(renderData && renderData.OriginPostalCode),
-                    token: token,
-                }
-            }).then(res => {
-                setButtonText("Updated")
-            }).catch(error=>{
-                setButtonText("Update")
-            })
-        }
+        updateStoreFront({
+            variables: {
+                Id: parseInt(id),
+                Name: renderData && renderData.Name,
+                OriginCountry: renderData && renderData.OriginCountry,
+                OriginState: renderData && renderData.OriginCountry === "CA" || renderData.OriginCountry === "US" ? renderData.OriginState : "",
+                OriginPostalCode: parseInt(renderData && renderData.OriginPostalCode),
+                token: token,
+            }
+        }).then(res => {
+            setButtonText("Updated")
+        }).catch(error => {
+            setButtonText("Update")
+        })
+    }
 
 
 
@@ -51,7 +53,7 @@ const UpdateStoreFront = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit StoreFront</h6>
-                        <button onClick={() => history.push("/storefront")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/storefront?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form
@@ -167,7 +169,9 @@ const UpdateStoreFront = (props) => {
                                         </div>
                                         : ""}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/storefront?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

@@ -7,10 +7,12 @@ import { SINGLE_ADMIN } from '../../apollo/Quries/singleAdmin'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_ADMIN } from '../../apollo/Mutations/updateAdmin'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams} from '../../functions'
 
 const EditAdministrator = (props) => {
-    let { history, match } = props;
+    let { history, match , location} = props;
     let id = match.params && match.params.id ? match.params.id : "";
+    let path = getParams(location.search);
     const [renderData, setRenderData] = useState("");
     const { loading, data } = useQuery(SINGLE_ADMIN(id));
     const [hideShow, setHideShow] = useState(false);
@@ -110,7 +112,7 @@ const EditAdministrator = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit Administrator</h6>
-                        <button onClick={() => history.push("/administrator")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/administrator?page="+ path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => updateUser(event)}>
@@ -124,7 +126,7 @@ const EditAdministrator = (props) => {
                                     {/* Name*/}
                                     <div className="mrg-left-60 fnt-poppins">
                                         <div>
-                                            <label>Name</label>
+                                            <label>Name*</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <input className="inputs-of-admistrator"
@@ -141,7 +143,7 @@ const EditAdministrator = (props) => {
                                     {/* Email*/}
                                     <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                         <div>
-                                            <label>Status</label>
+                                            <label>Status*</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <select className="inputs-of-admistrator fnt-poppins"
@@ -161,7 +163,7 @@ const EditAdministrator = (props) => {
                                     {/* Select Role*/}
                                     <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                         <div>
-                                            <label>Select Role</label>
+                                            <label>Select Role*</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <select className="inputs-of-admistrator fnt-poppins"
@@ -204,7 +206,7 @@ const EditAdministrator = (props) => {
                                         <div>
                                             <div className="mrg-left-60 fnt-poppins mrg-top-20">
                                                 <div>
-                                                    <label>Select Password</label>
+                                                    <label>Select Password*</label>
                                                 </div>
                                                 <div className="mrg-top-10">
                                                     <select className="inputs-of-admistrator fnt-poppins"
@@ -220,7 +222,7 @@ const EditAdministrator = (props) => {
                                                 <div>
                                                     <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                                         <div>
-                                                            <label>Password</label>
+                                                            <label>Password*</label>
                                                         </div>
                                                         <div className="mrg-top-10">
                                                             <input type="password" className="inputs-of-admistrator"
@@ -235,7 +237,7 @@ const EditAdministrator = (props) => {
                                                     {/* Confirm Password*/}
                                                     <div className="mrg-left-60 mrg-top-20 fnt-poppins">
                                                         <div>
-                                                            <label>Confirm Password</label>
+                                                            <label>Confirm Password*</label>
                                                         </div>
                                                         <div className="mrg-top-10">
                                                             <input type="password" className="inputs-of-admistrator"
@@ -249,7 +251,9 @@ const EditAdministrator = (props) => {
                                         </div>
                                     }
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                        onClick={() => history.goBack("/administrator?page="+ path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

@@ -8,9 +8,11 @@ import axios from 'axios'
 import { apiPath } from '../../../config'
 import ImgLoader from '../../../assets/Images/main-loader.gif'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const AddProduct = (props) => {
-    let { history } = props
+    let { history, location } = props;
+    let path = getParams(location.search);
     const [addProduct] = useMutation(CREATE_PRODUCT);
     const [name, setName] = useState();
     const [description, setDescription] = useState();
@@ -23,15 +25,13 @@ const AddProduct = (props) => {
     const [width, setWidth] = useState("");
     const [variation, setVariation] = useState([])
     const [buttonText, setButtonText] = useState("Creating")
-    const [loader,setLoader]=useState(true)
 
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
 
     const uploadProductImage = (event) => {
-        setLoader(true);
         const file = event.target.files[0];
-        console.log("loader",loader)
+        setImage("Loading");
         getBase64(file).then(
             data => {
                 let final = {
@@ -39,7 +39,6 @@ const AddProduct = (props) => {
                     imageTitle: file.name.split('.').slice(0, -1).join('.').replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase()
                 };
                 axios.post(apiPath + '/uploadProductMedia', final).then(res => {
-                    setLoader(false);
                     setImage(res.data.imageUrl);
                 });
             });
@@ -92,7 +91,7 @@ const AddProduct = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Product</h6>
-                <button onClick={() => history.push("/product")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/product?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form
@@ -106,23 +105,32 @@ const AddProduct = (props) => {
                             <div className="Form-section2-uploading-image">
                                 <div className="has-padding-top-20">
                                     {image ?
-                                        <div className="store-front-image"
+                                        <div className=""
                                             style={{
-                                                backgroundImage: `url(${loader  ? productImage_BaseUrl + image : <img src={Loader} />})`,
+                                                backgroundImage: `url(${image !== "Loading" ? productImage_BaseUrl + image : <img
+                                                    src={require('../../../assets/Images/main-loader.gif')}
+                                                    style={{
+                                                        height: "100px",
+                                                        width: "130px",
+                                                        backgroundRepeat: "no-repeat",
+                                                        marginLeft: "5%"
+                                                    }}
+                                                />})`,
                                                 height: "100px",
                                                 backgroundSize: "contain",
                                                 width: "95px",
-                                                marginLeft: "6%"
+                                                marginLeft: "89px",
+                                                backgroundRepeat: "no-repeat"
                                             }}>
                                         </div>
                                         :
                                         <img className="dashboard_icon"
-                                            src={require('../../../assets/Images/admin.png')}
+                                            src={require('../../../assets/Images/imageplaeholder.png')}
                                             style={{
                                                 height: "100px",
-                                                width: "95px",
+                                                width: "130px",
                                                 backgroundRepeat: "no-repeat",
-                                                marginLeft: "7%"
+                                                marginLeft: "5%"
                                             }}
                                         />
                                     }
@@ -289,13 +297,12 @@ const AddProduct = (props) => {
                                                         setVariation(duplicateVariation)
                                                     }}
                                                 />
-
                                             </div>
                                         </div>
                                         <div className="Form-Inputs-Fields has-margin-left-50">
                                             <div className="form-group">
                                                 <div>
-                                                    <label className="mrg-top-20 fnt-poppins">Variation Name</label>
+                                                    <label className="mrg-top-20 fnt-poppins">Variation Value</label>
                                                 </div>
                                                 <div>
                                                     <input className="mrg-top-10" type="slug"
@@ -318,7 +325,9 @@ const AddProduct = (props) => {
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/product?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>

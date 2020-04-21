@@ -4,12 +4,13 @@ import { SINGLE_INTEREST } from '../../apollo/Quries/SingleUserInterest'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_USER_INTEREST } from '../../apollo/Mutations/updateUserInterest'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const EditUserIntrest = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
     let id = match.params && match.params.id ? match.params.id : "";
-    const { loading, data } = useQuery(SINGLE_INTEREST(id))
-
+    let path = getParams(location.search);
+    const { loading , data } = useQuery(SINGLE_INTEREST(id))
     const [editData] = useMutation(UPDATE_USER_INTEREST);
     const [renderData, setRenderData] = useState("");
     const [buttonText, setButtonText] = useState("Update")
@@ -40,7 +41,7 @@ const EditUserIntrest = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Update Adson</h6>
-                        <button onClick={() => history.push("/view-user-interest")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/view-user-interest?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form
@@ -75,7 +76,9 @@ const EditUserIntrest = (props) => {
                                         </div>
                                     </div>
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/view-user-interest?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

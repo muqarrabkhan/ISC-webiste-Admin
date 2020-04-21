@@ -131,6 +131,10 @@ const AllRouters = (props) => {
                         <Route path={"/edit-category/:id"} component={EditCategory} />
                         <Route path={"/edit-category"} component={EditCategory} />
                         <Route path={"/category"} component={ViewCategory} />
+                        {/* Templates */}
+                        <Route path={"/add-tempelates"} component={AddTamplates} />
+                        <Route path={"/edit-tempelates/:id"} component={EditTamplates} />
+                        <Route path={"/tempelates"} component={ViewTamplates} />
                         {/* Newsletter */}
                         <Route path={"/add-newsletter"} component={AddNewsLetter} />
                         <Route path={"/edit-newsletter/:id"} component={EditNewsLetter} />
@@ -178,10 +182,6 @@ const AllRouters = (props) => {
                         <Route path={"/add-coupans"} component={AddCoupans} />
                         <Route path={"/edit-coupans/:id"} component={EditCoupans} />
                         <Route path={"/coupans"} component={ViewCoupans} />
-                        {/* Templates */}
-                        <Route path={"/add-tamplates"} component={AddTamplates} />
-                        <Route path={"/edit-tamplates/:id"} component={EditTamplates} />
-                        <Route path={"/tamplates"} component={ViewTamplates} />
                         {/* File */}
                         <Route path={"/edit-file"} component={EditFiles} />
                         <Route path={"/file"} component={Viewfiles} />

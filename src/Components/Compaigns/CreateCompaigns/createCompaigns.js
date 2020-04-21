@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import InputColor from 'react-input-color';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { campaignBanner_baseurl, campaignLogo_baseurl , apiPath } from '../../../config'
+import { campaignBanner_baseurl, campaignLogo_baseurl, apiPath } from '../../../config'
 import { CREATE_CAMPAIGN } from '../../apollo/Mutations/createCampaign'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
@@ -10,12 +10,13 @@ import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
 import ImageLoader from '../../../assets/Images/loader.gif'
 import cookie from 'react-cookies'
-import {SELECT_STOREFRONT} from '../../apollo/Quries/userStoreFronts'
+// import { SELECT_STOREFRONT } from '../../apollo/Quries/userStoreFronts'
+import { getParams } from '../../functions'
 
 const CreateCompaign = (props) => {
-    let { history } = props;
-    const { loading, data } = useQuery(CAMPAIGN_CATEGORIES, { context: { clientName: "second" } });
-
+    let { history, location } = props;
+    const { data } = useQuery(CAMPAIGN_CATEGORIES, {context:{clientName: "second"}});
+    let path = getParams(location.search);
     // states for colors
     const [initial] = useState("#5e72e4")
     const [secondary] = useState("#EC2027")
@@ -31,18 +32,18 @@ const CreateCompaign = (props) => {
     const [name, setName] = useState("")
     const [campaignType, setCampaignType] = useState("")
     const [shortDescription, setShortDescription] = useState("")
-    const [categoryId , setCategoryId] = useState("")
-    const [description , setDescription] = useState("")
-    const [startDate , setStartDate] = useState("")
-    const [endDate , setEndDate] = useState("")
-    const [goalSupport , setgoal_support] = useState("")
-    const [facebook , setfacebook_url] = useState("")
-    const [twitter , settwitter_url] = useState("")
-    const [website , setwebsite_url] = useState("")
-    const [buttonText , setButtonText] = useState("Create")
-    const [selectOverlay , setSelectOverlay] = useState("")
-    const [imageLoader , setImageLoader] = useState(false)
-    const [loader,setLoader]=useState(false)
+    const [categoryId, setCategoryId] = useState("")
+    const [description, setDescription] = useState("")
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
+    const [goalSupport, setgoal_support] = useState("")
+    const [facebook, setfacebook_url] = useState("")
+    const [twitter, settwitter_url] = useState("")
+    const [website, setwebsite_url] = useState("")
+    const [buttonText, setButtonText] = useState("Create")
+    const [selectOverlay, setSelectOverlay] = useState("")
+    const [imageLoader, setImageLoader] = useState(false)
+    const [loader, setLoader] = useState(false)
 
     const addImage = () => {
         let duplicateImage = [...addMoreImage]
@@ -68,7 +69,7 @@ const CreateCompaign = (props) => {
 
 
     const uploadOverlayImage = (event) => {
-        setLoader(true);       
+        setLoader(true);
         const file = event.target.files[0];
         getBase64(file).then(
             data => {
@@ -158,8 +159,8 @@ const CreateCompaign = (props) => {
                     token: token
                 }
             }).then(res => {
-                history.push("/edit-campaign/"+res.data.createCampaign.Id)
-            }).catch(error=>{
+                history.push("/edit-campaign/" + res.data.createCampaign.Id)
+            }).catch(error => {
                 setButtonText("Create")
             })
         }
@@ -170,7 +171,7 @@ const CreateCompaign = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add Campaign</h6>
-                <button onClick={() => history.push("/campaign")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/campaign?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={event => onSubmit(event)}>
@@ -193,7 +194,7 @@ const CreateCompaign = (props) => {
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%",
+                                                        marginLeft: "91px",
                                                         width: "100px"
                                                     }}>
                                                 </div>
@@ -204,7 +205,7 @@ const CreateCompaign = (props) => {
                                                         height: "100px",
                                                         width: "95px",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
+                                                        marginLeft: "91px"
                                                     }}
                                                 />
                                             }
@@ -236,12 +237,12 @@ const CreateCompaign = (props) => {
                             {selectOverlay ?
                                 <div className="store-front-image has-margin-top-10"
                                     style={{
-                                        backgroundImage: `url(${!loader ? campaignLogo_baseurl + selectOverlay : <p style={{color:"red"}}>Loading...</p>})`,
+                                        backgroundImage: `url(${selectOverlay ? campaignLogo_baseurl + selectOverlay : <p style={{ color: "red" }}>Loading...</p>})`,
                                         height: "100px",
                                         backgroundSize: "contain",
-                                        width:"100px",
+                                        width: "100px",
                                         backgroundRepeat: "no-repeat",
-                                        marginLeft: "7%"
+                                        marginLeft: "91px"
                                     }}>
                                 </div>
                                 :
@@ -251,7 +252,7 @@ const CreateCompaign = (props) => {
                                         height: "100px",
                                         width: "95px",
                                         backgroundRepeat: "no-repeat",
-                                        marginLeft: "7%"
+                                        marginLeft: "91px"
                                     }}
                                 />
                             }
@@ -322,7 +323,7 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-30 mrg-left-50">
                                         <div className="form-group">
                                             <div>
-                                                <label className="mrg-top-20 fnt-poppins">*Campaign Main Headline (100 characters)</label>
+                                                <label className="mrg-top-20 fnt-poppins">Campaign Main Headline (100 characters)*</label>
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins " type="name" placeholder="Enter Name"
@@ -337,7 +338,7 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label >Secondary Headline (300 characters)</label>
+                                                <label >Secondary Headline (300 characters)*</label>
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" placeholder="Enter Short Description"
@@ -351,7 +352,7 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label>Select CampaignType</label>
+                                                <label>Select CampaignType*</label>
                                             </div>
                                             <div>
                                                 <select className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag"
@@ -388,7 +389,7 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label >Start Date</label>
+                                                <label >Start Date*</label>
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="date"
@@ -403,7 +404,7 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label >End Date</label>
+                                                <label >End Date*</label>
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="date"
@@ -439,7 +440,7 @@ const CreateCompaign = (props) => {
                                     <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label>Description</label>
+                                                <label>Description*</label>
                                             </div>
                                             <div>
                                                 <input className="mrg-top-10 fnt-poppins" type="keyword" placeholder="Enter Keyword"
@@ -499,7 +500,9 @@ const CreateCompaign = (props) => {
                             {/* Form section2 div end here */}
                             {/* Cancel and Save button */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/campaign?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>

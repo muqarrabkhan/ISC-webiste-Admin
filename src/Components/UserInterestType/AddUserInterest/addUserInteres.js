@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_USER_INTEREST } from '../../apollo/Mutations/createUserInterestType'
+import { getParams } from '../../functions'
 
 const AddAdson = (props) => {
-    let { history } = props;
+    let { history ,location } = props;
+    let path = getParams(location.search);
     const [addUserInterest] = useMutation(CREATE_USER_INTEREST);
     const [name, setName] = useState("")
-    const [buttonText,setButtonText]=useState("Create")
+    const [buttonText, setButtonText] = useState("Create")
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -18,8 +20,8 @@ const AddAdson = (props) => {
             }
         }).then(res => {
             setButtonText("Created")
-            history.push("/edit-user-interest/"+res.data.createInterests.id)
-        }).catch(error=>{
+            history.push("/edit-user-interest/" + res.data.createInterests.id)
+        }).catch(error => {
             setButtonText("Create")
         })
     }
@@ -29,7 +31,7 @@ const AddAdson = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add User Interest</h6>
-                <button onClick={() => history.push("/view-user-interest")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/view-user-interest?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form
@@ -60,7 +62,9 @@ const AddAdson = (props) => {
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => history.goBack("/view-user-interest?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>

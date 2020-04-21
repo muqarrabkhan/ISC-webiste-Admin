@@ -5,13 +5,13 @@ import ReactPaginate from "react-paginate";
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
-import Loader from '../commonComponents/Loader/loader'
 import { overlays, camapignImage } from '../../config'
+import ContentLoader from 'react-content-loader'
 
 const Dashboard = () => {
 
   // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
-  const { loading, data } = useQuery(ADMIN_DASHBOARD);
+  const { loading, data, location } = useQuery(ADMIN_DASHBOARD);
   const [allCompagins] = useMutation(DASHBOARD_MUTATION);
   const [cards, setCards] = useState([]);
   const [compaignType, setCompaignType] = useState("");
@@ -114,7 +114,15 @@ const Dashboard = () => {
     }
   }
 
-  if (loading) return <Loader />;
+  if (loading) return <ContentLoader
+    viewBox="0 40 500 300"
+    speed={2}
+  >
+    <rect x="19" y="64" rx="0" ry="0" width="465" height="155" />
+    <rect x="18" y="225" rx="0" ry="0" width="141" height="200" />
+    <rect x="182" y="225" rx="0" ry="0" width="141" height="200" />
+    <rect x="343" y="225" rx="0" ry="0" width="141" height="200" />
+  </ContentLoader>;
   return (
     <div className="container-fluid Table-for-administrator-main-div">
       {/* header */}
@@ -133,6 +141,8 @@ const Dashboard = () => {
                 </div>
                 {/* { Dashboard  Campaign cards start here      */}
                 {/* <first card */}
+                {/* {data && data.length !== 0 ?
+                  <> */}
                 <div className=" dashboard-main-cards-div flex-row ">
                   <div className="dash-board-cards mrg-left-20 $White-color">
                     <div className="dashboard-card-headr ">
@@ -244,6 +254,7 @@ const Dashboard = () => {
                         <p className=" mrg-left-70 mrg-top-20 card-number-styling fnt-poppins number-data-responsive">{data && data.TotalNewpledgesCampaignLastWeek}</p>
                       </div>
                     </div>
+
                   </div>
                 </div>
                 {/* dashboard Campaign card end here */}
@@ -264,19 +275,23 @@ const Dashboard = () => {
                   </div>
                   {/* 1st Card of Last Week Views and of Compaigns */}
                   <div className=" is-flex last-week-wraping-cards mrg-left-20">
-                    {cards && cards.length != 0 ? cards.map((single, index) =>
+                    {cards && cards.length !== 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
-                          <div className="" style={{ backgroundImage: `url(${single.Image ? camapignImage + single.Image 
-                            :
-                             single.Overlay ? overlays + single.Overlay : ""})`,
-                              backgroundSize: 'contain',  
-                               minHeight: '255px' ,
-                               backgroundRepeat:"no-repeat"
-                               }}>
+                          <div className="" style={{
+                            backgroundImage: `url(${single.Image ? camapignImage + single.Image
+                              :
+                              single.Overlay ? overlays + single.Overlay : ""})`,
+                            backgroundSize: 'contain',
+                            minHeight: '210px',
+                            marginLeft: "8px",
+                            marginTop: "5px",
+                            backgroundRepeat: "no-repeat"
+                          }}>
                           </div>
+                          <hr />
                           <div className="mrg-top-10  text-center" >
-                            <h4 className="fnt-size-15 fnt-poppins">{single.Name}</h4>
+                            <h4 className="fnt-size-15 fnt-poppins heading-of-camp">{single.Name}</h4>
                             <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.CategoryId}</p>
                             <button className="Save-btn-of-form resonsive-save-butten-cards mrg-top-20 fnt-poppins">{single.CampaignType}</button>
                           </div>
@@ -289,7 +304,7 @@ const Dashboard = () => {
                     }
                   </div>
                 </div>
-                <div className="mrg-top-0">
+                <div className="mrg-top-0 has-margin-top-20">
                   <ReactPaginate previousLabel={<span className="fa fa-chevron-right "> &#60; </span>}
                     nextLabel={<span className="fa fa-chevron-right "> > </span>}
                     breakLabel={". . ."}

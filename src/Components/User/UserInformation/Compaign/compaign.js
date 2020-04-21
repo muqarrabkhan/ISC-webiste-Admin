@@ -8,10 +8,12 @@ import { SINGLE_USER } from '../../../apollo/Quries/singleUser'
 import { useQuery } from '@apollo/react-hooks'
 import { standardDate } from '../../../functions'
 import Loader from '../../../commonComponents/Loader/loader'
+import { getParams } from '../../../functions/index'
 
 const Campaign = (props) => {
-    let { history, match } = props;
+    let { history, match , location} = props;
     const [ipAddress, setIpAddress] = useState("");
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : ""
     const { loading, data } = useQuery(SINGLE_USER(id));
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
@@ -29,7 +31,7 @@ const Campaign = (props) => {
                     {/* header */}
                     <div className="has-margin header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">User</h6>
-                        <button onClick={() => history.push("/users/" + id)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/users?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <div className="Table-of-administrator">

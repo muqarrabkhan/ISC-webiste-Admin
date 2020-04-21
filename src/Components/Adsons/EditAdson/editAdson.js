@@ -4,11 +4,13 @@ import { withRouter } from 'react-router-dom'
 import { SINGLE_ADSONS } from '../../apollo/Quries/singleAdson'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_ADSON } from '../../apollo/Mutations/updateAdson'
+import { getParams } from '../../functions'
 
 const EditAdson = (props) => {
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
-    const { loading, data } = useQuery(SINGLE_ADSONS(id))
+    const { data } = useQuery(SINGLE_ADSONS(id))
     const [initial] = useState('#5e72e4');
     const [color, setColor] = useState({});
 
@@ -16,7 +18,7 @@ const EditAdson = (props) => {
     const [renderData, setRenderData] = useState("");
 
     useEffect(() => {
-        setRenderData(data && data.getAdsonbyId ? {...data.getAdsonbyId} : "");
+        setRenderData(data && data.getAdsonbyId ? { ...data.getAdsonbyId } : "");
     }, [data, data && data.getAdsonbyId])
 
     const onSubmit = (event) => {
@@ -25,7 +27,7 @@ const EditAdson = (props) => {
             variables: {
                 id: parseInt(id),
                 status: renderData.status,
-                place_on:parseInt(renderData.place_on),
+                place_on: parseInt(renderData.place_on),
                 type: renderData.type
                 // ad_text: adText,
                 // ad_button: adButton,
@@ -44,10 +46,10 @@ const EditAdson = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Update Adson</h6>
-                <button onClick={() => history.push("/adson")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => window.history.back("/adson?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
-            <form onSubmit={event=>onSubmit(event)}>
+            <form onSubmit={event => onSubmit(event)}>
                 <div className="Table-of-administrator">
                     <div className="container-fluid background-of-table">
                         <div className="blanck-dev"></div>
@@ -294,7 +296,9 @@ const EditAdson = (props) => {
                                 </div>
                             </div>
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <button className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() => window.history.back("/adson?page=" + path)}
+                                >Cancel</button>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">Save</button>
                             </div>
                         </div>

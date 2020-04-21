@@ -4,10 +4,11 @@ import { useMutation } from '@apollo/react-hooks'
 import { CREATE_SETTING } from '../../apollo/Mutations/createSetting'
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
+import { getParams } from '../../functions'
 
 const AddSetting = (props) => {
-    let { history } = props;
-
+    let { history , location } = props;
+    let path = getParams(location.search);
     const [addSetting] = useMutation(CREATE_SETTING);
     const [fieldName, setFieldName] = useState("");
     const [keyText, setKeyText] = useState("");
@@ -15,7 +16,7 @@ const AddSetting = (props) => {
     const [settingType, setSettingType] = useState("");
     const [ipAddress, setIpAddress] = useState("");
     const [settingTypeValidator, setSettingTypeValidator] = useState(false);
-    const [buttonText,setButtonText]=useState("Create");
+    const [buttonText, setButtonText] = useState("Create");
 
     useEffect(() => {
         publicIp.v4().then(ip => {
@@ -44,9 +45,9 @@ const AddSetting = (props) => {
             }).then(res => {
                 history.push("/edit-setting/" + res.data.createsettings.ID)
             })
-            .catch(error=>{
-                setButtonText("Create")
-            })
+                .catch(error => {
+                    setButtonText("Create")
+                })
         }
     }
     return (
@@ -54,7 +55,7 @@ const AddSetting = (props) => {
             {/* header */}
             <div className="header-of-viewAdministrator">
                 <h6 className="heading6-of-header fnt-poppins">Add General Setting</h6>
-                <button onClick={() => history.push("/setting")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                <button onClick={() => history.goBack("/setting?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
             </div>
             {/* Table of Administrator  */}
             <form onSubmit={event => createSetting(event)}>
@@ -129,7 +130,9 @@ const AddSetting = (props) => {
                             </div>
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                <span className="cancel-btn-of-form fnt-poppins"
+                                    onClick={() =>history.goBack("/setting?page=" + path)}
+                                >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
                         </div>

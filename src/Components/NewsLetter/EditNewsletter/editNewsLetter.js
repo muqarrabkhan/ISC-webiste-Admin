@@ -10,10 +10,12 @@ import axios, { CancelToken } from "axios";
 import { apiPath } from '../../../config'
 import Style from '../AddNewsletter/style'
 import { standardDate } from '../../functions/index'
+import { getParams } from '../../functions/index'
 
 const EditNewsletter = (props) => {
 
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const [hideShow, setHideShow] = useState(false);
     const [hideShowDate, setHideShowDate] = useState(false);
@@ -28,8 +30,7 @@ const EditNewsletter = (props) => {
     const [selectTemplate, setSelectTemplate] = useState("")
     const [buttonText, setButtonText] = useState("Update")
     const [searchData, setSearchData] = useState();
-    const [searchName, setSearchName] = useState();
-    const [selectedCampaign, setSelectedCampaign] = useState();
+    const [newSearch, setNewSearch] = useState();
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -49,13 +50,15 @@ const EditNewsletter = (props) => {
         setInterestData(data && data.getAllIntersts);
         setRenderData(data && data.singlenewsletter ? { ...data.singlenewsletter } : {})
         setSelectTemplate(data && data.singlenewsletter && data.singlenewsletter.Template);
+        setNewSearch(data && data.singlenewsletter && data.singlenewsletter.campaign_id ? data.singlenewsletter.campaignName : "")
 
     }, [data])
 
+    console.log("data", newSearch)
+
     let cancel;
     const onChageKeyword = (value) => {
-        setSelectedCampaign(value.Id);
-        setSearchName(value.Name);
+        setNewSearch(value);
         cancel && cancel();
         axios.post(
             apiPath + "/campainNameSearch",
@@ -69,12 +72,21 @@ const EditNewsletter = (props) => {
                 })
             }
         ).then(res => {
-            setSearchData(res && res.data && res.data.name)
+            setSearchData(res && res.data && res.data.name);
         })
+    }
+
+    const onSelectCampaign = (value) => {
+        setNewSearch(value.Name);
+        let duplicateNewsletter = { ...renderData }
+        duplicateNewsletter.campaign_id = value.Id;
+        setRenderData({ ...duplicateNewsletter });
+        setSearchData([]);
     }
 
     const onSubmit = (event) => {
         event.preventDefault();
+        let stDate = new Date(renderData.datetime)
         setButtonText("Upating...")
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
@@ -90,7 +102,7 @@ const EditNewsletter = (props) => {
                 name: renderData.name,
                 support_mailsettings_id: parseInt(renderData.Template.Id),
                 status: renderData.status,
-                datetime: renderData && renderData.status == "Schedule" ? renderData.datetime : null,
+                datetime: renderData && renderData.status == "Schedule" ? stDate : null,
                 group: renderData.group,
                 cron_status: "pending",
                 date_updated: currentDate,
@@ -115,7 +127,7 @@ const EditNewsletter = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit NewsLetter</h6>
-                        <button onClick={() => history.push("/newsletter")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/newsletter?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => onSubmit(event)}>
@@ -156,8 +168,8 @@ const EditNewsletter = (props) => {
                                                         <select className="mrg-top-10 fnt-poppins"
                                                             value={renderData && renderData.Template && renderData.Template.Id}
                                                             onChange={event => {
-                                                                let duplicateData = { ...renderData.Template }
-                                                                duplicateData.Id = event.target.value
+                                                                let duplicateData = { ...renderData }
+                                                                duplicateData.Template.Id = event.target.value
                                                                 setRenderData({ ...duplicateData })
                                                             }}>
                                                             <option>Select Template</option>
@@ -336,21 +348,17 @@ const EditNewsletter = (props) => {
                                                     <label className="mrg-top-20 fnt-poppins">Search Campaign</label>
                                                 </div>
                                                 <div>
-                                                    <input className="mrg-top-10 fnt-poppins" type="name"                                                                           
-                                                        value={renderData && renderData.campaign_id ? renderData && renderData.campaignName : ""}
+                                                    <input className="mrg-top-10 fnt-poppins" type="name"
+                                                        value={newSearch ? newSearch : ""}
                                                         onChange={event => {
-                                                            let duplicateData = {...renderData}
-                                                            duplicateData.campaignName = event.target.value;
-                                                            setRenderData({...duplicateData})
                                                             onChageKeyword(event.target.value);
                                                         }}
                                                     />
                                                     <div>
                                                         {searchData && searchData.length !== 0 ? searchData.map(single =>
                                                             <ul className="has-cursor-pointer seaarch-list" onClick={() => {
-                                                                onChageKeyword(single);
-                                                                // onChageKeyword(single.Id);
-                                                                // selectSearchData(single.Name);
+                                                                onSelectCampaign(single);
+
                                                             }}>
                                                                 <li className="has-padding-left-10" value={single.Id}>{single.Name}</li>
                                                             </ul>
@@ -363,7 +371,9 @@ const EditNewsletter = (props) => {
 
                                     {/* buttons */}
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/newsletter?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

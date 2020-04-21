@@ -9,46 +9,50 @@
      h1{
             color:$dashboard-card-hadr;
     }
+        }
+    .dashboard-card-hr-line { 
+        width: 361px;
+        height: 1px;
+        background:$dashboard-card-hr-vl-line;
     }
-.dashboard-card-hr-line { 
-      width: 361px;
-    height: 1px;
-    background:$dashboard-card-hr-vl-line;
-}
-.card-left-text {
-           width: 192px;
-        color:$dashboard-card-left-right-text;
+    .card-left-text {
+            width: 192px;
+            color:$dashboard-card-left-right-text;
+        }
+    .dashboard-cards-min-line{
+        width: 1.15px;
+        height: 106px;
+        background: #e0e0e0;
+        
     }
-.dashboard-cards-min-line{
-    width: 1.15px;
-    height: 106px;
-    background: #e0e0e0;
-    
-}
-.card-right-text {
-        color:$dashboard-card-left-right-text;
+    .card-right-text {
+            color:$dashboard-card-left-right-text;
+        }
     }
-}
-// Last Week campaign styling start
-.dashboard-responsive-select-opt-wdth{
-    width:160px;
-}
-.last-week-wraping-cards{
-    flex-wrap: wrap;
-}
-.last-week-main-dev{
-    min-height:70vh ;
-.dashboard-Lastweek-Campaign-hdr{
-width: 1311px;
-    height: 69px;
-    background-color:$Table-navbar;
+    // Last Week campaign styling start
+    .dashboard-responsive-select-opt-wdth{
+        width:160px;
+    }
+    .last-week-wraping-cards{
+        flex-wrap: wrap;
+    }
+    .last-week-main-dev{
+        min-height:70vh ;
+    .dashboard-Lastweek-Campaign-hdr{
+    width: 1311px;
+        height: 69px;
+        background-color:$Table-navbar;
 
-}
-.Last-week-card-section{
-    width: 288px!important;
-    height: 440px;
-    box-shadow: 0 0 18px 0 $dashbrd-card-box-shadow;
-     border-radius:10px;
-
-}
+    }
+    .heading-of-camp{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 20px;
+    }
+    .Last-week-card-section{
+        width: 288px!important;
+        height: 440px;
+        box-shadow: 0 0 18px 0 $dashbrd-card-box-shadow;
+        border-radius:10px;
+        }
 }

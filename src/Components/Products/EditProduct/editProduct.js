@@ -8,10 +8,12 @@ import axios from 'axios'
 import { UPDATE_PRODUCT } from '../../apollo/Mutations/updateProduct'
 import { apiPath } from '../../../config'
 import Loader from '../../commonComponents/Loader/loader'
+import { getParams } from '../../functions'
 
 const EditProduct = (props) => {
 
-    let { history, match } = props;
+    let { history, match, location } = props;
+    let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_PRODUCT(id))
     const [renderData, setRenderData] = useState("");
@@ -100,7 +102,7 @@ const EditProduct = (props) => {
                     {/* header */}
                     <div className="header-of-viewAdministrator">
                         <h6 className="heading6-of-header fnt-poppins">Edit Product</h6>
-                        <button onClick={() => history.push("/product")} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
+                        <button onClick={() => history.goBack("/product?page=" + path)} className="cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
                     <form onSubmit={event => editData(event)}>
@@ -118,17 +120,18 @@ const EditProduct = (props) => {
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
+                                                        marginLeft: "89px",
+                                                        width: "100px"
                                                     }}>
                                                 </div>
                                                 :
                                                 <img className="dashboard_icon"
-                                                    src={require('../../../assets/Images/admin.png')}
+                                                    src={require('../../../assets/Images/imageplaeholder.png')}
                                                     style={{
                                                         height: "100px",
                                                         width: "95px",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "7%"
+                                                        marginLeft: "5%"
                                                     }}
                                                 />
                                             }
@@ -329,7 +332,7 @@ const EditProduct = (props) => {
                                                 <div className="Form-Inputs-Fields has-margin-left-50">
                                                     <div className="form-group">
                                                         <div>
-                                                            <label className="mrg-top-20 fnt-poppins">Variation Name</label>
+                                                            <label className="mrg-top-20 fnt-poppins">Variation Value</label>
                                                         </div>
                                                         <div>
                                                             <input className="mrg-top-10" type="slug"
@@ -352,7 +355,9 @@ const EditProduct = (props) => {
                                         </div>
                                     </div>
                                     <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
-                                        <button className="cancel-btn-of-form fnt-poppins">Cancel</button>
+                                        <span className="cancel-btn-of-form fnt-poppins"
+                                            onClick={() => history.goBack("/product?page=" + path)}
+                                        >Cancel</span>
                                         <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                                     </div>
                                 </div>

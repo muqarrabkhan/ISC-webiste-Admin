@@ -8,9 +8,11 @@ import { ADSONS } from '../../apollo/Mutations/adsonsMutation'
 import { DELETE_ADSON } from '../../apollo/Mutations/deleteAdson'
 import Loader from '../../commonComponents/Loader/loader'
 import ReactPaginate from "react-paginate";
+import { getParams } from '../../functions'
 
 const ViewAdson = (props) => {
-    let { history } = props;
+    let { history , location } = props;
+    let path = getParams(location.search);
     const [users, setUsers] = useState([]);
     const [allPages] = useMutation(ADSONS);
     const [deleteAdson] = useMutation(DELETE_ADSON);
@@ -19,10 +21,11 @@ const ViewAdson = (props) => {
     const [page, setPage] = useState(1);
 
     const pageHandler = (value) => {
-        setPage(value.selected + 1);
+        setPage(parseInt(value.selected) + 1);
+        history.push("/adson?page=" + (parseInt(value.selected) + 1));
         allPages({
             variables: {
-                page: value.selected + 1,
+                page: parseInt(value.selected) + 1,
                 limit: 10
             }
         }
@@ -36,7 +39,7 @@ const ViewAdson = (props) => {
     useEffect(() => {
         allPages({
             variables: {
-                page: 1,
+                page: path && parseInt(path.page) ? parseInt(path.page) : page,
                 limit: 10
             }
         }
@@ -128,7 +131,9 @@ const ViewAdson = (props) => {
                                 onPageChange={pageHandler}
                                 containerClassName={"digit-icons main"}
                                 subContainerClassName={"container column"}
-                                activeClassName={"p-one"} />
+                                activeClassName={"p-one"} 
+                                forcePage={path && parseInt(path.page) ? (parseInt(path.page) - 1) : 0}
+                                />
                         </div>
                     </div>
                     <Style />
