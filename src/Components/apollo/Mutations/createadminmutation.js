@@ -8,8 +8,7 @@ export const CREATE_ADMIN = gql`
                         $Name:String,
                         $Status:String,
                         $CreatedDate:DateTime,
-                        $CreatedIp: Long,
-                        $CreatedBy: Int
+                        $CreatedIp: Long
                         )
                        {
     createAdmin (Email:$Email ,
@@ -18,8 +17,8 @@ export const CREATE_ADMIN = gql`
                 Name:$Name,
                 Status:$Status,
                 CreatedDate:$CreatedDate,
-                CreatedIp:$CreatedIp,
-                CreatedBy:$CreatedBy)
+                CreatedIp:$CreatedIp
+                )
                 {
                    Id     
                    error

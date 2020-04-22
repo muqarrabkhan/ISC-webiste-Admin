@@ -23,6 +23,7 @@ const EditProduct = (props) => {
     const [buttonText, setButtonText] = useState("Update")
     let currentDate = new Date();
     currentDate = currentDate.toISOString();
+    const [productImg,setProductImg]=useState("");
 
     useEffect(() => {
         let duplicateData = data && data.getproductbyId ? { ...data.getproductbyId } : {}
@@ -34,10 +35,12 @@ const EditProduct = (props) => {
         });
         setRenderData(duplicateData);
         setVariation(variation);
+        setProductImg(data && data.getproductbyId && data.getproductbyId.image);
     }, [data, data && data.getproductbyId])
 
     const uploadProductImage = (event, index) => {
         const file = event.target.files[0];
+        setProductImg("Loading");
         getBase64(file).then(
             data => {
                 let final = {
@@ -49,6 +52,7 @@ const EditProduct = (props) => {
                     let duplicateProducts = { ...renderData };
                     duplicateProducts.image = res.data.imageUrl;
                     setRenderData({ ...duplicateProducts })
+                    setProductImg(res.data.imageUrl);
                 });
             });
     };
@@ -114,10 +118,10 @@ const EditProduct = (props) => {
                                 <div className="container  Form-section-startup Form-sections-startups-responsive">
                                     <div className="Form-section2-uploading-image">
                                         <div className="has-padding-top-20">
-                                            {renderData && renderData.image ?
+                                            {productImg ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${renderData && renderData.image ? productImage_BaseUrl + renderData.image : ""})`,
+                                                        backgroundImage: `url(${productImg !=="Loading"  ? productImage_BaseUrl + renderData.image : require('../../../assets/Images/main-loader.gif')})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
@@ -130,9 +134,9 @@ const EditProduct = (props) => {
                                                     src={require('../../../assets/Images/imageplaeholder.png')}
                                                     style={{
                                                         height: "100px",
-                                                        width: "95px",
+                                                        width: "100px",
                                                         backgroundRepeat: "no-repeat",
-                                                        marginLeft: "5%"
+                                                        marginLeft: "89px"
                                                     }}
                                                 />
                                             }
@@ -203,7 +207,7 @@ const EditProduct = (props) => {
                                                         <label>Product Short Description*</label>
                                                     </div>
                                                     <div>
-                                                        <input className="mrg-top-10" type="slug"
+                                                        <input className="mrg-top-10 fnt-poppins" type="slug"
                                                             value={renderData && renderData.description}
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }

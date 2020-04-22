@@ -11,6 +11,7 @@ import axios from 'axios'
 import { apiPath } from '../../../config'
 // import ImageLoader from '../../../assets/Images/loader.gif'
 import ContentLoader from 'react-content-loader'
+import Cookie from 'react-cookies'
 
 const CompaignDetails = (props) => {
     let { history, match, location } = props;
@@ -33,14 +34,20 @@ const CompaignDetails = (props) => {
     const [hideShowColors, setHideShowColors] = useState(false)
     const [hideShowButtonText, setHideShowButtonText] = useState("Edit Hash Tag Colors")
     const [updateButtonText, setUpdateButtonText] = useState("Update")
+    const [bannerImg, setBannerImg] = useState("");
+    const [logoImg, setLogoImg] = useState("")
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
         setRenderData(data && data.SingleCampaign ? { ...data.SingleCampaign } : {});
         setGetAllCampaigns(data && data.campaignCategories)
+        setBannerImg(data && data.SingleCampaign && data.SingleCampaign.Banner);
+        setLogoImg(data && data.SingleCampaign && data.SingleCampaign.Logo);
     }, [data])
 
     const uploadProductImage = (event, index) => {
         const file = event.target.files[0];
+        setBannerImg("Loading");
         getBase64(file).then(
             data => {
                 let final = {
@@ -50,12 +57,14 @@ const CompaignDetails = (props) => {
                     let duplicateProducts = { ...renderData };
                     duplicateProducts.Banner = res.data.imageUrl;
                     setRenderData({ ...duplicateProducts })
+                    setBannerImg(res.data.imageUrl);
                 });
             });
     };
 
     const uploadOverlayImage = (event) => {
         const file = event.target.files[0];
+        setLogoImg("Loading");
         getBase64(file).then(
             data => {
                 let final = {
@@ -65,6 +74,7 @@ const CompaignDetails = (props) => {
                     let duplicateProducts = { ...renderData };
                     duplicateProducts.Logo = res.data.imageUrl;
                     setRenderData({ ...duplicateProducts })
+                    setLogoImg(res.data.imageUrl);
                 })
             });
     };
@@ -88,6 +98,7 @@ const CompaignDetails = (props) => {
     //     duplicateVariation.push("")
     //     setLogo(duplicateVariation);
     // }
+    let token = Cookie.load("token");
 
     const getBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -126,13 +137,15 @@ const CompaignDetails = (props) => {
                     website_url: renderData.website_url ? renderData.website_url : "",
                     ShortDescription: renderData.ShortDescription ? renderData.ShortDescription : "",
                     Description: renderData.Description ? renderData.Description : "",
-                    Banner: renderData.Banner ? renderData.Banner : "",
+                    Banner: renderData.Banner,
                     Primary_color: renderData && renderData.Primary_color,
                     Secondary_color: renderData && renderData.Secondary_color,
                     Tertiary_color: renderData && renderData.Tertiary_color,
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
-                    Logo: renderData.Logo ? renderData.Logo : ""
+                    Logo: renderData.Logo,
+                    Email: email ? email : "",
+                    token: token
                 }
             }).then(res => {
                 setUpdateButtonText("Updated")
@@ -153,13 +166,15 @@ const CompaignDetails = (props) => {
                     website_url: renderData.website_url ? renderData.website_url : "",
                     ShortDescription: renderData.ShortDescription ? renderData.ShortDescription : "",
                     Description: renderData.Description ? renderData.Description : "",
-                    Banner: renderData.Banner ? renderData.Banner : "",
+                    Banner: renderData.Banner,
                     Primary_color: color.hex,
                     Secondary_color: secondaryColor.hex,
                     Tertiary_color: tertiary.hex,
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
-                    Logo: renderData.Logo
+                    Logo: renderData.Logo,
+                    Email: email ? email : "",
+                    token: token
                 }
             }).then(res => {
                 setUpdateButtonText("Updated")
@@ -192,25 +207,14 @@ const CompaignDetails = (props) => {
                                         <label className="overlay-responsive-social-img mrg-left-50 fnt-poppins">Banner Image</label>
                                         <div class="field mrg-top-20 mrg-left-50">
                                             <div className="file is-small has-name ">
-                                                {renderData && renderData.Banner ?
+                                                {bannerImg ?
                                                     <div className="store-front-image"
                                                         style={{
-                                                            backgroundImage: `url(${renderData && renderData.Banner ? campaignBanner_baseurl + renderData.Banner :
-                                                                <img className="dashboard_icon" alt="edit-campaign"
-                                                                    src={require('../../../assets/Images/admin.png')}
-                                                                    style={{
-                                                                        height: "100px",
-                                                                        width: "95px",
-                                                                        backgroundRepeat: "no-repeat",
-                                                                        marginLeft: "7%",
-                                                                        width: "101px"
-                                                                    }}
-                                                                />
-                                                                })`,
+                                                            backgroundImage: `url(${bannerImg !== "Loading" ? campaignBanner_baseurl + bannerImg : require('../../../assets/Images/main-loader.gif')})`,
                                                             height: "100px",
                                                             backgroundSize: "contain",
                                                             backgroundRepeat: "no-repeat",
-                                                            marginLeft: "7%",
+                                                            marginLeft: "89px",
                                                             width: "101px"
                                                         }}>
                                                     </div>
@@ -219,9 +223,9 @@ const CompaignDetails = (props) => {
                                                         src={require('../../../assets/Images/admin.png')}
                                                         style={{
                                                             height: "100px",
-                                                            width: "95px",
+                                                            width: "100px",
                                                             backgroundRepeat: "no-repeat",
-                                                            marginLeft: "7%"
+                                                            marginLeft: "89px"
                                                         }}
                                                     />
                                                 }
@@ -252,10 +256,10 @@ const CompaignDetails = (props) => {
                                     {/* First choose file button */}
                                     <div className="field mrg-top-20  mrg-left-50">
                                         <div className="file is-small has-name ">
-                                            {renderData && renderData.Logo ?
+                                            {logoImg ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${renderData && renderData.Logo ? campaignLogo_baseurl + renderData.Logo : "no-image"})`,
+                                                        backgroundImage: `url(${logoImg != "Loading" ? campaignLogo_baseurl + logoImg : require('../../../assets/Images/main-loader.gif')})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
@@ -560,6 +564,22 @@ const CompaignDetails = (props) => {
                                                                 setRenderData(duplicateData);
                                                             }}
                                                             type="date"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                                <div className="form-group">
+                                                    <div>
+                                                        <label >Email</label>
+                                                    </div>
+                                                    <div>
+                                                        <input className="mrg-top-10 fnt-poppins"
+                                                            type={email}
+                                                            value={email}
+                                                            onChange={event => {
+                                                                setEmail(event.target.value);
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>

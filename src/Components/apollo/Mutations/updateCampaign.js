@@ -17,7 +17,9 @@ mutation updateCampaign(
     $Tertiary_color: String,
     $StartDate: DateTime,
     $EndDate: DateTime,
-    $Logo: String
+    $Logo: String,
+    $Email: String,
+    $token: String
     )
     {
         updateCampaign(
@@ -36,7 +38,9 @@ mutation updateCampaign(
             Tertiary_color:$Tertiary_color,
             StartDate:$StartDate,
             EndDate:$EndDate,
-            Logo:$Logo
+            Logo:$Logo,
+            Email:$Email,
+            token:$token 
             )
                 {
                     error

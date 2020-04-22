@@ -42,7 +42,6 @@ const CreateCompaign = (props) => {
     const [website, setwebsite_url] = useState("")
     const [buttonText, setButtonText] = useState("Create")
     const [selectOverlay, setSelectOverlay] = useState("")
-    const [imageLoader, setImageLoader] = useState(false)
     const [loader, setLoader] = useState(false)
 
     const addImage = () => {
@@ -53,7 +52,7 @@ const CreateCompaign = (props) => {
 
     const uploadProductImage = (event) => {
         const file = event.target.files[0];
-        setImageLoader(true)
+        setBannerImage("Loading");
         getBase64(file).then(
             data => {
                 let final = {
@@ -61,7 +60,6 @@ const CreateCompaign = (props) => {
                 };
                 axios.post(apiPath + "/bannerUpload", final).then(res => {
                     setBannerImage(res.data.imageUrl);
-                    setImageLoader(false)
                 });
             });
     };
@@ -71,6 +69,7 @@ const CreateCompaign = (props) => {
     const uploadOverlayImage = (event) => {
         setLoader(true);
         const file = event.target.files[0];
+        setSelectOverlay("Loading");
         getBase64(file).then(
             data => {
                 let final = {
@@ -190,7 +189,7 @@ const CreateCompaign = (props) => {
                                             {bannerimage ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${bannerimage ? campaignBanner_baseurl + bannerimage : <img src={ImageLoader} />})`,
+                                                        backgroundImage: `url(${bannerimage !=="Loading" ? campaignBanner_baseurl + bannerimage : require('../../../assets/Images/main-loader.gif') })`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
@@ -237,7 +236,7 @@ const CreateCompaign = (props) => {
                             {selectOverlay ?
                                 <div className="store-front-image has-margin-top-10"
                                     style={{
-                                        backgroundImage: `url(${selectOverlay ? campaignLogo_baseurl + selectOverlay : <p style={{ color: "red" }}>Loading...</p>})`,
+                                        backgroundImage: `url(${selectOverlay !== "Loading"? campaignLogo_baseurl + selectOverlay : require('../../../assets/Images/main-loader.gif')})`,
                                         height: "100px",
                                         backgroundSize: "contain",
                                         width: "100px",
