@@ -54,6 +54,7 @@ const EditNewsletter = (props) => {
         // })
         // setSelectedData(duplicateSelectedIntrestedIds)
         setInterestData(data && data.getAllIntersts);
+        console.log("data && data.getAllIntersts",data && data.getAllIntersts)
         setRenderData(data && data.singlenewsletter ? { ...data.singlenewsletter } : {})
         setSelectTemplate(data && data.singlenewsletter && data.singlenewsletter.Template);
         setNewSearch(data && data.singlenewsletter && data.singlenewsletter.campaign_id ? data.singlenewsletter.campaignName : "")

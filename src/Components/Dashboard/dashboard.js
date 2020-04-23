@@ -278,13 +278,13 @@ const Dashboard = () => {
                     {cards && cards.length !== 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
-                          <div className="" style={{
+                          <div className="background-dashboard" style={{
                             backgroundImage: `url(${single.Image ? camapignImage + single.Image
                               :
                               single.Overlay ? overlays + single.Overlay : ""})`,
                               backgroundSize: 'contain',
                               minHeight: '210px',
-                              marginLeft: "8px",
+                              marginLeft: "36px",
                               marginTop: "5px",
                               backgroundRepeat: "no-repeat"
                           }}>
