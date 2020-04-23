@@ -22,6 +22,14 @@ export default()=>{
                     height: 32px;
                     border: 1px solid;
                 }
+                .Table-Header .search-filters{
+                    width:100%;
+                    justify-content:space-between;
+                }
+                // .tr-border{
+                //     border-bottom:1px solid silver;
+                    
+                // }
                 .btns-of-viewcompaign{
                     width: 290px;
                     height: 97px;

@@ -433,7 +433,7 @@ const ViewCompaign = (props) => {
                             </div>
                         </div>
                         <div className="Table-Header">
-                            <div className="is-flex flex-end">
+                            <div className="is-flex search-filters">
                                 <select className="select-option-of-adminstrator fnt-poppins"
                                     onChange={event => selectUserorAdminHandler(event.target.value)}
                                 >
@@ -474,7 +474,7 @@ const ViewCompaign = (props) => {
                                     <option value="highestSupport">Highest Support</option>
                                     <option value="lowestSupport">Lowest Support</option>
                                 </select>
-                                <select className="select-option-of-adminstrator fnt-poppins mrg-left-50">
+                                {/* <select className="select-option-of-adminstrator fnt-poppins mrg-left-50">
                                     <option>Select Coupan</option>
                                     <option>NONPROFIT</option>
                                     <option>SAJJAD10</option>
@@ -500,7 +500,7 @@ const ViewCompaign = (props) => {
                                     <option>PANKAJ</option>
                                     <option>Kristen20</option>
                                     <option>PREMIUM_COUPON_ABDUL</option>
-                                </select>
+                                </select> */}
                             </div>
                         </div>
                         {/* Table-Title */}

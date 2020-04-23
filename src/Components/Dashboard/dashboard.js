@@ -282,11 +282,11 @@ const Dashboard = () => {
                             backgroundImage: `url(${single.Image ? camapignImage + single.Image
                               :
                               single.Overlay ? overlays + single.Overlay : ""})`,
-                              backgroundSize: 'contain',
-                              minHeight: '210px',
-                              marginLeft: "36px",
-                              marginTop: "5px",
-                              backgroundRepeat: "no-repeat"
+                            backgroundSize: 'contain',
+                            minHeight: '210px',
+                            marginLeft: "36px",
+                            marginTop: "5px",
+                            backgroundRepeat: "no-repeat"
                           }}>
                           </div>
                           <hr />
