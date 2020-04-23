@@ -83,7 +83,7 @@ const ViewCoupan = (props) => {
                                             <td>{single.Name ? single.Name : "-"}</td>
                                             <td>{single.Description ? single.Description : "-"}</td>
                                             <td>{single.reportCount ? single.reportCount : "-"}</td>
-                                            <td>
+                                            <td className="is-flex">
                                                 <span onClick={() => history.push("/count-reports/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Reports</span>
                                             </td>
                                         </tr>
