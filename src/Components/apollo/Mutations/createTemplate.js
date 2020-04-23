@@ -10,7 +10,6 @@ mutation createTemplate(
     $Content: String,
     $Status: String,
     $CreatedIp: Long,
-    $CreatedBy: Int,
     $CreatedDate: DateTime,
     $Type: String,
     $Category:String
@@ -25,7 +24,6 @@ mutation createTemplate(
         Content:$Content,
         Status:$Status,
         CreatedIp:$CreatedIp,
-        CreatedBy:$CreatedBy,
         CreatedDate:$CreatedDate,
         Category:$Category,
         Type:$Type

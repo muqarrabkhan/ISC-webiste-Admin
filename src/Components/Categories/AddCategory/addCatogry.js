@@ -30,7 +30,6 @@ const AddCategory = (props) => {
                 Name: name,
                 description: description,
                 CreatedIp: ipInt(ipAddress).toInt(),
-                CreatedBy: 1,
                 Status: "Enable"
             }
         }).then(res => {

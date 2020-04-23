@@ -4,7 +4,7 @@ export const CREATE_NEWSLETTER = gql`
 mutation createnewsletter(
     $name: String,
     $support_mailsettings_id:Int,
-    $datetime: String,
+    $datetime: DateTime,
     $status: String,
     $group: String,
     $cron_status: String,

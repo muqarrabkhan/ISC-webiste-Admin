@@ -8,8 +8,7 @@ mutation createwebpages(
     $pageHeading:String,
     $MetaDescription:String,
     $pageContent:String,
-    $createdIp:Long,
-    $createdBy:Int
+    $createdIp:Long
     
 ){
     createwebpages(
@@ -17,7 +16,6 @@ mutation createwebpages(
         pageTitle: $pageTitle,
         pageHeading:$pageHeading,
         MetaDescription: $MetaDescription,
-        createdBy:$createdBy,
         createdIp: $createdIp,
         pageContent:$pageContent
     )

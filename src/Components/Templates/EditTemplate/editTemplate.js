@@ -26,6 +26,7 @@ const EditTemplate = (props) => {
     const [templateVariables, setTemplatevariables] = useState([]);
     const [category, setCategory] = useState("");
     const [joditvalue, setJoditValue] = useState("");
+    const [joditContent, setJoditContent] = useState("");
 
     const updateUser = (event) => {
         event.preventDefault();
@@ -156,9 +157,7 @@ const EditTemplate = (props) => {
     }
 
     const onChangeEditor = (value) => {
-        let dupilcateName = { ...renderData }
-        dupilcateName.Content = value
-        setRenderData({ ...dupilcateName })
+        setJoditContent(value);
     }
 
     return (

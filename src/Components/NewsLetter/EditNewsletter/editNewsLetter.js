@@ -32,12 +32,17 @@ const EditNewsletter = (props) => {
     const [buttonText, setButtonText] = useState("Update")
     const [searchData, setSearchData] = useState();
     const [newSearch, setNewSearch] = useState();
+    const [dateTime, setDatetime] = useState("");
 
     useEffect(() => {
         getTemplates().then(res => {
             setTemplates(res && res.data && res.data.getNewsLetterTemplates);
         })
     }, [])
+
+    let dateFormate = renderData.datetime ? standardDate(renderData.datetime) : "";
+    dateFormate = dateFormate ? dateFormate.fullYear + "-" + dateFormate.monthNumber + "-" + dateFormate.dateNumber : ""
+    let stDate = new Date(dateFormate);
 
     useEffect(() => {
         // let duplicateSelectedIntrestedIds = data && data.singlenewsletter && data.singlenewsletter.interestedIds
@@ -52,7 +57,7 @@ const EditNewsletter = (props) => {
         setRenderData(data && data.singlenewsletter ? { ...data.singlenewsletter } : {})
         setSelectTemplate(data && data.singlenewsletter && data.singlenewsletter.Template);
         setNewSearch(data && data.singlenewsletter && data.singlenewsletter.campaign_id ? data.singlenewsletter.campaignName : "")
-
+        setDatetime(data && data.singlenewsletter && data.singlenewsletter.datetime ? data.singlenewsletter.datetime : "");
     }, [data])
 
     let cancel;
@@ -85,7 +90,6 @@ const EditNewsletter = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        let stDate = new Date(renderData.datetime)
         setButtonText("Upating...")
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
@@ -101,7 +105,7 @@ const EditNewsletter = (props) => {
                 name: renderData.name,
                 support_mailsettings_id: parseInt(renderData.Template.Id),
                 status: renderData.status,
-                datetime: renderData && renderData.status == "Schedule" ? stDate : null,
+                datetime: renderData && renderData.status == "Schedule" ? stDate.toISOString() : null,
                 group: renderData.group,
                 cron_status: "pending",
                 date_updated: currentDate,
@@ -114,10 +118,6 @@ const EditNewsletter = (props) => {
             setButtonText("Update")
         })
     }
-
-    let date = renderData && renderData.datetime;
-    date = standardDate(date).standardDate
-
 
     return (
         <>
@@ -226,16 +226,17 @@ const EditNewsletter = (props) => {
                                             <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 mrg-top-20 fnt-poppins">
                                                 <div className="form-group fnt-poppins">
                                                     <div>
-                                                        <label>Set Newsletter Date And Time (MM/DD/YYYY HH:mm:ss)</label>
+                                                        <label>Set Newsletter Date And Time </label>
                                                     </div>
                                                     <div>
-                                                        <input className="mrg-top-10 fnt-poppins" type="date" placeholder="Enter Short Description"
-                                                            value={standardDate(renderData && renderData.datetime).standardDate}
+                                                        <input className="mrg-top-10 fnt-poppins" id="myDate" placeholder="Enter Short Description"
+                                                            value={dateFormate}
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.datetime = event.target.value
                                                                 setRenderData({ ...duplicateData })
                                                             }}
+                                                            type="date"
                                                         />
                                                     </div>
                                                 </div>

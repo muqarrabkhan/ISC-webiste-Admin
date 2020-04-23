@@ -502,7 +502,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.ShortDescription = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                         />
                                                     </div>
@@ -520,7 +520,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.facebook_url = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                         />
                                                     </div>
@@ -540,7 +540,7 @@ const CompaignDetails = (props) => {
                                                                 onChange={event => {
                                                                     let duplicateData = { ...renderData }
                                                                     duplicateData.EndDate = event.target.value
-                                                                    setRenderData(duplicateData);
+                                                                    setRenderData({...duplicateData});
                                                                 }}
                                                                 type="date"
                                                             />
@@ -561,7 +561,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.StartDate = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                             type="date"
                                                         />
@@ -605,7 +605,7 @@ const CompaignDetails = (props) => {
                                                                 onChange={event => {
                                                                     let duplicateData = { ...renderData }
                                                                     duplicateData.goal_support = event.target.value
-                                                                    setRenderData(duplicateData);
+                                                                    setRenderData({...duplicateData});
                                                                 }}
                                                             />
                                                             : ""}
@@ -624,7 +624,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.Description = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                         />
                                                     </div>
@@ -642,7 +642,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.CategoryId = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                         >
                                                             <option>Select Category</option>
@@ -665,7 +665,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.website_url = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                         />
                                                     </div>
@@ -684,7 +684,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.twitter_url = event.target.value
-                                                                setRenderData(duplicateData);
+                                                                setRenderData({...duplicateData});
                                                             }}
                                                         />
                                                     </div>

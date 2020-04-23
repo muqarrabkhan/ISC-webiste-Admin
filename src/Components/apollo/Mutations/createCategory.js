@@ -5,7 +5,6 @@ mutation createcategory(
     $Name: String!,
     $description: String,
     $CreatedIp: Long,
-    $CreatedBy: Int,
     $Status:String
     )
     {
@@ -13,7 +12,6 @@ mutation createcategory(
             Name:$Name,
             description:$description,
             CreatedIp:$CreatedIp,
-            CreatedBy:$CreatedBy,
             Status:$Status
             )
             {

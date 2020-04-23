@@ -10,17 +10,12 @@ import { getParams } from '../../functions/index'
 const AddPage = (props) => {
     let { history, location } = props;
     let path = getParams(location.search);
-    const editor = useRef(null)
-    const config = {
-        readonly: false
-    }
     const [content, setContent] = useState("");
     const [metaKeywords, setMetaKeyWord] = useState("");
     const [pageTitle, setPageTitle] = useState("");
     const [pageHeading, setPageHeading] = useState("");
     const [metaDescription, setMetaDescription] = useState("");
     const [btnText, setBtnText] = useState("Create");
-    const [pageContent, setPageContent] = useState("");
     const [ipAddress, setIpAddress] = useState();
     const [data] = useMutation(CREATE_WEB_PAGE);
 
@@ -40,8 +35,7 @@ const AddPage = (props) => {
                 pageHeading: pageHeading,
                 MetaDescription: metaDescription,
                 pageContent: content,
-                createdBy: 1,
-                createdIp: ipInt(ipAddress).toInt(),
+                createdIp: ipInt(ipAddress).toInt()
             }
         }).then(res => {
             setBtnText("Created");

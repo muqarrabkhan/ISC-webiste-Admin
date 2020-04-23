@@ -20,8 +20,7 @@ const AddCoupan = (props) => {
             variables: {
                 Coupon_code: couponCode.replace(/ /g, ''),
                 Status_coupon: "Enable",
-                Discount_percentage: parseInt(discount),
-                User_id: 614799
+                Discount_percentage: parseInt(discount)
             }
         }).then(res => {
             if (res.data.createCoupons.error) {

@@ -18,13 +18,13 @@ const AddNewsletter = (props) => {
     const { data } = useQuery(USER_INTEREST);
     const [templates, setTemplates] = useState("");
     const [name, setName] = useState("");
-    const [selectTemplate, setSelecTemplate] = useState("")
+    const [selectTemplate, setSelecTemplate] = useState("");
     const [dateTime, setDateTime] = useState("");
     const [status, setStatus] = useState("");
     const [group, setGroup] = useState("");
     const [hideShow, setHideShow] = useState(false);
     const [hideShowDate, setHideShowDate] = useState(false);
-    const [searchHide, setSearchHide] = useState(false)
+    const [searchHide, setSearchHide] = useState(false);
     const [interestData, setInterestData] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
     const [statusValidtion, setStatusValidation] = useState(false);
@@ -99,17 +99,20 @@ const AddNewsletter = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         setButtonText("Creating...")
-        // let stDate = new Date(dateTime)
+        let stDate = new Date(dateTime)
         let currentDate = new Date();
         currentDate = currentDate.toISOString();
         if (!selectTemplate) {
             setTemplateValidation(true);
+            setButtonText("Create")
         }
         if (!status) {
             setStatusValidation(true);
+            setButtonText("Create")
         }
         if (!group) {
             setGroupValidation(true);
+            setButtonText("Create")
         }
         else {
             // let interestIds = []
@@ -122,7 +125,7 @@ const AddNewsletter = (props) => {
                 variables: {
                     name: name,
                     support_mailsettings_id: parseInt(selectTemplate),
-                    datetime: dateTime ? dateTime : "",
+                    datetime: stDate ? stDate : null,
                     status: status,
                     group: group,
                     cron_status: "pending",

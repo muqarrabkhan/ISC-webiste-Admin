@@ -52,8 +52,7 @@ const AddAdministrator = (props) => {
                     RoleId: parseInt(roleId),
                     Status: "Enable",
                     CreatedDate: currentDate,
-                    CreatedIp: ipInt(ipAddress).toInt(),
-                    CreatedBy: 1
+                    CreatedIp: ipInt(ipAddress).toInt()
                 }
             }).then(res => {
                 if (res.data.createAdmin.error) {
@@ -77,8 +76,7 @@ const AddAdministrator = (props) => {
                     RoleId: parseInt(roleId),
                     Status: "Enable",
                     CreatedDate: currentDate,
-                    CreatedIp: ipInt(ipAddress).toInt(),
-                    CreatedBy: 1
+                    CreatedIp: ipInt(ipAddress).toInt()
                 }
             }).then(res => {
                 if (res.data.createAdmin.error) {

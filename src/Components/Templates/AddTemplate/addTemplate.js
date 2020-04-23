@@ -64,7 +64,6 @@ const AddTemplate = (props) => {
                     Status: status,
                     Type: type,
                     CreatedIp: ipInt(ipAddress).toInt(),
-                    CreatedBy: 1,
                     CreatedDate: currentDate,
                     Category: category
                 }

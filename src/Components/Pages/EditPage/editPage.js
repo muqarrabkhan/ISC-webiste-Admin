@@ -17,10 +17,14 @@ const EditPage = (props) => {
     const [renderData, setRenderData] = useState("");
     const [buttonText, setButtonText] = useState("Update");
     const [joditvalue, setJoditValue] = useState("");
+    const [joditContent, setJoditContent] = useState("");
+
+    console.log("joditContent", joditContent);
 
     const updateUser = (event) => {
         event.preventDefault();
         setButtonText("Updating...")
+        console.log("joditContent", joditContent);
         editData({
             variables: {
                 id: parseInt(id),
@@ -28,7 +32,7 @@ const EditPage = (props) => {
                 pageTitle: renderData.pageTitle,
                 MetaDescription: renderData.MetaDescription,
                 pageHeading: renderData.pageHeading,
-                pageContent: renderData.pageContent
+                pageContent: joditContent
             }
         }).then(res => {
             setButtonText("Updated")
@@ -37,15 +41,15 @@ const EditPage = (props) => {
         })
     }
 
+
+
     useEffect(() => {
         setRenderData(data && data.singlewebpages ? { ...data.singlewebpages } : {});
         setJoditValue(data && data.singlewebpages && data.singlewebpages.pageContent);
     }, [data])
 
     const onChangeEditor = (value) => {
-        let dupilcateName = { ...renderData }
-        dupilcateName.pageContent = value
-        setRenderData({ ...dupilcateName })
+        setJoditContent(value);
     }
 
     return (
