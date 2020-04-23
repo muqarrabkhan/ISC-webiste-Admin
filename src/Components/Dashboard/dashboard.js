@@ -292,8 +292,8 @@ const Dashboard = () => {
                           <hr />
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins heading-of-camp">{single.Name}</h4>
-                            <p className="mrg-top-5 fnt-size-13  fnt-poppins">{single.CategoryId}</p>
-                            <button className="Save-btn-of-form resonsive-save-butten-cards mrg-top-20 fnt-poppins">{single.CampaignType}</button>
+                            <p className="mrg-top-5 fnt-size-13 has-margin-bottom-10 fnt-poppins">{single.CategoryId}</p>
+                            <span className="Save-btn-of-form padding-of-btn resonsive-save-butten-cards fnt-poppins">{single.CampaignType}</span>
                           </div>
                         </div>
                       </div>

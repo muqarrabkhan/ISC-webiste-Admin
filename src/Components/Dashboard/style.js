@@ -12,7 +12,9 @@ export default ()=>{
                           align-items:center;
                           min-height:60vh;  
                       }
-                     
+                      .padding-of-btn{
+                        padding: 5px 20px 5px 20px;
+                      }
 
                    `}
                </style>
