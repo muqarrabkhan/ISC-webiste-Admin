@@ -123,7 +123,8 @@ const Dashboard = () => {
     <rect x="182" y="225" rx="0" ry="0" width="141" height="200" />
     <rect x="343" y="225" rx="0" ry="0" width="141" height="200" />
   </ContentLoader>;
-  return (
+
+return (
     <div className="container-fluid Table-for-administrator-main-div">
       {/* header */}
       <div className="header-of-viewAdministrator">
