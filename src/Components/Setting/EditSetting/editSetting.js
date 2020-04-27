@@ -123,7 +123,7 @@ const EditSetting = (props) => {
                                                 <option value="Social">Social</option>
                                                 <option value="Email">Email</option>
                                                 <option value="Apps">Apps</option>
-                                                <option value="">campaignCategories</option>
+                                                <option value="campaignCategories">Campaign Categories</option>
                                             </select>
                                         </div>
                                     </div>

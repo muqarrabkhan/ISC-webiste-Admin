@@ -7,7 +7,7 @@ import ipInt from 'ip-to-int'
 import { getParams } from '../../functions'
 
 const AddSetting = (props) => {
-    let { history , location } = props;
+    let { history, location } = props;
     let path = getParams(location.search);
     const [addSetting] = useMutation(CREATE_SETTING);
     const [fieldName, setFieldName] = useState("");
@@ -122,7 +122,7 @@ const AddSetting = (props) => {
                                         <option value="Social">Social</option>
                                         <option value="Email">Email</option>
                                         <option value="Apps">Apps</option>
-                                        <option value="">campaignCategories</option>
+                                        <option value="campaignCategories">Campaign Categories</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@ const AddSetting = (props) => {
                             {/* buttons */}
                             <div className="btns-of-add mrg-left-60 mrg-top-30 fnt-poppins">
                                 <span className="cancel-btn-of-form fnt-poppins"
-                                    onClick={() =>history.goBack("/setting?page=" + path)}
+                                    onClick={() => history.goBack("/setting?page=" + path)}
                                 >Cancel</span>
                                 <button className="Save-btn-of-form mrg-left-20 fnt-poppins" type="submit">{buttonText}</button>
                             </div>
