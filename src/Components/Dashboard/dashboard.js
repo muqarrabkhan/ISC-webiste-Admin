@@ -7,9 +7,10 @@ import { ADMIN_DASHBOARD } from '../apollo/Quries/dashboardQurie'
 import { DASHBOARD_MUTATION } from '../apollo/Mutations/dashboardMutation'
 import { overlays, camapignImage } from '../../config'
 import ContentLoader from 'react-content-loader'
+import { isupportcauseCampaign } from '../../config'
 
-const Dashboard = () => {
-
+const Dashboard = (props) => {
+  let { history } = props;
   // const {loading, error, data} = useQuery(ADMIN_DASHBOARD, { context: { clientName: "second" } });
   const { loading, data, location } = useQuery(ADMIN_DASHBOARD);
   const [allCompagins] = useMutation(DASHBOARD_MUTATION);
@@ -124,7 +125,7 @@ const Dashboard = () => {
     <rect x="343" y="225" rx="0" ry="0" width="141" height="200" />
   </ContentLoader>;
 
-return (
+  return (
     <div className="container-fluid Table-for-administrator-main-div">
       {/* header */}
       <div className="header-of-viewAdministrator">
@@ -294,7 +295,9 @@ return (
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins heading-of-camp">{single.Name}</h4>
                             <p className="mrg-top-5 fnt-size-13 has-margin-bottom-10 fnt-poppins">{single.CategoryId}</p>
-                            <span className="Save-btn-of-form padding-of-btn resonsive-save-butten-cards fnt-poppins">{single.CampaignType}</span>
+                            <span className="Save-btn-of-form padding-of-btn resonsive-save-butten-cards fnt-poppins"
+                              onClick={() => window.open(single.campaign_made == "New" ? isupportcauseCampaign +"new-campaign/"+ single.Slug : isupportcauseCampaign +"campaign/"+ single.Slug)}
+                            >{single.CampaignType}</span>
                           </div>
                         </div>
                       </div>

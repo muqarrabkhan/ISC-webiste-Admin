@@ -18,6 +18,7 @@ export const DASHBOARD_MUTATION = gql`
         Id
         Name
         Slug
+        campaign_made
         CampaignType
         campaign_needed
         Image

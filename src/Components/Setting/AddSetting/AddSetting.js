@@ -122,6 +122,7 @@ const AddSetting = (props) => {
                                         <option value="Social">Social</option>
                                         <option value="Email">Email</option>
                                         <option value="Apps">Apps</option>
+                                        <option value="">campaignCategories</option>
                                     </select>
                                 </div>
                             </div>
