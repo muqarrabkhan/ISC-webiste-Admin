@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
-import CKEditor from "react-ckeditor-component";
-import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
 import { SINGLE_TEMPLATE } from '../../apollo/Quries/singleTemplate'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_TEMPLATE } from '../../apollo/Mutations/updateTemplate'
-import Loader from '../../commonComponents/Loader/loader'
 import JoditEditor from "jodit-react";
 import { getParams } from '../../functions'
 import ContentLoader from 'react-content-loader'
@@ -13,10 +10,6 @@ import ContentLoader from 'react-content-loader'
 const EditTemplate = (props) => {
     let { history, match, location } = props;
     let path = getParams(location.search);
-    const editor = useRef(null)
-    const config = {
-        readonly: false
-    }
 
     let id = match.params && match.params.id ? match.params.id : "";
     const { loading, data } = useQuery(SINGLE_TEMPLATE(id));
@@ -27,28 +20,6 @@ const EditTemplate = (props) => {
     const [category, setCategory] = useState("");
     const [joditvalue, setJoditValue] = useState("");
     const [joditContent, setJoditContent] = useState("");
-
-    const updateUser = (event) => {
-        event.preventDefault();
-        setButtontext("Updating...")
-        editData({
-            variables: {
-                Id: parseInt(id),
-                Title: renderData.Title,
-                Subject: renderData.Subject,
-                Email: renderData.Email,
-                FromText: renderData.FromText,
-                Content: renderData.Content,
-                Status: renderData.Status,
-                Type: renderData.Type,
-                Category: renderData.Category
-            }
-        }).then(res => {
-            setButtontext("Updated")
-        }).catch(error => {
-            setButtontext("Update")
-        })
-    }
 
     useEffect(() => {
         setRenderData(data && data.singletemplate ? { ...data.singletemplate } : {});
@@ -158,6 +129,28 @@ const EditTemplate = (props) => {
 
     const onChangeEditor = (value) => {
         setJoditContent(value);
+    }
+
+    const updateUser = (event) => {
+        event.preventDefault();
+        setButtontext("Updating...")
+        editData({
+            variables: {
+                Id: parseInt(id),
+                Title: renderData.Title,
+                Subject: renderData.Subject,
+                Email: renderData.Email,
+                FromText: renderData.FromText,
+                Content: joditContent,
+                Status: renderData.Status,
+                Type: renderData.Type,
+                Category: renderData.Category
+            }
+        }).then(res => {
+            setButtontext("Updated")
+        }).catch(error => {
+            setButtontext("Update")
+        })
     }
 
     return (

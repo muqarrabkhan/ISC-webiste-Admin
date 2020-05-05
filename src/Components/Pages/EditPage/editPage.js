@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import { SINGLE_PAGE } from '../../apollo/Quries/singlePage'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { UPDATE_PAGE } from '../../apollo/Mutations/updatePage'
-import Loader from '../../commonComponents/Loader/loader'
 import JoditEditor from "jodit-react";
 import { getParams } from '../../functions/index'
 import ContentLoader from 'react-content-loader'
@@ -19,12 +18,9 @@ const EditPage = (props) => {
     const [joditvalue, setJoditValue] = useState("");
     const [joditContent, setJoditContent] = useState("");
 
-    console.log("joditContent", joditContent);
-
     const updateUser = (event) => {
         event.preventDefault();
         setButtonText("Updating...")
-        console.log("joditContent", joditContent);
         editData({
             variables: {
                 id: parseInt(id),
