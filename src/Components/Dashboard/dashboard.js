@@ -294,7 +294,7 @@ const Dashboard = (props) => {
                           <hr />
                           <div className="mrg-top-10  text-center" >
                             <h4 className="fnt-size-15 fnt-poppins heading-of-camp">{single.Name}</h4>
-                            <p className="mrg-top-5 fnt-size-13 has-margin-bottom-10 fnt-poppins">{single.CategoryId}</p>
+                            <p className="mrg-top-5 fnt-size-13 has-margin-bottom-10 fnt-poppins">{single.CategoryId ? single.CategoryId : "-"}</p>
                             <span className="Save-btn-of-form padding-of-btn resonsive-save-butten-cards fnt-poppins"
                               onClick={() => window.open(single.campaign_made == "New" ? isupportcauseCampaign +"new-campaign/"+ single.Slug : isupportcauseCampaign +"campaign/"+ single.Slug)}
                             >{single.CampaignType}</span>

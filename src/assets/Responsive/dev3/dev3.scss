@@ -1,4 +1,9 @@
 @media (max-width: 1400px) and (min-width: 1200px) { 
+    // inputs responsive css
+    .input-for-search {
+        width: 183px!important;
+    }
+    // ends here
     .sidenav-Links {
         width: 210px;
     }
@@ -9,8 +14,9 @@
         height: 40px;
     }
     span.cursor-pointer.view-btn-of-table {
+        padding: 8px 0px 0px 7px;
         height: 40px;
-        width: 178px;
+        width: 133px;
     }
     .main-table-heading {
         width: 95%;

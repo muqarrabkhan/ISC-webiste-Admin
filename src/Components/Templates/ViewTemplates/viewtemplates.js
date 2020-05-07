@@ -67,7 +67,7 @@ const ViewTemplate = (props) => {
                 <div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
-                        <h6 className="heading6-of-header fnt-poppins">Tempelates</h6>
+                        <h6 className="heading6-of-header fnt-poppins">Templates</h6>
                         <button onClick={() => history.push("/add-tempelates")} className="has-cursor-pointer header-btn-of-table fnt-poppins">Create</button>
                     </div>
                     {/* Table of Administrator  */}
@@ -85,7 +85,7 @@ const ViewTemplate = (props) => {
                                         <th>Title</th>
                                         <th>Subject</th>
                                         <th>Email</th>
-                                        <th>From Text</th>
+                                        {/* <th>From Text</th> */}
                                         <th>Status</th>
                                         <th>Type</th>
                                         <th>Action</th>
@@ -97,7 +97,7 @@ const ViewTemplate = (props) => {
                                             <td>{single.Title ? single.Title : "-"}</td>
                                             <td>{single.Subject ? single.Subject : "-"}</td>
                                             <td>{single.Email ? single.Email : "-"}</td>
-                                            <td>{single.FromText ? single.FromText : "-"}</td>
+                                            {/* <td>{single.FromText ? single.FromText : "-"}</td> */}
                                             <td>{single.Status ? single.Status : "-"}</td>
                                             <td>{single.Type ? single.Type : "-"}</td>
                                             <td>
@@ -109,7 +109,7 @@ const ViewTemplate = (props) => {
                                         </tr>
                                     )}
                                     <tr className="table-footer">
-                                        <td colspan={6}>Total</td>
+                                        <td colspan={5}>Total</td>
                                         <td>{totalCustomers}</td>
                                     </tr>
                                 </tbody>

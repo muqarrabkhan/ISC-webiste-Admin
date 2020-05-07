@@ -176,11 +176,19 @@ const ViewAdministrator = (props) => {
                                             <td>{single.Name ? single.Name : "-"}</td>
                                             <td>{single.Email ? single.Email : "-"}</td>
                                             <td>{single.Status ? single.Status : "-"}</td>
-                                            {single && single.RoleId ?
+                                            {single && single.RoleId == 1 ?
                                                 <div>
                                                     <td>{single && single.RoleId == 1 ? "Super Admin" : ""}</td>
+                                                </div>
+                                                : ""}
+                                            {single && single.RoleId == 2 ?
+                                                <div>
                                                     <td>{single && single.RoleId == 2 ? "Moderator" : ""}</td>
-                                                    <td>{single && single.RoleId == 3 ? "Creater" : ""}</td>
+                                                </div>
+                                                : ""}
+                                            {single && single.RoleId == 3 ?
+                                                <div>
+                                                    <td>{single && single.RoleId == 3 ? "Creater" : ""}</td> 
                                                 </div>
                                                 : ""}
                                             <td>

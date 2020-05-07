@@ -536,7 +536,7 @@ const ViewCompaign = (props) => {
                                                         src={Deletelogo} />
                                                     <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
                                                 </div>
-                                                <div className="mrg-top-10">
+                                                <div className="mrg-top-10 is-flex">
                                                     <span onClick={() => history.push("/view-reports/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Reports</span>
                                                 </div>
                                             </td>

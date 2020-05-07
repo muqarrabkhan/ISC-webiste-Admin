@@ -100,7 +100,7 @@ const ViewCoupan = (props) => {
                                         <th>Page Link</th>
                                         <th>Coupon Status</th>
                                         <th>Total Montly Subscription</th>
-                                        <th>Total Annual Subscription</th>
+                                        {/* <th>Total Annual Subscription</th> */}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -112,7 +112,7 @@ const ViewCoupan = (props) => {
                                             <td>{single.Page_link ? single.Page_link : couponUrl + single.Coupon_code}</td>
                                             <td>{single.Status_coupon ? single.Status_coupon : "-"}</td>
                                             <td>{single.TotalMonthlySubscriptions}</td>
-                                            <td>{single.TotalAnnuallySubscriptions}</td>
+                                            {/* <td>{single.TotalAnnuallySubscriptions}</td> */}
                                             <td className="is-flex">
                                                 <img onClick={() => history.push("/edit-coupans/" + single.Id)} className=" cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                 <img className="cursor-pointer delete-image-table" alt="delete-button" onClick={() => deleteCoupon(single.Id)} src={Deletelogo} />
@@ -123,7 +123,7 @@ const ViewCoupan = (props) => {
                                     :
                                     <tfoot>
                                         <tr>
-                                            <td colSpan={5} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
+                                            <td colSpan={4} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
                                         </tr>
                                     </tfoot>
                                 }

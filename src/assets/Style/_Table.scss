@@ -101,16 +101,17 @@
     color: $Table-text-color;
     
     td{
-        padding-left: 14px;
-        padding-right: 14px;
-        padding-top: 10px;
+        // padding-left: 14px;
+        // padding-right: 14px;
+        // padding-top: 10px;
+        padding: 10px 14px 10px 14px;
     }
 }
 .table-footer{
     height: 52px;
     color: $Table-text-color;
     border: 1px solid #dddddd;
-    
+    background: #fff;   
     td{
         padding-left: 14px;
         padding-right: 14px;

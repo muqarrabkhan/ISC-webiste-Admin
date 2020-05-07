@@ -89,7 +89,7 @@ const ViewNewsletter = (props) => {
                                         <th>Name</th>
                                         <th>Template Name</th>
                                         <th>Status</th>
-                                        <th>Scheduled Date And Time</th>
+                                        {/* <th>Scheduled Date And Time</th> */}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -101,10 +101,10 @@ const ViewNewsletter = (props) => {
                                                 <td>{single.name ? single.name : "-"}</td>
                                                 <td>{single.Template ? single.Template && single.Template.Title : "-"}</td>
                                                 <td>{single.status ? single.status : "-"}</td>
-                                                <td className="is-flex">
+                                                {/* <td className="is-flex">
                                                     <span>{single.datetime ? standardDate(parseInt(single.datetime)).standardDate : "-"}</span>
                                                     <span className="has-margin-left-15">{single.datetime ? standardDate(parseInt(single.datetime)).time : "-"}</span>
-                                                </td>
+                                                </td> */}
                                                 <td>
                                                     {/* {single && single.status == "Draft" ? */}
                                                     <div className="applying-flex">
@@ -119,7 +119,7 @@ const ViewNewsletter = (props) => {
                                         )
                                     })}
                                     <tr className="table-footer">
-                                        <td colSpan={4}>Total</td>
+                                        <td colSpan={3}>Total</td>
                                         <td>{totalNewsletter}</td>
                                     </tr>
                                 </tbody>
