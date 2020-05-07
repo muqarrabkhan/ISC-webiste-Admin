@@ -79,7 +79,7 @@ const ViewTemplate = (props) => {
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
-                            <table className="main-table-heading">
+                            <table className="main-table-heading responsive-table-template">
                                 <thead className="heading-of-table background-color-head">
                                     <tr className="table-row-of-head fnt-poppins">
                                         <th>Title</th>
@@ -88,7 +88,6 @@ const ViewTemplate = (props) => {
                                         <th>From Text</th>
                                         <th>Status</th>
                                         <th>Type</th>
-                                        <th>Date Created</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -101,7 +100,6 @@ const ViewTemplate = (props) => {
                                             <td>{single.FromText ? single.FromText : "-"}</td>
                                             <td>{single.Status ? single.Status : "-"}</td>
                                             <td>{single.Type ? single.Type : "-"}</td>
-                                            <td>{single.CreatedDate ? standardDate(single.CreatedDate).standardDate : "-"}</td>
                                             <td>
                                                 <div style={{ display: "flex" }}>
                                                     <img onClick={() => history.push("/edit-tempelates/"+single.Id)} className="has-cursor-pointer edit-image-table" alt="" src={Editlogo} />
@@ -111,7 +109,7 @@ const ViewTemplate = (props) => {
                                         </tr>
                                     )}
                                     <tr className="table-footer">
-                                        <td colspan={7}>Total</td>
+                                        <td colspan={6}>Total</td>
                                         <td>{totalCustomers}</td>
                                     </tr>
                                 </tbody>

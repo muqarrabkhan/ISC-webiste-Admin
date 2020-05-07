@@ -56,7 +56,7 @@ const ViewAdson = (props) => {
                                         <td>{single.name ? single.name : "-"}</td>
                                         <td>{single.Slug ? single.Slug : "-"}</td>
                                         <td>
-                                            <div className="appling-flex-btns">
+                                            <div className="appling-flex-btns desktop-responsive">
                                                 <img onClick={() => history.push("/edit-user-interest/" + single.id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />
                                                 <img className="cursor-pointer delete-image-table" alt="delete-button" src={Deletelogo}
                                                     onClick={() => deleteAdsons(single.id)}
