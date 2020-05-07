@@ -26,10 +26,10 @@ export default()=>{
                     width:100%;
                     justify-content:space-between;
                 }
-                // .tr-border{
-                //     border-bottom:1px solid silver;
+                .tr-border-bottom{
+                    border-bottom:1px solid silver;
                     
-                // }
+                }
                 .btns-of-viewcompaign{
                     width: 290px;
                     height: 97px;

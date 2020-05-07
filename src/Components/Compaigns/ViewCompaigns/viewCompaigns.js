@@ -520,7 +520,7 @@ const ViewCompaign = (props) => {
                                 </thead>
                                 <tbody className="table-of-data">
                                     {search && search.length !== 0 ? search.map((single, index) =>
-                                        <tr key={index} className="table-row-data-of-body fnt-poppins">
+                                        <tr key={index} className="table-row-data-of-body tr-border-bottom fnt-poppins">
                                             <td>{single.Id}</td>
                                             <td>{single.Name}</td>
                                             <td>{single.CampaignType}</td>
