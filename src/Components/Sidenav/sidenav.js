@@ -142,10 +142,9 @@ const Sidenav = (props) => {
                                 <img className="administrator_icon"
                                     src={currentActive("tempelates") === "active" ? require('../../assets/Images/templateactive.png') : require('../../assets/Images/template.png')}
                                     alt="Coupan" />
-                                <span className="sidenav-link fnt-poppins">Tempelates</span>
+                                <span className="sidenav-link fnt-poppins">Templates</span>
                             </div>
                         </Link>
-
                         {/* Newsletters */}
                         <Link to={"/newsletter"}>
                             <div className={"sidenav-name-logo" + currentActive("newsletter")}>

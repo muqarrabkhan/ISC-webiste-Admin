@@ -159,7 +159,7 @@ const EditTemplate = (props) => {
                 <div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
-                        <h6 className="heading6-of-header fnt-poppins">Edit Tempelates</h6>
+                        <h6 className="heading6-of-header fnt-poppins">Edit Templates</h6>
                         <button onClick={() => history.goBack("/tempelates?page=" + path)} className=" cursor-pointer header-btn-of-table fnt-poppins">Back</button>
                     </div>
                     {/* Table of Administrator  */}
@@ -354,7 +354,7 @@ const EditTemplate = (props) => {
                                     <div className=" mrg-top-20 mrg-left-50 fnt-poppins">
                                         <div className="form-group">
                                             <div>
-                                                <label>Tempelates Variable </label>
+                                                <label>Templates Variable </label>
                                             </div>
                                             <div>
                                                 <input disabled className="redonly-input mrg-top-10  fnt-poppins"

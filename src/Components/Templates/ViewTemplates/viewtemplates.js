@@ -75,7 +75,7 @@ const ViewTemplate = (props) => {
                         <div className="background-of-table">
                         </div>
                         <div className="Table-Header">
-                            <h6 className="fnt-poppins">All Tempelates Record</h6>
+                            <h6 className="fnt-poppins">All Templates Record</h6>
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">
