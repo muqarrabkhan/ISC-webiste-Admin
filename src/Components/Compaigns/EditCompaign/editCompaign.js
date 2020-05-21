@@ -475,7 +475,7 @@ const CompaignDetails = (props) => {
                                     {/* checkbox */}
                                     <div className="mrg-left-50 fnt-poppins mrg-top-20">
                                         <div>
-                                            <label>Featured Campaign</label>
+                                            <label>Featured</label>
                                         </div>
                                         <div className="mrg-top-10">
                                             <input className="checkbox-for-edit-forms mrg-left-5" type="checkbox"
