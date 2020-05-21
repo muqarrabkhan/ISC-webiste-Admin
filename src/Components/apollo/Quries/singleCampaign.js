@@ -27,6 +27,7 @@ export const SINGLE_CAMPAIGN = (Slug) => gql`
     Logo
     StartDate
     EndDate
+    is_admin_boosted
   }
 
   campaignCategories

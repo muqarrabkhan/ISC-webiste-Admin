@@ -5,7 +5,7 @@ import { SINGLE_CAMPAIGN } from '../../apollo/Quries/singleCampaign'
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { campaignBanner_baseurl, campaignLogo_baseurl } from '../../../config'
 import { getParams } from '../../functions'
-import Loader from '../../commonComponents/Loader/loader'
+// import Loader from '../../commonComponents/Loader/loader'
 import { EDIT_CAMPAIGN } from '../../apollo/Mutations/updateCampaign'
 import axios from 'axios'
 import { apiPath } from '../../../config'
@@ -144,6 +144,7 @@ const CompaignDetails = (props) => {
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
                     Logo: renderData.Logo,
+                    is_admin_boosted:renderData.is_admin_boosted,
                     Email: email ? email : "",
                     token: token
                 }
@@ -173,6 +174,7 @@ const CompaignDetails = (props) => {
                     StartDate: stDate.toISOString() ? stDate.toISOString() : "",
                     EndDate: edDate.toISOString() ? edDate.toISOString() : "",
                     Logo: renderData.Logo,
+                    is_admin_boosted:renderData.is_admin_boosted,
                     Email: email ? email : "",
                     token: token
                 }
@@ -470,6 +472,30 @@ const CompaignDetails = (props) => {
                                             >{hideShowButtonText}</span>
                                         </div>
                                     </div>
+                                    {/* checkbox */}
+                                    <div className="mrg-left-50 fnt-poppins mrg-top-20">
+                                        <div>
+                                            <label>Featured Campaign</label>
+                                        </div>
+                                        <div className="mrg-top-10">
+                                            <input className="checkbox-for-edit-forms mrg-left-5" type="checkbox"
+                                                checked={renderData && renderData.is_admin_boosted === "1"}
+                                                onChange={event => {
+                                                    if (renderData && renderData.is_admin_boosted === "1") {
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.is_admin_boosted = "0"
+                                                        setRenderData({ ...duplicateData })
+                                                    }
+                                                    else{
+                                                        let duplicateData = { ...renderData }
+                                                        duplicateData.is_admin_boosted = "1"
+                                                        setRenderData({ ...duplicateData })
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    {/* inputs starts from here */}
                                     <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                         <div className="Form-section1-main-div-of-inputs  ">
                                             {/* Campaign Name */}
@@ -502,7 +528,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.ShortDescription = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                         />
                                                     </div>
@@ -520,7 +546,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.facebook_url = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                         />
                                                     </div>
@@ -540,7 +566,7 @@ const CompaignDetails = (props) => {
                                                                 onChange={event => {
                                                                     let duplicateData = { ...renderData }
                                                                     duplicateData.EndDate = event.target.value
-                                                                    setRenderData({...duplicateData});
+                                                                    setRenderData({ ...duplicateData });
                                                                 }}
                                                                 type="date"
                                                             />
@@ -561,7 +587,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.StartDate = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                             type="date"
                                                         />
@@ -605,7 +631,7 @@ const CompaignDetails = (props) => {
                                                                 onChange={event => {
                                                                     let duplicateData = { ...renderData }
                                                                     duplicateData.goal_support = event.target.value
-                                                                    setRenderData({...duplicateData});
+                                                                    setRenderData({ ...duplicateData });
                                                                 }}
                                                             />
                                                             : ""}
@@ -624,7 +650,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.Description = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                         />
                                                     </div>
@@ -642,7 +668,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.CategoryId = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                         >
                                                             <option>Select Category</option>
@@ -665,7 +691,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.website_url = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                         />
                                                     </div>
@@ -684,7 +710,7 @@ const CompaignDetails = (props) => {
                                                             onChange={event => {
                                                                 let duplicateData = { ...renderData }
                                                                 duplicateData.twitter_url = event.target.value
-                                                                setRenderData({...duplicateData});
+                                                                setRenderData({ ...duplicateData });
                                                             }}
                                                         />
                                                     </div>

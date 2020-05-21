@@ -8,14 +8,15 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
 import publicIp from 'public-ip'
 import ipInt from 'ip-to-int'
-import ImageLoader from '../../../assets/Images/loader.gif'
+// import { getData, getCode, getName } from "country-list";
+// import ImageLoader from '../../../assets/Images/loader.gif'
 import cookie from 'react-cookies'
 // import { SELECT_STOREFRONT } from '../../apollo/Quries/userStoreFronts'
 import { getParams } from '../../functions'
 
 const CreateCompaign = (props) => {
     let { history, location } = props;
-    const { data } = useQuery(CAMPAIGN_CATEGORIES, {context:{clientName: "second"}});
+    const { data } = useQuery(CAMPAIGN_CATEGORIES, { context: { clientName: "second" } });
     let path = getParams(location.search);
     // states for colors
     const [initial] = useState("#5e72e4")
@@ -40,8 +41,10 @@ const CreateCompaign = (props) => {
     const [facebook, setfacebook_url] = useState("")
     const [twitter, settwitter_url] = useState("")
     const [website, setwebsite_url] = useState("")
+    const [featuredChechbox, setFeaturedCheckbox] = useState("0");
     const [buttonText, setButtonText] = useState("Create")
     const [selectOverlay, setSelectOverlay] = useState("")
+    const [country, setSelectCountry] = useState("")
     const [loader, setLoader] = useState(false)
 
     const addImage = () => {
@@ -152,6 +155,7 @@ const CreateCompaign = (props) => {
                     Secondary_color: secondaryColor.hex.toString() !== secondary ? secondaryColor.hex.toString() : "",
                     Tertiary_color: tertiary.hex.toString() !== tertiaryC ? tertiary.hex.toString() : "",
                     Logo: selectOverlay ? selectOverlay : "",
+                    is_admin_boosted:featuredChechbox,
                     Banner: bannerimage ? bannerimage : "",
                     Createduser: "Admin",
                     CreatedIp: ipInt(ipAddress).toInt(),
@@ -189,7 +193,7 @@ const CreateCompaign = (props) => {
                                             {bannerimage ?
                                                 <div className="store-front-image"
                                                     style={{
-                                                        backgroundImage: `url(${bannerimage !=="Loading" ? campaignBanner_baseurl + bannerimage : require('../../../assets/Images/main-loader.gif') })`,
+                                                        backgroundImage: `url(${bannerimage !== "Loading" ? campaignBanner_baseurl + bannerimage : require('../../../assets/Images/main-loader.gif')})`,
                                                         height: "100px",
                                                         backgroundSize: "contain",
                                                         backgroundRepeat: "no-repeat",
@@ -236,7 +240,7 @@ const CreateCompaign = (props) => {
                             {selectOverlay ?
                                 <div className="store-front-image has-margin-top-10"
                                     style={{
-                                        backgroundImage: `url(${selectOverlay !== "Loading"? campaignLogo_baseurl + selectOverlay : require('../../../assets/Images/main-loader.gif')})`,
+                                        backgroundImage: `url(${selectOverlay !== "Loading" ? campaignLogo_baseurl + selectOverlay : require('../../../assets/Images/main-loader.gif')})`,
                                         height: "100px",
                                         backgroundSize: "contain",
                                         width: "100px",
@@ -316,6 +320,26 @@ const CreateCompaign = (props) => {
                                     <InputColor initialHexColor={tertiaryC} onChange={setTertiaryColor} />
                                 </div>
                             </div>
+                            {/* checkbox */}
+                            <div className="mrg-left-50 fnt-poppins mrg-top-20">
+                                <div>
+                                    <label>Featured Campaign</label>
+                                </div>
+                                <div className="mrg-top-10">
+                                    <input className="checkbox-for-edit-forms mrg-left-5" type="checkbox"
+                                        // value={featuredChechbox}
+                                        onChange={event => {
+                                            if (featuredChechbox === "0") {
+                                                setFeaturedCheckbox("1");
+                                            }
+                                            else{
+                                                setFeaturedCheckbox("0");
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            {/* inputs starts from here */}
                             <div className="Form-main-div-of-sectons flex-row flex-column-responsive">
                                 <div className="Form-section1-main-div-of-inputs ">
                                     {/* Campaign Name */}
@@ -414,6 +438,21 @@ const CreateCompaign = (props) => {
                                             </div>
                                         </div>
                                     </div>
+                                    {/* are you an**/}
+                                    {/* <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                        <div className="form-group">
+                                            <div>
+                                                <label>Are you an*</label>
+                                            </div>
+                                            <div>
+                                                <select className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag">
+                                                    <option value="">Individual</option>
+                                                    <option value="">Company</option>
+                                                    <option value="">Non-Profit / NGO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> */}
                                 </div>
                                 {/* Form section2 dv start here */}
                                 <div className="Form-section2-main-div-of-inputs mrg-top-10">
@@ -494,6 +533,49 @@ const CreateCompaign = (props) => {
                                             </div>
                                         </div>
                                     </div>
+                                    {/* Select Currency*/}
+                                    {/* <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                        <div className="form-group">
+                                            <div>
+                                                <label>Currency Type*</label>
+                                            </div>
+                                            <div>
+                                                <select className="mrg-top-10 fnt-poppins" type="Hash-Tag" placeholder="Enter Hash Tag">
+                                                    <option value="">Choose Currency</option>
+                                                    <option value="">UED</option>
+                                                    <option value="">INR</option>
+                                                    <option value="">EUR</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> */}
+                                    {/* select Country */}
+                                    {/* <div className="Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
+                                        <div className="form-group">
+                                            <div>
+                                                <label>Select Country*</label>
+                                            </div>
+                                            <div>
+                                            <select required className="fnt-poppins mrg-top-10"
+                                                onChange={(event) => {
+                                                    setSelectCountry(event.target.value)
+                                                }}
+                                            >
+                                                <option value="">Select Country</option>
+                                                {getData().map((single, index) => {
+                                                    return (
+                                                        <option
+                                                            key={index}
+                                                            value={getCode(single.name)}
+                                                        >
+                                                            {single.name}
+                                                        </option>
+                                                    );
+                                                })}
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div> */}
                                 </div>
                             </div>
                             {/* Form section2 div end here */}

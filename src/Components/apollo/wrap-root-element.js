@@ -27,7 +27,6 @@ const WrapRootElement = ({children, initialState}) => {
         // other link options...
     });
 
-
     const client = new ApolloClient({
         connectToDevTools: process.browser,
         ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)

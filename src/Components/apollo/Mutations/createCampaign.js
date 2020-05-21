@@ -19,6 +19,7 @@ export const CREATE_CAMPAIGN = gql`
     $Createduser: String,
     $Banner: String,
     $Logo:String,
+    $is_admin_boosted: String,
     $CreatedIp:Long,
     $token: String
     )
@@ -39,6 +40,7 @@ export const CREATE_CAMPAIGN = gql`
                             Secondary_color:$Secondary_color,
                             Tertiary_color:$Tertiary_color,
                             Logo:$Logo,
+                            is_admin_boosted:$is_admin_boosted,
                             Banner:$Banner,
                             Createduser:$Createduser,
                             CreatedIp:$CreatedIp,

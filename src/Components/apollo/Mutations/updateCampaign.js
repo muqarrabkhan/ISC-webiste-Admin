@@ -18,6 +18,7 @@ mutation updateCampaign(
     $StartDate: DateTime,
     $EndDate: DateTime,
     $Logo: String,
+    $is_admin_boosted: String,
     $Email: String,
     $token: String
     )
@@ -39,6 +40,7 @@ mutation updateCampaign(
             StartDate:$StartDate,
             EndDate:$EndDate,
             Logo:$Logo,
+            is_admin_boosted:$is_admin_boosted,
             Email:$Email,
             token:$token 
             )

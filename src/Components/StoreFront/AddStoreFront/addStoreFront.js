@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Image from '../../../assets/Images/admin.png'
+// import Image from '../../../assets/Images/admin.png'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_STOREFRONT } from '../../apollo/Mutations/createStorefront'
@@ -114,7 +114,7 @@ const AddStoreFront = (props) => {
                                                     setSelectCountry(event.target.value)
                                                 }}
                                             >
-                                                <option value="">select Country</option>
+                                                <option value="">Select Country</option>
                                                 {getData().map((single, index) => {
                                                     return (
                                                         <option
