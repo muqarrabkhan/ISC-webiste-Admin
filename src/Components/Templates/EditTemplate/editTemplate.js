@@ -21,6 +21,8 @@ const EditTemplate = (props) => {
     const [joditvalue, setJoditValue] = useState("");
     const [joditContent, setJoditContent] = useState("");
 
+    console.log("data && data.singletemplate && data.singletemplate.Category",data && data.singletemplate && data.singletemplate.Category)
+
     useEffect(() => {
         setRenderData(data && data.singletemplate ? { ...data.singletemplate } : {});
         setCategory(data && data.singletemplate && data.singletemplate.Category);
@@ -71,6 +73,7 @@ const EditTemplate = (props) => {
 
     const variablesHandler = (obj) => {
         setCategory(obj);
+        console.log("obj",obj);
         switch (obj) {
             case "": {
                 setTemplatevariables("")
@@ -144,7 +147,7 @@ const EditTemplate = (props) => {
                 Content: joditContent,
                 Status: renderData.Status,
                 Type: renderData.Type,
-                Category: renderData.Category
+                Category: category
             }
         }).then(res => {
             setButtontext("Updated")
@@ -227,7 +230,7 @@ const EditTemplate = (props) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* Password* */}
+                                            {/* From Name* */}
                                             <div className="is-flex Form-Inputs-Fields mrg-top-10 mrg-left-50 fnt-poppins">
                                                 <div className="form-group">
                                                     <div>
