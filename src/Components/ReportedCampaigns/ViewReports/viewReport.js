@@ -14,7 +14,8 @@ const ViewCoupan = (props) => {
     let { history, location } = props;
     let path = getParams(location.search);
     const [coupons] = useMutation(ALL_REPORTED_CAMPAIGNS);
-    const [data, setData] = useState("")
+    const [loading,setLoading]=useState(false);
+    const [data, setData] = useState("");
     const [totalPages, setTotalPage] = useState(1);
     const [totalCoupons, setTotalCoupons] = useState([]);
     const [page, setPage] = useState(1);
@@ -29,6 +30,7 @@ const ViewCoupan = (props) => {
             }
         }
         ).then(response => {
+            setLoading(true);
             setData(response && response.data && response.data.allReportedCampaign ? response.data.allReportedCampaign.campaigns : []);
             setTotalPage(response && response.data.allReportedCampaign ? response.data.allReportedCampaign.totalPages : [1]);
             setTotalCoupons(response && response.data.allReportedCampaign && response.data.allReportedCampaign.totalCampaigns);
@@ -43,6 +45,7 @@ const ViewCoupan = (props) => {
             }
         }
         ).then(response => {
+            setLoading(true);
             setData(response && response.data && response.data.allReportedCampaign ? response.data.allReportedCampaign.campaigns : []);
             setTotalPage(response && response.data.allReportedCampaign ? response.data.allReportedCampaign.totalPages : [1]);
             setTotalCoupons(response && response.data.allReportedCampaign && response.data.allReportedCampaign.totalCampaigns);
@@ -51,7 +54,8 @@ const ViewCoupan = (props) => {
 
     return (
         <>
-            {data && data.length !== 0 ?
+            {!loading === false ?
+            //  {/* {data && data.length !== 0 ? */}
                 < div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
@@ -92,7 +96,7 @@ const ViewCoupan = (props) => {
                                     :
                                     <tfoot>
                                         <tr>
-                                            <td colSpan={4} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
+                                            <td colSpan={5} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
                                         </tr>
                                     </tfoot>
                                 }
@@ -117,7 +121,7 @@ const ViewCoupan = (props) => {
                     </div>
                     <Style />
                 </div>
-                :
+                 :
                 <ContentLoader
                     speed={2}
                     viewBox="0 0 1000 550"
@@ -177,7 +181,7 @@ const ViewCoupan = (props) => {
                     <rect x="782" y="56" rx="3" ry="3" width="72" height="33" />
                     <rect x="933" y="54" rx="3" ry="3" width="24" height="33" />
                 </ContentLoader>
-            }
+            } 
         </>
     );
 }
