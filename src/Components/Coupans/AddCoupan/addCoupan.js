@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_COUPON } from '../../apollo/Mutations/createCoupan'
-import { couponUrl } from '../../../config'
+import { isupportcauseCampaign } from '../../../config'
 import { getParams } from '../../functions/index'
 
 const AddCoupan = (props) => {
@@ -83,7 +83,7 @@ const AddCoupan = (props) => {
                                     <label>Page Url Link With Coupon*</label>
                                 </div>
                                 <div className="mrg-top-10">
-                                    <input className="inputs-of-admistrator" value={couponUrl + couponCode.replace(/ /g, '')} disabled />
+                                    <input className="inputs-of-admistrator" value={isupportcauseCampaign + couponCode.replace(/ /g, '')} disabled />
                                 </div>
                                 {/* <button className="Save-btn-of-form Save-btns-of-forms-responsive mrg-top-10 fnt-poppins">Link Copy</button> */}
                             </div>

@@ -173,13 +173,14 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* General Setting */}
-                        <Link onClick={() => hideShowSetting(false)}>
+                        {/* <Link onClick={() => hideShowSetting(false)}> */}
+                        <Link to={"/setting"}>
                             <div className={"sidenav-name-logo" + currentActive("setting")}>
                                 <img className="administrator_icon"
                                     src={currentActive("setting") === "active" ? require('../../assets/Images/generalsettingactive.png') : require('../../assets/Images/Setting.png')}
                                     alt="General Setting" />
                                 <span className="sidenav-link fnt-poppins active" onClick={() => hideShowSetting(false)}>Settings</span>
-                                {showSetting ?
+                                {/* {showSetting ?
                                     <img className="icon-width-admin has-margin-left-30"
                                         src={require('../../assets/Images/upwardarrow.png')}
                                         alt="Administrator" style={{ width: "15px", height: "10px" }} />
@@ -187,10 +188,10 @@ const Sidenav = (props) => {
                                     <img className="icon-width-admin has-margin-left-30"
                                         src={require('../../assets/Images/downwardarrow.png')}
                                         alt="Administrator" style={{ width: "15px", height: "10px" }} />
-                                }
+                                } */}
                             </div>
                         </Link>
-                        {showSetting ?
+                        {/* {showSetting ?
                             <div className="has-margin-left-30">
                                 <Link to={"/setting"}>
                                     <div className={"sidenav-name-logo" + currentActive("setting")}>
@@ -203,7 +204,7 @@ const Sidenav = (props) => {
                                     </div>
                                 </Link>
                             </div>
-                            : ""}
+                            : ""} */}
                         {/* Compaigns */}
                         <Link to={"/campaign"}>
                             <div className={"sidenav-name-logo" + currentActive("campaign")}>
@@ -223,22 +224,22 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Products */}
-                        <Link to={"/product"}>
+                        {/* <Link to={"/product"}>
                             <div className={"sidenav-name-logo" + currentActive("product")}>
                                 <img className="administrator_icon"
                                     src={currentActive("product") === "active" ? require('../../assets/Images/productactive.png') : require('../../assets/Images/product.png')}
                                     alt="Products" />
                                 <span className="sidenav-link fnt-poppins">Products</span>
                             </div>
-                        </Link>
-                        <Link to={"/storefront"}>
+                        </Link> */}
+                        {/* <Link to={"/storefront"}>
                             <div className={"sidenav-name-logo" + currentActive("storefront")}>
                                 <img className="administrator_icon"
                                     src={currentActive("storefront") === "active" ? require('../../assets/Images/activeStorefront.png') : require('../../assets/Images/storefront.png')}
                                     alt="storefront" />
                                 <span className="sidenav-link fnt-poppins">StoreFront</span>
                             </div>
-                        </Link>
+                        </Link> */}
                         {/* Adsons*/}
                         {/* <Link to={"/adson"}>
                             <div className={"sidenav-name-logo" + currentActive("adson")}>
@@ -258,14 +259,14 @@ const Sidenav = (props) => {
                             </div>
                         </Link>
                         {/* Files */}
-                        <Link to={"/file"}>
+                        {/* <Link to={"/file"}>
                             <div className={"sidenav-name-logo" + currentActive("file")}>
                                 <img className="administrator_icon"
                                     src={currentActive("file") === "active" ? require('../../assets/Images/filesactive.png') : require('../../assets/Images/file.png')}
                                     alt="Files" />
                                 <span className="sidenav-link fnt-poppins">Files</span>
                             </div>
-                        </Link>
+                        </Link> */}
                         {/* Logout */}
                         <Link to={"/signin"} onClick={() => logout()}>
                             <div className="sidenav-name-logo">

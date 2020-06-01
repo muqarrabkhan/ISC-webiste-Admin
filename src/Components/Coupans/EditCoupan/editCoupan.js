@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { SINGLE_COUPON } from '../../apollo/Quries/singleCoupan'
-import { couponUrl } from '../../../config'
+import { isupportcauseCampaign } from '../../../config'
 import { EDIT_COUPON } from '../../apollo/Mutations/updateCoupon'
 import { getParams } from '../../functions'
 import ContentLoader from 'react-content-loader'
@@ -29,8 +29,6 @@ const EditCoupan = (props) => {
         setRenderData({ ...duplicateData });
     }
 
-    console.log("data",code.replace(/ /g, ''))
-
     const update = (event) => {
         event.preventDefault();
         setBtnText("Updating...")
@@ -47,8 +45,6 @@ const EditCoupan = (props) => {
             setBtnText("Update")
         })
     }
-
-    // let removeSpace = renderData && renderData.Coupon_code;
 
     return (
         <>
@@ -127,7 +123,7 @@ const EditCoupan = (props) => {
                                             <label>Page Url Link With Coupon*</label>
                                         </div>
                                         <div className="mrg-top-10">
-                                            <input className="inputs-of-admistrator" value={couponUrl + code.replace(/ /g, '')} disabled />
+                                            <input className="inputs-of-admistrator" value={isupportcauseCampaign + code.replace(/ /g, '')} disabled />
                                         </div>
                                         {/* <button className="Save-btn-of-form Save-btns-of-forms-responsive mrg-top-10 fnt-poppins">Link Copy</button> */}
                                     </div>
