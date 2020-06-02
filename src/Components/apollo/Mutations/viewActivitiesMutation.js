@@ -17,7 +17,7 @@ mutation userActivity(
         CampaignId
         CreatedDate
         CreatedIp
-        CampaignName {
+        CampaignName{
           Id
           Name
           error

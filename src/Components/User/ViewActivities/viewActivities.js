@@ -84,7 +84,7 @@ const ViewActivities = (props) => {
                                                 height: '143px',
                                                 backgroundRepeat: 'no-repeat'
                                             }}></td>
-                                            <td>{single.CampaignName.Name}</td>
+                                            <td>{single.CampaignName && single.CampaignName.Name ? single.CampaignName.Name : "-"}</td>
                                             <td>{single.userName ? single.userName.Name : "-"}</td>
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).standardDate : "-"}</td>
                                             <td>{single.CreatedDate ? standardDate(single.CreatedDate).time : "-"}</td>
