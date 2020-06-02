@@ -25,13 +25,13 @@ const ViewUser = (props) => {
     const searchHandler = (value) => {
         let resultData = users ? users.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
         setSearch(resultData);
+        setTotalPage([1]);
     }
 
     const searchEmailHandler = (value) => {
         let resultData = users ? users.filter(sin => sin.Email.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
         setSearch(resultData);
-        // setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
-        // setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+        setTotalPage([1]);
     }
 
     const pageHandler = (value) => {

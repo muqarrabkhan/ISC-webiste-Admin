@@ -66,7 +66,7 @@ const ViewAnnouncement = (props) => {
                                     <thead className="viewAnnouncement-Table-header fnt-poppins">
                                         <tr >
                                             <th className="white-color">Title</th>
-                                            <th className="white-color">Flag</th>
+                                            {/* <th className="white-color">Flag</th> */}
                                             <th className="white-color">Action</th>
                                         </tr>
                                     </thead>
@@ -74,7 +74,7 @@ const ViewAnnouncement = (props) => {
                                         {search && search.length !== 0 && search.map((single, index) =>
                                             <tr key={index} className="fnt-poppins background-white">
                                                 <td>{single.title}</td>
-                                                {single && single.flag == 1 ?
+                                                {/* {single && single.flag == 1 ?
                                                     <td>
                                                         <div className="switch-btn-of-tables">
                                                             <label className="switch">
@@ -91,7 +91,7 @@ const ViewAnnouncement = (props) => {
                                                                 <span className="slider"></span>
                                                             </label>
                                                         </div>
-                                                    </td>}
+                                                    </td>} */}
                                                 {/* buttons  */}
                                                 <td>
                                                     <div className="appling-flex-btns">

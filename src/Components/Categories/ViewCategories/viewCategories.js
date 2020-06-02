@@ -24,7 +24,8 @@ const ViewCategories = (props) => {
 
     const searchHandler = (value) => {
         let resultData = data ? data.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
-        setSearch(resultData)
+        setSearch(resultData);
+        setTotalPages([1]);
     }
 
     const handlePageClick = (value) => {
