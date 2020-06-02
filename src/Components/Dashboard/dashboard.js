@@ -145,7 +145,7 @@ const Dashboard = (props) => {
                 {/* <first card */}
                 {/* {data && data.length !== 0 ?
                   <> */}
-                <div className=" dashboard-main-cards-div flex-row ">
+                <div className=" dashboard-main-cards-div flex-row has-padding-right-10">
                   <div className="dash-board-cards mrg-left-20 $White-color">
                     <div className="dashboard-card-headr ">
                       <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600 ">Total Support</h1>
@@ -164,7 +164,7 @@ const Dashboard = (props) => {
                     </div>
                   </div>
                   {/* second card */}
-                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-20 $White-color">
                     <div className="dashboard-card-headr">
                       <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">Total New Campaigns</h1>
                     </div>
@@ -182,7 +182,7 @@ const Dashboard = (props) => {
                     </div>
                   </div>
                   {/* Third card */}
-                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-20 $White-color">
                     <div className="dashboard-card-headr">
                       <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Users</h1>
                     </div>
@@ -202,7 +202,7 @@ const Dashboard = (props) => {
                 </div>
                 {/* card second section2 start here */}
                 {/* first card section2*/}
-                <div className=" dashboard-main-cards-div flex-row mrg-top-50">
+                <div className=" dashboard-main-cards-div flex-row mrg-top-50 has-padding-right-10">
                   <div className="dash-board-cards mrg-left-20 $White-color">
                     <div className="dashboard-card-headr ">
                       <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Support Campaigns</h1>
@@ -221,7 +221,7 @@ const Dashboard = (props) => {
                     </div>
                   </div>
                   {/* second card  section2*/}
-                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-20 $White-color">
                     <div className="dashboard-card-headr">
                       <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Petition Campaigns</h1>
                     </div>
@@ -240,7 +240,7 @@ const Dashboard = (props) => {
                     </div>
                   </div>
                   {/* Third cardz section2*/}
-                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-50 $White-color">
+                  <div className="dash-board-cards dashboard-responsive-card-marglft mrg-left-20 $White-color">
                     <div className="dashboard-card-headr">
                       <h1 className=" has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Pledge Campaigns</h1>
                     </div>
@@ -276,7 +276,7 @@ const Dashboard = (props) => {
                     </div>
                   </div>
                   {/* 1st Card of Last Week Views and of Compaigns */}
-                  <div className=" is-flex last-week-wraping-cards mrg-left-20">
+                  <div className=" is-flex last-week-wraping-cards">
                     {cards && cards.length !== 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">
