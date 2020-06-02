@@ -73,14 +73,15 @@
    
 .Form-Inputs-Fields{
     input{
-       width:600px;
+    //    width:600px;
+       width:550px;
        height:45px;
        padding: 10px;
        border-radius:5px;
        border:1px solid $Tabel-action-border-color;
    }
    select{
-    width:600px;
+    width:550px;
     height:45px;
     border-radius:5px;
     border:1px solid $Tabel-action-border-color;
