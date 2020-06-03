@@ -15,7 +15,6 @@ export default ()=>{
                       .padding-of-btn{
                         padding: 5px 20px 5px 20px;
                       }
-
                    `}
                </style>
         );

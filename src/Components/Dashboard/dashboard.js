@@ -276,7 +276,7 @@ const Dashboard = (props) => {
                     </div>
                   </div>
                   {/* 1st Card of Last Week Views and of Compaigns */}
-                  <div className=" is-flex last-week-wraping-cards">
+                  <div className=" is-flex last-week-wraping-cards ">
                     {cards && cards.length !== 0 ? cards.map((single, index) =>
                       <div className="is-flex Last-week-cards-main-dev mrg-left-30">
                         <div className="Last-week-card-section mrg-top-50">

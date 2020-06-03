@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import { CREATE_CATEGORY } from '../../apollo/Mutations/createCategory'
-import publicIp from 'public-ip'
-import ipInt from 'ip-to-int'
+// import publicIp from 'public-ip'
+// import ipInt from 'ip-to-int'
 import { getParams } from '../../functions'
 
 const AddCategory = (props) => {
@@ -13,14 +13,14 @@ const AddCategory = (props) => {
     const [addCategory] = useMutation(CREATE_CATEGORY);
     const [name, setName] = useState("");
     const [description, setDiscription] = useState("");
-    const [ipAddress, setIpAddress] = useState("");
+    // const [ipAddress, setIpAddress] = useState("");
     const [buttonText, setButtonText] = useState("Create");
 
-    useEffect(() => {
-        publicIp.v4().then(ip => {
-            setIpAddress(ip);
-        })
-    }, [])
+    // useEffect(() => {
+    //     publicIp.v4().then(ip => {
+    //         setIpAddress(ip);
+    //     })
+    // }, [])
 
     const createCategories = (event) => {
         event.preventDefault();
@@ -29,13 +29,13 @@ const AddCategory = (props) => {
             variables: {
                 Name: name,
                 description: description,
-                CreatedIp: ipInt(ipAddress).toInt(),
+                // CreatedIp: ipInt(ipAddress).toInt(),
                 Status: "Enable"
             }
         }).then(res => {
-            history.push("/edit-category/" + res.data.createcategory.Id)
+            history.push("/edit-category/" + res.data.createcategory.Id);
         }).catch(error => {
-            setButtonText("Create")
+            setButtonText("Create");
         })
     }
 
