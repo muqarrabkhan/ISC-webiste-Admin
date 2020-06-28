@@ -7,5 +7,5 @@ export const overlays = "https://s3.ap-south-1.amazonaws.com/isupportcause/uploa
 export const camapignImage="https://s3.ap-south-1.amazonaws.com/isupportcause/uploads/campaign/";
 export const productImage_BaseUrl="https://s3.ap-south-1.amazonaws.com/isupportcause/uploads/products/";
 export const viewActivities_img="https://s3.ap-south-1.amazonaws.com/isupportcause/uploads/merged/";
-export const couponUrl="http://isc-website-next.now.sh/pricing?coupon=";
-export const isupportcauseCampaign="https://isupportcause.org/";
+export const couponUrl="https://www.isupportcause.com/pricing?coupon=";
+export const isupportcauseCampaign="https://www.isupportcause.com/";
