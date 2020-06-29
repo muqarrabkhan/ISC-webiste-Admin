@@ -9,21 +9,24 @@ import { useQuery } from '@apollo/react-hooks'
 import { standardDate } from '../../../functions'
 import Loader from '../../../commonComponents/Loader/loader'
 import { getParams } from '../../../functions/index'
+import cookie from 'react-cookies'
 
 const Campaign = (props) => {
     let { history, match , location} = props;
     const [ipAddress, setIpAddress] = useState("");
     let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : ""
-    const { loading, data } = useQuery(SINGLE_USER(id));
+    let token = cookie.load("token");
+    const { loading, data } = useQuery(SINGLE_USER(token,id));
+    console.log("data")
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
     let getDate = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     getDate = standardDate(getDate).time;
-    const publicIp = require('public-ip');
-    (async () => {
-        setIpAddress(await publicIp.v4());
-    })();
+    // const publicIp = require('public-ip');
+    // (async () => {
+    //     setIpAddress(await publicIp.v4());
+    // })();
     return (
         <>
             {!loading ?

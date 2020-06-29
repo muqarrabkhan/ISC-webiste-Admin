@@ -8,13 +8,15 @@ import { viewActivities_img } from '../../../../config'
 import ipInt from 'ip-to-int'
 import Loader from '../../../commonComponents/Loader/loader'
 import { getParams } from '../../../functions/index'
+import cookie from 'react-cookies'
 
 const UserInformation = (props) => {
     let { history, match , location} = props;
     let path = getParams(location.search);
     // const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
-    const { loading, data } = useQuery(SINGLE_USER(id));
+    let token = cookie.load("token");
+    const { loading, data } = useQuery(SINGLE_USER(token,id));
     const [userActivityData, setUserActivityData] = useState()
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
