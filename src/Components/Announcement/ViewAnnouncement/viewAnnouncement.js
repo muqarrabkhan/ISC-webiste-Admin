@@ -53,11 +53,11 @@ const ViewAnnouncement = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Announcement Records</h6>
-                            <input className="input-for-search fnt-poppins" placeholder="Title"
+                            {/* <input className="input-for-search fnt-poppins" placeholder="Title"
                                 onChange={event => {
                                     searchHandler(event.target.value)
                                 }}
-                            />
+                            /> */}
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">

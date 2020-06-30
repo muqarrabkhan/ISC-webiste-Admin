@@ -151,12 +151,12 @@ const ViewAdministrator = (props) => {
                                 <option value="Enable">Active</option>
                                 <option value="Delete">In-Active</option>
                             </select>
-                            <input className="input-for-search fnt-poppins" placeholder="Search Name"
+                            {/* <input className="input-for-search fnt-poppins" placeholder="Search Name"
                                 onChange={event => {
                                     searchHandler(event.target.value)
                                 }}
                                 type="text"
-                            />
+                            /> */}
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">

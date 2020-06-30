@@ -9,6 +9,10 @@ import { DELETE_USER } from '../../apollo/Mutations/deleteUser'
 import ReactPaginate from "react-paginate";
 import { getParams } from '../../functions/index'
 import ContentLoader from 'react-content-loader'
+import axios, { CancelToken } from "axios";
+import { apiPath } from '../../../config'
+let cancel;
+let cancel2;
 
 const ViewUser = (props) => {
     let { history, location } = props;
@@ -22,16 +26,81 @@ const ViewUser = (props) => {
     const [userStatus, setUserStatus] = useState("");
     const [search, setSearch] = useState([]);
 
+
     const searchHandler = (value) => {
-        let resultData = users ? users.filter(sin => sin.Name.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
-        setSearch(resultData);
-        setTotalPage([1]);
+        if (value.length >= 2) {
+            cancel && cancel();
+            axios.post(
+                apiPath + "/userNameSearch",
+                {
+                    Name: value
+                },
+                {
+                    cancelToken: new CancelToken(function executor(c) {
+                        // An executor function receives a cancel function as a parameter
+                        cancel = c;
+                    })
+                }
+            )
+                .then(res => {
+                    console.log(res);
+                    setSearch(res && res.data && res.data.users);
+                    setTotalPage([1]);
+                })
+        }
+        else if (value.length === 0) {
+            allUsers({
+                variables: {
+                    page: path && parseInt(path.page) ? parseInt(path.page) : page,
+                    limit: 10,
+                    Status: ""
+                }
+            }
+            ).then(response => {
+                setUsers(response && response.data && response.data.users ? response.data.users.users : []);
+                setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
+                setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+                setSearch(response && response.data && response.data.users ? response.data.users.users : []);
+            })
+        }
     }
 
+    // searchEmail method
     const searchEmailHandler = (value) => {
-        let resultData = users ? users.filter(sin => sin.Email.toLowerCase().indexOf(value.toLowerCase()) !== -1) : []
-        setSearch(resultData);
-        setTotalPage([1]);
+        if (value.length >= 2) {
+            cancel2 && cancel2();
+            axios.post(
+                apiPath + "/userByEmailSearch",
+                {
+                    Email: value
+                },
+                {
+                    cancelToken: new CancelToken(function executor(c) {
+                        // An executor function receives a cancel function as a parameter
+                        cancel2 = c;
+                    })
+                }
+            )
+                .then(res => {
+                    setSearch(res && res.data && res.data.users);
+                    setTotalPage([1]);
+                })
+        }
+        else if (value.length === 0) {
+            allUsers({
+                variables: {
+                    page: path && parseInt(path.page) ? parseInt(path.page) : page,
+                    limit: 10,
+                    Status: ""
+                }
+            }
+            ).then(response => {
+                setUsers(response && response.data && response.data.users ? response.data.users.users : []);
+                setTotalPage(response && response.data.users ? response.data.users.totalPages : [1]);
+                setTotalCustomers(response && response.data.users && response.data.users.totalusers);
+                setSearch(response && response.data && response.data.users ? response.data.users.users : []);
+            })
+        }
     }
 
     const pageHandler = (value) => {

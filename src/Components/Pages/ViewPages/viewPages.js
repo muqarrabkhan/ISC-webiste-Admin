@@ -87,11 +87,11 @@ const ViewPages = (props) => {
                         </div>
                         <div className="Table-Header">
                             <h6 className="fnt-poppins">All Pages Record</h6>
-                            <input className="input-for-search fnt-poppins" placeholder="Slug"
+                            {/* <input className="input-for-search fnt-poppins" placeholder="Slug"
                                 onChange={event => {
                                     searchHandler(event.target.value)
                                 }}
-                            />
+                            /> */}
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">

@@ -207,11 +207,11 @@ const ViewSetting = (props) => {
                                 <option value="Email">Email</option>
                                 <option value="Apps">Apps</option>
                             </select>
-                            <input className="input-for-search fnt-poppins" placeholder="Name"
+                            {/* <input className="input-for-search fnt-poppins" placeholder="Name"
                                 onChange={event => {
                                     searchHandler(event.target.value)
                                 }}
-                            />
+                            /> */}
                         </div>
                         {/* Table-Title */}
                         <div className="container-fluid Table-title">

@@ -91,7 +91,6 @@ const AddNewsletter = (props) => {
             }
         )
             .then(res => {
-                console.log(res && res.data && res.data.name);
                 setSearchData(res && res.data && res.data.name)
             })
     }
@@ -141,8 +140,6 @@ const AddNewsletter = (props) => {
             })
         }
     }
-
-    console.log("date", dateTime)
 
     return (
         <div className="container-fluid Table-for-administrator-main-div">

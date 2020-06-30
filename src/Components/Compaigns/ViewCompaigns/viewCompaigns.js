@@ -425,11 +425,11 @@ const ViewCompaign = (props) => {
                                 <input placeholder="To Date" type="date" /> */}
                             {/* </div> */}
                             <div>
-                                <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Name"
+                                {/* <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Name"
                                     onChange={event => {
                                         searchHandler(event.target.value)
                                     }}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="Table-Header">
