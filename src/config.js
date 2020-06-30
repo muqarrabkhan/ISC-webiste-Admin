@@ -1,4 +1,4 @@
-export const apiPath = "https://isc-website-cms-services.herokuapp.com";
+export const apiPath = "https://www.isupportcause.com";
 export const productImages= "https://s3.ap-south-1.amazonaws.com/isupportcause/uploads/products/";
 export const campaignBanner_baseurl="https://s3.ap-south-1.amazonaws.com/isupportcause/uploads/campaign/banner/";
 export const campaignLogo_baseurl="https://s3.ap-south-1.amazonaws.com/isupportcause/uploads/campaign/logo/";
