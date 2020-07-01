@@ -43,7 +43,6 @@ const ViewUser = (props) => {
                 }
             )
                 .then(res => {
-                    console.log(res);
                     setSearch(res && res.data && res.data.users);
                     setTotalPage([1]);
                 })

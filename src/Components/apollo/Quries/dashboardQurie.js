@@ -15,7 +15,8 @@ export const ADMIN_DASHBOARD=gql`
     TotalNewpetitionsCampaignLastWeek
     TotalNewpledgesCampaignToday
     TotalNewpledgesCampaignLastWeek    
-
+    TotalNewFundriseCampaignToday
+    TotalNewFundriseCampaignLastWeek
 }
 `;
 
