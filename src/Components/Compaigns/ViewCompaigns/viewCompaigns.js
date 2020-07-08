@@ -11,6 +11,9 @@ import { CAMPAIGN_CATEGORIES } from '../../apollo/Quries/campaignCategories';
 import { DELETE_CAMPAIGN } from '../../apollo/Mutations/deleteCampaign'
 import cookie from 'react-cookies'
 import ContentLoader from 'react-content-loader'
+import axios, { CancelToken } from "axios";
+import { apiPath } from '../../../config'
+let cancel;
 
 const ViewCompaign = (props) => {
 
@@ -81,6 +84,48 @@ const ViewCompaign = (props) => {
         })
     }, [])
 
+    const searchName = (value) => {
+        if (value.length >= 2) {
+            cancel && cancel();
+            axios.post(
+                apiPath + "/campainNameSearch",
+                {
+                    Name: value
+                },
+                {
+                    cancelToken: new CancelToken(function executor(c) {
+                        // An executor function receives a cancel function as a parameter
+                        cancel = c;
+                    })
+                }
+            )
+                .then(res => {
+                    // console.log("res", res && res.data && res.data.name);
+                    setSearch(res && res.data && res.data.name);
+                    setTotalPages([1]);
+                })
+        }
+        else if (value.length === 0) {
+            getCampaign({
+                variables: {
+                    page: path && parseInt(path.page) ? parseInt(path.page) : page,
+                    limit: 10,
+                    CampaignType: campaignType,
+                    sort: sort,
+                    Createduser: createdUser,
+                    CategoryId: parseInt(categoryId),
+                    Boosted: ""
+                }
+            }
+            ).then(res => {
+                setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
+                setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+            })
+        }
+    }
+    
     // useEffect(() => {
     //     getCampaign({
     //         variables: {
@@ -162,8 +207,6 @@ const ViewCompaign = (props) => {
             }
         }
     }
-
-
 
     // categoryType filter through Id
     const categoryHandler = (value) => {
@@ -425,11 +468,11 @@ const ViewCompaign = (props) => {
                                 <input placeholder="To Date" type="date" /> */}
                             {/* </div> */}
                             <div>
-                                {/* <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Name"
+                                <input className="input-for-search fnt-poppins input-for-search-user" placeholder="Name"
                                     onChange={event => {
-                                        searchHandler(event.target.value)
+                                        searchName(event.target.value)
                                     }}
-                                /> */}
+                                />
                             </div>
                         </div>
                         <div className="Table-Header">

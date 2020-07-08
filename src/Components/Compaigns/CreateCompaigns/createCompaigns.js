@@ -44,7 +44,7 @@ const CreateCompaign = (props) => {
     const [featuredChechbox, setFeaturedCheckbox] = useState("0");
     const [buttonText, setButtonText] = useState("Create")
     const [selectOverlay, setSelectOverlay] = useState("")
-    const [country, setSelectCountry] = useState("")
+     const [country, setSelectCountry] = useState("")
     const [loader, setLoader] = useState(false)
 
     const addImage = () => {
