@@ -9,6 +9,7 @@ mutation getCategories($page:Int,$limit:Int)
                 Name
                 Status
                 Id
+                totalCampaigns
             }
             totalPages
             currentPage

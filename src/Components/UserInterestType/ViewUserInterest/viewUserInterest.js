@@ -47,14 +47,16 @@ const ViewAdson = (props) => {
                                 <tr className="table-row-of-head fnt-poppins">
                                     <th>Name</th>
                                     <th>Slug</th>
+                                    <th>Total Interests</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="table-of-data">
                                 {data && data.length !== 0 && data.getAllIntersts.map((single, index) =>
                                     <tr key={index} className="table-row-data-of-body fnt-poppins">
-                                        <td>{single.name ? single.name : "-"}</td>
-                                        <td>{single.Slug ? single.Slug : "-"}</td>
+                                        <td>{single && single.name ? single.name : "-"}</td>
+                                        <td>{single && single.Slug ? single.Slug : "-"}</td>
+                                        <td>{single && single.totalInterests ? single.totalInterests : "0"}</td>
                                         <td>
                                             <div className="appling-flex-btns desktop-responsive">
                                                 <img onClick={() => history.push("/edit-user-interest/" + single.id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

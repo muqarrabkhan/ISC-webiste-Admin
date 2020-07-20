@@ -60,7 +60,6 @@ const ViewNewsletter = (props) => {
         }).then(response => {
             if (window.confirm("Are you sure you want to delete Data"));
             window.location.replace("/newsletter")
-
         })
     }
 

@@ -244,12 +244,13 @@ const AddTemplate = (props) => {
                                             <option value="forgetPassword">Forget Password</option>
                                             <option value="notPremium">Premium Subscription 2 Days</option>
                                             <option value="campaignSupported">Supported Campaign</option>
-                                            <option value="sellerRecive">Seller Reciver</option>
-                                            <option value="buyerRecive">Buyer Reciver</option>
+                                            <option value="sellerRecive">Seller Receiver</option>
+                                            <option value="buyerRecive">Buyer Receiver</option>
                                             <option value="fundriser">Fundraiser</option>
-                                            <option value="fundriseReciver">Fundraiser Reciver</option>
+                                            <option value="fundriseReciver">Fundraiser Receiver</option>
                                             <option value="succesfullySubscribed">Succesfully Subscribed</option>
                                             <option value="resetSucessfully">Reset Sucessfully</option>
+                                            <option value="NewsLetter">NewsLetter</option>
                                         </select>
                                         <div className="color-red-text ">
                                             {categoryValidator ? "Select Category" : ""}

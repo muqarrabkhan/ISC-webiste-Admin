@@ -34,6 +34,7 @@ const AddNewsletter = (props) => {
     const [selectData, setSelectData] = useState();
     const [searchData, setSearchData] = useState();
     const [searchName, setSearchName] = useState();
+    const [slug,setSlug]=useState("");
 
     useEffect(() => {
         getTemplates().then(res => {
@@ -77,11 +78,12 @@ const AddNewsletter = (props) => {
     const onChageKeyword = (value) => {
         setSelectedData(value.Id);
         setSearchName(value.Name);
+        setSlug(value.Slug);
         cancel && cancel();
         axios.post(
             apiPath + "/campainNameSearch",
             {
-                Name: value
+                Name: value,
             },
             {
                 cancelToken: new CancelToken(function executor(c) {
@@ -363,7 +365,7 @@ const AddNewsletter = (props) => {
                                                     <ul className="has-cursor-pointer seaarch-list" onClick={() => {
                                                         onChageKeyword(single);
                                                     }}>
-                                                        <li className="has-padding-left-10" value={single.Id}>{single.Name}</li>
+                                                        <li className="has-padding-left-10" value={single.Id}>{single.Name +"  | isupportcause.com/campaign"+single.Slug}</li>
                                                     </ul>
                                                 ) : ""}
                                             </div>

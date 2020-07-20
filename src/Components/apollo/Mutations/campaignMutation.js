@@ -1,14 +1,14 @@
 import gql from 'graphql-tag'
 
-export const VIEW_CAMPAIGN= gql`
+export const VIEW_CAMPAIGN = gql`
 mutation allCampaignFilters(
-     $CampaignType:String,
+      $CampaignType:String,
       $page:Int,
       $limit:Int,
       $sort: String,
       $Createduser: String,
       $CategoryId: Int,
-      $Boosted:String
+      $Boosted:String,
       )
       { 
         allCampaignFilters(
@@ -35,6 +35,8 @@ mutation allCampaignFilters(
         is_donation
         support_count
         reportCount
+        recent_reported_date
+        creatorEmail 
       }
       totalPages
       totalCampaigns

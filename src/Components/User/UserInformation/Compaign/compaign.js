@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import Style from './style'
 import Deletelogo from '../../../../assets/Images/delete.svg'
 import Editlogo from '../../../../assets/Images/edit.svg'
@@ -10,14 +10,16 @@ import { standardDate } from '../../../functions'
 import Loader from '../../../commonComponents/Loader/loader'
 import { getParams } from '../../../functions/index'
 import cookie from 'react-cookies'
+import ipInt from 'ip-to-int'
 
 const Campaign = (props) => {
-    let { history, match , location} = props;
+    let { history, match, location } = props;
     const [ipAddress, setIpAddress] = useState("");
+    const [renderData , setRenderData] = useState("");
     let path = getParams(location.search);
     let id = match.params && match.params.id ? match.params.id : ""
     let token = cookie.load("token");
-    const { loading, data } = useQuery(SINGLE_USER(token,id));
+    const { loading, data } = useQuery(SINGLE_USER(token, id));
     console.log("data")
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
@@ -27,6 +29,12 @@ const Campaign = (props) => {
     // (async () => {
     //     setIpAddress(await publicIp.v4());
     // })();
+
+    useEffect(() => {
+        // setUserActivityData(data && data.getuserbyId && data.getuserbyId.useractivity);
+        setRenderData(data && data.getuserbyId && data.getuserbyId)
+    }, [data])
+
     return (
         <>
             {!loading ?
@@ -78,6 +86,14 @@ const Campaign = (props) => {
                                                 <label>Create Info*</label>
                                                 <input className="fnt-poppins inputs-for-responsive" disabled
                                                     value={date ? date : "--"}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="mrg-top-20 has-margin-bottom-30 fnt-poppins">
+                                            <div>
+                                                <label>Created Ip</label>
+                                                <input className="fnt-poppins inputs-for-responsive" disabled
+                                                    value={renderData ? ipInt(renderData.CreatedIp).toIP() : "-"}
                                                 />
                                             </div>
                                         </div>

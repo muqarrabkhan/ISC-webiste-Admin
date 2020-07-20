@@ -6,6 +6,7 @@ export const USER_INTEREST = gql`
             id
             name
             Slug
+            totalInterests
           }
     }
 `;

@@ -77,16 +77,18 @@ const ViewCoupan = (props) => {
                                         <th>Name</th>
                                         <th>Discription</th>
                                         <th>Report Count</th>
+                                        <th> Recent Reported Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 {data && data.length !== 0 ? data.map((single, index) =>
                                     <tbody className="table-of-data">
                                         <tr className="table-row-data-of-body fnt-poppins">
-                                            <td>{single.Id ? single.Id : "-"}</td>
-                                            <td>{single.Name ? single.Name : "-"}</td>
-                                            <td>{single.Description ? single.Description : "-"}</td>
-                                            <td>{single.reportCount ? single.reportCount : "-"}</td>
+                                            <td>{single && single.Id ? single.Id : "-"}</td>
+                                            <td>{single && single.Name ? single.Name : "-"}</td>
+                                            <td>{single && single.Description ? single.Description : "-"}</td>
+                                            <td>{single && single.reportCount ? single.reportCount : "-"}</td>
+                                            <td>{single && single.recent_reported_date ? single.recent_reported_date : "-"}</td>
                                             <td className="is-flex">
                                                 <span onClick={() => history.push("/count-reports/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Reports</span>
                                             </td>

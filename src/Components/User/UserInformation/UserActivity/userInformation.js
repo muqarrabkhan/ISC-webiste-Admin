@@ -11,12 +11,13 @@ import { getParams } from '../../../functions/index'
 import cookie from 'react-cookies'
 
 const UserInformation = (props) => {
-    let { history, match , location} = props;
+    let { history, match, location } = props;
     let path = getParams(location.search);
-    // const [ipAddress, setIpAddress] = useState("");
+    const [renderData, setRenderData] = useState("");
+    const [ipAddress, setIpAddress] = useState("");
     let id = match.params && match.params.id ? match.params.id : ""
     let token = cookie.load("token");
-    const { loading, data } = useQuery(SINGLE_USER(token,id));
+    const { loading, data } = useQuery(SINGLE_USER(token, id));
     const [userActivityData, setUserActivityData] = useState()
     let date = data && data.getuserbyId && data.getuserbyId.CreatedDate;
     date = standardDate(date).standardDate;
@@ -24,7 +25,6 @@ const UserInformation = (props) => {
     getDate = standardDate(getDate).time;
 
     // const publicIp = require('public-ip');
-
     // useEffect(() => {
     //     publicIp.v4().then(ip => {
     //         setIpAddress(ip);
@@ -33,6 +33,7 @@ const UserInformation = (props) => {
 
     useEffect(() => {
         setUserActivityData(data && data.getuserbyId && data.getuserbyId.useractivity);
+        setRenderData(data && data.getuserbyId && data.getuserbyId)
     }, [data])
 
 
@@ -90,6 +91,14 @@ const UserInformation = (props) => {
                                                 />
                                             </div>
                                         </div>
+                                        <div className="mrg-top-20 has-margin-bottom-30 fnt-poppins">
+                                            <div>
+                                                <label>Created Ip</label>
+                                                <input className="fnt-poppins inputs-for-responsive" disabled
+                                                    value={renderData ? ipInt(renderData.CreatedIp).toIP() : "-"}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -134,7 +143,7 @@ const UserInformation = (props) => {
                                 ) :
                                     <tfoot>
                                         <tr>
-                                            <td colSpan={5} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{textAlign:"center"}}>No Record Found</td>
+                                            <td colSpan={5} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
                                         </tr>
                                     </tfoot>
                                 }

@@ -18,8 +18,7 @@ export const SINGLE_USER = (token,userId) => gql`
         }
       is_activity_aws
         CreatedDate
-        CreatedIp
-}
+ }
   }
   }
 `;

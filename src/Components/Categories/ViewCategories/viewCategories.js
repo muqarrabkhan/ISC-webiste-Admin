@@ -100,6 +100,7 @@ const ViewCategories = (props) => {
                                         <tr >
                                             <th className="white-color">Name</th>
                                             <th className="white-color">Status</th>
+                                            <th className="white-color">Total Campaigns</th>
                                             <th className="white-color">Action</th>
                                         </tr>
                                     </thead>
@@ -108,6 +109,7 @@ const ViewCategories = (props) => {
                                             <tr key={index} className="fnt-poppins background-white">
                                                 <td>{single.Name ? single.Name : "-"}</td>
                                                 <td>{single && single.Status ? single.Status : "-"}</td>
+                                                <td>{single && single.totalCampaigns ? single.totalCampaigns : "-"}</td>
                                                 <td>
                                                     <div className="appling-flex-btns">
                                                         <img onClick={() => history.push("/edit-category/" + single.Id)} className="cursor-pointer edit-image-table" alt="edit-button" src={Editlogo} />

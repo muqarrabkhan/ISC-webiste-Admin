@@ -11,10 +11,12 @@ const Campaign = (props) => {
     const { loading, data } = useQuery(SINGLE_CAMPAIGN(id))
     let date = data && data.getcampaignbyId && data.getcampaignbyId.CreatedDate;
     date = standardDate(date).standardDate;
-    const [singleCampaignstData, setSingleCampaignstData] = useState()
+    const [singleCampaignstData, setSingleCampaignstData] = useState();
+    const [renderData , setRenderData] = useState("");
 
     useEffect(() => {
         setSingleCampaignstData(data && data.getcampaignbyId);
+        setRenderData(data && data.getuserbyId && data.getuserbyId)
     }, [data])
 
     return (

@@ -15,8 +15,17 @@
         height: 1px;
         background:$dashboard-card-hr-vl-line;
     }
+    .dashboard-card-hr-line-of-fundriser { 
+        width: 100%;
+        height: 1px;
+        background:$dashboard-card-hr-vl-line;
+    }
     .card-left-text {
             width: 192px;
+            color:$dashboard-card-left-right-text;
+        }
+        .card-left-text-of-fundriser {
+            width: 100%;
             color:$dashboard-card-left-right-text;
         }
     .dashboard-cards-min-line{

@@ -582,11 +582,12 @@ const ViewCompaign = (props) => {
                                 </thead>
                                 <tbody className="table-of-data">
                                     {search && search.length !== 0 ? search.map((single, index) =>
-                                        <tr key={index} className="table-row-data-of-body tr-border-bottom fnt-poppins">
+                                    <>
+                                        <tr key={index} className="table-row-data-of-body tr-border-bottom fnt-poppins cursor-pointer background-hover" onClick={() => history.push("/Camapaign-details/" + single.Id)}>
                                             <td>{single.Id}</td>
                                             <td>{single.Name}</td>
                                             <td>{single.CampaignType}</td>
-                                            <td>{single.CreatedBy}</td>
+                                            <td>{single.creatorEmail}</td>
                                             <td>{standardDate(single.CreatedDate).standardDate}</td>
                                             <td>{single.support_count}</td>
                                             <td>{single.reportCount}</td>
@@ -603,6 +604,7 @@ const ViewCompaign = (props) => {
                                                 </div>
                                             </td>
                                         </tr>
+                                    </>
                                     ) : ""}
                                     <tr className="table-footer">
                                         <td colSpan={7}>Total</td>

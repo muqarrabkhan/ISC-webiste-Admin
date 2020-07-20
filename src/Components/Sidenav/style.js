@@ -45,7 +45,7 @@ export default () => {
                 margin-top: 10%!important;
                 margin-left: 20%!important;
                 color: #fff;
-                width: 215px;
+                width: 225px;
             }
             // ends here
             .dashboard-name-logo .dashboard-link {
