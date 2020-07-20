@@ -276,8 +276,8 @@ const EditTemplate = (props) => {
                                                         <option value="campaignSupported">Supported Campaign</option>
                                                         <option value="sellerRecive">Seller Reciver</option>
                                                         <option value="buyerRecive">Buyer Reciver</option>
-                                                        <option value="fundriser">Fundriser</option>
-                                                        <option value="fundriseReciver">Fundrise Reciver</option>
+                                                        <option value="fundriser">Fundraiser</option>
+                                                        <option value="fundriseReciver">Fundraiser Reciver</option>
                                                         <option value="succesfullySubscribed">Succesfully Subscribed</option>
                                                         <option value="resetSucessfully">Reset Sucessfully</option>
                                                     </select>
