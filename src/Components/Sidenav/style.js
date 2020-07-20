@@ -63,7 +63,7 @@ export default () => {
                 width: 19px
             }
             .sidenav-name-logo {
-                width: 215px;
+                width: 225px;
                 margin-left: 20%!important;
                 margin-top: 10%!important;
             }

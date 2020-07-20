@@ -23,7 +23,8 @@ const EidtCategory = (props) => {
             variables: {
                 Id: parseInt(id),
                 Name: renderData.Name,
-                description: renderData.description
+                description: renderData.description,
+                Status:renderData.Status
             }
         }).then(res => {
             setButtonText("Updated")
@@ -83,6 +84,56 @@ const EidtCategory = (props) => {
                                                     setRenderData({ ...duplicateDiscription })
                                                 }}
                                             />
+                                        </div>
+                                    </div>
+                                    {/* radio buttons */}
+                                    <div className="radios-of-group mrg-top-20 mrg-left-60">
+                                        <div className="radio-of-group">
+                                            <label>Select Group*</label>
+                                            <input className="mrg-top-40" type="radio" id="radio3" name="radio-of-groups"
+                                                checked={renderData && renderData.Status == "Enable"}
+                                                onChange={event => {
+                                                    let duplicateData = { ...renderData }
+                                                    duplicateData.Status = "Enable"
+                                                    setRenderData({ ...duplicateData })
+                                                }}
+                                            />
+                                            <label className="label-of-radio" for="radio3">
+                                                <div className="checker"></div>
+                                                Enable
+                                                </label>
+                                        </div>
+                                    </div>
+                                    <div className="radios-of-group mrg-left-60">
+                                        <div className="radio-of-group">
+                                            <input type="radio" id="radio4" name="radio-of-groups"
+                                                checked={renderData && renderData.Status == "Disable"}
+                                                onChange={event => {
+                                                    let duplicateData = { ...renderData }
+                                                    duplicateData.Status = "Disable"
+                                                    setRenderData({ ...duplicateData })
+                                                }}
+                                            />
+                                            <label className="label-of-radio" for="radio4">
+                                                <div className="checker"></div>
+                                                <div>Disable</div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="radios-of-group mrg-left-60">
+                                        <div className="radio-of-group">
+                                            <input type="radio" id="radio5" name="radio-of-groups"
+                                                checked={renderData && renderData.Status == "Delete"}
+                                                onChange={event => {
+                                                    let duplicateData = { ...renderData }
+                                                    duplicateData.Status = "Delete"
+                                                    setRenderData({ ...duplicateData })
+                                                }}
+                                            />
+                                            <label className="label-of-radio" for="radio5">
+                                                <div className="checker"></div>
+                                                <div>Delete</div>
+                                            </label>
                                         </div>
                                     </div>
                                     {/* buttons */}

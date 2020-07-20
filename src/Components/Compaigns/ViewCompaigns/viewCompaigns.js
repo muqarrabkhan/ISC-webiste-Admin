@@ -303,6 +303,24 @@ const ViewCompaign = (props) => {
                 })
                 return;
             }
+            case "Fundraiser": {
+                setCampaignType(value);
+                getCampaign({
+                    variables: {
+                        page: page,
+                        limit: 10,
+                        CampaignType: "Fundraiser",
+                        sort: sort,
+                        Createduser: ""
+                    }
+                }).then(res => {
+                    setCampaign(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                    setTotalPages(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalPages ? res.data.allCampaignFilters.totalPages : [1])
+                    setTotalCampaigns(res && res.data.allCampaignFilters && res.data.allCampaignFilters.totalCampaigns ? res.data.allCampaignFilters.totalCampaigns : [])
+                    setSearch(res && res.data.allCampaignFilters && res.data.allCampaignFilters.campaigns ? res.data.allCampaignFilters.campaigns : [])
+                })
+                return;
+            }
         }
     }
 
@@ -501,6 +519,7 @@ const ViewCompaign = (props) => {
                                     <option value="Support">Support</option>
                                     <option value="Petition">Petition</option>
                                     <option value="Pledge">Pledge</option>
+                                    <option value="Fundraiser">Fundraiser</option>
                                 </select>
                                 <select className="select-option-of-adminstrator fnt-poppins mrg-left-50"
                                     onChange={event => campaignPackage(event.target.value)}

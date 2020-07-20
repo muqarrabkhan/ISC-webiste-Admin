@@ -6,6 +6,7 @@ export const SINGLE_CATEGORY=(Id)=>gql`
       Name
       description
       CreatedDate
+      Status
       }
   }
 `;
