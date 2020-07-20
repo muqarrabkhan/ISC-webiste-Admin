@@ -365,7 +365,7 @@ const AddNewsletter = (props) => {
                                                     <ul className="has-cursor-pointer seaarch-list" onClick={() => {
                                                         onChageKeyword(single);
                                                     }}>
-                                                        <li className="has-padding-left-10" value={single.Id}>{single.Name +"  | isupportcause.com/campaign"+single.Slug}</li>
+                                                        <li className="has-padding-left-10" value={single.Id}>{single.Name +"  | isupportcause.com/campaign/"+single.Slug}</li>
                                                     </ul>
                                                 ) : ""}
                                             </div>

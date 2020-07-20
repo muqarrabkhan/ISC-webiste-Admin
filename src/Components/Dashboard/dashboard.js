@@ -268,14 +268,14 @@ const Dashboard = (props) => {
                     <div className="dashboard-card-headr ">
                       <h1 className="has-padding-top-20 fnt-poppins fnt-size-20 text-center fnt-weight-600">New Fundraising Campaigns</h1>
                     </div>
-                    <div className="dashboard-card-hr-line-of-fundriser mrg-left-20 mrg-top-10 "></div>
+                    <div className="dashboard-card-hr-line mrg-left-20 mrg-top-10 "></div>
                     <div className="card-inner-main div d-flex flex-row">
-                      <div className="card-left-text-of-fundriser  ">
+                      <div className="card-left-text">
                         <h1 className="mrg-left-60 mrg-top-30 fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data text-center">Today</h1>
                         <p className="mrg-left-70 mrg-top-20  fnt-poppins card-number-styling number-data-responsive text-center">{data && data.TotalNewFundriseCampaignToday}</p>
                       </div>
                       <div className="dashboard-cards-min-line mrg-top-10 "></div>
-                      <div className="card-right-text width-full-100">
+                      <div className="card-right-text">
                         <h1 className="mrg-left-45 mrg-top-30 text-center fnt-size-20 fnt-poppins fnt-weight-400 dashboard-reesposive-data">Last Week</h1>
                         <p className="mrg-left-70 mrg-top-20  text-center fnt-poppins card-number-styling number-data-responsive">{data && data.TotalNewFundriseCampaignLastWeek}</p>
                       </div>

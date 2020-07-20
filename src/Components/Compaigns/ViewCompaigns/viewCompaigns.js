@@ -13,6 +13,7 @@ import cookie from 'react-cookies'
 import ContentLoader from 'react-content-loader'
 import axios, { CancelToken } from "axios";
 import { apiPath } from '../../../config'
+import { isupportcauseCampaign } from '../../../config'
 let cancel;
 
 const ViewCompaign = (props) => {
@@ -583,9 +584,9 @@ const ViewCompaign = (props) => {
                                 <tbody className="table-of-data">
                                     {search && search.length !== 0 ? search.map((single, index) =>
                                     <>
-                                        <tr key={index} className="table-row-data-of-body tr-border-bottom fnt-poppins cursor-pointer background-hover" onClick={() => history.push("/Camapaign-details/" + single.Id)}>
-                                            <td>{single.Id}</td>
-                                            <td>{single.Name}</td>
+                                        <tr key={index} className="table-row-data-of-body tr-border-bottom fnt-poppins">
+                                            <td className="cursor-pointer" onClick={() => window.open(isupportcauseCampaign+"campaign/"+single.Slug)}>{single.Id}</td>
+                                            <td className="cursor-pointer" onClick={() => window.open(isupportcauseCampaign+"campaign/"+single.Slug)}>{single.Name}</td>
                                             <td>{single.CampaignType}</td>
                                             <td>{single.creatorEmail}</td>
                                             <td>{standardDate(single.CreatedDate).standardDate}</td>
@@ -593,11 +594,11 @@ const ViewCompaign = (props) => {
                                             <td>{single.reportCount}</td>
                                             <td className="btns-of-viewcompaign">
                                                 <div className="is-flex">
-                                                    <img onClick={() => history.push("/edit-campaign/" + single.Id)} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
+                                                    <img onClick={() => history.push("/edit-campaign/" + single.Slug)} className="cursor-pointer edit-image-table customization-of-image-btn" alt="edit-button" src={Editlogo} />
                                                     <img className="has-margin-left-5 has-cursor-pointer edit-image-table customization-of-image-btn" alt="delete-button"
                                                         onClick={() => deleteSingleCampaign(single.Id)}
                                                         src={Deletelogo} />
-                                                    <span onClick={() => history.push("/Camapaign-details/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
+                                                    <span onClick={() => history.push("/Camapaign-details/" + single.Slug)} className="cursor-pointer view-btn-of-table has-width-40">View Details</span>
                                                 </div>
                                                 <div className="mrg-top-10 is-flex">
                                                     <span onClick={() => history.push("/view-reports/" + single.Id)} className="cursor-pointer view-btn-of-table has-width-40">View Reports</span>

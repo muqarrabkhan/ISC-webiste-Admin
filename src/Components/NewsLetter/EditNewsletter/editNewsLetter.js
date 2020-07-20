@@ -361,7 +361,7 @@ const EditNewsletter = (props) => {
                                                                 onSelectCampaign(single);
 
                                                             }}>
-                                                                <li className="has-padding-left-10" value={single.Id}>{single.Name +"  | isupportcause.com/campaign"+single.Slug}</li>
+                                                                <li className="has-padding-left-10" value={single.Id}>{single.Name +"  | isupportcause.com/campaign/"+single.Slug}</li>
                                                             </ul>
                                                         ) : ""}
                                                     </div>

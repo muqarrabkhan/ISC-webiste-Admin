@@ -23,6 +23,7 @@ mutation allCampaignFilters(
         {
       campaigns{
         Id
+        Slug
        Name
        CampaignType
         CreatedBy
