@@ -13,6 +13,7 @@ export const SINGLE_USER = (token,userId) => gql`
           useractivity {
           Image
            Type
+           CreatedIp
         CampaignName {
          Name
         }

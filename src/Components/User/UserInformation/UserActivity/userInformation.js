@@ -136,7 +136,8 @@ const UserInformation = (props) => {
                                             <td>{single.Type ? single.Type : "--"}</td>
                                             <td>{single.CampaignName && single.CampaignName.Name ? single.CampaignName.Name : "--"}</td>
                                             <td>{getDate ? getDate : "--"}</td>
-                                            <td>{single.CreatedIp ? ipInt(single.CreatedIp).toIP() : ""}</td>
+                                            <td>{single && single.CreatedIp? ipInt(single.CreatedIp).toIP() : ""}</td>
+                                            
                                         </tr>
 
                                     </tbody>
