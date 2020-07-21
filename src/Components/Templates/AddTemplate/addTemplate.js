@@ -238,18 +238,18 @@ const AddTemplate = (props) => {
                                             }}
                                         >
                                             <option value="">Select Category</option>
-                                            <option value="signUp">SignUp Confirmation</option>
-                                            <option value="welcome">Welcome</option >
-                                            <option value="CreateCampaign">Create Campaign</option>
+                                            <option value="signUp">Signup Confirmation - Users</option>
+                                            <option value="welcome">Welcome-Users</option >
+                                            <option value="CreateCampaign">Create Campaign - Campaign creator</option>
                                             <option value="forgetPassword">Forget Password</option>
-                                            <option value="notPremium">Premium Subscription 2 Days</option>
-                                            <option value="campaignSupported">Supported Campaign</option>
-                                            <option value="sellerRecive">Seller Receiver</option>
-                                            <option value="buyerRecive">Buyer Receiver</option>
-                                            <option value="fundriser">Fundraiser</option>
-                                            <option value="fundriseReciver">Fundraiser Receiver</option>
-                                            <option value="succesfullySubscribed">Succesfully Subscribed</option>
-                                            <option value="resetSucessfully">Reset Sucessfully</option>
+                                            <option value="notPremium">Buy Premium Subscription - after first campaign- user</option>
+                                            <option value="campaignSupported">Campaign goal status - Campaign creator</option>
+                                            <option value="sellerRecive">Product Sold-Product owner</option>
+                                            <option value="buyerRecive">Product purchased-Buyer</option>
+                                            <option value="fundriser">Fund donated -Donner</option>
+                                            <option value="fundriseReciver">Fundraised- Fundraiser</option>
+                                            <option value="succesfullySubscribed">Successfully Subscribed</option>
+                                            <option value="resetSucessfully">Password Reset Successfully</option>
                                             <option value="NewsLetter">NewsLetter</option>
                                         </select>
                                         <div className="color-red-text ">
