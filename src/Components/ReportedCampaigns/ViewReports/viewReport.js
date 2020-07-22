@@ -9,6 +9,8 @@ import ReactPaginate from "react-paginate";
 import { DELETE_COUPON } from '../../apollo/Mutations/deleteCoupon'
 import { getParams } from '../../functions/index'
 import ContentLoader from 'react-content-loader'
+import {isupportcauseCampaign} from '../../../config'
+
 
 const ViewCoupan = (props) => {
     let { history, location } = props;
@@ -84,8 +86,8 @@ const ViewCoupan = (props) => {
                                 {data && data.length !== 0 ? data.map((single, index) =>
                                     <tbody className="table-of-data">
                                         <tr className="table-row-data-of-body fnt-poppins">
-                                            <td>{single && single.Id ? single.Id : "-"}</td>
-                                            <td>{single && single.Name ? single.Name : "-"}</td>
+                                            <td className="cursor-pointer" onClick={() => window.open(isupportcauseCampaign+"campaign/"+single.Slug)}>{single && single.Id ? single.Id : "-"}</td>
+                                            <td className="cursor-pointer" onClick={() => window.open(isupportcauseCampaign+"campaign/"+single.Slug)}>{single && single.Name ? single.Name : "-"}</td>
                                             <td>{single && single.Description ? single.Description : "-"}</td>
                                             <td>{single && single.reportCount ? single.reportCount : "-"}</td>
                                             <td>{single && single.recent_reported_date ? single.recent_reported_date : "-"}</td>

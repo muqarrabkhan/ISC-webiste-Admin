@@ -12,6 +12,7 @@ mutation allReportedCampaign($page:Int,$limit:Int)
           Description
           reportCount
           recent_reported_date
+          Slug
         }
         totalPages
         totalCampaigns

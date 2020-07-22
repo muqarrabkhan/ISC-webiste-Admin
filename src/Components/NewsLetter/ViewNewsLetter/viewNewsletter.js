@@ -22,6 +22,7 @@ const ViewNewsletter = (props) => {
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
     const [deleteNewsletter] = useMutation(DELETE_NEWSLETTER);
+    const [loaderStop, setLoader] = useState(false);
 
     const handlePageClick = (value) => {
         setPage(parseInt(value.selected) + 1);
@@ -33,6 +34,7 @@ const ViewNewsletter = (props) => {
             }
         })
             .then(res => {
+                setLoader(true);
                 setData(res && res.data.newsletters && res.data.newsletters.newsletters ? res.data.newsletters.newsletters : [])
                 setTotalPages(res && res.data.newsletters.totalPages ? res.data.newsletters.totalPages : [1])
                 setTotalNewsletter(res && res.data.newsletters && res.data.newsletters.totalnewsletters);
@@ -46,6 +48,7 @@ const ViewNewsletter = (props) => {
                 page: path && parseInt(path.page) ? parseInt(path.page) : page,
             }
         }).then(res => {
+            setLoader(true)
             setData(res && res.data.newsletters && res.data.newsletters.newsletters ? res.data.newsletters.newsletters : [])
             setTotalPages(res && res.data.newsletters.totalPages ? res.data.newsletters.totalPages : [1])
             setTotalNewsletter(res && res.data.newsletters && res.data.newsletters.totalnewsletters);
@@ -66,7 +69,7 @@ const ViewNewsletter = (props) => {
 
     return (
         <>
-            {data && data.length !== 0 ?
+            {!loaderStop === false ?
                 <div className="container-fluid Table-for-administrator-main-div">
                     {/* header */}
                     <div className="header-of-viewAdministrator">
@@ -92,10 +95,10 @@ const ViewNewsletter = (props) => {
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="table-of-data">
-                                    {data && data.length !== 0 && data.map((single, index) => {
-                                        console.log(single.datetime);
-                                        return (
+                                {data && data.length !== 0 ? data.map((single, index) => {
+                                    console.log(single.datetime);
+                                    return (
+                                        <tbody className="table-of-data">
                                             <tr key={index} className="table-row-data-of-body fnt-poppins">
                                                 <td>{single.name ? single.name : "-"}</td>
                                                 <td>{single.Template ? single.Template && single.Template.Title : "-"}</td>
@@ -115,13 +118,20 @@ const ViewNewsletter = (props) => {
                                                     {/* : ""} */}
                                                 </td>
                                             </tr>
-                                        )
-                                    })}
-                                    <tr className="table-footer">
-                                        <td colSpan={3}>Total</td>
-                                        <td>{totalNewsletter}</td>
-                                    </tr>
-                                </tbody>
+                                            <tr className="table-footer">
+                                                <td colSpan={3}>Total</td>
+                                                <td>{totalNewsletter}</td>
+                                            </tr>
+                                        </tbody>
+                                    )
+                                })
+                                    :
+                                    <tfoot>
+                                        <tr>
+                                            <td colSpan={4} className="fnt-size-25 fnt-weight-600 fnt-poppins" style={{ textAlign: "center" }}>No Record Found</td>
+                                        </tr>
+                                    </tfoot>
+                                }
                             </table>
                         </div>
                         <div className="mrg-top-0">
